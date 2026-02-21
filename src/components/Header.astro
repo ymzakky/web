@@ -1,0 +1,185 @@
+---
+---
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="/" class="brand">
+      <span class="brand-icon">結</span>
+      <span class="brand-text">むすびかなでる</span>
+    </a>
+    <nav class="site-nav" id="site-nav">
+      <ul>
+        <li><a href="/#about">理念</a></li>
+        <li><a href="/#case">事例</a></li>
+        <li><a href="/#service">支援の流れ</a></li>
+        <li><a href="/#partner">体制</a></li>
+        <li><a href="/#contact" class="btn-contact">無料相談</a></li>
+      </ul>
+    </nav>
+    <button class="nav-toggle" id="nav-toggle" aria-label="メニューを開く">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<script>
+  const toggle = document.getElementById('nav-toggle');
+  const nav = document.getElementById('site-nav');
+  toggle?.addEventListener('click', () => {
+    nav?.classList.toggle('is-open');
+    toggle.classList.toggle('is-open');
+  });
+</script>
+
+<style>
+  .site-header {
+    padding: 0.9rem 0;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(27,108,168,0.08);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    transition: all 0.3s ease;
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .brand-icon {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-brand-primary);
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 6px;
+    font-family: var(--font-family-serif);
+    flex-shrink: 0;
+  }
+
+  .brand-text {
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--color-text-main);
+    font-family: var(--font-family-serif);
+  }
+
+  .site-nav ul {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    list-style: none;
+  }
+
+  .site-nav a {
+    font-size: 0.88rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--color-text-sub);
+    transition: color 0.2s;
+    position: relative;
+  }
+
+  .site-nav a:not(.btn-contact)::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background: var(--color-brand-primary);
+    transition: width 0.25s;
+    border-radius: 2px;
+  }
+
+  .site-nav a:not(.btn-contact):hover {
+    color: var(--color-brand-primary);
+  }
+
+  .site-nav a:not(.btn-contact):hover::after {
+    width: 100%;
+  }
+
+  .btn-contact {
+    display: inline-block;
+    padding: 0.55rem 1.3rem;
+    background: var(--color-brand-primary);
+    color: #fff !important;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 0.88rem;
+    box-shadow: var(--shadow-brand);
+    transition: background 0.2s, transform 0.2s;
+  }
+
+  .btn-contact:hover {
+    background: var(--color-brand-primary-dark);
+    transform: translateY(-2px);
+  }
+
+  .nav-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+  }
+
+  .nav-toggle span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--color-text-main);
+    border-radius: 2px;
+    transition: all 0.3s;
+  }
+
+  @media (max-width: 768px) {
+    .nav-toggle {
+      display: flex;
+    }
+
+    .site-nav {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: #fff;
+      border-top: 1px solid var(--color-bg-muted);
+      box-shadow: var(--shadow-md);
+      padding: 1.5rem;
+    }
+
+    .site-nav.is-open {
+      display: block;
+    }
+
+    .site-nav ul {
+      flex-direction: column;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    .btn-contact {
+      width: 100%;
+      text-align: center;
+    }
+  }
+</style>

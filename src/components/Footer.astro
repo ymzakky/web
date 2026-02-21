@@ -1,0 +1,126 @@
+---
+const today = new Date();
+---
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <div class="footer-logo">
+        <span class="footer-logo-icon">結</span>
+        <span class="footer-logo-text">むすびかなでる</span>
+      </div>
+      <p class="footer-tagline">技術と人を結び、組織のハーモニーを奏でる。</p>
+    </div>
+    <div class="footer-links">
+      <h4>サービス</h4>
+      <ul>
+        <li><a href="/#problem">こんなお悩みありませんか</a></li>
+        <li><a href="/#solution">提供価値</a></li>
+        <li><a href="/#case">導入事例</a></li>
+        <li><a href="/#service">支援の流れ</a></li>
+      </ul>
+    </div>
+    <div class="footer-links">
+      <h4>会社情報</h4>
+      <ul>
+        <li><a href="/#about">代表の想い</a></li>
+        <li><a href="/#partner">パートナー体制</a></li>
+        <li><a href="/#contact">お問い合わせ</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; {today.getFullYear()} むすびかなでる All rights reserved.</p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--color-bg-dark);
+    color: rgba(255,255,255,0.75);
+    padding-top: 4rem;
+    margin-top: 0;
+  }
+
+  .footer-inner {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 3rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .footer-logo-icon {
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-brand-primary);
+    color: #fff;
+    font-size: 0.95rem;
+    font-weight: 700;
+    border-radius: 5px;
+    font-family: var(--font-family-serif);
+  }
+
+  .footer-logo-text {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #fff;
+    font-family: var(--font-family-serif);
+    letter-spacing: 0.06em;
+  }
+
+  .footer-tagline {
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.8;
+  }
+
+  .footer-links h4 {
+    color: #fff;
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+    margin-bottom: 1rem;
+    font-weight: 700;
+  }
+
+  .footer-links ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .footer-links a {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.6);
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover {
+    color: rgba(255,255,255,0.95);
+  }
+
+  .footer-bottom {
+    text-align: center;
+    padding: 1.5rem 0;
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.35);
+  }
+
+  @media (max-width: 768px) {
+    .footer-inner {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+</style>
