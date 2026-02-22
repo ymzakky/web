@@ -1,11 +1,11 @@
 :root {
-    /* Brand Colors - Trust & Warmth Palette */
-    --color-brand-primary: #1B6CA8;      /* 信頼の青 */
-    --color-brand-primary-light: #4A9CC7;
-    --color-brand-primary-dark: #0F4A78;
-    --color-brand-accent: #3E9E6F;       /* 暖かみのある緑 */
-    --color-brand-accent-light: #6DC597;
-    --color-brand-warm: #E8863A;         /* アクセントの暖色 */
+    /* Brand Colors — ロゴカラーベース Teal × LimeGreen */
+    --color-brand-primary: #1A6B68;      /* ロゴのディープティール */
+    --color-brand-primary-light: #3A9A97;
+    --color-brand-primary-dark: #0F4D4B;
+    --color-brand-accent: #79B31B;       /* ロゴのライムグリーン（背景色） */
+    --color-brand-accent-light: #9ED240;
+    --color-brand-warm: #C87D5A;         /* ロゴのクリーム寄り暖色 */
 
     /* Text Colors */
     --color-text-main: #2A2A35;
@@ -17,15 +17,15 @@
     --color-bg-body: #FAFAF8;            /* 温かみのあるオフホワイト */
     --color-bg-card: #FFFFFF;
     --color-bg-muted: #F3F4F6;
-    --color-bg-warm: #FFF8F2;            /* 温かいセクション背景 */
-    --color-bg-dark: #1E2A3A;            /* フッター等の濃色 */
-    --color-bg-hero: #EEF4FA;
+    --color-bg-warm: #F2F7F2;            /* 薄い緑味オフホワイト */
+    --color-bg-dark: #1A2E2E;            /* ロゴティールに合わせた濃色 */
+    --color-bg-hero: #EBF4F0;            /* ティール寄りのヒーロー背景 */
 
     /* Gradients */
-    --gradient-brand: linear-gradient(135deg, #1B6CA8 0%, #3E9E6F 100%);
-    --gradient-hero: linear-gradient(160deg, #EEF4FA 0%, #E8F4E8 100%);
-    --gradient-dark: linear-gradient(135deg, #1E2A3A 0%, #0F1C2E 100%);
-    --gradient-warm: linear-gradient(135deg, #FFF8F2 0%, #F0F7F0 100%);
+    --gradient-brand: linear-gradient(135deg, #1A6B68 0%, #79B31B 100%);
+    --gradient-hero: linear-gradient(160deg, #EBF4F0 0%, #EFF7E8 100%);
+    --gradient-dark: linear-gradient(135deg, #1A2E2E 0%, #0C1F1F 100%);
+    --gradient-warm: linear-gradient(135deg, #F2F7F2 0%, #EEF7E8 100%);
 
     /* Typography */
     --font-family-base: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
@@ -46,7 +46,7 @@
     --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
     --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.08);
     --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.10);
-    --shadow-brand: 0 8px 32px rgba(27, 108, 168, 0.18);
+    --shadow-brand: 0 8px 32px rgba(26, 107, 104, 0.18);
 
     /* Transitions */
     --transition-fast: 0.2s ease;
@@ -163,7 +163,7 @@ img {
 .btn-primary:hover {
     background: var(--color-brand-primary-dark);
     transform: translateY(-2px);
-    box-shadow: 0 12px 36px rgba(27, 108, 168, 0.28);
+    box-shadow: 0 12px 36px rgba(26, 107, 104, 0.28);
 }
 
 .btn-secondary {
@@ -196,15 +196,15 @@ img {
     font-size: 1.05rem;
     letter-spacing: 0.06em;
     transition: all 0.2s;
-    box-shadow: 0 6px 24px rgba(232, 134, 58, 0.28);
+    box-shadow: 0 6px 24px rgba(200, 125, 90, 0.28);
     cursor: pointer;
     border: none;
 }
 
 .btn-accent:hover {
-    background: #D0722A;
+    background: #A8623E;
     transform: translateY(-2px);
-    box-shadow: 0 12px 32px rgba(232, 134, 58, 0.38);
+    box-shadow: 0 12px 32px rgba(200, 125, 90, 0.38);
 }
 
 .section {
@@ -227,4 +227,33 @@ img {
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, 0.3);
     box-shadow: var(--shadow-md);
+}
+
+/* Hero Section */
+.hero {
+    text-align: center;
+    padding: var(--spacing-xl) 0;
+    background: var(--gradient-hero);
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.hero-logo {
+    max-width: 180px;
+    margin: 0 auto var(--spacing-md);
+    filter: drop-shadow(var(--shadow-sm));
+}
+
+.hero h1 {
+    font-size: 2.8rem;
+    font-family: var(--font-family-serif);
+    color: var(--color-brand-primary);
+    margin-bottom: var(--spacing-sm);
+    font-weight: 900;
+}
+
+.hero p {
+    font-size: 1.1rem;
+    color: var(--color-text-sub);
+    max-width: 600px;
+    margin: 0 auto;
 }
