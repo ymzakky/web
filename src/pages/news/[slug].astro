@@ -1,0 +1,215 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const allNews = await getCollection('news');
+  return allNews.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+const formattedDate = entry.data.date.replace(/-/g, '.');
+---
+
+<BaseLayout title={entry.data.title} description={entry.data.summary}>
+
+  <div class="news-detail-wrap">
+    <div class="container">
+
+      <!-- パンくず -->
+      <nav class="breadcrumb" aria-label="パンくずリスト">
+        <a href="/" class="breadcrumb-link">ホーム</a>
+        <span class="breadcrumb-sep">/</span>
+        <span class="breadcrumb-current">お知らせ</span>
+      </nav>
+
+      <article class="news-article">
+
+        <!-- ヘッダー -->
+        <header class="news-article-header">
+          <time class="news-article-date" datetime={entry.data.date}>{formattedDate}</time>
+          <h1 class="news-article-title">{entry.data.title}</h1>
+          {entry.data.tags && entry.data.tags.length > 0 && (
+            <div class="news-article-tags">
+              {entry.data.tags.map((tag: string) => (
+                <span class="news-article-tag">#{tag}</span>
+              ))}
+            </div>
+          )}
+        </header>
+
+        <!-- 本文 -->
+        <div class="news-article-body">
+          <Content />
+        </div>
+
+      </article>
+
+      <!-- 戻るリンク -->
+      <div class="news-back">
+        <a href="/" class="news-back-link">← トップページに戻る</a>
+      </div>
+
+    </div>
+  </div>
+
+</BaseLayout>
+
+<style>
+.news-detail-wrap {
+  background: var(--color-bg-body);
+  padding: 3rem 0 5rem;
+}
+
+/* パンくず */
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  font-size: 0.8rem;
+}
+.breadcrumb-link {
+  color: var(--color-brand-primary);
+  text-decoration: none;
+  font-weight: 600;
+}
+.breadcrumb-link:hover { text-decoration: underline; }
+.breadcrumb-sep { color: var(--color-text-muted); }
+.breadcrumb-current { color: var(--color-text-muted); }
+
+/* 記事 */
+.news-article {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: var(--shadow-md);
+  border: 1px solid rgba(0,0,0,0.04);
+  overflow: hidden;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* ヘッダー */
+.news-article-header {
+  padding: 2.5rem 3rem 2rem;
+  border-bottom: 2px solid var(--color-bg-muted);
+}
+.news-article-date {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  font-variant-numeric: tabular-nums;
+  margin-bottom: 0.75rem;
+}
+.news-article-title {
+  font-size: clamp(1.25rem, 2.5vw, 1.7rem);
+  font-weight: 700;
+  color: var(--color-text-main);
+  line-height: 1.4;
+  margin-bottom: 1.25rem;
+  font-family: var(--font-family-serif);
+}
+.news-article-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.news-article-tag {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--color-brand-primary);
+  background: rgba(26,107,104,0.07);
+  border-radius: 99px;
+  padding: 0.15rem 0.65rem;
+  border: 1px solid rgba(26,107,104,0.14);
+}
+
+/* 本文 */
+.news-article-body {
+  padding: 2.5rem 3rem;
+  font-size: 0.95rem;
+  color: var(--color-text-sub);
+  line-height: 2;
+}
+.news-article-body :global(h2) {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+  margin: 2.5rem 0 1rem;
+  padding-left: 1rem;
+  border-left: 4px solid var(--color-brand-primary);
+  line-height: 1.5;
+}
+.news-article-body :global(h2:first-child) {
+  margin-top: 0;
+}
+.news-article-body :global(h3) {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+  margin: 2rem 0 0.75rem;
+}
+.news-article-body :global(p) {
+  margin-bottom: 1.25rem;
+}
+.news-article-body :global(p:last-child) {
+  margin-bottom: 0;
+}
+.news-article-body :global(ul),
+.news-article-body :global(ol) {
+  padding-left: 1.5rem;
+  margin-bottom: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.news-article-body :global(li) {
+  line-height: 1.8;
+}
+.news-article-body :global(strong) {
+  color: var(--color-text-main);
+  font-weight: 700;
+}
+.news-article-body :global(hr) {
+  border: none;
+  border-top: 1px dashed rgba(0,0,0,0.1);
+  margin: 2rem 0;
+}
+
+/* 戻るリンク */
+.news-back {
+  text-align: center;
+  margin-top: 2.5rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.news-back-link {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--color-brand-primary);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.6rem 1.25rem;
+  border: 1px solid rgba(26,107,104,0.2);
+  border-radius: 99px;
+  transition: background 0.15s, box-shadow 0.15s;
+}
+.news-back-link:hover {
+  background: rgba(26,107,104,0.05);
+  box-shadow: var(--shadow-sm);
+}
+
+@media (max-width: 768px) {
+  .news-detail-wrap { padding: 2rem 0 4rem; }
+  .news-article-header { padding: 1.75rem 1.5rem 1.5rem; }
+  .news-article-body { padding: 1.75rem 1.5rem; }
+}
+</style>

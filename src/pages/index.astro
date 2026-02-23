@@ -1,5 +1,9 @@
 ﻿---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allNews = await getCollection('news');
+const latestNews = allNews.sort((a, b) => b.data.date.localeCompare(a.data.date)).slice(0, 5);
 ---
 
 <BaseLayout
@@ -22,7 +26,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             自走する組織へ。
           </h1>
           <p class="hero-lead">
-            IT苦手な現場でも「手書き感覚」で使える。<br>
+            IT苦手な現場でも「直感操作」で使える。<br>
             現場が自ら考え、動き出す<strong>「自走型DX」</strong>の伴走支援。
           </p>
           <div class="hero-actions">
@@ -42,6 +46,25 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </div>
   </section>
 
+  <!-- Section 1.2: お知らせ -->
+  {latestNews.length > 0 && (
+    <section class="news-strip" id="news">
+      <div class="container">
+        <div class="news-strip-inner">
+          <div class="news-strip-label">お知らせ</div>
+          <ul class="news-strip-list">
+            {latestNews.map((item) => (
+              <li class="news-strip-item">
+                <time class="news-strip-date">{item.data.date.replace(/-/g, '.')}</time>
+                <a href={`/news/${item.slug}`} class="news-strip-title">{item.data.title}</a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+  )}
+
   <!-- Section 1.5: 経営理念 -->
   <section class="creed-section" id="philosophy">
     <div class="creed-deco-line"></div>
@@ -50,9 +73,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
         <!-- 上部：ラベル＋キャッチ -->
         <div class="creed-header">
-          <p class="section-label">ミッション</p>
-          <h2 class="creed-catch">未来を創造し、価値を提供する。</h2>
-          <p class="creed-sub">私たちのビジョンとコミットメントを共有します。</p>
+          <p class="section-label">経営理念</p>
         </div>
 
         <!-- 3つの理念カード -->
@@ -94,22 +115,22 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <div class="problem-card">
           <div class="problem-icon"></div>
           <h3>阿吽の呼吸が通じない</h3>
-          <p>創業メンバーと新入社員の意識にズレが生じ、「なぜ分からないんだ」という指示待ち人間が増えてきた。</p>
+          <p>「言わなくても分かるはず」が通じなくなり、指示がなければ動けない社員が増えてきた。</p>
         </div>
         <div class="problem-card">
           <div class="problem-icon"></div>
           <h3>社長が現場から抜け出せない</h3>
-          <p>トラブル対応や現場管理に追われ、本来やるべき「経営」や「新規開拓」「未来への投資」に時間が割けない。</p>
+          <p>トラブル対応や現場管理に追われ、経営や新規開拓など本来やるべき仕事に時間が割けない。</p>
         </div>
         <div class="problem-card">
           <div class="problem-icon"></div>
           <h3>IT導入が現場に定着しない</h3>
-          <p>高機能なシステムを入れたが現場が抵抗し、結局使われずに「入力地獄」だけが残ってしまった。</p>
+          <p>高機能なシステムを導入したものの現場には定着せず、煩雑な入力作業だけが残ってしまった。</p>
         </div>
       </div>
       <div class="problem-message">
-        <p class="problem-message-lead">それは、御社のせいではありません。</p>
-        <p>企業の成長段階における<strong>構造的な課題</strong>です。<br>必要なのは高価なシステムではなく、<strong>現場の「心」と「業務」に寄り添うアプローチ</strong>です。</p>
+        <p class="problem-message-lead">こうしたお悩みは、御社だけではありません。</p>
+        <p>人・組織・ツールのバランスが崩れる「20人の壁」は、成長期の企業が必ず直面する<strong>構造的な課題</strong>です。<br>必要なのはシステム導入だけではなく、<strong>現場の「心」と「業務」に寄り添うアプローチ</strong>です。</p>
       </div>
     </div>
   </section>
@@ -129,21 +150,21 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <div class="solution-number">01</div>
           <div class="solution-icon"></div>
           <h3>現場フィット<span>（心理的安全性の確保）</span></h3>
-          <p>「難しいIT」を押し付けません。タブレット操作を前提とした、文字入力を極限まで減らした<strong>「手書きメモ感覚」</strong>のシステム（kintoneプラグイン「Gemba-Fit」等）を活用します。</p>
+          <p>「難しいIT」を押し付けません。現場スタッフが<strong>「これなら使える」</strong>と感じられるよう、操作の煩雑さを取り除き、日常業務に自然に溶け込むツールとプロセスを設計します。</p>
           <div class="solution-badge">現場の抵抗ゼロへ</div>
         </div>
-        <div class="solution-card solution-card--accent">
+        <div class="solution-card">
           <div class="solution-number">02</div>
           <div class="solution-icon"></div>
           <h3>伴走型人財育成<span>（チェンジマネジメント）</span></h3>
-          <p>システムを入れて終わりではありません。現場の「やらされ感」を「自分たちの工夫」に変える研修と対話で、社員が自らシステムを改善できる<strong>「市民開発者」</strong>へと育てます。</p>
+          <p>システムを入れて終わりではありません。現場の「やらされ感」を「自分たちの工夫」に変える研修と対話で、社員が自らシステムを改善できる<strong>「市民開発者」</strong>に育てます。</p>
           <div class="solution-badge">社員が主役のDX</div>
         </div>
         <div class="solution-card">
           <div class="solution-number">03</div>
           <div class="solution-icon"></div>
           <h3>科学的経営への昇華<span>（データ活用）</span></h3>
-          <p>現場で蓄積されたデータを活用し、感覚頼みの経営から<strong>「データに基づく科学的経営」</strong>へ。売上予測から投資計画の策定まで一貫してサポートします。</p>
+          <p>現場で蓄積されたデータを活用し、感覚頼みの経営から<strong>「データに基づく科学的経営」</strong>へ転換。売上予測から設備投資計画まで、経営判断の高度化を一貫してサポートします。</p>
           <div class="solution-badge">経営判断の高度化</div>
         </div>
       </div>
@@ -271,7 +292,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <span class="client-record-item">NPO法人 dattochi home 様</span>
           <span class="client-record-item">NPO法人 ESAアジア教育支援の会 様</span>
         </div>
-        <p class="client-record-note">ほか、社労士事務所様、新聞店様など</p>
+        <p class="client-record-note">ほか、地域新聞出版社様、社労士事務所様など</p>
       </div>
     </div>
   </section>
@@ -295,19 +316,20 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <h2 class="about-intro-name">山﨑 啓介</h2>
             <p class="about-intro-role">むすびかなでる 代表 ／ 有限会社サニーシステム 取締役</p>
           </div>
-          <p class="about-intro-lead">日立グループのSEとして大規模金融システム開発に携わり、2015年の三陸復興支援を転機に独立。東京多摩エリアを拠点に、製造業・建設業・NPOへのIT伴走支援を実践しています。「現場翻訳力」と「伴走力」で、自走する組織づくりを支えます。また、東京都あきる野市の有限会社サニーシステム取締役として、住宅用太陽光蓄電池の提案やITを活かした電力エネルギーの利用状況分析にも携わっています。</p>
+          <p class="about-intro-lead">日立グループのSEとして大規模金融システム開発に携わり、2015年の三陸復興支援を転機に独立。東京多摩エリアを拠点とし、主に製造業・建設業・NPOへのIT伴走支援を実践しています。「現場翻訳力」と「伴走力」で、自走する組織づくりを支えます。</p>
           <div class="about-intro-certs">
             <button class="cert-tag cert-tag--primary" data-cert="security">情報セキュリティスペシャリスト</button>
             <button class="cert-tag" data-cert="ict">ICT支援員</button>
             <button class="cert-tag" data-cert="digital">デジタル推進委員</button>
             <button class="cert-tag" data-cert="drone">二等無人航空機操縦士</button>
+            <p class="cert-hint">資格名をクリックすると詳細を確認できます</p>
           </div>
           <!-- 創業の想い -->
           <div class="story-inline">
             <h3 class="story-title">「あなたのExcelは魔法のようだ」から始まった</h3>
             <div class="story-body">
-              <p>2015年に復興支援として三陸の水産加工会社様のIT活用をサポートした時に言われたのが「あなたのExcelは魔法のようだ」という一言。私は受け取った帳票の集計を普段通りに整理していただけで、その言裉を言われたことは駚きを隠す事ができませんでした。自分にとって当たり前の知識でも誰かの役に立つということの気づき。人生の岐路になった瞬間です。</p>
-              <p>ITは魔法ではありません。導入したからといって必ず便利になるというものではなく「100社の組織があれば、100通りの使い方」。私は事業を通じてITを魔法ではなく、それぞれの組織で活かす最適な道具を選び皆様と一緒に磨きあげていくお手伝いをさせて頂きたいと考えています。</p>
+              <p>2015年に復興支援として三陸の水産加工会社様のIT活用をサポートした時に言われたのが「あなたのExcelは魔法のようだ」という一言。私は受け取った帳票の集計を普段通りに整理していただけで、その言葉を言われたことは驚きを隠す事ができませんでした。自分にとって当たり前の知識でも誰かの役に立つということの気づき。人生の岐路になった瞬間です。</p>
+              <p>ITは魔法ではありません。導入したからといって必ず便利になるというものではなく「100社の組織があれば、100通りの使い方」があります。私は事業を通じてITを魔法ではなく、それぞれの組織で活かす最適な道具を選び皆様と一緒に磨きあげていくお手伝いをさせて頂きたいと考えています。</p>
             </div>
           </div>
         </div>
@@ -336,7 +358,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <div class="partner-card">
           <div class="partner-avatar"><img src="/assets/images/tydi-adachi.png" alt="足立 恭平 氏"></div>
           <div class="partner-info">
-            <h3 class="partner-name"><a href="https://tydi.co.jp/" target="_blank" rel="noopener" class="partner-link">足立 恭平 氏</a></h3>
+            <h3 class="partner-name">足立 恭平 氏</h3>
             <p class="partner-role">地域DX・地域共創</p>
             <p class="partner-former">株式会社東京山側デジタル推進機構 代表取締役</p>
             <p class="partner-desc">東京山側エリアを拠点に、Web制作・業務効率化・生成AI導入などLocal-DXを展開。地域の課題解決と都心企業の新規事業創出を結びつけるパートナーです。</p>
@@ -376,21 +398,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <dl class="info-dl">
           <div class="info-row"><dt>屋号</dt><dd>むすびかなでる</dd></div>
           <div class="info-row"><dt>創業年月</dt><dd>2020年7月</dd></div>
-          <div class="info-row">
-            <dt>所在地</dt>
-            <dd>〒197-0814<br>東京都あきる野市二宮1156-27<br>有限会社サニーシステム 気付</dd>
-          </div>
-          <div class="info-row">
-            <dt>所属</dt>
-            <dd>
-              <ul>
-                <li>有限会社サニーシステム（取締役）</li>
-                <li>東京中小企業家同友会（三多摩支部幹事）</li>
-                <li>八王子商工会議所</li>
-              </ul>
-            </dd>
-          </div>
-          <div class="info-row info-row--full">
+          <div class="info-row info-row--col3">
             <dt>事業内容</dt>
             <dd>
               <div class="biz-service-list">
@@ -402,11 +410,20 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                   <p class="biz-service-title">IT基盤整備・クラウド移行支援</p>
                   <p class="biz-service-sub">リモートワーク環境構築・業務効率化</p>
                 </div>
-                <div class="biz-service-card">
-                  <p class="biz-service-title">非営利活動事業者 運営支援</p>
-                  <p class="biz-service-sub">事務局業務代行・会計内製化・支援者管理システム構築</p>
-                </div>
               </div>
+            </dd>
+          </div>
+          <div class="info-row">
+            <dt>所在地</dt>
+            <dd>〒197-0814<br>東京都あきる野市二宮1156-27<br>有限会社サニーシステム 気付</dd>
+          </div>
+          <div class="info-row">
+            <dt>所属</dt>
+            <dd>
+              <ul>
+                <li>東京中小企業家同友会（三多摩支部幹事）</li>
+                <li>八王子商工会議所</li>
+              </ul>
             </dd>
           </div>
         </dl>
@@ -422,7 +439,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <h2 class="cta-title">まずは「現場の悩み」を<br>お聞かせください。</h2>
         <p class="cta-lead">ITの専門用語は不要です。<br>御社の現状と、目指したい姿についてお話しましょう。</p>
         <div class="cta-actions">
-          <a href="https://forms.gle/example" class="btn-accent cta-btn" target="_blank" rel="noopener">無料個別相談に申し込む</a>
+          <a href="https://forms.gle/iaMWnnnnWmsciXcv8" class="btn-accent cta-btn" target="_blank" rel="noopener">無料個別相談に申し込む</a>
         </div>
       </div>
     </div>
@@ -458,10 +475,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       desc: '学校・企業等へのICT活用支援を行う専門人材認定資格。現場へのITリテラシー教育や活用定着支援の専門性を証明。'
     },
     digital: {
-      level: '総務省任命',
+      level: 'デジタル庁任命',
       levelClass: 'cert-level--gov',
       title: 'デジタル推進委員',
-      desc: '総務省が推進するデジタル活用支援員制度に基づく認定。地域住民・事業者へのデジタル活用普及を担う人材として任命。'
+      desc: 'デジタル庁が推進するデジタル活用支援員推進事業に基づく認定。地域住民・事業者へのデジタル活用普及を担う人材として任命。'
     },
     drone: {
       level: '国家資格',
@@ -505,6 +522,77 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 </script>
 
 <style>
+/* ===== News Strip ===== */
+.news-strip {
+  background: #fff;
+  border-bottom: 1px solid rgba(0,0,0,0.07);
+}
+.news-strip-inner {
+  display: flex;
+  align-items: stretch;
+  min-height: 52px;
+}
+.news-strip-label {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  background: var(--color-brand-primary);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  white-space: nowrap;
+}
+.news-strip-list {
+  list-style: none;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.news-strip-item {
+  display: flex;
+  align-items: baseline;
+  gap: 1.25rem;
+  padding: 0.85rem 1.5rem;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  transition: background 0.15s;
+  flex-wrap: wrap;
+}
+.news-strip-item:last-child {
+  border-bottom: none;
+}
+.news-strip-item:hover {
+  background: rgba(26,107,104,0.03);
+}
+.news-strip-date {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+}
+.news-strip-title {
+  font-size: 0.9rem;
+  color: var(--color-text-main);
+  flex: 1;
+  line-height: 1.5;
+  min-width: 0;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.news-strip-title:hover {
+  color: var(--color-brand-primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+@media (max-width: 768px) {
+  .news-strip-inner { flex-direction: column; }
+  .news-strip-label { padding: 0.55rem 1rem; justify-content: center; }
+  .news-strip-item { gap: 0.5rem; padding: 0.75rem 1rem; }
+}
+
 /* ===== Hero ===== */
 .hero {
   position: relative;
@@ -578,6 +666,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   gap: 1rem;
   flex-wrap: wrap;
   margin-bottom: 1.5rem;
+}
+.hero-actions > a {
+  flex: 1 1 0;
+  text-align: center;
 }
 .hero-trust {
   display: flex;
@@ -1275,7 +1367,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   line-height: 1.9;
   margin: 0;
 }
-.about-intro-certs { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.about-intro-certs { display: flex; flex-wrap: wrap; gap: 0.35rem; align-items: center; }
+.cert-hint { font-size: 0.68rem; color: #9ca3af; margin: 0; width: 100%; }
 .cert-tag {
   font-size: 0.73rem;
   font-weight: 600;
@@ -1313,13 +1406,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 .about-biz-full {}
 .about-biz-full .info-dl {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 1rem 2.5rem;
 }
-.info-row--full { grid-column: 1 / -1; }
+.info-row--col3 { grid-row: span 2; }
 .biz-service-list {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-direction: column;
   gap: 1rem;
   margin-top: 0.75rem;
 }
@@ -1345,8 +1438,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 }
 @media (max-width: 768px) {
   .about-biz-full .info-dl { grid-template-columns: 1fr; }
-  .biz-service-list { grid-template-columns: 1fr; }
+  .info-row--col3 { grid-row: auto; }
 }
+
 
 /* ===== Cert Modal ===== */
 .cert-modal-backdrop {
