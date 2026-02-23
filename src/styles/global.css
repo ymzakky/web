@@ -98,13 +98,13 @@ img {
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0 clamp(1rem, 4vw, 2rem);
 }
 
 .container--narrow {
     max-width: 880px;
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0 clamp(1rem, 4vw, 2rem);
 }
 
 /* Section共通スタイル */
@@ -210,6 +210,35 @@ img {
 
 .section {
     padding: var(--spacing-lg) 0;
+}
+
+@media (max-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+
+    .section {
+        padding: 3.5rem 0;
+    }
+
+    .section-label {
+        font-size: 1.35rem;
+    }
+}
+
+@media (max-width: 430px) {
+    html {
+        font-size: 15.5px;
+    }
+
+    .section {
+        padding: 3rem 0;
+    }
+
+    .section-label {
+        font-size: 1.2rem;
+        letter-spacing: 0.1em;
+    }
 }
 
 .text-gradient {

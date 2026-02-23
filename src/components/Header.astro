@@ -31,7 +31,7 @@
 
 <style>
   .site-header {
-    padding: 0.9rem 0;
+    padding: 0.7rem 0;
     background: rgba(255, 255, 255, 0.92);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
@@ -60,7 +60,7 @@
   }
 
   .brand-logo {
-      height: 80px;
+      height: 72px;
       width: auto;
   }
 
@@ -145,6 +145,23 @@
   }
 
   @media (max-width: 768px) {
+    .site-header {
+      padding: 0.55rem 0;
+    }
+
+    .brand {
+      gap: 0.55rem;
+    }
+
+    .brand-logo {
+      height: 52px;
+    }
+
+    .brand-text {
+      font-size: 0.95rem;
+      letter-spacing: 0.04em;
+    }
+
     .nav-toggle {
       display: flex;
     }
@@ -174,6 +191,20 @@
     .btn-contact {
       width: 100%;
       text-align: center;
+    }
+  }
+
+  @media (max-width: 430px) {
+    .brand-logo {
+      height: 46px;
+    }
+
+    .brand-text {
+      font-size: 0.88rem;
+    }
+
+    .site-nav {
+      padding: 1rem;
     }
   }
 </style>
