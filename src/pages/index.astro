@@ -13,35 +13,23 @@ const latestNews = allNews.sort((a, b) => b.data.date.localeCompare(a.data.date)
 
   <!-- Section 1: ヒーローエリア -->
   <section class="hero" id="hero">
+    <img src="/assets/images/index_header.jpg" alt="" class="hero-bg-img" aria-hidden="true">
     <div class="hero-bg"></div>
     <div class="container hero-container">
-      <!-- 2カラム: コピー左 / 画像右 -->
       <div class="hero-content">
-
-        <!-- 左：メインコピー -->
-        <div class="hero-text">
-          <p class="hero-eyebrow">中小企業の「20人の壁」を突破する伴走支援</p>
-          <h1 class="hero-title">
-            社長が<span class="text-accent">経営に専念</span>できる<br>
-            自走する組織へ。
-          </h1>
-          <p class="hero-lead">
-            IT苦手な現場でも「直感操作」で使える。<br>
-            現場が自ら考え、動き出す<strong>「自走型DX」</strong>の伴走支援。
-          </p>
-          <div class="hero-actions">
-            <a href="#contact" class="btn-accent">無料相談お問い合わせ</a>
-            <a href="#case" class="btn-secondary">導入事例を見る</a>
-          </div>
+        <p class="hero-eyebrow">中小企業の「20人の壁」を突破する伴走支援</p>
+        <h1 class="hero-title">
+          社長が<span class="text-accent">経営に専念</span>できる
+          自走する組織へ。
+        </h1>
+        <p class="hero-lead">
+          IT苦手な現場でも「直感操作」で使える。<br>
+          現場が自ら考え、動き出す<strong>「自走型DX」</strong>の伴走支援。
+        </p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn-accent">無料相談お問い合わせ</a>
+          <a href="#case" class="btn-secondary">導入事例を見る</a>
         </div>
-
-        <!-- 右：イメージ画像 -->
-        <div class="hero-image-wrap">
-          <div class="hero-image-frame">
-            <img src="/assets/images/hero-image.png" alt="現場と経営をつなぐ伴走支援のイメージ" class="hero-image">
-          </div>
-        </div>
-
       </div>
     </div>
   </section>
@@ -74,26 +62,24 @@ const latestNews = allNews.sort((a, b) => b.data.date.localeCompare(a.data.date)
         <!-- 上部：ラベル＋キャッチ -->
         <div class="creed-header">
           <p class="section-label">経営理念</p>
+          <h2 class="section-title">技術と誠実さを結び合わせ、<br>お客様と未来を奏でていく。</h2>
         </div>
 
         <!-- 3つの理念カード -->
         <div class="creed-list">
           <div class="creed-item">
-            <span class="creed-num">01</span>
             <div class="creed-item-body">
               <p class="creed-item-text">私たちは、<br><strong>技術と実践</strong>で<br>未来を切り拓きます</p>
               <p class="creed-item-note">机上の空論ではなく、現場で動くものを。技術を磨き、ひとつずつ実行に移すことが私たちの誠実さです。</p>
             </div>
           </div>
           <div class="creed-item">
-            <span class="creed-num">02</span>
             <div class="creed-item-body">
               <p class="creed-item-text">私たちは、<br>夢や希望を目標に置き変え、<br><strong>世の中の奏者</strong>となります</p>
               <p class="creed-item-note">想いだけでは届かない。目標という楽譜に落とし込み、社会という舞台で共に奏でていきます。</p>
             </div>
           </div>
           <div class="creed-item">
-            <span class="creed-num">03</span>
             <div class="creed-item-body">
               <p class="creed-item-text">私たちは、<br>学び続け、成長し、<br><strong>成果に結びつけます</strong></p>
               <p class="creed-item-note">変化を恐れず、学びを止めない。お客様の成果が、私たちの成長の証です。</p>
@@ -109,7 +95,7 @@ const latestNews = allNews.sort((a, b) => b.data.date.localeCompare(a.data.date)
     <div class="container">
       <div class="section-header text-center">
         <p class="section-label">お客様の持つ課題</p>
-        <h2 class="section-title">こんなお悩み、<br>「20人の壁」に直面していませんか？</h2>
+        <h2 class="section-title">「20人の壁」に直面していませんか？</h2>
       </div>
       <div class="problem-grid">
         <div class="problem-card">
@@ -140,7 +126,7 @@ const latestNews = allNews.sort((a, b) => b.data.date.localeCompare(a.data.date)
     <div class="container">
       <div class="section-header text-center">
         <p class="section-label">私たちが提供する解決策</p>
-        <h2 class="section-title">「むすびかなでる」が提供するのは、<br>ITツールではなく<span class="text-brand">「自走する組織」</span>です。</h2>
+        <h2 class="section-title">「むすびかなでる」が提供するのは、<br>ITツールではなく<span class="text-brand">「自走する組織」</span></h2>
         <p class="section-lead center-lead">
           システム導入はゴールではありません。現場が主体的に動き出し、経営者が本来の仕事に集中できる組織をつくることが私たちのゴールです。
         </p>
@@ -526,6 +512,7 @@ const latestNews = allNews.sort((a, b) => b.data.date.localeCompare(a.data.date)
 .news-strip {
   background: #fff;
   border-bottom: 1px solid rgba(0,0,0,0.07);
+  margin: 1.5rem 0;
 }
 .news-strip-inner {
   display: flex;
@@ -597,8 +584,22 @@ const latestNews = allNews.sort((a, b) => b.data.date.localeCompare(a.data.date)
 .hero {
   position: relative;
   overflow: hidden;
-  padding: 4rem 0;
+  padding: 7rem 0;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
   background: var(--gradient-hero);
+}
+.hero-bg-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0.12;
+  pointer-events: none;
+  z-index: 0;
 }
 .hero-bg {
   position: absolute;
@@ -607,10 +608,11 @@ const latestNews = allNews.sort((a, b) => b.data.date.localeCompare(a.data.date)
     radial-gradient(ellipse 60% 50% at 75% 60%, rgba(121, 179, 27, 0.09) 0%, transparent 70%),
     radial-gradient(ellipse 50% 60% at 20% 30%, rgba(26, 107, 104, 0.08) 0%, transparent 70%);
   pointer-events: none;
+  z-index: 1;
 }
 .hero-container {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   display: flex;
   flex-direction: column;
   gap: 2.5rem;
@@ -627,49 +629,59 @@ const latestNews = allNews.sort((a, b) => b.data.date.localeCompare(a.data.date)
   border-radius: 20px;
   box-shadow: var(--shadow-md);
 }
-/* 2カラムグリッド */
+/* 縦並びレイアウト */
 .hero-content {
-  display: grid;
-  grid-template-columns: 3fr 2fr;
-  gap: 2rem;
-  align-items: center;
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.75rem;
+  max-width: 780px;
+}
+.hero-left,
+.hero-right {
+  display: contents;
 }
 .hero-eyebrow {
   display: inline-block;
-  font-size: 0.8rem;
+  font-size: 1rem;
   font-weight: 700;
   letter-spacing: 0.12em;
   color: var(--color-brand-primary);
   background: rgba(26, 107, 104, 0.08);
-  padding: 0.4rem 1rem;
+  padding: 0.5rem 1.25rem;
   border-radius: 99px;
-  margin-bottom: 1.2rem;
+  margin-bottom: 0;
   border: 1px solid rgba(26,107,104,0.15);
 }
 .hero-title {
-  font-size: clamp(1.7rem, 3.5vw, 2.5rem);
-  line-height: 1.3;
-  margin-bottom: 1.5rem;
+  font-size: clamp(2rem, 3.8vw, 3.2rem);
+  line-height: 1.4;
+  margin-bottom: 0;
   font-family: var(--font-family-serif);
+  word-break: keep-all;
+  overflow-wrap: anywhere;
 }
 .text-accent { color: var(--color-brand-warm); }
 .text-brand { color: var(--color-brand-primary); }
 .hero-lead {
-  font-size: 1.05rem;
+  font-size: 1.25rem;
   color: var(--color-text-sub);
   line-height: 1.95;
-  margin-bottom: 2rem;
+  margin-bottom: 0;
 }
 .hero-actions {
   display: flex;
   gap: 1rem;
-  flex-wrap: wrap;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0;
+  width: 100%;
+  max-width: 620px;
+  align-self: center;
 }
 .hero-actions > a {
-  flex: 1 1 0;
+  flex: 1;
+  white-space: nowrap;
   text-align: center;
+  display: block;
 }
 .hero-trust {
   display: flex;
@@ -1322,7 +1334,7 @@ const latestNews = allNews.sort((a, b) => b.data.date.localeCompare(a.data.date)
 /* 2カラム: 左写真・右プロフィール */
 .about-profile-2col {
   display: grid;
-  grid-template-columns: 2fr 3fr;
+  grid-template-columns: 1fr 4fr;
   gap: 3rem;
   align-items: start;
 }
@@ -1792,11 +1804,13 @@ const latestNews = allNews.sort((a, b) => b.data.date.localeCompare(a.data.date)
   .expertise-grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 768px) {
-  .hero { padding: 2.5rem 0; }
-  .hero-title { margin-bottom: 1rem; }
+  .section { padding: 1rem 0; }
+  .creed-section { padding: 1rem 0; }
+  .hero { padding: 4rem 0; min-height: 60vh; }
+  .hero-title { margin-bottom: 0; }
   .hero-lead { margin-bottom: 1.4rem; }
-  .hero-actions { flex-direction: column; gap: 0.75rem; }
-  .hero-actions > a { width: 100%; }
+  .hero-actions { flex-direction: column; }
+  .hero-actions > a { flex: none; width: 100%; }
   .hero-logo { width: 88px; height: 88px; border-radius: 16px; }
   .hero-image-badge { bottom: -0.5rem; left: 0; padding: 0.6rem 0.9rem; }
   .hero-image-badge-num { font-size: 1.2rem; }
@@ -1819,7 +1833,7 @@ const latestNews = allNews.sort((a, b) => b.data.date.localeCompare(a.data.date)
   .career-list-period { width: fit-content; }
   .about-profile-biz-wrap { grid-template-columns: 1fr; gap: 2rem; }
   .about-profile-2col { grid-template-columns: 1fr; gap: 2rem; }
-  .about-photo-wrap { aspect-ratio: 4 / 3; }
+  .about-photo-wrap { aspect-ratio: 4 / 3; width: 50%; margin: 0 auto; }
   .about-intro-certs { justify-content: center; }
   .partner-grid { grid-template-columns: 1fr; }
   .partner-card { flex-direction: column; }
@@ -1833,6 +1847,8 @@ const latestNews = allNews.sort((a, b) => b.data.date.localeCompare(a.data.date)
 }
 
 @media (max-width: 430px) {
+  .section { padding: 1rem 0; }
+  .creed-section { padding: 1rem 0; }
   .news-strip-item {
     align-items: flex-start;
     gap: 0.35rem;
