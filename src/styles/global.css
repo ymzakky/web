@@ -34,9 +34,9 @@
     /* Spacing */
     --spacing-xs: 0.5rem;
     --spacing-sm: 1rem;
-    --spacing-md: 2rem;
-    --spacing-lg: 4rem;
-    --spacing-xl: 8rem;
+    --spacing-md: 2.5rem;
+    --spacing-lg: 5rem;
+    --spacing-xl: 10rem;
 
     /* Borders & Shadows */
     --border-radius-sm: 8px;
@@ -63,6 +63,7 @@
 
 html {
     scroll-behavior: smooth;
+    font-size: 17px; /* ベース：1rem=17px、本文約12.75pt */
 }
 
 body {
@@ -95,15 +96,15 @@ img {
 }
 
 .container {
-    max-width: 1080px;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 0 1.5rem;
+    padding: 0 2rem;
 }
 
 .container--narrow {
-    max-width: 760px;
+    max-width: 880px;
     margin: 0 auto;
-    padding: 0 1.5rem;
+    padding: 0 2rem;
 }
 
 /* Section共通スタイル */
@@ -122,7 +123,7 @@ img {
 
 .section-label {
     display: inline-block;
-    font-size: 0.8rem;
+    font-size: 1.8rem;
     font-weight: 700;
     letter-spacing: 0.15em;
     text-transform: uppercase;
@@ -131,28 +132,28 @@ img {
 }
 
 .section-title {
-    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-size: clamp(1.5rem, 2.8vw, 2.2rem);
     font-weight: 700;
-    margin-bottom: 1rem;
+    margin-bottom: 1.25rem;
     line-height: 1.4;
 }
 
 .section-lead {
-    font-size: 1.05rem;
+    font-size: 1.1rem;
     color: var(--color-text-sub);
-    max-width: 640px;
+    max-width: 760px;
     line-height: 1.9;
 }
 
 /* ボタン類 */
 .btn-primary {
     display: inline-block;
-    padding: 0.9rem 2.2rem;
+    padding: 1rem 2.6rem;
     background: var(--color-brand-primary);
     color: #fff;
     border-radius: 4px;
     font-weight: 700;
-    font-size: 1rem;
+    font-size: 1.05rem;
     letter-spacing: 0.06em;
     transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
     box-shadow: var(--shadow-brand);
@@ -168,13 +169,13 @@ img {
 
 .btn-secondary {
     display: inline-block;
-    padding: 0.9rem 2.2rem;
+    padding: 1rem 2.6rem;
     background: transparent;
     color: var(--color-brand-primary);
     border: 2px solid var(--color-brand-primary);
     border-radius: 4px;
     font-weight: 700;
-    font-size: 1rem;
+    font-size: 1.05rem;
     letter-spacing: 0.06em;
     transition: all 0.2s;
     cursor: pointer;
@@ -188,12 +189,12 @@ img {
 
 .btn-accent {
     display: inline-block;
-    padding: 1rem 2.5rem;
+    padding: 1.1rem 2.8rem;
     background: var(--color-brand-warm);
     color: #fff;
     border-radius: 4px;
     font-weight: 700;
-    font-size: 1.05rem;
+    font-size: 1.1rem;
     letter-spacing: 0.06em;
     transition: all 0.2s;
     box-shadow: 0 6px 24px rgba(200, 125, 90, 0.28);
@@ -238,13 +239,13 @@ img {
 }
 
 .hero-logo {
-    max-width: 180px;
+    max-width: 220px;
     margin: 0 auto var(--spacing-md);
     filter: drop-shadow(var(--shadow-sm));
 }
 
 .hero h1 {
-    font-size: 2.8rem;
+    font-size: clamp(1.8rem, 3.2vw, 2.6rem);
     font-family: var(--font-family-serif);
     color: var(--color-brand-primary);
     margin-bottom: var(--spacing-sm);
@@ -252,8 +253,15 @@ img {
 }
 
 .hero p {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     color: var(--color-text-sub);
-    max-width: 600px;
+    max-width: 720px;
     margin: 0 auto;
+}
+
+/* 1280px以上: ベースフォントサイズをさらに拡大してrem全体をスケールアップ */
+@media (min-width: 1280px) {
+    html {
+        font-size: 18px; /* 1rem=18px、本文約13.5pt */
+    }
 }

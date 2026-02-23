@@ -50,9 +50,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
         <!-- 上部：ラベル＋キャッチ -->
         <div class="creed-header">
-          <p class="creed-label">Philosophy</p>
-          <h2 class="creed-catch">想いをかたちに、未来へつなぐ。</h2>
-          <p class="creed-sub">すべての仕事の根底にある、私たちの約束です。</p>
+          <p class="section-label">ミッション</p>
+          <h2 class="creed-catch">未来を創造し、価値を提供する。</h2>
+          <p class="creed-sub">私たちのビジョンとコミットメントを共有します。</p>
         </div>
 
         <!-- 3つの理念カード -->
@@ -87,7 +87,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <section class="section section--alt" id="problem">
     <div class="container">
       <div class="section-header text-center">
-        <p class="section-label">Problem</p>
+        <p class="section-label">お客様の持つ課題</p>
         <h2 class="section-title">こんなお悩み、<br>「20人の壁」に直面していませんか？</h2>
       </div>
       <div class="problem-grid">
@@ -118,7 +118,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <section class="section" id="solution">
     <div class="container">
       <div class="section-header text-center">
-        <p class="section-label">Solution</p>
+        <p class="section-label">私たちが提供する解決策</p>
         <h2 class="section-title">「むすびかなでる」が提供するのは、<br>ITツールではなく<span class="text-brand">「自走する組織」</span>です。</h2>
         <p class="section-lead center-lead">
           システム導入はゴールではありません。現場が主体的に動き出し、経営者が本来の仕事に集中できる組織をつくることが私たちのゴールです。
@@ -150,11 +150,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </div>
   </section>
 
-  <!-- Section 7: 導入事例 -->
+  <!-- Section 7: 事例紹介 -->
   <section class="section" id="case">
     <div class="container">
       <div class="section-header text-center">
-        <p class="section-label">Case Study</p>
+        <p class="section-label">事例紹介</p>
         <h2 class="section-title">現場が自走し、経営が変わった。<br>「ちょうどいいDX」の実践事例。</h2>
       </div>
       <div class="case-wrap">
@@ -200,7 +200,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <div class="voice-card">
             <div class="voice-icon"></div>
             <blockquote>手書きメモを動かす感覚で使えるので、社員もすぐ慣れました。自分たちで管理表を改善できるようになったのも大きな変化です。</blockquote>
-            <cite>管理部 金子様</cite>
+            <cite>管理部 金子泰広 様</cite>
           </div>
         </div>
         <div class="case-result">
@@ -279,39 +279,37 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <!-- プロフィール -->
   <section class="section section--alt" id="about">
     <div class="container">
-      <div class="about-profile-col">
-        <p class="section-label">About</p>
-        <div class="about-profile-inner">
-          <div class="about-photo-circle">
-            <span></span>
-            <small>Photo</small>
-          </div>
-          <div>
-            <h2 class="about-intro-name">山崎 啓介</h2>
-            <p class="about-intro-role">むすびかなでる 代表</p>
-          </div>
-        </div>
-        <p class="about-intro-lead">日立グループのSEとして大規模金融システム開発に携わり、2015年の三陸復興支援を転機に独立。東京多摩エリアを拠点に、製造業・建設業・NPOへのIT伴走支援を実践しています。「現場翻訳力」と「伴走力」で、自走する組織づくりを支えます。</p>
-        <div class="about-intro-certs">
-          <button class="cert-tag cert-tag--primary" data-cert="security">情報セキュリティスペシャリスト</button>
-          <button class="cert-tag" data-cert="ict">ICT支援員</button>
-          <button class="cert-tag" data-cert="digital">デジタル推進委員</button>
-          <button class="cert-tag" data-cert="drone">二等無人航空機操縦士</button>
-        </div>
+      <div class="section-header text-center">
+        <p class="section-label">代表者紹介</p>
       </div>
-    </div>
-  </section>
-
-  <!-- 創業の想い -->
-  <section class="section" id="story">
-    <div class="container">
-      <div class="about-story-col">
-        <p class="section-label">Story</p>
-        <h2 class="section-title">創業の想い</h2>
-        <h3 class="story-title">「あなたのExcelは魔法のようだ」から始まった</h3>
-        <div class="story-body">
-          <p>2015年に復興支援として三陸の水産加工会社様のIT活用をサポートした時に言われたのが「あなたのExcelは魔法のようだ」という一言。私は受け取った帳票の集計を普段通りに整理していただけで、その言葉を言われたことは驚きを隠す事ができませんでした。自分にとって当たり前の知識でも誰かの役に立つということの気づき。人生の岐路になった瞬間です。</p>
-          <p>しかしITは魔法ではありません。導入したからといって必ず便利になるというものではなく、100社の組織があれば、100通りの使い方。私は事業を通じてITを魔法ではなく、それぞれの組織で活かす最適な道具を選び皆様と一緒に磨きあげていくお手伝いをさせて頂きたいと考えています。</p>
+      <div class="about-profile-2col">
+        <!-- 左：写真 -->
+        <div class="about-photo-col">
+          <div class="about-photo-wrap">
+            <img src="/assets/images/profile-yamazaki.jpg" alt="山﨑 啓介" class="about-photo-img">
+          </div>
+        </div>
+        <!-- 右：プロフィール -->
+        <div class="about-info-col">
+          <div>
+            <h2 class="about-intro-name">山﨑 啓介</h2>
+            <p class="about-intro-role">むすびかなでる 代表 ／ 有限会社サニーシステム 取締役</p>
+          </div>
+          <p class="about-intro-lead">日立グループのSEとして大規模金融システム開発に携わり、2015年の三陸復興支援を転機に独立。東京多摩エリアを拠点に、製造業・建設業・NPOへのIT伴走支援を実践しています。「現場翻訳力」と「伴走力」で、自走する組織づくりを支えます。また、東京都あきる野市の有限会社サニーシステム取締役として、住宅用太陽光蓄電池の提案やITを活かした電力エネルギーの利用状況分析にも携わっています。</p>
+          <div class="about-intro-certs">
+            <button class="cert-tag cert-tag--primary" data-cert="security">情報セキュリティスペシャリスト</button>
+            <button class="cert-tag" data-cert="ict">ICT支援員</button>
+            <button class="cert-tag" data-cert="digital">デジタル推進委員</button>
+            <button class="cert-tag" data-cert="drone">二等無人航空機操縦士</button>
+          </div>
+          <!-- 創業の想い -->
+          <div class="story-inline">
+            <h3 class="story-title">「あなたのExcelは魔法のようだ」から始まった</h3>
+            <div class="story-body">
+              <p>2015年に復興支援として三陸の水産加工会社様のIT活用をサポートした時に言われたのが「あなたのExcelは魔法のようだ」という一言。私は受け取った帳票の集計を普段通りに整理していただけで、その言裉を言われたことは駚きを隠す事ができませんでした。自分にとって当たり前の知識でも誰かの役に立つということの気づき。人生の岐路になった瞬間です。</p>
+              <p>ITは魔法ではありません。導入したからといって必ず便利になるというものではなく「100社の組織があれば、100通りの使い方」。私は事業を通じてITを魔法ではなく、それぞれの組織で活かす最適な道具を選び皆様と一緒に磨きあげていくお手伝いをさせて頂きたいと考えています。</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -321,36 +319,45 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <section class="section section--alt" id="partner">
     <div class="container">
       <div class="section-header text-center">
-        <p class="section-label">Partnership</p>
+        <p class="section-label">パートナーシップ</p>
         <h2 class="section-title">各分野のスペシャリストによる<br>盤石のサポート体制</h2>
         <p class="section-lead center-lead">個人事業主だからといって、品質に妥協はしません。各分野のプロフェッショナルとの連携により、大企業レベルの専門性を中小企業サイズで提供します。</p>
       </div>
       <div class="partner-grid">
         <div class="partner-card">
-          <div class="partner-avatar">市</div>
+          <div class="partner-avatar"><img src="/assets/images/realize-ichikawa.png" alt="市川 英利 氏"></div>
           <div class="partner-info">
             <h3 class="partner-name">市川 英利 氏</h3>
             <p class="partner-role">データ分析戦略</p>
-            <p class="partner-former">株式会社リアライズ 代表</p>
+            <p class="partner-former">株式会社リアライズ 代表取締役</p>
             <p class="partner-desc">日本マクドナルド等での実績に基づく統計分析の専門家。蓄積データを「利益」に変える戦略立案を支援します。</p>
           </div>
         </div>
         <div class="partner-card">
-          <div class="partner-avatar">東</div>
+          <div class="partner-avatar"><img src="/assets/images/tydi-adachi.png" alt="足立 恭平 氏"></div>
           <div class="partner-info">
-            <h3 class="partner-name"><a href="https://tydi.co.jp/" target="_blank" rel="noopener" class="partner-link">東京山側デジタル推進機構（TYDI）</a></h3>
+            <h3 class="partner-name"><a href="https://tydi.co.jp/" target="_blank" rel="noopener" class="partner-link">足立 恭平 氏</a></h3>
             <p class="partner-role">地域DX・地域共創</p>
-            <p class="partner-former">代表：足立 恭平 氏｜東京都あきる野市</p>
+            <p class="partner-former">株式会社東京山側デジタル推進機構 代表取締役</p>
             <p class="partner-desc">東京山側エリアを拠点に、Web制作・業務効率化・生成AI導入などLocal-DXを展開。地域の課題解決と都心企業の新規事業創出を結びつけるパートナーです。</p>
           </div>
         </div>
         <div class="partner-card partner-card--soon">
           <div class="partner-avatar partner-avatar--soon">？</div>
           <div class="partner-info">
-            <h3 class="partner-name">システム設計監修</h3>
-            <p class="partner-role">スペシャリストパートナー</p>
+            <h3 class="partner-name">新メンバー参加予定</h3>
+            <p class="partner-role">システム設計スペシャリスト</p>
             <div class="partner-coming-soon">Coming Soon</div>
-            <p class="partner-desc">各分野のスペシャリストによる新たなパートナーシップを準備中です。詳細は近日公開予定。</p>
+            <p class="partner-desc">大企業での豊富な実績を持つシステム設計のスペシャリストが間もなく参画予定。確かな設計力で、より高品質なシステム開発をご提供します。</p>
+          </div>
+        </div>
+        <div class="partner-card partner-card--soon">
+          <div class="partner-avatar partner-avatar--soon">？</div>
+          <div class="partner-info">
+            <h3 class="partner-name">新メンバー参加予定</h3>
+            <p class="partner-role">実績豊富なプログラマー</p>
+            <div class="partner-coming-soon">Coming Soon</div>
+            <p class="partner-desc">数多くのプロジェクトを手がけてきた経験豊富なプログラマーが間もなく加わります。さらに強力な開発体制でご期待ください。</p>
           </div>
         </div>
       </div>
@@ -364,16 +371,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <section class="section cta-section" id="contact">
     <div class="container">
       <div class="cta-wrap">
-        <p class="section-label" style="color: rgba(255,255,255,0.7);">Contact</p>
+        <p class="section-label" style="color: rgba(255,255,255,0.7);">お問い合わせ</p>
         <h2 class="cta-title">まずは「現場の悩み」を<br>お聞かせください。</h2>
-        <p class="cta-lead">ITの専門用語は不要です。御社の現状と、目指したい姿についてお話しましょう。</p>
+        <p class="cta-lead">ITの専門用語は不要です。<br>御社の現状と、目指したい姿についてお話しましょう。</p>
         <div class="cta-actions">
           <a href="https://forms.gle/example" class="btn-accent cta-btn" target="_blank" rel="noopener">無料個別相談に申し込む</a>
-        </div>
-        <div class="cta-notes">
-          <p> 完全無料1時間程度のオンライン相談</p>
-          <p> 提案の強制しつこい営業なし</p>
-          <p> どんな些細な悩みでもOK</p>
         </div>
       </div>
     </div>
@@ -383,30 +385,43 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   <section class="section" id="business">
     <div class="container">
       <div class="about-biz-full">
-        <p class="section-label">Business</p>
+        <div class="section-header text-center">
+          <p class="section-label">事業概要</p>
+        </div>
         <dl class="info-dl">
           <div class="info-row"><dt>屋号</dt><dd>むすびかなでる</dd></div>
+          <div class="info-row"><dt>創業年月</dt><dd>2020年7月</dd></div>
           <div class="info-row">
             <dt>所在地</dt>
-            <dd>〒197-0814<br>東京都あきる野市二宮115627<br>有限会社サニーシステム 気付</dd>
+            <dd>〒197-0814<br>東京都あきる野市二宮1156-27<br>有限会社サニーシステム 気付</dd>
           </div>
           <div class="info-row">
-            <dt>事業内容</dt>
+            <dt>所属</dt>
             <dd>
               <ul>
-                <li>経営システムコンサルティング</li>
-                <li>ITシステム受託開発</li>
-                <li>NPO事務局業務代行</li>
+                <li>有限会社サニーシステム（取締役）</li>
+                <li>東京中小企業家同友会（三多摩支部幹事）</li>
+                <li>八王子商工会議所</li>
               </ul>
             </dd>
           </div>
-          <div class="info-row">
-            <dt>所属組織</dt>
+          <div class="info-row info-row--full">
+            <dt>事業内容</dt>
             <dd>
-              <ul>
-                <li>東京中小企業家同友会</li>
-                <li>八王子商工会議所</li>
-              </ul>
+              <div class="biz-service-list">
+                <div class="biz-service-card">
+                  <p class="biz-service-title">中小企業向け自走型DX伴走支援</p>
+                  <p class="biz-service-sub">kintone活用・業務改善・人財育成</p>
+                </div>
+                <div class="biz-service-card">
+                  <p class="biz-service-title">IT基盤整備・クラウド移行支援</p>
+                  <p class="biz-service-sub">リモートワーク環境構築・業務効率化</p>
+                </div>
+                <div class="biz-service-card">
+                  <p class="biz-service-title">非営利活動事業者 運営支援</p>
+                  <p class="biz-service-sub">事務局業務代行・会計内製化・支援者管理システム構築</p>
+                </div>
+              </div>
             </dd>
           </div>
         </dl>
@@ -433,8 +448,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     security: {
       level: '国家資格',
       levelClass: 'cert-level--national',
-      title: '情報安全確保支援士（情報セキュリティスペシャリスト）',
-      desc: 'サイバーセキュリティに関する国内唯一の国家資格（登録制）。企業のセキュリティ対策立案・リスク管理・インシデント対応の専門家として認定。'
+      title: '情報セキュリティスペシャリスト（旧制度）',
+      desc: 'IPAが実施するサイバーセキュリティ分野の国家試験（現・情報安全確保支援士試験の前身）合格。セキュリティ対策立案・リスク管理・インシデント対応に関する専門知識を有する。'
     },
     ict: {
       level: '認定資格',
@@ -452,8 +467,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       level: '国家資格',
       levelClass: 'cert-level--national',
       title: '二等無人航空機操縦士',
-      desc: 'ドローン操縦の国家資格（二等）。建設現場や農地の空撮・点検・測量支援が可能。IT支援とドローン活用を組み合わせた現場DX提案にも活用。'
+      desc: 'ドローン操縦の国家資格（二等）。建設現場の空撮・点検が可能。IT支援とドローン活用を組み合わせた現場DX提案にも活用。'
     }
+    
   };
 
   const backdrop = document.getElementById('certModalBackdrop')!;
@@ -541,10 +557,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   padding: 0.4rem 1rem;
   border-radius: 99px;
   margin-bottom: 1.2rem;
-  border: 1px solid rgba(26, 107, 104, 0.15);
+  border: 1px solid rgba(26,107,104,0.15);
 }
 .hero-title {
-  font-size: clamp(2rem, 4.5vw, 3rem);
+  font-size: clamp(1.7rem, 3.5vw, 2.5rem);
   line-height: 1.3;
   margin-bottom: 1.5rem;
   font-family: var(--font-family-serif);
@@ -661,7 +677,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   display: block;
 }
 .creed-catch {
-  font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+  font-size: clamp(1.3rem, 2.8vw, 1.9rem);
   font-weight: 900;
   color: var(--color-text-main);
   font-family: var(--font-family-serif);
@@ -1036,8 +1052,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 }
 .partner-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
 .partner-avatar {
-  width: 54px;
-  height: 54px;
+  width: 72px;
+  height: 72px;
   border-radius: 50%;
   background: var(--gradient-brand);
   color: #fff;
@@ -1048,6 +1064,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   font-weight: 700;
   flex-shrink: 0;
   font-family: var(--font-family-serif);
+  overflow: hidden;
+}
+.partner-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 .partner-info {}
 .partner-name { font-size: 1rem; font-weight: 700; margin-bottom: 0.15rem; }
@@ -1188,7 +1211,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 /* ===== CTA Section ===== */
 .cta-section { background: var(--gradient-brand); padding: 6rem 0; }
 .cta-wrap { text-align: center; max-width: 600px; margin: 0 auto; }
-.cta-title { font-size: clamp(1.6rem, 4vw, 2.3rem); color: #fff; margin-bottom: 1.2rem; line-height: 1.4; }
+.cta-title { font-size: clamp(1.4rem, 3.2vw, 2rem); color: #fff; margin-bottom: 1.2rem; line-height: 1.4; }
 .cta-lead { font-size: 1.02rem; color: rgba(255,255,255,0.85); margin-bottom: 2.5rem; line-height: 1.8; }
 .cta-btn { font-size: 1.1rem; padding: 1.1rem 3rem; }
 .cta-actions { margin-bottom: 0.5rem; }
@@ -1204,28 +1227,36 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 }
 .about-profile-col { display: flex; flex-direction: column; gap: 1rem; }
 .about-biz-col { display: flex; flex-direction: column; gap: 0; }
-.about-profile-inner {
-  display: flex;
-  align-items: center;
-  gap: 1.25rem;
-  margin-bottom: 0.25rem;
+/* 2カラム: 左写真・右プロフィール */
+.about-profile-2col {
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  gap: 3rem;
+  align-items: start;
 }
-.about-photo-circle {
-  width: 88px;
-  height: 88px;
-  border-radius: 50%;
+.about-photo-wrap {
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  aspect-ratio: 3 / 4;
   background: var(--color-bg-muted);
   border: 3px solid rgba(26,107,104,0.12);
+}
+.about-photo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  transition: transform 0.4s ease;
+}
+.about-photo-wrap:hover .about-photo-img { transform: scale(1.03); }
+.about-info-col {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0.3rem;
-  color: var(--color-text-muted);
-  font-size: 1.2rem;
-  flex-shrink: 0;
+  gap: 1.5rem;
+  padding-top: 0.5rem;
 }
-.about-photo-circle small { font-size: 0.65rem; }
 .about-intro-name {
   font-size: clamp(1.3rem, 2.2vw, 1.7rem);
   font-family: var(--font-family-serif);
@@ -1285,8 +1316,36 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   grid-template-columns: repeat(2, 1fr);
   gap: 1rem 2.5rem;
 }
+.info-row--full { grid-column: 1 / -1; }
+.biz-service-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 0.75rem;
+}
+.biz-service-card {
+  padding: 0.25rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.biz-service-card:hover {}
+.biz-service-title {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+  line-height: 1.65;
+  margin: 0;
+}
+.biz-service-sub {
+  font-size: 0.77rem;
+  color: var(--color-text-muted);
+  line-height: 1.7;
+  margin: 0;
+}
 @media (max-width: 768px) {
   .about-biz-full .info-dl { grid-template-columns: 1fr; }
+  .biz-service-list { grid-template-columns: 1fr; }
 }
 
 /* ===== Cert Modal ===== */
@@ -1572,6 +1631,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   border-left: 3px solid var(--color-brand-primary);
   box-shadow: var(--shadow-sm);
 }
+.story-inline {
+  border-top: 1px solid rgba(26,107,104,0.15);
+  padding-top: 1.5rem;
+  margin-top: 0.5rem;
+}
+.story-inline > .story-title { margin-top: 0; }
 .story-title { font-size: 1.05rem; color: var(--color-brand-primary); margin-bottom: 1.25rem; padding-left: 1rem; border-left: 4px solid var(--color-brand-primary); line-height: 1.5; }
 .story-body p { font-size: 0.92rem; color: var(--color-text-sub); line-height: 2; margin-bottom: 1rem; text-align: justify; }
 .story-body p:last-child { margin-bottom: 0; }
@@ -1654,7 +1719,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   .career-list-item { grid-template-columns: 1fr; gap: 0.3rem; }
   .career-list-period { width: fit-content; }
   .about-profile-biz-wrap { grid-template-columns: 1fr; gap: 2rem; }
-  .about-profile-inner { flex-direction: column; text-align: center; }
+  .about-profile-2col { grid-template-columns: 1fr; gap: 2rem; }
+  .about-photo-wrap { aspect-ratio: 4 / 3; }
   .about-intro-certs { justify-content: center; }
   .partner-grid { grid-template-columns: 1fr; }
   .partner-card { flex-direction: column; }

@@ -7,6 +7,7 @@ const today = new Date();
     <div class="footer-brand">
       <a href="/" class="footer-logo">
         <img src="/assets/images/logo.png" alt="むすびかなでる ロゴ" class="footer-logo-img">
+        <span class="footer-brand-text">むすびかなでる</span>
       </a>
       <p class="footer-tagline">想いをかたちに、未来へつなぐ。</p>
     </div>
@@ -14,9 +15,9 @@ const today = new Date();
         <div class="footer-links">
           <h4>Menu</h4>
           <ul>
-            <li><a href="/#about">私たちについて</a></li>
-            <li><a href="/works">制作実績</a></li>
             <li><a href="/#solution">サービス</a></li>
+            <li><a href="/#case">導入事例</a></li>
+            <li><a href="/#about">私たちについて</a></li>
           </ul>
         </div>
         <div class="footer-links">
@@ -49,18 +50,27 @@ const today = new Date();
   }
 
   .footer-logo {
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
     margin-bottom: 1.5rem;
-    max-width: 200px;
   }
 
   .footer-logo-img {
-      width: 100%;
-      filter: brightness(0) invert(1) opacity(0.85);
-      transition: filter 0.3s;
+      height: 72px;
+      width: auto;
+      opacity: 0.85;
+      transition: opacity 0.3s;
   }
   .footer-logo:hover .footer-logo-img {
-      filter: brightness(0) invert(1) opacity(1);
+      opacity: 1;
+  }
+
+  .footer-brand-text {
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: rgba(255,255,255,0.85);
   }
 
   .footer-tagline {
