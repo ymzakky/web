@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420">
+  <defs>
+    <marker id="mG" viewBox="0 0 8 8" refX="7" refY="4"
+            markerWidth="5" markerHeight="5" orient="auto">
+      <path d="M0,0.5 L7,4 L0,7.5 Z" fill="#2a6041"/>
+    </marker>
+    <marker id="mO" viewBox="0 0 8 8" refX="7" refY="4"
+            markerWidth="5" markerHeight="5" orient="auto">
+      <path d="M0,0.5 L7,4 L0,7.5 Z" fill="#c87533"/>
+    </marker>
+    <marker id="mGd" viewBox="0 0 8 8" refX="7" refY="4"
+            markerWidth="5" markerHeight="5" orient="auto">
+      <path d="M0,0.5 L7,4 L0,7.5 Z" fill="#2a6041" opacity="0.55"/>
+    </marker>
+  </defs>
+  <rect width="800" height="420" fill="#fafaf7" rx="6"/>
+  <path d="M160,112 L210,112" stroke="#2a6041" stroke-width="2" fill="none" marker-end="url(#mG)"/>
+  <path d="M350,112 L400,110" stroke="#2a6041" stroke-width="2" fill="none" marker-end="url(#mG)"/>
+  <path d="M560,110 L610,112" stroke="#2a6041" stroke-width="2" fill="none" marker-end="url(#mG)"/>
+  <path d="M685,155 L685,217 L570,217 L570,280" stroke="#c87533" stroke-width="2" fill="none" marker-end="url(#mO)"/>
+  <path d="M685,155 L685,217 L710,217 L710,280" stroke="#c87533" stroke-width="2" fill="none" marker-end="url(#mO)"/>
+  <path d="M107,250 L107,171 L390,171 L390,110 L400,110" stroke="#2a6041" stroke-width="1.8" stroke-dasharray="5,4" fill="none" marker-end="url(#mGd)" opacity="0.55"/>
+  <rect x="30" y="70" width="130" height="85" rx="8" fill="#ffffff" stroke="#c87533" stroke-width="2"/>
+  <rect x="30" y="70" width="130" height="24" rx="8" fill="#fdf4ec"/>
+  <rect x="30" y="86" width="130" height="8" fill="#fdf4ec"/>
+  <text x="95" y="85" text-anchor="middle" font-size="11" font-weight="700" fill="#c87533" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">PDF&#x6295;&#x5165;</text>
+  <text x="95" y="110" text-anchor="middle" font-size="10" fill="#5a5a5a" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">Google Drive</text>
+  <text x="95" y="125" text-anchor="middle" font-size="10" fill="#5a5a5a" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">&#x76E3;&#x8996;&#x30D5;&#x30A9;&#x30EB;&#x30C0;</text>
+  <text x="95" y="140" text-anchor="middle" font-size="10" fill="#5a5a5a" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">5&#x5206;&#x3054;&#x3068;&#x691C;&#x51FA;</text>
+  <rect x="210" y="70" width="140" height="85" rx="8" fill="#ffffff" stroke="#2a6041" stroke-width="2"/>
+  <rect x="210" y="70" width="140" height="24" rx="8" fill="#e8f3ed"/>
+  <rect x="210" y="86" width="140" height="8" fill="#e8f3ed"/>
+  <text x="280" y="85" text-anchor="middle" font-size="11" font-weight="700" fill="#2a6041" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">&#x30D5;&#x30A1;&#x30A4;&#x30EB;&#x53D6;&#x5F97;</text>
+  <text x="280" y="110" text-anchor="middle" font-size="10" fill="#5a5a5a" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">PDF&#x30FB;Google Docs</text>
+  <text x="280" y="125" text-anchor="middle" font-size="10" fill="#5a5a5a" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">&#x2192; base64&#x5909;&#x63DB;</text>
+  <text x="280" y="140" text-anchor="middle" font-size="10" fill="#5a5a5a" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">&#x901A;&#x3057;&#x756A;&#x53F7;&#x767A;&#x884C;</text>
+  <rect x="400" y="55" width="160" height="110" rx="10" fill="#2a6041"/>
+  <rect x="400" y="55" width="160" height="26" rx="10" fill="#1d4a30"/>
+  <rect x="400" y="73" width="160" height="8" fill="#1d4a30"/>
+  <text x="480" y="72" text-anchor="middle" font-size="11" font-weight="700" fill="white" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">Claude Vision &#x89E3;&#x6790;</text>
+  <text x="480" y="97" text-anchor="middle" font-size="10" fill="white" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif" opacity="0.85">&#x66F8;&#x985E;&#x7A2E;&#x5225;&#x30FB;&#x8ACB;&#x6C42;&#x65E5;</text>
+  <text x="480" y="111" text-anchor="middle" font-size="10" fill="white" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif" opacity="0.85">&#x8ACB;&#x6C42;&#x5143;&#x30FB;&#x91D1;&#x984D;&#x30FB;&#x7A0E;</text>
+  <line x1="418" y1="123" x2="542" y2="123" stroke="#c87533" stroke-width="1.5" opacity="0.7"/>
+  <text x="480" y="137" text-anchor="middle" font-size="10" fill="white" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif" opacity="0.75">&#x52D8;&#x5B9A;&#x79D1;&#x76EE;&#x81EA;&#x52D5;&#x5224;&#x5B9A;</text>
+  <text x="480" y="151" text-anchor="middle" font-size="10" fill="white" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif" opacity="0.75">&#x767B;&#x9332;&#x756A;&#x53F7;&#x62BD;&#x51FA;</text>
+  <rect x="610" y="70" width="150" height="85" rx="8" fill="#ffffff" stroke="#2a6041" stroke-width="2"/>
+  <rect x="610" y="70" width="150" height="24" rx="8" fill="#e8f3ed"/>
+  <rect x="610" y="86" width="150" height="8" fill="#e8f3ed"/>
+  <text x="685" y="85" text-anchor="middle" font-size="11" font-weight="700" fill="#2a6041" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">&#x6B20;&#x640D;&#x30C1;&#x30A7;&#x30C3;&#x30AF;</text>
+  <text x="685" y="110" text-anchor="middle" font-size="10" fill="#5a5a5a" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">&#x5FC5;&#x9808;&#x9805;&#x76EE;&#x691C;&#x67FB;</text>
+  <text x="685" y="125" text-anchor="middle" font-size="10" fill="#5a5a5a" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">&#x6B63;&#x5E38;/&#x7570;&#x5E38;&#x5224;&#x5B9A;</text>
+  <text x="685" y="140" text-anchor="middle" font-size="10" fill="#5a5a5a" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">&#x30E1;&#x30FC;&#x30EB;&#x901A;&#x77E5;</text>
+  <rect x="30" y="250" width="155" height="105" rx="8" fill="white" stroke="#2a6041" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <rect x="30" y="250" width="155" height="24" rx="8" fill="#e8f3ed"/>
+  <rect x="30" y="266" width="155" height="8" fill="#e8f3ed"/>
+  <text x="107" y="265" text-anchor="middle" font-size="11" font-weight="700" fill="#2a6041" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">&#x8A2D;&#x5B9A;&#x30FB;&#x30EB;&#x30FC;&#x30EB;</text>
+  <text x="107" y="290" text-anchor="middle" font-size="10" fill="#5a5a5a" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">&#x52D8;&#x5B9A;&#x79D1;&#x76EE;&#x30EA;&#x30B9;&#x30C8;</text>
+  <text x="107" y="305" text-anchor="middle" font-size="10" fill="#5a5a5a" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">&#x5FC5;&#x9808;&#x30D5;&#x30A3;&#x30FC;&#x30EB;&#x30C9;&#x5B9A;&#x7FA9;</text>
+  <text x="107" y="320" text-anchor="middle" font-size="10" fill="#5a5a5a" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">&#x81EA;&#x793E;&#x540D;&#x9664;&#x5916;</text>
+  <text x="107" y="335" text-anchor="middle" font-size="10" fill="#5a5a5a" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">&#x30EA;&#x30CD;&#x30FC;&#x30E0;&#x898F;&#x5247;</text>
+  <rect x="510" y="280" width="120" height="75" rx="8" fill="#ffffff" stroke="#c87533" stroke-width="2"/>
+  <rect x="510" y="280" width="120" height="24" rx="8" fill="#fdf4ec"/>
+  <rect x="510" y="296" width="120" height="8" fill="#fdf4ec"/>
+  <text x="570" y="295" text-anchor="middle" font-size="11" font-weight="700" fill="#c87533" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">&#x30B7;&#x30FC;&#x30C8;&#x8A18;&#x9332;</text>
+  <text x="570" y="320" text-anchor="middle" font-size="10" fill="#5a5a5a" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">17&#x9805;&#x76EE;&#x81EA;&#x52D5;&#x5165;&#x529B;</text>
+  <text x="570" y="335" text-anchor="middle" font-size="10" fill="#5a5a5a" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">&#x8272;&#x4ED8;&#x3051;&#x5224;&#x5B9A;</text>
+  <rect x="650" y="280" width="120" height="75" rx="8" fill="#ffffff" stroke="#c87533" stroke-width="2"/>
+  <rect x="650" y="280" width="120" height="24" rx="8" fill="#fdf4ec"/>
+  <rect x="650" y="296" width="120" height="8" fill="#fdf4ec"/>
+  <text x="710" y="295" text-anchor="middle" font-size="11" font-weight="700" fill="#c87533" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">&#x30EA;&#x30CD;&#x30FC;&#x30E0;&#x30FB;&#x632F;&#x5206;</text>
+  <text x="710" y="320" text-anchor="middle" font-size="10" fill="#5a5a5a" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">&#x96FB;&#x5E33;&#x6CD5;&#x5BFE;&#x5FDC;&#x540D;</text>
+  <text x="710" y="335" text-anchor="middle" font-size="10" fill="#5a5a5a" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">OK/NG&#x30D5;&#x30A9;&#x30EB;&#x30C0;</text>
+  <g transform="translate(50, 390)">
+    <line x1="0" y1="7" x2="22" y2="7" stroke="#2a6041" stroke-width="2" marker-end="url(#mG)"/>
+    <text x="28" y="11" font-size="10" fill="#5a5a5a" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">&#x30C7;&#x30FC;&#x30BF;&#x306E;&#x6D41;&#x308C;</text>
+    <line x1="118" y1="7" x2="140" y2="7" stroke="#2a6041" stroke-width="1.8" stroke-dasharray="5,4" marker-end="url(#mGd)" opacity="0.55"/>
+    <text x="146" y="11" font-size="10" fill="#5a5a5a" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">&#x6761;&#x4EF6;&#x30FB;&#x30EB;&#x30FC;&#x30EB;</text>
+    <line x1="236" y1="7" x2="258" y2="7" stroke="#c87533" stroke-width="2" marker-end="url(#mO)"/>
+    <text x="264" y="11" font-size="10" fill="#5a5a5a" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">&#x51FA;&#x529B;&#x30D5;&#x30A1;&#x30A4;&#x30EB;</text>
+  </g>
+</svg>
