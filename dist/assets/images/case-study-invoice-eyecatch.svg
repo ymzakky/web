@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e8f3ed"/>
+      <stop offset="100%" stop-color="#f5f9f7"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <!-- LEFT BLOCK: PDF Input -->
+  <rect x="120" y="175" width="110" height="135" rx="6" fill="#ffffff" stroke="#e0ddd6" stroke-width="1.5"/>
+  <path d="M200,175 L230,175 L230,205 Z" fill="#fdf4ec" stroke="#e0ddd6" stroke-width="1"/>
+  <rect x="140" y="210" width="70" height="24" rx="4" fill="#c87533" opacity="0.9"/>
+  <text x="175" y="227" text-anchor="middle" font-size="13" font-weight="700" fill="#ffffff" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">PDF</text>
+  <rect x="140" y="248" width="70" height="5" rx="2" fill="#e0ddd6"/>
+  <rect x="140" y="260" width="50" height="5" rx="2" fill="#e0ddd6"/>
+  <rect x="140" y="272" width="60" height="5" rx="2" fill="#e0ddd6"/>
+  <rect x="140" y="284" width="40" height="5" rx="2" fill="#e0ddd6"/>
+  <text x="175" y="340" text-anchor="middle" font-size="14" font-weight="700" fill="#2c2c2c" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">PDF / Google Docs</text>
+  <text x="175" y="362" text-anchor="middle" font-size="12" fill="#5a5a5a" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">&#x8ACB;&#x6C42;&#x66F8;&#x30FB;&#x9818;&#x53CE;&#x66F8;&#x30FB;&#x898B;&#x7A4D;&#x66F8;</text>
+  <rect x="135" y="378" width="80" height="26" rx="13" fill="#c87533" opacity="0.15"/>
+  <text x="175" y="396" text-anchor="middle" font-size="11" font-weight="500" fill="#c87533" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">&#x81EA;&#x52D5;&#x691C;&#x51FA;</text>
+
+  <!-- ARROW LEFT to CENTER -->
+  <line x1="260" y1="275" x2="470" y2="275" stroke="#2a6041" stroke-width="2.5" stroke-dasharray="8,5" opacity="0.6"/>
+  <polygon points="468,268 485,275 468,282" fill="#2a6041" opacity="0.6"/>
+  <rect x="325" y="248" width="80" height="22" rx="4" fill="#ffffff" opacity="0.85"/>
+  <text x="365" y="264" text-anchor="middle" font-size="11" fill="#5a5a5a" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">base64&#x9001;&#x4FE1;</text>
+
+  <!-- CENTER BLOCK: AI Engine -->
+  <circle cx="600" cy="275" r="105" fill="none" stroke="#e8f3ed" stroke-width="3" stroke-dasharray="6,4"/>
+  <circle cx="600" cy="275" r="85" fill="#2a6041"/>
+  <circle cx="600" cy="275" r="70" fill="none" stroke="#ffffff" stroke-width="1" opacity="0.2"/>
+  <circle cx="600" cy="183" r="7" fill="#1d4a30"/>
+  <circle cx="674" cy="210" r="7" fill="#1d4a30"/>
+  <circle cx="693" cy="275" r="7" fill="#1d4a30"/>
+  <circle cx="674" cy="340" r="7" fill="#1d4a30"/>
+  <circle cx="600" cy="367" r="7" fill="#1d4a30"/>
+  <circle cx="526" cy="340" r="7" fill="#1d4a30"/>
+  <circle cx="507" cy="275" r="7" fill="#1d4a30"/>
+  <circle cx="526" cy="210" r="7" fill="#1d4a30"/>
+  <text x="600" y="255" text-anchor="middle" font-size="16" font-weight="700" fill="#ffffff" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">Claude Vision</text>
+  <text x="600" y="278" text-anchor="middle" font-size="13" fill="#ffffff" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif" opacity="0.85">AI &#x8AAD;&#x307F;&#x53D6;&#x308A;</text>
+  <line x1="555" y1="295" x2="645" y2="295" stroke="#c87533" stroke-width="1.5" opacity="0.7"/>
+  <text x="600" y="315" text-anchor="middle" font-size="11" fill="#ffffff" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif" opacity="0.75">&#x69CB;&#x9020;&#x5316;&#x30C7;&#x30FC;&#x30BF;&#x62BD;&#x51FA;</text>
+
+  <!-- ARROW CENTER to RIGHT -->
+  <line x1="715" y1="275" x2="880" y2="275" stroke="#c87533" stroke-width="2.5" stroke-dasharray="8,5" opacity="0.6"/>
+  <polygon points="878,268 895,275 878,282" fill="#c87533" opacity="0.6"/>
+  <rect x="755" y="248" width="80" height="22" rx="4" fill="#ffffff" opacity="0.85"/>
+  <text x="795" y="264" text-anchor="middle" font-size="11" fill="#5a5a5a" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">&#x81EA;&#x52D5;&#x8A18;&#x9332;</text>
+
+  <!-- RIGHT BLOCK: Output Cards -->
+  <rect x="905" y="145" width="250" height="72" rx="8" fill="#ffffff" stroke="#e0ddd6" stroke-width="1.5"/>
+  <rect x="905" y="145" width="250" height="22" rx="8" fill="#e8f3ed"/>
+  <rect x="905" y="159" width="250" height="8" fill="#e8f3ed"/>
+  <rect x="920" y="151" width="10" height="10" rx="1" fill="#2a6041" opacity="0.5"/>
+  <text x="940" y="161" font-size="11" font-weight="700" fill="#2a6041" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">&#x30B9;&#x30D7;&#x30EC;&#x30C3;&#x30C9;&#x30B7;&#x30FC;&#x30C8;&#x8A18;&#x9332;</text>
+  <text x="1030" y="185" text-anchor="middle" font-size="10.5" fill="#5a5a5a" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">17&#x9805;&#x76EE;&#x3092;&#x81EA;&#x52D5;&#x5165;&#x529B;</text>
+  <text x="1030" y="201" text-anchor="middle" font-size="10.5" fill="#5a5a5a" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">&#x52D8;&#x5B9A;&#x79D1;&#x76EE;&#x3082;&#x81EA;&#x52D5;&#x5224;&#x5B9A;</text>
+
+  <rect x="905" y="228" width="250" height="72" rx="8" fill="#ffffff" stroke="#e0ddd6" stroke-width="1.5"/>
+  <rect x="905" y="228" width="250" height="22" rx="8" fill="#fdf4ec"/>
+  <rect x="905" y="242" width="250" height="8" fill="#fdf4ec"/>
+  <text x="940" y="244" font-size="11" font-weight="700" fill="#c87533" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">&#x96FB;&#x5E33;&#x6CD5;&#x5BFE;&#x5FDC;&#x30EA;&#x30CD;&#x30FC;&#x30E0;</text>
+  <text x="1030" y="268" text-anchor="middle" font-size="10.5" fill="#5a5a5a" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">&#x7A2E;&#x5225;_&#x65E5;&#x4ED8;_&#x8ACB;&#x6C42;&#x5143;_&#x91D1;&#x984D;</text>
+  <text x="1030" y="284" text-anchor="middle" font-size="10.5" fill="#5a5a5a" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">&#x6B63;&#x5E38;/&#x7570;&#x5E38;&#x30D5;&#x30A9;&#x30EB;&#x30C0;&#x632F;&#x5206;&#x3051;</text>
+
+  <rect x="905" y="311" width="250" height="72" rx="8" fill="#ffffff" stroke="#e0ddd6" stroke-width="1.5"/>
+  <rect x="905" y="311" width="250" height="22" rx="8" fill="#e8f3ed"/>
+  <rect x="905" y="325" width="250" height="8" fill="#e8f3ed"/>
+  <text x="940" y="327" font-size="11" font-weight="700" fill="#2a6041" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">&#x30E1;&#x30FC;&#x30EB;&#x901A;&#x77E5;</text>
+  <text x="1030" y="351" text-anchor="middle" font-size="10.5" fill="#5a5a5a" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">&#x51E6;&#x7406;&#x7D50;&#x679C;&#x3092;1&#x901A;&#x306B;&#x96C6;&#x7D04;</text>
+  <text x="1030" y="367" text-anchor="middle" font-size="10.5" fill="#5a5a5a" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">&#x7570;&#x5E38;&#x6642;&#x306F;&#x8981;&#x78BA;&#x8A8D;&#x30A2;&#x30E9;&#x30FC;&#x30C8;</text>
+
+  <!-- BOTTOM BANNER -->
+  <rect x="180" y="490" width="840" height="52" rx="26" fill="#ffffff" stroke="#e0ddd6" stroke-width="1"/>
+  <circle cx="230" cy="516" r="10" fill="#e8f3ed"/>
+  <path d="M226,516 L229,519 L235,513" stroke="#2a6041" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="248" y="521" font-size="13" font-weight="500" fill="#2c2c2c" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">5&#x5206;&#x3054;&#x3068;&#x306B;&#x81EA;&#x52D5;&#x51E6;&#x7406;</text>
+  <circle cx="440" cy="516" r="10" fill="#e8f3ed"/>
+  <path d="M436,516 L439,519 L445,513" stroke="#2a6041" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="458" y="521" font-size="13" font-weight="500" fill="#2c2c2c" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">&#x624B;&#x5165;&#x529B;&#x30BC;&#x30ED;</text>
+  <circle cx="610" cy="516" r="10" fill="#e8f3ed"/>
+  <path d="M606,516 L609,519 L615,513" stroke="#2a6041" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="628" y="521" font-size="13" font-weight="500" fill="#2c2c2c" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">&#x96FB;&#x5E33;&#x6CD5;&#x5BFE;&#x5FDC;</text>
+  <circle cx="770" cy="516" r="10" fill="#e8f3ed"/>
+  <path d="M766,516 L769,519 L775,513" stroke="#2a6041" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="788" y="521" font-size="13" font-weight="500" fill="#2c2c2c" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">&#x7570;&#x5E38;&#x3092;&#x81EA;&#x52D5;&#x691C;&#x51FA;</text>
+
+</svg>
