@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://www.musubi-kanaderu.net/sitemap-index.xml
