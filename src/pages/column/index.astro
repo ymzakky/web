@@ -1,0 +1,210 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allColumns = await getCollection('column');
+const sortedColumns = allColumns.sort(
+  (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
+---
+
+<BaseLayout
+  title="コラム"
+  description="むすびかなでるが日々の業務やAI活用の中で感じたことを、コラムとしてお届けします。"
+>
+  <div class="column-hero">
+    <div class="container">
+      <p class="column-label">COLUMN</p>
+      <h1 class="column-title">コラム</h1>
+      <p class="column-lead">日々の業務やAI活用の中で感じたことを、<br>私たちの視点からお届けします。</p>
+    </div>
+  </div>
+
+  <div class="column-body">
+    <div class="container">
+      <div class="column-grid">
+        {sortedColumns.map((entry) => (
+          <a href={`/column/${entry.slug}`} class="column-card">
+            {entry.data.eyecatchImage && (
+              <img
+                src={entry.data.eyecatchImage}
+                alt={entry.data.title}
+                class="column-card-eyecatch"
+              />
+            )}
+            <div class="column-card-body">
+              <time class="column-card-date" datetime={entry.data.date}>
+                {entry.data.date.replace(/-/g, '.')}
+              </time>
+              <h2 class="column-card-title">{entry.data.title}</h2>
+              {entry.data.summary && (
+                <p class="column-card-summary">{entry.data.summary}</p>
+              )}
+              {entry.data.tags && entry.data.tags.length > 0 && (
+                <div class="column-card-tags">
+                  {entry.data.tags.map((tag: string) => (
+                    <span class="column-card-tag">#{tag}</span>
+                  ))}
+                </div>
+              )}
+              <div class="column-card-link">続きを読む →</div>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      <div class="column-back">
+        <a href="/" class="column-back-link">← トップページに戻る</a>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  /* ===== ヒーロー ===== */
+  .column-hero {
+    background: linear-gradient(135deg, var(--color-bg-warm) 0%, #f0f4f4 100%);
+    padding: 4rem 0 3rem;
+    border-bottom: 1px solid rgba(26,107,104,0.1);
+  }
+  .column-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-brand-primary);
+    margin-bottom: 0.75rem;
+  }
+  .column-title {
+    font-size: clamp(1.6rem, 4vw, 2.5rem);
+    font-weight: 800;
+    color: var(--color-text-main);
+    letter-spacing: 0.04em;
+    line-height: 1.3;
+    margin: 0 0 1rem;
+  }
+  .column-lead {
+    font-size: 0.95rem;
+    line-height: 1.85;
+    color: var(--color-text-sub);
+    max-width: 600px;
+  }
+
+  /* ===== 本文エリア ===== */
+  .column-body {
+    padding: 4rem 0 6rem;
+  }
+
+  /* ===== カードグリッド ===== */
+  .column-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .column-card {
+    display: block;
+    background: var(--color-bg-card);
+    border: 1px solid rgba(0,0,0,0.08);
+    border-radius: 12px;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+  }
+  .column-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    text-decoration: none;
+  }
+
+  .column-card-eyecatch {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    display: block;
+  }
+
+  .column-card-body {
+    padding: 1.5rem 2rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .column-card-date {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .column-card-title {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--color-text-main);
+    line-height: 1.5;
+    margin: 0;
+    border: none;
+    padding: 0;
+  }
+
+  .column-card-summary {
+    font-size: 0.88rem;
+    line-height: 1.8;
+    color: var(--color-text-sub);
+    margin: 0;
+  }
+
+  .column-card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+  .column-card-tag {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--color-brand-primary);
+    background: rgba(26,107,104,0.07);
+    border-radius: 99px;
+    padding: 0.15rem 0.65rem;
+    border: 1px solid rgba(26,107,104,0.14);
+  }
+
+  .column-card-link {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--color-brand-primary);
+    margin-top: 0.25rem;
+  }
+
+  /* ===== 戻るリンク ===== */
+  .column-back {
+    text-align: center;
+  }
+  .column-back-link {
+    font-size: 0.88rem;
+    color: var(--color-text-sub);
+    transition: color 0.2s;
+  }
+  .column-back-link:hover {
+    color: var(--color-brand-primary);
+  }
+
+  /* ===== レスポンシブ ===== */
+  @media (max-width: 768px) {
+    .column-grid {
+      grid-template-columns: 1fr;
+    }
+    .column-hero {
+      padding: 3rem 0 2rem;
+    }
+    .column-body {
+      padding: 2.5rem 0 4rem;
+    }
+    .column-card-body {
+      padding: 1.25rem 1.5rem 1.5rem;
+    }
+  }
+</style>
