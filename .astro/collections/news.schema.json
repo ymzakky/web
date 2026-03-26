@@ -19,6 +19,9 @@
         "summary": {
           "type": "string"
         },
+        "showOnTop": {
+          "type": "boolean"
+        },
         "$schema": {
           "type": "string"
         }

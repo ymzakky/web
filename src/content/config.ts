@@ -22,6 +22,7 @@ const newsCollection = defineCollection({
     date: z.string(),
     tags: z.array(z.string()).optional(),
     summary: z.string().optional(),
+    showOnTop: z.boolean().optional(),
   }),
 });
 

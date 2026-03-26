@@ -51,6 +51,23 @@ const sortedColumns = allColumns.sort(
             </div>
           </a>
         ))}
+
+        <!-- noteへの誘導カード -->
+        <a href="https://note.com/kymzk/all" target="_blank" rel="noopener noreferrer" class="column-card note-card">
+          <div class="note-card-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20" />
+              <path d="M8 7h6" />
+              <path d="M8 11h8" />
+            </svg>
+          </div>
+          <div class="column-card-body">
+            <p class="note-card-label">MORE COLUMNS</p>
+            <h2 class="column-card-title">その他のコラムはnoteで公開中</h2>
+            <p class="column-card-summary">日々の気づきや考えを、noteでも発信しています。ぜひご覧ください。</p>
+            <div class="column-card-link">noteで読む →</div>
+          </div>
+        </a>
       </div>
 
       <div class="column-back">
@@ -177,6 +194,37 @@ const sortedColumns = allColumns.sort(
     font-weight: 700;
     color: var(--color-brand-primary);
     margin-top: 0.25rem;
+  }
+
+  /* ===== noteカード ===== */
+  .note-card {
+    border: 2px dashed rgba(26,107,104,0.25);
+    background: linear-gradient(135deg, rgba(26,107,104,0.03) 0%, rgba(26,107,104,0.08) 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .note-card:hover {
+    border-color: var(--color-brand-primary);
+    background: linear-gradient(135deg, rgba(26,107,104,0.06) 0%, rgba(26,107,104,0.12) 100%);
+  }
+  .note-card-icon {
+    padding: 2rem 0 0;
+    color: var(--color-brand-primary);
+    opacity: 0.6;
+  }
+  .note-card .column-card-body {
+    align-items: center;
+    text-align: center;
+  }
+  .note-card-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    color: var(--color-brand-primary);
+    margin: 0;
   }
 
   /* ===== 戻るリンク ===== */

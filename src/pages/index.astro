@@ -3,7 +3,16 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 
 const allNews = await getCollection('news');
-const latestNews = allNews.sort((a, b) => b.data.date.localeCompare(a.data.date)).slice(0, 5);
+const oneMonthAgo = new Date();
+oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
+const topNews = allNews
+  .filter((item) => {
+    if (item.data.showOnTop) return true;
+    return new Date(item.data.date) >= oneMonthAgo;
+  })
+  .sort((a, b) => b.data.date.localeCompare(a.data.date))
+  .slice(0, 5);
+const latestNews = topNews;
 ---
 
 <BaseLayout
@@ -20,14 +29,15 @@ const latestNews = allNews.sort((a, b) => b.data.date.localeCompare(a.data.date)
         <p class="hero-eyebrow">中小企業の「20人の壁」を突破する伴走支援</p>
         <h1 class="hero-title">
           社長が<span class="text-accent">経営に専念</span>できる
-          自走する組織へ。
+          自走する組織へ
         </h1>
         <p class="hero-lead">
           多様な社会を支える人や組織の<strong>仕組みづくり</strong>に伴走
         </p>
         <div class="hero-actions">
-          <a href="#contact" class="btn-accent">無料相談お問い合わせ</a>
-          <a href="#case" class="btn-secondary">導入事例を見る</a>
+          <a href="#case" class="btn-secondary"><svg class="hero-action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>導入事例を見る</a>
+          <a href="/tools/" class="btn-secondary"><svg class="hero-action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>ツールを見る</a>
+          <a href="/column/" class="btn-secondary"><svg class="hero-action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>コラムを読む</a>
         </div>
       </div>
     </div>
@@ -415,8 +425,9 @@ const latestNews = allNews.sort((a, b) => b.data.date.localeCompare(a.data.date)
             <dt>所属</dt>
             <dd>
               <ul>
-                <li>東京中小企業家同友会（三多摩支部幹事）</li>
+                <li>(一社)東京中小企業家同友会</li>
                 <li>八王子商工会議所</li>
+                <li>八王子ITサポートチームish<br>（サイバーシルクロード八王子）</li>
               </ul>
             </dd>
           </div>
@@ -682,14 +693,22 @@ const latestNews = allNews.sort((a, b) => b.data.date.localeCompare(a.data.date)
   gap: 1rem;
   margin-bottom: 0;
   width: 100%;
-  max-width: 620px;
+  max-width: 720px;
   align-self: center;
 }
 .hero-actions > a {
   flex: 1;
   white-space: nowrap;
   text-align: center;
-  display: block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4em;
+}
+.hero-action-icon {
+  width: 1.1em;
+  height: 1.1em;
+  flex-shrink: 0;
 }
 .hero-trust {
   display: flex;
