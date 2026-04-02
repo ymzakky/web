@@ -1,0 +1,613 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="PCの作業時間を「見える化」するダッシュボード"
+  description="PC操作ログをブラウザ上でグラフ化し分析するダッシュボード。サーバ不要・完全ローカル処理で、業務改善の根拠データが手軽に手に入ります。"
+>
+  <div class="tools-article">
+    <div class="article-area">
+
+      <!-- パンくず -->
+      <nav class="breadcrumb">
+        <a href="/">ホーム</a> / <a href="/tools">ツール紹介</a> / PC作業の見える化ダッシュボード
+      </nav>
+
+      <!-- 日付・タグ -->
+      <p class="article-date">2026.04</p>
+      <div class="article-tags">
+        <span>#構築実績</span>
+        <span>#業務自動化</span>
+        <span>#データ活用</span>
+        <span>#見える化</span>
+        <span>#属人化解消</span>
+      </div>
+
+      <!-- アイキャッチ -->
+      <figure class="eyecatch">
+        <img src="/assets/images/case-study-awl-dashboard-eyecatch.svg" alt="PC操作ログをブラウザ上でグラフ化し分析するダッシュボードの概念図"/>
+        <figcaption>PC操作ログをブラウザ上で可視化する分析ダッシュボード</figcaption>
+      </figure>
+
+      <!-- タイトル -->
+      <h1>「うちの事務員、何にどれだけ時間を使っているんだろう？」<br>PC作業の"見える化"で、業務改善の糸口を見つけます</h1>
+
+      <!-- メタカード -->
+      <div class="meta-card">
+        <div class="meta-card-title">CASE STUDY OVERVIEW</div>
+        <div class="meta-grid">
+          <div class="meta-item">
+            <div class="meta-item-label">タイトル</div>
+            <div class="meta-item-value">PC操作ログの分析ダッシュボード</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-item-label">想定読者</div>
+            <div class="meta-item-value">事務員のPC作業の実態を把握し業務改善を検討したい小規模事業者の経営者・管理職の方</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-item-label">対象課題</div>
+            <div class="meta-item-value">誰がどのアプリにどれだけ時間を使っているかわからない。感覚ベースの業務改善に限界がある</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-item-label">得られる効果</div>
+            <div class="meta-item-value">PC作業の時間配分がグラフで一目瞭然になり、改善すべきポイントを具体的に見つけられます</div>
+          </div>
+          <div class="meta-item full">
+            <div class="meta-item-label">技術タグ</div>
+            <div class="tech-tags">
+              <span>Google Workspace</span>
+              <span>データ分析・可視化</span>
+              <span>開発費：5〜10万円規模</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 共感パート -->
+      <h2>こんな悩みはありませんか？</h2>
+      <p>「事務のAさんはいつも忙しそうだけど、実際どんな作業にどれだけ時間がかかっているんだろう？」——そんな疑問を抱いたことはありませんか？残業の原因を聞いても「書類が重なって…」という答えしか返ってこない。感覚ではなんとなくわかっていても、数字で裏付けしないと改善の手が打ちにくいものです。</p>
+      <p>とくに少人数の事業所では、ひとりの事務員が経理・受発注・顧客対応を兼任していることが多く、「何にどれだけ時間をかけているか」は本人にもわからないことがあります。Excelでの入力作業なのか、メールの確認なのか、あるいは調べ物にかなり使っている時間が長いのか。</p>
+      <p>このダッシュボードは、PCの操作ログをグラフで「見える化」し、業務改善の根拠になるデータを手軽に手に入れるためのツールです。</p>
+
+      <!-- Before / After -->
+      <h2>導入の前と後</h2>
+      <div class="ba-grid">
+        <div class="ba-card before">
+          <h4>Before（手作業・感覚頼り）</h4>
+          <ul class="ba-list">
+            <li>「忙しい」のはわかるけど、何に時間がかかっているか不明</li>
+            <li>残業の原因を特定できず、改善策が打てない</li>
+            <li>日報や自己申告では正確な実態がつかめない</li>
+            <li>業務配分の見直しがなんとなくで終わる</li>
+          </ul>
+        </div>
+        <div class="ba-card after">
+          <h4>After（ダッシュボードで見える化）</h4>
+          <ul class="ba-list">
+            <li>どのアプリに何分使ったかがグラフで一目瞭然</li>
+            <li>時間帯ごとの作業パターンがわかり、ボトルネックを発見</li>
+            <li>複数日分を比較して傾向を客観的に把握</li>
+            <li>データを根拠にした業務改善の提案ができる</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 仕組みの流れ -->
+      <h2>仕組みの流れ</h2>
+
+      <figure class="dataflow-figure">
+        <img src="/assets/images/case-study-awl-dashboard.svg" alt="データの流れ：ZIPファイルからブラウザ内でパース・集計し、ダッシュボードとして表示するフロー図"/>
+        <figcaption>&#9650; PC操作ログがダッシュボードになるまでの流れ</figcaption>
+      </figure>
+
+      <div class="flow-diagram">
+        <div class="flow-step">
+          <div class="flow-num">1</div>
+          <div class="flow-body">
+            <div class="flow-title">操作ログのZIPファイルを用意する</div>
+            <div class="flow-desc">PCに常駐する記録ソフト「ActiveWindowLogger」が、どのアプリをいつ・どれだけ使ったかを自動でCSVに保存しています。そのファイルをZIPにまとめるだけでOKです。</div>
+          </div>
+        </div>
+        <figure class="screenshot-figure screenshot-small">
+          <img src="/assets/images/awl-dashboard-screenshot-logger.png" alt="ActiveWindowLoggerの記録画面。時刻・滞在時間・ウィンドウタイトル・実行ファイルパスが一覧で表示されている"/>
+          <figcaption>ActiveWindowLoggerの記録画面 — アプリ操作が1秒単位で自動記録される</figcaption>
+        </figure>
+        <div class="flow-step">
+          <div class="flow-num">2</div>
+          <div class="flow-body">
+            <div class="flow-title">ブラウザでダッシュボードを開き、ZIPをドラッグ&amp;ドロップ</div>
+            <div class="flow-desc">HTMLファイルをダブルクリックするだけでダッシュボードが開きます。ZIPファイルをドラッグ&amp;ドロップまたはクリックでアップロードします。</div>
+          </div>
+        </div>
+        <figure class="screenshot-figure">
+          <img src="/assets/images/awl-dashboard-screenshot-dropzone.png" alt="ダッシュボードのZIPファイルアップロード画面。中央にドラッグ&ドロップエリアが表示されている"/>
+          <figcaption>ダッシュボードを開いた直後の画面 — ZIPファイルをドラッグ&amp;ドロップするだけ</figcaption>
+        </figure>
+        <div class="flow-step">
+          <div class="flow-num">3</div>
+          <div class="flow-body">
+            <div class="flow-title">数秒でグラフが自動生成される</div>
+            <div class="flow-desc">ブラウザの中だけでデータを処理するため、社外にデータが送られることはありません。数秒でKPI（重要な数値）やグラフが画面に表示されます。</div>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-num">4</div>
+          <div class="flow-body">
+            <div class="flow-title">日付を切り替えて比較・分析する</div>
+            <div class="flow-desc">複数日分のログがあれば、日付ボタンで表示を切り替えたり、日別の推移グラフで傾向を確認できます。</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 補足説明 -->
+      <h2>ダッシュボードで見られる情報</h2>
+
+      <figure class="screenshot-figure screenshot-hero">
+        <img src="/assets/images/awl-dashboard-screenshot-result.png" alt="ダッシュボードの分析結果画面。KPIカード、タイムライン、アプリ別利用時間グラフ、時間分類別の構成比が表示されている"/>
+        <figcaption>実際のダッシュボード画面 — KPI・タイムライン・グラフが一画面に集約</figcaption>
+      </figure>
+
+      <h3>KPI概況カード</h3>
+      <p>1日の実稼働時間、最も長い集中した時間、離席時間、もっとも使ったアプリ、アプリの切り替え回数、使用アプリ数の6つの指標をひと目で確認できます。前日との比較も表示されるので、変化にも気づけます。</p>
+
+      <h3>タイムライン表示</h3>
+      <p>1日の作業内容をガントチャート風（横棒の帯グラフ）で表示します。「午前中はExcelに集中して、午後はメールの対応が増えている」といったパターンが視覚的にわかります。アプリ名をクリックすると、特定のアプリだけを表示・非表示に切り替えられます。</p>
+
+      <h3>各種グラフ</h3>
+      <p>アプリごとの利用時間（横棒グラフ）、生産的・管理的・非生産的の時間配分（円グラフ）、30分ごとのアプリ切替回数（折れ線グラフ）、ウィンドウごとの滞在時間ランキングなど、さまざまな角度から作業内容を分析できます。</p>
+
+      <!-- 得られる効果 -->
+      <h2>得られる効果</h2>
+      <div class="effect-grid">
+        <div class="effect-item">
+          <div class="effect-num">数秒</div>
+          <div class="effect-label">ZIPを読み込むだけで<br>ダッシュボードが完成</div>
+        </div>
+        <div class="effect-item">
+          <div class="effect-num">6指標</div>
+          <div class="effect-label">KPIカードで<br>1日の全体像を即把握</div>
+        </div>
+        <div class="effect-item">
+          <div class="effect-num">0件</div>
+          <div class="effect-label">データの外部送信なし<br>安全ローカル処理</div>
+        </div>
+        <div class="effect-item">
+          <div class="effect-num">複数日</div>
+          <div class="effect-label">日別推移で<br>傾向の変化を発見</div>
+        </div>
+      </div>
+
+      <!-- 機材・環境の補足 -->
+      <div class="note-box">
+        <div class="note-box-title">ご利用に必要な環境</div>
+        <p>このダッシュボードは、Chrome・Edge・Firefox・Safariの最新版で動作します。HTMLファイルをダブルクリックするだけで起動するため、特別なソフトのインストールは不要です。初回のみインターネット接続が必要ですが、2回目以降はオフラインでもお使いいただけます。</p>
+        <p>操作ログの記録には「ActiveWindowLogger」というフリーソフトが必要です。導入方法は別途ご案内いたします。</p>
+      </div>
+
+      <!-- 技術的なポイント -->
+      <h2>技術的なポイント</h2>
+
+      <h3>サーバ不要・安全ローカル処理</h3>
+      <p>すべての処理がブラウザ内で完結します。操作ログという機密性の高いデータを外部に送る必要がないため、情報漏れの心配もありません。ZIPファイルの展開もブラウザ標準の機能（DecompressionStream）を使い、外部の追加プログラムに頼らない設計にしています。</p>
+
+      <h3>デジタル庁のガイドライン準拠</h3>
+      <p>グラフの色味を5色に制限し、すべての数値をグラフの横に併記するなど、デジタル庁「ダッシュボードデザインの実践ガイドブック」の考え方に沿って設計しています。色の見分けがつきにくい方にも情報が伝わるよう配慮しています。</p>
+
+      <h3>約3万件のデータを数秒で処理</h3>
+      <p>21日分（約30,000件のレコード）の操作ログでも、数秒でパース（データの読み取り）からグラフ描画まで完了することを確認しています。日常的な利用でストレスを感じることはありません。</p>
+
+      <!-- こんな方に向いています -->
+      <h2>こんな方に向いています</h2>
+      <p>「事務員の業務負荷を客観的に把握して、人員配置や業務フローの見直しに役立てたい」という経営者・管理職の方に向いています。とくに「日報だけでは実態が見えにくい」と感じている方や、「残業削減のための根拠データがほしい」方におすすめです。</p>
+      <p>一方で、リアルタイムで従業員を監視したい、という目的には向いていません。このツールはあくまでも「本人や上長がまとめて振り返る」ための分析ツールです。また、操作ログの記録ソフトの導入には従業員への事前説明が必要です。プライバシーへの配慮を大切にしながらお使いいただくことをおすすめします。</p>
+
+      <!-- CTA -->
+      <div class="cta-section">
+        <h2>「うちでも使える？」と思った方へ</h2>
+        <p>操作ログの記録ソフトの導入から、ダッシュボードの設置・使い方のご説明まで、<br>まとめてサポートいたします。まずはお気軽にご相談ください。</p>
+        <a href="/#contact" class="cta-btn">無料で相談してみる</a>
+      </div>
+
+      <!-- 戻るリンク -->
+      <div class="back-link">
+        <a href="/tools">← ツール紹介一覧へ戻る</a>
+      </div>
+
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  /* ===== ローカル変数（サイト変数にマッピング） ===== */
+  .tools-article {
+    --color-primary:       var(--color-brand-primary);
+    --color-primary-light: rgba(26,107,104,0.1);
+    --color-primary-dark:  var(--color-brand-primary-dark);
+    --color-accent:        var(--color-brand-warm);
+    --color-accent-light:  rgba(200,125,90,0.12);
+    --color-text:          var(--color-text-main);
+    --color-text-light:    var(--color-text-sub);
+    --color-bg:            var(--color-bg-body);
+    --color-white:         #ffffff;
+    --color-border:        rgba(0,0,0,0.11);
+    --color-tag-bg:        var(--color-bg-muted);
+    --max-width:           780px;
+    --radius:              8px;
+  }
+
+  /* ===== 記事エリア ===== */
+  .article-area {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 24px 20px 80px;
+  }
+
+  /* ===== パンくず ===== */
+  .breadcrumb {
+    font-size: 12.5px;
+    color: var(--color-text-light);
+    margin-bottom: 20px;
+  }
+  .breadcrumb a {
+    color: var(--color-text-light);
+    transition: color 0.2s;
+  }
+  .breadcrumb a:hover {
+    color: var(--color-primary);
+  }
+
+  /* ===== 日付・タグ ===== */
+  .article-date {
+    font-size: 13px;
+    color: var(--color-text-light);
+    margin-bottom: 8px;
+  }
+  .article-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 20px;
+  }
+  .article-tags span {
+    font-size: 12px;
+    background: var(--color-tag-bg);
+    padding: 3px 10px;
+    border-radius: 4px;
+    color: var(--color-text-light);
+  }
+
+  /* ===== アイキャッチ ===== */
+  .eyecatch {
+    margin: 0 0 36px;
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    background: var(--color-white);
+  }
+  .eyecatch img { width: 100%; height: auto; display: block; }
+  .eyecatch figcaption {
+    font-size: 12px;
+    color: var(--color-text-light);
+    padding: 8px 14px;
+    border-top: 1px solid var(--color-border);
+    background: var(--color-bg);
+  }
+
+  /* ===== 見出し ===== */
+  .tools-article h1 {
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1.5;
+    margin-bottom: 32px;
+    color: var(--color-text);
+  }
+  .tools-article h2 {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.5;
+    margin: 48px 0 20px;
+    padding-bottom: 8px;
+    border-bottom: 3px solid var(--color-primary);
+  }
+  .tools-article h3 {
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.5;
+    margin: 32px 0 12px;
+    padding-left: 14px;
+    border-left: 4px solid var(--color-accent);
+  }
+  .tools-article p { margin-bottom: 16px; }
+
+  /* ===== メタカード ===== */
+  .meta-card {
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 28px;
+    margin-bottom: 40px;
+  }
+  .meta-card-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--color-primary);
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    margin-bottom: 16px;
+  }
+  .meta-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .meta-item-label {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 4px;
+  }
+  .meta-item-value {
+    font-size: 14px;
+    color: var(--color-text-light);
+    line-height: 1.7;
+  }
+  .meta-item.full { grid-column: 1 / -1; }
+  .tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 8px;
+  }
+  .tech-tags span {
+    font-size: 11.5px;
+    font-weight: 500;
+    border: 1px solid var(--color-border);
+    padding: 2px 10px;
+    border-radius: 4px;
+    color: var(--color-text-light);
+  }
+
+  /* ===== Before/After ===== */
+  .ba-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .ba-card {
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 20px;
+  }
+  .ba-card.before { border-top: 4px solid #b0b0b0; }
+  .ba-card.after  { border-top: 4px solid var(--color-primary); }
+  .ba-card h4 {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .ba-card.before h4 { color: #888; }
+  .ba-card.after h4  { color: var(--color-primary); }
+  .ba-list { list-style: none; padding: 0; }
+  .ba-list li {
+    font-size: 14px;
+    padding: 4px 0 4px 24px;
+    position: relative;
+    line-height: 1.7;
+  }
+  .ba-card.before .ba-list li::before {
+    content: '\00D7';
+    position: absolute;
+    left: 4px;
+    color: #aaa;
+    font-weight: 700;
+  }
+  .ba-card.after .ba-list li::before {
+    content: '\2713';
+    position: absolute;
+    left: 2px;
+    color: var(--color-primary);
+    font-weight: 700;
+  }
+
+  /* ===== データフロー図 ===== */
+  .dataflow-figure {
+    margin: 20px 0 32px;
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    background: var(--color-white);
+  }
+  .dataflow-figure img { width: 100%; height: auto; display: block; }
+  .dataflow-figure figcaption {
+    font-size: 12.5px;
+    color: var(--color-text-light);
+    padding: 8px 14px;
+    border-top: 1px solid var(--color-border);
+    background: var(--color-bg);
+  }
+
+  /* ===== スクリーンショット ===== */
+  .screenshot-figure {
+    margin: 12px 0 24px;
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    background: var(--color-white);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .screenshot-figure img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .screenshot-figure figcaption {
+    font-size: 12.5px;
+    color: var(--color-text-light);
+    padding: 8px 14px;
+    border-top: 1px solid var(--color-border);
+    background: var(--color-bg);
+  }
+  .screenshot-hero {
+    margin: 0 0 32px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  }
+  .screenshot-small {
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* ===== フロー図 ===== */
+  .flow-diagram { margin-bottom: 32px; }
+  .flow-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 4px;
+    position: relative;
+  }
+  .flow-step::after {
+    content: '';
+    position: absolute;
+    left: 17px;
+    top: 38px;
+    width: 2px;
+    height: calc(100% + 4px);
+    background: var(--color-primary-light);
+  }
+  .flow-step:last-child::after { display: none; }
+  .flow-num {
+    flex-shrink: 0;
+    width: 34px;
+    height: 34px;
+    background: var(--color-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 14px;
+    font-weight: 700;
+    position: relative;
+    z-index: 1;
+  }
+  .flow-body { padding-bottom: 20px; }
+  .flow-title {
+    font-size: 14.5px;
+    font-weight: 700;
+    margin-bottom: 2px;
+  }
+  .flow-desc {
+    font-size: 13.5px;
+    color: var(--color-text-light);
+  }
+
+  /* ===== 効果カード ===== */
+  .effect-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+  .effect-item {
+    background: var(--color-primary-light);
+    border-radius: var(--radius);
+    padding: 20px 16px;
+    text-align: center;
+  }
+  .effect-num {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 4px;
+  }
+  .effect-label {
+    font-size: 13.5px;
+    color: var(--color-text);
+  }
+
+  /* ===== ノートボックス ===== */
+  .note-box {
+    background: var(--color-accent-light);
+    border-left: 4px solid var(--color-accent);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 18px 20px;
+    margin: 24px 0;
+  }
+  .note-box-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--color-accent);
+    margin-bottom: 6px;
+  }
+  .note-box p {
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+  .note-box p:last-child { margin-bottom: 0; }
+
+  /* ===== CTAセクション ===== */
+  .cta-section {
+    background: var(--color-primary-light);
+    border-radius: var(--radius);
+    padding: 40px 24px;
+    text-align: center;
+    margin: 48px 0;
+  }
+  .cta-section h2 {
+    border: none;
+    margin: 0 0 12px;
+    padding: 0;
+    font-size: 20px;
+  }
+  .cta-section p {
+    font-size: 15px;
+    color: var(--color-text-light);
+    margin-bottom: 20px;
+  }
+  .cta-btn {
+    display: inline-block;
+    background: var(--color-primary);
+    color: white;
+    padding: 12px 36px;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .cta-btn:hover {
+    background: var(--color-primary-dark);
+    text-decoration: none;
+  }
+
+  /* ===== 戻るリンク ===== */
+  .back-link {
+    text-align: center;
+    margin: 32px 0;
+  }
+  .back-link a {
+    font-size: 14px;
+    color: var(--color-primary);
+  }
+
+  /* ===== モバイル ===== */
+  @media (max-width: 640px) {
+    .tools-article h1 { font-size: 21px; }
+    .ba-grid { grid-template-columns: 1fr; }
+    .effect-grid { grid-template-columns: 1fr; }
+    .meta-grid { grid-template-columns: 1fr; }
+    .eyecatch,
+    .dataflow-figure,
+    .screenshot-figure {
+      margin-left: -20px;
+      margin-right: -20px;
+      border-radius: 0;
+      border-left: none;
+      border-right: none;
+    }
+  }
+</style>

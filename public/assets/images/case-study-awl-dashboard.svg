@@ -1,0 +1,150 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 420">
+  <defs>
+    <marker id="mG" viewBox="0 0 8 8" refX="7" refY="4"
+            markerWidth="5" markerHeight="5" orient="auto">
+      <path d="M0,0.5 L7,4 L0,7.5 Z" fill="#2a6041"/>
+    </marker>
+    <marker id="mO" viewBox="0 0 8 8" refX="7" refY="4"
+            markerWidth="5" markerHeight="5" orient="auto">
+      <path d="M0,0.5 L7,4 L0,7.5 Z" fill="#c87533"/>
+    </marker>
+    <marker id="mGd" viewBox="0 0 8 8" refX="7" refY="4"
+            markerWidth="5" markerHeight="5" orient="auto">
+      <path d="M0,0.5 L7,4 L0,7.5 Z" fill="#2a6041" opacity="0.55"/>
+    </marker>
+  </defs>
+  <rect width="800" height="420" fill="#fafaf7" rx="6"/>
+
+  <!-- ===== 矢印（ノードの下に描画） ===== -->
+  <!-- N1→N2 水平 -->
+  <path d="M160,120 L210,120"
+        stroke="#2a6041" stroke-width="2" fill="none" marker-end="url(#mG)"/>
+  <!-- N2→N3 水平 -->
+  <path d="M350,120 L400,120"
+        stroke="#2a6041" stroke-width="2" fill="none" marker-end="url(#mG)"/>
+  <!-- N3→N4 水平 -->
+  <path d="M550,120 L610,120"
+        stroke="#2a6041" stroke-width="2" fill="none" marker-end="url(#mG)"/>
+
+  <!-- N4→No1 下方向分岐 -->
+  <path d="M680,160 L680,220 L600,220 L600,270"
+        stroke="#c87533" stroke-width="2" fill="none" marker-end="url(#mO)"/>
+  <!-- N4→No2 下方向分岐 -->
+  <path d="M680,160 L680,220 L730,220 L730,270"
+        stroke="#c87533" stroke-width="2" fill="none" marker-end="url(#mO)"/>
+
+  <!-- Ns→N3 補助（上方向／右折り） -->
+  <path d="M105,240 L105,176 L390,176 L390,120 L400,120"
+        stroke="#2a6041" stroke-width="1.8" stroke-dasharray="5,4" fill="none"
+        marker-end="url(#mGd)" opacity="0.55"/>
+
+  <!-- ===== ノード描画 ===== -->
+
+  <!-- N1: ZIPアップロード（入力ノード） -->
+  <rect x="30" y="80" width="130" height="80" rx="8"
+        fill="#ffffff" stroke="#c87533" stroke-width="2"/>
+  <rect x="30" y="80" width="130" height="24" rx="8" fill="#fdf4ec"/>
+  <rect x="30" y="96" width="130" height="8" fill="#fdf4ec"/>
+  <text x="95" y="95" text-anchor="middle"
+        font-size="11" font-weight="700" fill="#c87533" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">ZIPアップロード</text>
+  <text x="95" y="120" text-anchor="middle"
+        font-size="10" fill="#5a5a5a" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">操作ログCSV</text>
+  <text x="95" y="134" text-anchor="middle"
+        font-size="10" fill="#5a5a5a" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">(複数日分)</text>
+
+  <!-- N2: パース・デコード（処理ノード通常） -->
+  <rect x="210" y="80" width="140" height="80" rx="8"
+        fill="#ffffff" stroke="#2a6041" stroke-width="2"/>
+  <rect x="210" y="80" width="140" height="24" rx="8" fill="#e8f3ed"/>
+  <rect x="210" y="96" width="140" height="8" fill="#e8f3ed"/>
+  <text x="280" y="95" text-anchor="middle"
+        font-size="11" font-weight="700" fill="#2a6041" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">展開・変換</text>
+  <text x="280" y="120" text-anchor="middle"
+        font-size="10" fill="#5a5a5a" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">ZIP展開</text>
+  <text x="280" y="134" text-anchor="middle"
+        font-size="10" fill="#5a5a5a" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">文字コード変換</text>
+  <text x="280" y="148" text-anchor="middle"
+        font-size="10" fill="#5a5a5a" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">CSVパース</text>
+
+  <!-- N3: 集計処理（強調ノード） -->
+  <rect x="400" y="70" width="150" height="100" rx="10" fill="#2a6041"/>
+  <rect x="400" y="70" width="150" height="26" rx="10" fill="#1d4a30"/>
+  <rect x="400" y="88" width="150" height="8" fill="#1d4a30"/>
+  <text x="475" y="87" text-anchor="middle"
+        font-size="11" font-weight="700" fill="white" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">データ集計・分析</text>
+  <text x="475" y="110" text-anchor="middle"
+        font-size="10" fill="white" opacity="0.9" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">KPI算出</text>
+  <text x="475" y="124" text-anchor="middle"
+        font-size="10" fill="white" opacity="0.9" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">アプリ別集計</text>
+  <text x="475" y="138" text-anchor="middle"
+        font-size="10" fill="white" opacity="0.9" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">時間帯別分析</text>
+  <!-- オレンジアクセントライン -->
+  <line x1="418" y1="152" x2="532" y2="152"
+        stroke="#c87533" stroke-width="1.5" opacity="0.7"/>
+
+  <!-- N4: ダッシュボード描画（処理ノード通常） -->
+  <rect x="610" y="80" width="140" height="80" rx="8"
+        fill="#ffffff" stroke="#2a6041" stroke-width="2"/>
+  <rect x="610" y="80" width="140" height="24" rx="8" fill="#e8f3ed"/>
+  <rect x="610" y="96" width="140" height="8" fill="#e8f3ed"/>
+  <text x="680" y="95" text-anchor="middle"
+        font-size="11" font-weight="700" fill="#2a6041" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">ダッシュボード</text>
+  <text x="680" y="120" text-anchor="middle"
+        font-size="10" fill="#5a5a5a" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">Reactで</text>
+  <text x="680" y="134" text-anchor="middle"
+        font-size="10" fill="#5a5a5a" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">即時描画</text>
+
+  <!-- Ns: フィルタルール（補助ノード） -->
+  <rect x="30" y="240" width="150" height="100" rx="8"
+        fill="white" stroke="#2a6041" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <rect x="30" y="240" width="150" height="24" rx="8" fill="#e8f3ed"/>
+  <rect x="30" y="256" width="150" height="8" fill="#e8f3ed"/>
+  <text x="105" y="255" text-anchor="middle"
+        font-size="11" font-weight="700" fill="#2a6041" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">フィルタルール</text>
+  <text x="105" y="278" text-anchor="middle"
+        font-size="10" fill="#5a5a5a" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">スリープ除外</text>
+  <text x="105" y="292" text-anchor="middle"
+        font-size="10" fill="#5a5a5a" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">(1時間以上)</text>
+  <text x="105" y="306" text-anchor="middle"
+        font-size="10" fill="#5a5a5a" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">不正レコード除外</text>
+  <text x="105" y="320" text-anchor="middle"
+        font-size="10" fill="#5a5a5a" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">アプリ名正規化</text>
+
+  <!-- No1: KPI・チャート（出力ノード） -->
+  <rect x="540" y="270" width="120" height="70" rx="8"
+        fill="#ffffff" stroke="#c87533" stroke-width="2"/>
+  <rect x="540" y="270" width="120" height="24" rx="8" fill="#fdf4ec"/>
+  <rect x="540" y="286" width="120" height="8" fill="#fdf4ec"/>
+  <text x="600" y="285" text-anchor="middle"
+        font-size="11" font-weight="700" fill="#c87533" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">KPI・チャート</text>
+  <text x="600" y="310" text-anchor="middle"
+        font-size="10" fill="#5a5a5a" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">稼働時間・アプリ別</text>
+  <text x="600" y="324" text-anchor="middle"
+        font-size="10" fill="#5a5a5a" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">タイムライン等</text>
+
+  <!-- No2: 日別推移（出力ノード） -->
+  <rect x="670" y="270" width="120" height="70" rx="8"
+        fill="#ffffff" stroke="#c87533" stroke-width="2"/>
+  <rect x="670" y="270" width="120" height="24" rx="8" fill="#fdf4ec"/>
+  <rect x="670" y="286" width="120" height="8" fill="#fdf4ec"/>
+  <text x="730" y="285" text-anchor="middle"
+        font-size="11" font-weight="700" fill="#c87533" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">日別推移</text>
+  <text x="730" y="310" text-anchor="middle"
+        font-size="10" fill="#5a5a5a" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">複数日比較</text>
+  <text x="730" y="324" text-anchor="middle"
+        font-size="10" fill="#5a5a5a" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">傾向分析</text>
+
+  <!-- ===== 凡例 ===== -->
+  <g transform="translate(50, 390)">
+    <line x1="0" y1="7" x2="22" y2="7" stroke="#2a6041" stroke-width="2"
+          marker-end="url(#mG)"/>
+    <text x="28" y="11" font-size="10" fill="#5a5a5a" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">データの流れ</text>
+    <line x1="118" y1="7" x2="140" y2="7" stroke="#2a6041" stroke-width="1.8"
+          stroke-dasharray="5,4" marker-end="url(#mGd)" opacity="0.55"/>
+    <text x="146" y="11" font-size="10" fill="#5a5a5a" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">条件・ルール</text>
+    <line x1="236" y1="7" x2="258" y2="7" stroke="#c87533" stroke-width="2"
+          marker-end="url(#mO)"/>
+    <text x="264" y="11" font-size="10" fill="#5a5a5a" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">出力ファイル</text>
+  </g>
+
+</svg>

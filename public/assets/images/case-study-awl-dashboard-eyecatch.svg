@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e8f3ed"/>
+      <stop offset="100%" stop-color="#f5f9f7"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <!-- ===== 左ブロック: 入力（ZIPファイル） ===== -->
+  <!-- ファイルアイコン -->
+  <rect x="110" y="175" width="130" height="160" rx="8" fill="#ffffff" stroke="#e0ddd6" stroke-width="1.5"/>
+  <rect x="110" y="175" width="130" height="32" rx="8" fill="#fdf4ec"/>
+  <rect x="110" y="199" width="130" height="8" fill="#fdf4ec"/>
+  <!-- ZIP icon shape -->
+  <rect x="145" y="185" width="24" height="16" rx="3" fill="#c87533" opacity="0.8"/>
+  <text x="157" y="197" text-anchor="middle" font-size="8" font-weight="700" fill="#ffffff" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">ZIP</text>
+  <text x="175" y="232" text-anchor="middle" font-size="13" font-weight="700" fill="#2c2c2c" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">PC操作ログ</text>
+  <text x="175" y="252" text-anchor="middle" font-size="10.5" fill="#5a5a5a" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">ZIPファイル</text>
+  <text x="175" y="270" text-anchor="middle" font-size="10.5" fill="#5a5a5a" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">(CSV複数日分)</text>
+
+  <!-- 小さなCSVアイコン群 -->
+  <rect x="128" y="290" width="36" height="24" rx="4" fill="#ffffff" stroke="#e0ddd6" stroke-width="1"/>
+  <text x="146" y="306" text-anchor="middle" font-size="7.5" fill="#5a5a5a" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">CSV</text>
+  <rect x="154" y="296" width="36" height="24" rx="4" fill="#ffffff" stroke="#e0ddd6" stroke-width="1"/>
+  <text x="172" y="312" text-anchor="middle" font-size="7.5" fill="#5a5a5a" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">CSV</text>
+
+  <!-- バッジ -->
+  <rect x="125" y="332" width="100" height="26" rx="13" fill="#2a6041" opacity="0.12"/>
+  <text x="175" y="349" text-anchor="middle" font-size="10.5" font-weight="500" fill="#2a6041" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">複数日分のログ</text>
+
+  <!-- ===== 矢印: 入力→処理 ===== -->
+  <line x1="260" y1="275" x2="480" y2="275" stroke="#2a6041" stroke-width="2" stroke-dasharray="8,5" opacity="0.6"/>
+  <polygon points="478,269 492,275 478,281" fill="#2a6041" opacity="0.6"/>
+  <!-- ラベル -->
+  <rect x="330" y="257" width="90" height="20" rx="4" fill="#ffffff" opacity="0.9"/>
+  <text x="375" y="271" text-anchor="middle" font-size="9.5" fill="#5a5a5a" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">ドラッグ&amp;ドロップ</text>
+
+  <!-- ===== 中央ブロック: 処理（ブラウザダッシュボード） ===== -->
+  <!-- 装飾円 -->
+  <circle cx="600" cy="265" r="105" fill="#e8f3ed" opacity="0.5"/>
+  <!-- メイン円 -->
+  <circle cx="600" cy="265" r="85" fill="#2a6041"/>
+  <!-- ギア風装飾 -->
+  <circle cx="600" cy="265" r="95" fill="none" stroke="#2a6041" stroke-width="3" stroke-dasharray="14,10" opacity="0.35"/>
+  <!-- テキスト -->
+  <text x="600" y="245" text-anchor="middle" font-size="15" font-weight="700" fill="#ffffff" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">ブラウザで</text>
+  <text x="600" y="268" text-anchor="middle" font-size="15" font-weight="700" fill="#ffffff" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">自動分析</text>
+  <text x="600" y="295" text-anchor="middle" font-size="10.5" fill="#ffffff" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif" opacity="0.85">完全ローカル処理</text>
+  <!-- オレンジアクセントライン -->
+  <line x1="550" y1="310" x2="650" y2="310" stroke="#c87533" stroke-width="1.5" opacity="0.7"/>
+
+  <!-- ===== 矢印: 処理→出力 ===== -->
+  <line x1="710" y1="275" x2="890" y2="275" stroke="#c87533" stroke-width="2" stroke-dasharray="8,5" opacity="0.6"/>
+  <polygon points="888,269 902,275 888,281" fill="#c87533" opacity="0.6"/>
+  <rect x="768" y="257" width="60" height="20" rx="4" fill="#ffffff" opacity="0.9"/>
+  <text x="798" y="271" text-anchor="middle" font-size="9.5" fill="#5a5a5a" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">即時描画</text>
+
+  <!-- ===== 右ブロック: 出力（ダッシュボード画面） ===== -->
+  <!-- カード1: KPI -->
+  <rect x="910" y="140" width="250" height="68" rx="8" fill="#ffffff" stroke="#e0ddd6" stroke-width="1.5"/>
+  <rect x="910" y="140" width="250" height="24" rx="8" fill="#e8f3ed"/>
+  <rect x="910" y="156" width="250" height="8" fill="#e8f3ed"/>
+  <text x="1035" y="157" text-anchor="middle" font-size="10.5" font-weight="700" fill="#2a6041" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">KPI概況カード</text>
+  <text x="1035" y="185" text-anchor="middle" font-size="9.5" fill="#5a5a5a" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">稼働時間・集中時間・アプリ数</text>
+
+  <!-- カード2: タイムライン -->
+  <rect x="910" y="220" width="250" height="68" rx="8" fill="#ffffff" stroke="#e0ddd6" stroke-width="1.5"/>
+  <rect x="910" y="220" width="250" height="24" rx="8" fill="#fdf4ec"/>
+  <rect x="910" y="236" width="250" height="8" fill="#fdf4ec"/>
+  <text x="1035" y="237" text-anchor="middle" font-size="10.5" font-weight="700" fill="#c87533" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">タイムライン</text>
+  <text x="1035" y="265" text-anchor="middle" font-size="9.5" fill="#5a5a5a" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">1日の作業をガントチャート風に</text>
+
+  <!-- カード3: グラフ群 -->
+  <rect x="910" y="300" width="250" height="68" rx="8" fill="#ffffff" stroke="#e0ddd6" stroke-width="1.5"/>
+  <rect x="910" y="300" width="250" height="24" rx="8" fill="#e8f3ed"/>
+  <rect x="910" y="316" width="250" height="8" fill="#e8f3ed"/>
+  <text x="1035" y="317" text-anchor="middle" font-size="10.5" font-weight="700" fill="#2a6041" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">分析グラフ群</text>
+  <text x="1035" y="345" text-anchor="middle" font-size="9.5" fill="#5a5a5a" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">アプリ別・時間帯別・日別推移</text>
+
+  <!-- ===== 下部バナー ===== -->
+  <rect x="180" y="489" width="840" height="52" rx="26" fill="#ffffff" stroke="#e0ddd6" stroke-width="1"/>
+
+  <!-- アイテム1 -->
+  <circle cx="240" cy="515" r="10" fill="#2a6041" opacity="0.15"/>
+  <path d="M235,515 L238,518 L245,511" stroke="#2a6041" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="258" y="519" font-size="12" font-weight="500" fill="#2c2c2c" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">サーバ不要</text>
+
+  <!-- アイテム2 -->
+  <circle cx="410" cy="515" r="10" fill="#2a6041" opacity="0.15"/>
+  <rect x="405" y="509" width="4" height="8" rx="1" fill="#2a6041"/>
+  <rect x="411" y="512" width="4" height="5" rx="1" fill="#2a6041"/>
+  <text x="428" y="519" font-size="12" font-weight="500" fill="#2c2c2c" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">数秒で可視化</text>
+
+  <!-- アイテム3 -->
+  <circle cx="590" cy="515" r="10" fill="#c87533" opacity="0.15"/>
+  <rect x="585" y="510" width="10" height="10" rx="2" fill="none" stroke="#c87533" stroke-width="1.5"/>
+  <text x="608" y="519" font-size="12" font-weight="500" fill="#2c2c2c" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">データ外部送信なし</text>
+
+  <!-- アイテム4 -->
+  <circle cx="790" cy="515" r="10" fill="#c87533" opacity="0.15"/>
+  <path d="M785,515 L790,510 L795,515 L790,520 Z" fill="#c87533" opacity="0.6"/>
+  <text x="808" y="519" font-size="12" font-weight="500" fill="#2c2c2c" font-family="Noto Sans CJK JP, Noto Sans JP, sans-serif">複数日一括分析</text>
+
+</svg>
