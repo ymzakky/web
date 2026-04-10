@@ -1,0 +1,1953 @@
+﻿---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allNews = await getCollection('news');
+const oneMonthAgo = new Date();
+oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);
+const topNews = allNews
+  .filter((item) => {
+    if (item.data.showOnTop) return true;
+    return new Date(item.data.date) >= oneMonthAgo;
+  })
+  .sort((a, b) => b.data.date.localeCompare(a.data.date))
+  .slice(0, 5);
+const latestNews = topNews;
+---
+
+<BaseLayout
+  title="むすびかなでる | 社長が経営に専念できる 自走する組織作りに伴走"
+  description="従業員20名前後の製造業建設業の経営者向け。「20人の壁」を突破し、現場が自ら考え動き出す「自走型DX」の伴走支援。IT苦手な現場でも手書き感覚で使えるシステム導入と組織変革を支援します。"
+>
+
+  <!-- Section 1: ヒーローエリア -->
+  <section class="hero" id="hero">
+    <img src="/assets/images/index_header.jpg" alt="" class="hero-bg-img" aria-hidden="true">
+    <div class="hero-bg"></div>
+    <div class="container hero-container">
+      <div class="hero-content">
+        <p class="hero-eyebrow">中小企業の「20人の壁」を突破する伴走支援</p>
+        <h1 class="hero-title">
+          社長が<span class="text-accent">経営に専念</span>できる
+          自走する組織へ
+        </h1>
+        <p class="hero-lead">
+          多様な社会を支える人や組織の<strong>仕組みづくり</strong>に伴走
+        </p>
+        <div class="hero-actions">
+          <a href="#case" class="btn-secondary"><svg class="hero-action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>導入事例を見る</a>
+          <a href="/tools/" class="btn-secondary"><svg class="hero-action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>ツールを見る</a>
+          <a href="/column/" class="btn-secondary"><svg class="hero-action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>コラムを読む</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 1.2: お知らせ -->
+  {latestNews.length > 0 && (
+    <section class="news-strip" id="news">
+      <div class="container">
+        <div class="news-strip-inner">
+          <div class="news-strip-label">お知らせ</div>
+          <ul class="news-strip-list">
+            {latestNews.map((item) => (
+              <li class="news-strip-item">
+                <time class="news-strip-date">{item.data.date.replace(/-/g, '.')}</time>
+                <a href={`/news/${item.slug}`} class="news-strip-title">{item.data.title}</a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Section 1.5: 経営理念 -->
+  <section class="creed-section" id="philosophy">
+    <div class="creed-deco-line"></div>
+    <div class="container">
+      <div class="creed-inner">
+
+        <!-- 上部：ラベル＋キャッチ -->
+        <div class="creed-header">
+          <p class="section-label">経営理念</p>
+        </div>
+
+        <!-- 3つの理念カード -->
+        <div class="creed-list">
+          <div class="creed-item">
+            <div class="creed-item-body">
+              <p class="creed-item-text">私たちは、<br><strong>技術と実践</strong>で<br>未来を切り拓きます</p>
+              <p class="creed-item-note">机上の空論ではなく、現場で動くものを。技術を磨き、ひとつずつ実行に移すことが私たちの誠実さです。</p>
+            </div>
+          </div>
+          <div class="creed-item">
+            <div class="creed-item-body">
+              <p class="creed-item-text">私たちは、<br>夢や希望を目標に置き変え、<br><strong>世の中の奏者</strong>となります</p>
+              <p class="creed-item-note">想いだけでは届かない。目標という楽譜に落とし込み、社会という舞台で共に奏でていきます。</p>
+            </div>
+          </div>
+          <div class="creed-item">
+            <div class="creed-item-body">
+              <p class="creed-item-text">私たちは、<br>学び続け、成長し、<br><strong>成果に結びつけます</strong></p>
+              <p class="creed-item-note">変化を恐れず、学びを止めない。お客様の成果が、私たちの成長の証です。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: 課題提起 -->
+  <section class="section section--alt" id="problem">
+    <div class="container">
+      <div class="section-header text-center">
+        <p class="section-label">お客様の持つ課題</p>
+        <h2 class="section-title">「20人の壁」に直面していませんか？</h2>
+      </div>
+      <div class="problem-grid">
+        <div class="problem-card">
+          <div class="problem-icon"></div>
+          <h3>阿吽の呼吸が通じない</h3>
+          <p>「言わなくても分かるはず」が通じなくなり、指示がなければ動けない社員が増えてきた。</p>
+        </div>
+        <div class="problem-card">
+          <div class="problem-icon"></div>
+          <h3>社長が現場から抜け出せない</h3>
+          <p>トラブル対応や現場管理に追われ、経営や新規開拓など本来やるべき仕事に時間が割けない。</p>
+        </div>
+        <div class="problem-card">
+          <div class="problem-icon"></div>
+          <h3>IT導入が現場に定着しない</h3>
+          <p>高機能なシステムを導入したものの現場には定着せず、煩雑な入力作業だけが残ってしまった。</p>
+        </div>
+      </div>
+      <div class="problem-message">
+        <p class="problem-message-lead">こうしたお悩みは、御社だけではありません。</p>
+        <p>人・組織・ツールのバランスが崩れる「20人の壁」は、成長期の企業が必ず直面する<strong>構造的な課題</strong>です。<br>必要なのはシステム導入だけではなく、<strong>現場の「心」と「業務」に寄り添うアプローチ</strong>です。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: 提供価値解決策 -->
+  <section class="section" id="solution">
+    <div class="container">
+      <div class="section-header text-center">
+        <p class="section-label">私たちが提供する解決策</p>
+        <h2 class="section-title">「むすびかなでる」が提供するのは、<br>ITツールではなく<span class="text-brand">「自走する組織」</span></h2>
+        <p class="section-lead center-lead">
+          システム導入はゴールではありません。現場が主体的に動き出し、経営者が本来の仕事に集中できる組織をつくることが私たちのゴールです。
+        </p>
+      </div>
+      <div class="solution-grid">
+        <div class="solution-card">
+          <div class="solution-number">01</div>
+          <div class="solution-icon"></div>
+          <h3>現場フィット<span>（心理的安全性の確保）</span></h3>
+          <p>「難しいIT」を押し付けません。現場スタッフが<strong>「これなら使える」</strong>と感じられるよう、操作の煩雑さを取り除き、日常業務に自然に溶け込むツールとプロセスを設計します。</p>
+          <div class="solution-badge">現場の抵抗ゼロへ</div>
+        </div>
+        <div class="solution-card">
+          <div class="solution-number">02</div>
+          <div class="solution-icon"></div>
+          <h3>伴走型人財育成<span>（チェンジマネジメント）</span></h3>
+          <p>システムを入れて終わりではありません。現場の「やらされ感」を「自分たちの工夫」に変える研修と対話で、社員が自らシステムを改善できる<strong>「市民開発者」</strong>に育てます。</p>
+          <div class="solution-badge">社員が主役のDX</div>
+        </div>
+        <div class="solution-card">
+          <div class="solution-number">03</div>
+          <div class="solution-icon"></div>
+          <h3>科学的経営への昇華<span>（データ活用）</span></h3>
+          <p>現場で蓄積されたデータを活用し、感覚頼みの経営から<strong>「データに基づく科学的経営」</strong>へ転換。売上予測から設備投資計画まで、経営判断の高度化を一貫してサポートします。</p>
+          <div class="solution-badge">経営判断の高度化</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 7: 事例紹介 -->
+  <section class="section" id="case">
+    <div class="container">
+      <div class="section-header text-center">
+        <p class="section-label">事例紹介</p>
+        <h2 class="section-title">現場が自走し、経営が変わった。<br>「ちょうどいいDX」の実践事例。</h2>
+      </div>
+      <div class="case-wrap">
+        <div class="case-header">
+          <div class="case-header-text">
+            <span class="case-badge">製造業従業員約20名</span>
+            <h3 class="case-company">株式会社葵製作所 様</h3>
+            <p class="case-subtitle">東京都八王子市 ／ 総合板金加工</p>
+          </div>
+          <div class="case-header-photos">
+            <img src="/assets/images/aoi-1.jpg" alt="葵製作所 現場1" class="case-header-photo">
+            <img src="/assets/images/aoi-2.jpg" alt="葵製作所 現場2" class="case-header-photo">
+            <img src="/assets/images/aoi-3.jpg" alt="葵製作所 現場3" class="case-header-photo">
+          </div>
+        </div>
+        <div class="case-flow">
+          <div class="case-block case-before">
+            <h4>Before</h4>
+            <ul>
+              <li>ホワイトボードと付箋によるアナログ工程管理</li>
+              <li>その場に行かないと進捗が分からない</li>
+              <li>貼り替え忘れで実態と情報にズレが発生</li>
+              <li>「コスト負担」を理由にIT導入を見送っていた</li>
+            </ul>
+          </div>
+          <div class="case-arrow"></div>
+          <div class="case-block case-after">
+            <h4>After</h4>
+            <ul>
+              <li>「手書きメモを動かす感覚」で現場が抵抗なく受け入れ</li>
+              <li>社外からリアルタイムで工程進捗を確認可能に</li>
+              <li>社員がその場で進捗更新する習慣が定着</li>
+              <li>外注管理シートを現場社員が自ら追加改善</li>
+            </ul>
+          </div>
+        </div>
+        <div class="case-voices">
+          <div class="voice-card">
+            <div class="voice-icon"></div>
+            <blockquote>「社員に無理をさせない」を大切にしてくれた。現場に寄り添う導入だったからこそ、社員も安心して受け入れられた。</blockquote>
+            <cite>代表取締役 長谷川薫 様</cite>
+          </div>
+          <div class="voice-card">
+            <div class="voice-icon"></div>
+            <blockquote>手書きメモを動かす感覚で使えるので、社員もすぐ慣れました。自分たちで管理表を改善できるようになったのも大きな変化です。</blockquote>
+            <cite>管理部 金子泰広 様</cite>
+          </div>
+        </div>
+        <div class="case-result">
+          <span class="result-icon"></span>
+          <p>現場の自走により社長が現場管理から解放され、<strong>経営に専念できる体制へ</strong></p>
+        </div>
+      </div>
+
+      <div class="other-cases">
+        <h3 class="other-cases-title">その他の支援実績</h3>
+        <div class="other-cases-grid">
+          <div class="other-case-card">
+            <div class="other-case-industry">中小企業支援</div>
+            <h4>小規模出版社のリモートワーク対応IT基盤整備</h4>
+            <p>VPN＋NAS環境からDropboxへ移行。編集者が外出先からも快適に作業できる仕組みを構築しました。</p>
+            <ul class="other-case-results">
+              <li>事務所外でも安定運用可能に</li>
+              <li>NAS・VPN運用コストが不要に</li>
+              <li>編集部の作業効率が改善</li>
+            </ul>
+            <div class="other-case-tags">
+              <span>Dropbox</span><span>リモートワーク</span><span>情報共有</span>
+            </div>
+          </div>
+          <div class="other-case-card">
+            <div class="other-case-industry">NPO支援</div>
+            <h4>NPOの会計業務をfreeeで効率化</h4>
+            <p>紙・Excelベースの帳簿管理からクラウド会計へ移行。ノンエンジニアでも自走できる運用体制を整備しました。</p>
+            <ul class="other-case-results">
+              <li>手書き不要で月次記帳が定着</li>
+              <li>税理士とのコミュニケーションが円滑化</li>
+              <li>新スタッフへの引き継ぎもスムーズに</li>
+            </ul>
+            <div class="other-case-tags">
+              <span>freee</span><span>会計内製化</span><span>NPO</span>
+            </div>
+          </div>
+
+          <div class="other-case-card">
+            <div class="other-case-industry">NPO支援</div>
+            <h4>教育系NPOの支援者管理をkintoneで一元化</h4>
+            <p>寄付情報・送付履歴が分断されていたNPOに、kintoneで支援者情報の一元管理を構築しました。</p>
+            <ul class="other-case-results">
+              <li>支援者との関係履歴が可視化</li>
+              <li>お礼状・機関誌発送が簡易化</li>
+              <li>5年以上にわたり安定運用中</li>
+            </ul>
+            <div class="other-case-tags">
+              <span>kintone</span><span>CRM</span><span>NPO</span>
+            </div>
+          </div>
+
+
+
+        </div>
+      </div>
+
+      <!-- 伴走実績 -->
+      <div class="client-record">
+        <h3 class="client-record-title">伴走実績</h3>
+        <div class="client-record-grid">
+          <span class="client-record-item">株式会社葵製作所 様</span>
+          <span class="client-record-item">有限会社サニーシステム 様</span>
+          <span class="client-record-item">株式会社巧測 様</span>
+          <span class="client-record-item">キーナスデザイン株式会社 様</span>
+          <span class="client-record-item">沈金師 春日友子 様</span>
+          <span class="client-record-item">NPO法人 アジアの子どもたちの就学を支援する会 様</span>
+          <span class="client-record-item">NPO法人 dattochi home 様</span>
+          <span class="client-record-item">NPO法人 ESAアジア教育支援の会 様</span>
+        </div>
+        <p class="client-record-note">ほか、地域新聞出版社様、社労士事務所様など</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- プロフィール -->
+  <section class="section section--alt" id="about">
+    <div class="container">
+      <div class="section-header text-center">
+        <p class="section-label">代表者紹介</p>
+      </div>
+      <div class="about-profile-2col">
+        <!-- 左：写真 -->
+        <div class="about-photo-col">
+          <div class="about-photo-wrap">
+            <img src="/assets/images/profile-yamazaki.jpg" alt="山﨑 啓介" class="about-photo-img">
+          </div>
+        </div>
+        <!-- 右：プロフィール -->
+        <div class="about-info-col">
+          <div>
+            <h2 class="about-intro-name">山﨑 啓介</h2>
+            <p class="about-intro-role">むすびかなでる 代表 ／ 有限会社サニーシステム 取締役</p>
+          </div>
+          <p class="about-intro-lead">日立グループでサーバ・ネットワークSEとして大規模システム開発に従事。2015年の三陸復興支援を転機に、現場により近く寄り添ったIT活用に携わりたいと考え、中小企業の経営支援会社へ転職。クライアント先でスマホアプリを使った顧客管理システムを軸にITシステム戦略の策定・設計・運用経験を経て独立。<br>現在は東京多摩エリアを拠点に、建設業・製造業・NPOへのIT伴走支援を実践するとともに、住宅設備施工店の取締役としてバックオフィスの業務改革や住宅環境の可視化にも取り組んでいます。<br>現場の言葉を大切に、あなたの組織が自走できるまで、ともに歩み続けます。</p>
+          <div class="about-intro-certs">
+            <button class="cert-tag"data-cert="security">情報セキュリティスペシャリスト</button>
+            <button class="cert-tag" data-cert="ict">ICT支援員</button>
+            <button class="cert-tag" data-cert="digital">デジタル推進委員</button>
+            <button class="cert-tag" data-cert="drone">二等無人航空機操縦士</button>
+            <p class="cert-hint">資格名をクリックすると詳細を確認できます</p>
+          </div>
+          <!-- 創業の想い -->
+          <div class="story-inline">
+            <h3 class="story-title">「あなたのExcelは魔法のようだ」から始まった</h3>
+            <div class="story-body">
+              <p>2015年に復興支援として三陸の水産加工会社様のIT活用をサポートした時に言われたのが「あなたのExcelは魔法のようだ」という一言。私は受け取った帳票の集計を普段通りに整理していただけで、その言葉を言われたことは驚きを隠す事ができませんでした。自分にとって当たり前の知識でも誰かの役に立つということの気づき。人生の岐路になった瞬間です。</p>
+              <p>ITは魔法ではありません。導入したからといって必ず便利になるというものではなく「100社の組織があれば、100通りの使い方」があります。私は事業を通じてITを魔法ではなく、それぞれの組織で活かす最適な道具を選び皆様と一緒に磨きあげていくお手伝いをさせて頂きたいと考えています。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- パートナーシップ -->
+  <section class="section section--alt" id="partner">
+    <div class="container">
+      <div class="section-header text-center">
+        <p class="section-label">パートナーシップ</p>
+        <h2 class="section-title">各分野のスペシャリストによる<br>盤石のサポート体制</h2>
+        <p class="section-lead center-lead">個人事業主だからといって、品質に妥協はしません。各分野のプロフェッショナルとの連携により、大企業レベルの専門性を中小企業サイズで提供します。</p>
+      </div>
+      <div class="partner-grid">
+        <div class="partner-card">
+          <div class="partner-avatar"><img src="/assets/images/realize-ichikawa.png" alt="市川 英利 氏"></div>
+          <div class="partner-info">
+            <h3 class="partner-name">市川 英利 氏</h3>
+            <p class="partner-role">データ分析戦略</p>
+            <p class="partner-former">株式会社リアライズ 代表取締役</p>
+            <p class="partner-desc">日本マクドナルド等での実績に基づく統計分析の専門家。蓄積データを「利益」に変える戦略立案を支援します。</p>
+          </div>
+        </div>
+        <div class="partner-card">
+          <div class="partner-avatar"><img src="/assets/images/tydi-adachi.png" alt="足立 恭平 氏"></div>
+          <div class="partner-info">
+            <h3 class="partner-name">足立 恭平 氏</h3>
+            <p class="partner-role">地域DX・地域共創</p>
+            <p class="partner-former">株式会社東京山側デジタル推進機構 代表取締役</p>
+            <p class="partner-desc">東京山側エリアを拠点に、Web制作・業務効率化・生成AI導入などLocal-DXを展開。地域の課題解決と都心企業の新規事業創出を結びつける。</p>
+          </div>
+        </div>
+        <div class="partner-card">
+          <div class="partner-avatar"><img src="/assets/images/shedar-fukuda.jpg" alt="福田 多美子 氏"></div>
+          <div class="partner-info">
+            <h3 class="partner-name">福田 多美子 氏</h3>
+            <p class="partner-role">サステナビリティ経営支援</p>
+            <p class="partner-former">株式会社シェダル 代表取締役</p>
+            <p class="partner-desc">サステナビリティ推進支援を専門とし、企業の人材育成・社内浸透・収益力向上を一体で支援。現場で動く仕組みづくりに強みを持つ専門家。</p>
+          </div>
+        </div>
+        <div class="partner-card">
+          <div class="partner-avatar"><img src="/assets/images/fruitful-koyama.jpg" alt="小山 美果 氏"></div>
+          <div class="partner-info">
+            <h3 class="partner-name">小山 美果 氏</h3>
+            <p class="partner-role">組織開発・事業戦略</p>
+            <p class="partner-former">株式会社美果Fruitful Design 代表取締役<br>
+            国家資格キャリアコンサルタント</p>
+            <p class="partner-desc">流通大手で商品企画・新規事業など事業戦略全般を担当後に独立。心理的安全性を軸にした組織開発とコーチングで「人が動く組織」に伴走。</p>
+          </div>
+        </div>
+        <div class="partner-card partner-card--soon">
+          <div class="partner-avatar partner-avatar--soon">？</div>
+          <div class="partner-info">
+            <h3 class="partner-name">新メンバー参加予定</h3>
+            <p class="partner-role">システム設計スペシャリスト</p>
+            <div class="partner-coming-soon">Coming Soon</div>
+            <p class="partner-desc">大企業での豊富な実績を持つシステム設計のスペシャリストが間もなく参画予定。確かな設計力で、より高品質なシステム開発をご提供します。</p>
+          </div>
+        </div>
+      </div>
+      <div class="partner-message">
+        <p>「個人事業主への不安」を感じるのは当然です。だから、各分野のプロと連携し、チームで御社を支えます。</p>
+      </div>
+    </div>
+  </section>
+  <!-- 事業概要 -->
+  <section class="section" id="business">
+    <div class="container">
+      <div class="about-biz-full">
+        <div class="section-header text-center">
+          <p class="section-label">事業概要</p>
+        </div>
+        <dl class="info-dl">
+          <div class="info-row"><dt>屋号</dt><dd>むすびかなでる</dd></div>
+          <div class="info-row"><dt>創業年月</dt><dd>2020年7月</dd></div>
+          <div class="info-row info-row--col3">
+            <dt>事業内容</dt>
+            <dd>
+              <div class="biz-service-list">
+                <div class="biz-service-card">
+                  <p class="biz-service-title">中小企業向け自走型DX伴走支援</p>
+                  <p class="biz-service-sub">kintone活用・業務改善・人財育成</p>
+                </div>
+                <div class="biz-service-card">
+                  <p class="biz-service-title">IT基盤整備・クラウド移行支援</p>
+                  <p class="biz-service-sub">リモートワーク環境構築・業務効率化</p>
+                </div>
+              </div>
+            </dd>
+          </div>
+          <div class="info-row">
+            <dt>所在地</dt>
+            <dd>〒197-0814<br>東京都あきる野市二宮1156-27<br>有限会社サニーシステム 気付</dd>
+          </div>
+          <div class="info-row">
+            <dt>所属</dt>
+            <dd>
+              <ul>
+                <li>(一社)東京中小企業家同友会</li>
+                <li>八王子商工会議所</li>
+                <li>八王子ITサポートチームish<br>（サイバーシルクロード八王子）</li>
+              </ul>
+            </dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- お問い合わせ -->
+  <section class="section cta-section" id="contact">
+    <div class="container">
+      <div class="cta-wrap">
+        <p class="section-label" style="color: rgba(255,255,255,0.7);">お問い合わせ</p>
+        <h2 class="cta-title">まずは「現場の悩み」を<br>お聞かせください。</h2>
+        <p class="cta-lead">ITの専門用語は不要です。<br>御社の現状と、目指したい姿についてお話しましょう。</p>
+        <div class="cta-actions">
+          <a href="https://forms.gle/iaMWnnnnWmsciXcv8" class="btn-accent cta-btn" target="_blank" rel="noopener">無料個別相談に申し込む</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- 資格モーダル -->
+  <div class="cert-modal-backdrop" id="certModalBackdrop" aria-hidden="true">
+    <div class="cert-modal" id="certModal" role="dialog" aria-modal="true" aria-labelledby="certModalTitle">
+      <button class="cert-modal-close" id="certModalClose" aria-label="閉じる">✕</button>
+      <div class="cert-modal-level-wrap">
+        <span class="cert-level" id="certModalLevel"></span>
+      </div>
+      <h3 class="cert-modal-title" id="certModalTitle"></h3>
+      <p class="cert-modal-desc" id="certModalDesc"></p>
+    </div>
+  </div>
+
+</BaseLayout>
+
+<script>
+  const certData: Record<string, { level: string; levelClass: string; title: string; desc: string }> = {
+    security: {
+      level: '国家資格',
+      levelClass: 'cert-level--national',
+      title: '情報セキュリティスペシャリスト（旧制度）',
+      desc: 'IPAが実施するサイバーセキュリティ分野の国家試験（現・情報安全確保支援士試験の前身）合格。セキュリティ対策立案・リスク管理・インシデント対応に関する専門知識を有する。'
+    },
+    ict: {
+      level: '認定資格',
+      levelClass: '',
+      title: 'ICT支援員',
+      desc: '学校・企業等へのICT活用支援を行う専門人材認定資格。現場へのITリテラシー教育や活用定着支援の専門性を証明。'
+    },
+    digital: {
+      level: 'デジタル庁任命',
+      levelClass: 'cert-level--gov',
+      title: 'デジタル推進委員',
+      desc: 'デジタル庁が推進するデジタル活用支援員推進事業に基づく認定。地域住民・事業者へのデジタル活用普及を担う人材として任命。'
+    },
+    drone: {
+      level: '国家資格',
+      levelClass: 'cert-level--national',
+      title: '二等無人航空機操縦士',
+      desc: 'ドローン操縦の国家資格（二等）。建設現場の空撮・点検が可能。IT支援とドローン活用を組み合わせた現場DX提案にも活用。'
+    }
+    
+  };
+
+  const backdrop = document.getElementById('certModalBackdrop')!;
+  const modal = document.getElementById('certModal')!;
+  const closeBtn = document.getElementById('certModalClose')!;
+  const levelEl = document.getElementById('certModalLevel')!;
+  const titleEl = document.getElementById('certModalTitle')!;
+  const descEl = document.getElementById('certModalDesc')!;
+
+  function openModal(certId: string) {
+    const data = certData[certId];
+    if (!data) return;
+    levelEl.textContent = data.level;
+    levelEl.className = 'cert-level' + (data.levelClass ? ' ' + data.levelClass : '');
+    titleEl.textContent = data.title;
+    descEl.textContent = data.desc;
+    backdrop.setAttribute('aria-hidden', 'false');
+    backdrop.classList.add('is-open');
+    closeBtn.focus();
+  }
+
+  function closeModal() {
+    backdrop.classList.remove('is-open');
+    backdrop.setAttribute('aria-hidden', 'true');
+  }
+
+  document.querySelectorAll('[data-cert]').forEach((btn) => {
+    btn.addEventListener('click', () => openModal((btn as HTMLElement).dataset.cert!));
+  });
+  closeBtn.addEventListener('click', closeModal);
+  backdrop.addEventListener('click', (e) => { if (e.target === backdrop) closeModal(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+</script>
+
+<style>
+/* ===== News Strip ===== */
+.news-strip {
+  background: #fff;
+  border-bottom: 1px solid rgba(0,0,0,0.07);
+  margin: 1.5rem 0;
+}
+.news-strip-inner {
+  display: flex;
+  align-items: stretch;
+  min-height: 52px;
+}
+.news-strip-label {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  background: var(--color-brand-primary);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  white-space: nowrap;
+}
+.news-strip-list {
+  list-style: none;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.news-strip-item {
+  display: flex;
+  align-items: baseline;
+  gap: 1.25rem;
+  padding: 0.3rem 1.5rem;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  transition: background 0.15s;
+  flex-wrap: wrap;
+}
+.news-strip-item:last-child {
+  border-bottom: none;
+}
+.news-strip-item:hover {
+  background: rgba(26,107,104,0.03);
+}
+.news-strip-date {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+}
+.news-strip-title {
+  font-size: 0.9rem;
+  color: var(--color-text-main);
+  flex: 1;
+  line-height: 1.5;
+  min-width: 0;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.news-strip-title:hover {
+  color: var(--color-brand-primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+@media (max-width: 768px) {
+  .news-strip-inner { flex-direction: column; }
+  .news-strip-label { padding: 0.1rem 1rem; justify-content: center; }
+  .news-strip-item { gap: 0.5rem; padding: 0.75rem 1rem; }
+}
+
+/* ===== Hero ===== */
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: 7rem 0;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  background: var(--gradient-hero);
+}
+.hero-bg-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0.12;
+  pointer-events: none;
+  z-index: 0;
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 75% 60%, rgba(121, 179, 27, 0.09) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 60% at 20% 30%, rgba(26, 107, 104, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 1;
+}
+.hero-container {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+/* ロゴ */
+.hero-logo-wrap {
+  display: flex;
+  justify-content: flex-start;
+}
+.hero-logo {
+  width: 112px;
+  height: 112px;
+  object-fit: contain;
+  border-radius: 20px;
+  box-shadow: var(--shadow-md);
+}
+/* 縦並びレイアウト */
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.75rem;
+  max-width: 780px;
+}
+.hero-left,
+.hero-right {
+  display: contents;
+}
+.hero-eyebrow {
+  display: inline-block;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--color-brand-primary);
+  background: rgba(26, 107, 104, 0.08);
+  padding: 0.5rem 1.25rem;
+  border-radius: 99px;
+  margin-bottom: 0;
+  border: 1px solid rgba(26,107,104,0.15);
+}
+.hero-title {
+  font-size: clamp(2rem, 3.8vw, 3.2rem);
+  line-height: 1.4;
+  margin-bottom: 0;
+  font-family: var(--font-family-serif);
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+.text-accent { color: var(--color-brand-warm); }
+.text-brand { color: var(--color-brand-primary); }
+.hero-lead {
+  font-size: 1.25rem;
+  color: var(--color-text-sub);
+  line-height: 1.95;
+  margin-bottom: 0;
+}
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 0;
+  width: 100%;
+  max-width: 720px;
+  align-self: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+.hero-actions > a {
+  flex: 1 1 0;
+  min-width: 0;
+  white-space: nowrap;
+  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4em;
+}
+.hero-action-icon {
+  width: 1.1em;
+  height: 1.1em;
+  flex-shrink: 0;
+}
+.hero-trust {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+.hero-trust span {
+  font-size: 0.78rem;
+  color: var(--color-brand-primary);
+  font-weight: 600;
+  background: rgba(26,107,104,0.07);
+  padding: 0.25rem 0.75rem;
+  border-radius: 99px;
+  border: 1px solid rgba(26,107,104,0.15);
+}
+
+/* 右カラム：イメージ画像 */
+.hero-image-wrap {
+  position: relative;
+  padding-bottom: 1rem;
+  padding-left: 1rem;
+}
+.hero-image-frame {
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  aspect-ratio: 4 / 3;
+  background: var(--color-bg-muted);
+}
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+.hero-image-frame:hover .hero-image {
+  transform: scale(1.03);
+}
+.hero-image-badge {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background: var(--gradient-brand);
+  color: #fff;
+  border-radius: 14px;
+  padding: 0.8rem 1.25rem;
+  box-shadow: var(--shadow-brand);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.2;
+}
+.hero-image-badge-num {
+  font-size: 1.5rem;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+}
+.hero-image-badge-text {
+  font-size: 0.68rem;
+  font-weight: 600;
+  opacity: 0.85;
+  letter-spacing: 0.08em;
+}
+
+/* ===== 経営理念セクション ===== */
+.creed-section {
+  position: relative;
+  background: linear-gradient(160deg, #EBF4F0 0%, #EFF7E8 100%);
+  padding: 5rem 0;
+  overflow: hidden;
+}
+.creed-deco-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--gradient-brand);
+}
+.creed-inner {
+  position: relative;
+  z-index: 1;
+}
+/* ヘッダー */
+.creed-header {
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+.creed-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--color-brand-primary);
+  margin-bottom: 1.25rem;
+  display: block;
+}
+.creed-catch {
+  font-size: clamp(1.3rem, 2.8vw, 1.9rem);
+  font-weight: 900;
+  color: var(--color-text-main);
+  font-family: var(--font-family-serif);
+  line-height: 1.4;
+  margin-bottom: 0.8rem;
+  letter-spacing: 0.04em;
+}
+.creed-sub {
+  font-size: 0.92rem;
+  color: var(--color-text-sub);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+/* 理念カード */
+.creed-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+.creed-item {
+  background: rgba(255,255,255,0.75);
+  border: 1px solid rgba(26,107,104,0.12);
+  border-radius: 20px;
+  padding: 2.2rem 1.8rem 2rem;
+  position: relative;
+  transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+}
+.creed-item:hover {
+  transform: translateY(-4px);
+  border-color: rgba(26,107,104,0.28);
+  background: rgba(255,255,255,0.95);
+  box-shadow: var(--shadow-md);
+}
+.creed-num {
+  display: block;
+  font-size: 2.6rem;
+  font-weight: 900;
+  line-height: 1;
+  margin-bottom: 1.2rem;
+  background: var(--gradient-brand);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  opacity: 0.55;
+  font-family: var(--font-family-serif);
+}
+.creed-item-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+.creed-item-text {
+  font-size: clamp(0.95rem, 1.3vw, 1.08rem);
+  font-weight: 700;
+  color: var(--color-text-main);
+  line-height: 1.8;
+  margin: 0;
+  font-family: var(--font-family-serif);
+}
+.creed-item-text strong {
+  color: var(--color-brand-warm);
+  font-weight: 800;
+}
+.creed-item-note {
+  font-size: 0.82rem;
+  color: var(--color-text-sub);
+  line-height: 1.8;
+  margin: 0;
+  font-weight: 400;
+}
+/* フッター署名 */
+.creed-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+}
+.creed-logo-mark {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  overflow: hidden;
+  opacity: 0.5;
+}
+.creed-footer-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.creed-sig {
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+  margin: 0;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  display: block;
+}
+
+/* ===== Section共通 ===== */
+.section { padding: 5rem 0; }
+.section--alt { background: var(--color-bg-warm); }
+.text-center { text-align: center; }
+.section-header { margin-bottom: 3.5rem; }
+.center-lead { margin: 0 auto; text-align: center; }
+
+/* ===== Problem ===== */
+.problem-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+.problem-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 2rem 1.5rem;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(0,0,0,0.05);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.problem-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+.problem-icon { font-size: 2.2rem; margin-bottom: 0.9rem; }
+.problem-card h3 { font-size: 1rem; margin-bottom: 0.7rem; }
+.problem-card p { font-size: 0.88rem; color: var(--color-text-sub); line-height: 1.8; }
+.problem-message {
+  background: linear-gradient(135deg, rgba(26,107,104,0.05), rgba(121,179,27,0.05));
+  border-left: 4px solid var(--color-brand-primary);
+  border-radius: 0 12px 12px 0;
+  padding: 1.75rem 2.5rem;
+}
+.problem-message-lead {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-brand-primary);
+  margin-bottom: 0.6rem;
+}
+.problem-message p { font-size: 0.95rem; color: var(--color-text-sub); line-height: 1.9; }
+
+/* ===== Solution ===== */
+.solution-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+.solution-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 2.5rem 2rem;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(0,0,0,0.06);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.solution-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+.solution-card--accent {
+  border-color: rgba(26,107,104,0.2);
+  background: linear-gradient(180deg, rgba(26,107,104,0.05) 0%, #fff 45%);
+}
+.solution-number {
+  font-size: 2.8rem;
+  font-weight: 800;
+  color: rgba(26,107,104,0.1);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+  font-family: var(--font-family-serif);
+}
+.solution-icon { font-size: 1.8rem; margin-bottom: 0.9rem; }
+.solution-card h3 { font-size: 1rem; margin-bottom: 0.9rem; line-height: 1.5; }
+.solution-card h3 span { display: block; font-size: 0.78rem; font-weight: 600; color: var(--color-text-muted); margin-top: 0.2rem; }
+.solution-card p { font-size: 0.88rem; color: var(--color-text-sub); line-height: 1.85; margin-bottom: 1.25rem; }
+.solution-badge {
+  display: inline-block;
+  background: rgba(121,179,27,0.1);
+  color: var(--color-brand-accent);
+  border-radius: 99px;
+  padding: 0.28rem 0.85rem;
+  font-size: 0.76rem;
+  font-weight: 700;
+  border: 1px solid rgba(121,179,27,0.2);
+}
+
+/* ===== Philosophy ===== */
+.philosophy-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+.philosophy-lead { font-size: 1.05rem; font-weight: 600; margin-bottom: 1.2rem; line-height: 1.85; }
+.philosophy-body { font-size: 0.93rem; color: var(--color-text-sub); line-height: 1.95; margin-bottom: 1.15rem; }
+.profile-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.2rem 1.5rem;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(0,0,0,0.05);
+  margin-top: 2rem;
+}
+.profile-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--gradient-brand);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.profile-name { font-size: 1rem; font-weight: 700; }
+.profile-role { font-size: 0.78rem; color: var(--color-brand-primary); font-weight: 600; margin-bottom: 0.2rem; }
+.profile-desc { font-size: 0.8rem; color: var(--color-text-muted); line-height: 1.7; }
+.philosophy-quote {
+  background: var(--color-bg-dark);
+  border-radius: 16px;
+  padding: 2.5rem;
+  margin-bottom: 1.5rem;
+}
+.philosophy-quote blockquote {
+  color: rgba(255,255,255,0.85);
+  font-size: 1rem;
+  line-height: 1.9;
+  font-weight: 500;
+  font-family: var(--font-family-serif);
+}
+.philosophy-values { display: flex; flex-direction: column; gap: 0.7rem; }
+.value-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: #fff;
+  border-radius: 8px;
+  padding: 0.85rem 1.25rem;
+  box-shadow: var(--shadow-sm);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-text-sub);
+}
+.value-icon { font-size: 1.15rem; }
+
+/* ===== Case Study ===== */
+.case-wrap {
+  background: #fff;
+  border-radius: 20px;
+  padding: 3rem;
+  box-shadow: var(--shadow-md);
+  border: 1px solid rgba(0,0,0,0.04);
+}
+.case-header {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  border-bottom: 2px solid var(--color-bg-muted);
+  padding-bottom: 1.5rem;
+  margin-bottom: 2rem;
+}
+.case-header-text { flex: 0 0 auto; }
+.case-header-photos {
+  display: flex;
+  gap: 0.75rem;
+  flex: 1;
+  justify-content: flex-end;
+}
+.case-header-photo {
+  width: calc((100% - 1.5rem) / 3);
+  max-width: 200px;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: var(--shadow-sm);
+}
+.case-badge {
+  display: inline-block;
+  background: rgba(26,107,104,0.08);
+  color: var(--color-brand-primary);
+  border-radius: 99px;
+  padding: 0.28rem 0.85rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  margin-bottom: 0.7rem;
+}
+.case-company { font-size: 1.4rem; font-weight: 700; margin-bottom: 0.2rem; }
+.case-subtitle { font-size: 0.85rem; color: var(--color-text-muted); }
+.case-flow {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 1.5rem;
+  align-items: start;
+  margin-bottom: 2.5rem;
+}
+.case-block { border-radius: 12px; padding: 1.5rem; }
+.case-before { background: rgba(200,125,90,0.07); border: 1px solid rgba(200,125,90,0.18); }
+.case-after { background: #f0f8ec; border: 1px solid rgba(121,179,27,0.15); }
+.case-block h4 { font-size: 0.82rem; font-weight: 700; letter-spacing: 0.1em; margin-bottom: 1rem; text-transform: uppercase; }
+.case-before h4 { color: var(--color-brand-warm); }
+.case-after h4 { color: var(--color-brand-accent); }
+.case-block ul { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+.case-block li { font-size: 0.86rem; color: var(--color-text-sub); line-height: 1.7; padding-left: 1.1rem; position: relative; }
+.case-before li::before { content: ""; position: absolute; left: 0; color: var(--color-brand-warm); font-size: 0.68rem; top: 0.28rem; }
+.case-after li::before { content: ""; position: absolute; left: 0; color: var(--color-brand-accent); font-size: 0.72rem; top: 0.22rem; }
+.case-arrow { font-size: 1.8rem; color: var(--color-brand-primary); display: flex; align-items: center; justify-content: center; padding-top: 2rem; font-weight: 700; }
+.case-voices { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem; }
+.voice-card { background: var(--color-bg-body); border-radius: 12px; padding: 1.5rem; border: 1px solid rgba(0,0,0,0.04); }
+.voice-icon { font-size: 1.4rem; margin-bottom: 0.7rem; }
+.voice-card blockquote { font-size: 0.88rem; color: var(--color-text-sub); line-height: 1.85; font-style: italic; margin-bottom: 0.7rem; }
+.voice-card cite { font-size: 0.78rem; font-weight: 700; color: var(--color-brand-primary); font-style: normal; }
+.case-result {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  background: linear-gradient(135deg, rgba(26,107,104,0.06), rgba(121,179,27,0.06));
+  border-radius: 12px;
+  padding: 1.5rem 2rem;
+  text-align: center;
+}
+.result-icon { font-size: 1.8rem; }
+.case-result p { font-size: 0.95rem; color: var(--color-text-sub); line-height: 1.8; }
+
+/* ===== Service Steps ===== */
+.service-steps { display: flex; flex-direction: column; gap: 0; max-width: 800px; margin: 0 auto; }
+.service-step {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 2rem;
+  background: #fff;
+  border-radius: 16px;
+  padding: 2rem 2.5rem;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(0,0,0,0.05);
+}
+.service-step--accent { border-color: rgba(26,107,104,0.2); background: linear-gradient(135deg, rgba(26,107,104,0.05), #fff); }
+.step-head { display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 0.5rem; padding-top: 0.25rem; }
+.step-phase {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--color-brand-primary);
+  background: rgba(26,107,104,0.08);
+  padding: 0.22rem 0.6rem;
+  border-radius: 99px;
+  white-space: nowrap;
+}
+.step-number { font-size: 2.5rem; font-weight: 800; color: rgba(26,107,104,0.14); font-family: var(--font-family-serif); line-height: 1; }
+.step-body h3 { font-size: 1.1rem; margin-bottom: 0.7rem; }
+.step-body h3 span { font-size: 0.76rem; font-weight: 600; color: var(--color-brand-primary); margin-left: 0.5rem; font-family: var(--font-family-base); }
+.step-body p { font-size: 0.9rem; color: var(--color-text-sub); line-height: 1.85; margin-bottom: 1.1rem; }
+.step-list { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
+.step-list li { font-size: 0.83rem; color: var(--color-text-muted); padding-left: 1.1rem; position: relative; }
+.step-list li::before { content: ""; position: absolute; left: 0; color: var(--color-brand-primary); font-size: 0.72rem; top: 0.15rem; }
+.step-connector { text-align: center; font-size: 1.4rem; color: var(--color-brand-primary); padding: 0.4rem 0; opacity: 0.35; }
+
+/* ===== Partner ===== */
+.partner-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem; }
+.partner-card {
+  display: flex;
+  gap: 1.5rem;
+  background: #fff;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(0,0,0,0.05);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.partner-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+.partner-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--gradient-brand);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  font-family: var(--font-family-serif);
+  overflow: hidden;
+}
+.partner-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.partner-info {}
+.partner-name { font-size: 1rem; font-weight: 700; margin-bottom: 0.15rem; }
+.partner-link { color: inherit; text-decoration: underline; text-decoration-color: var(--color-brand-primary); text-underline-offset: 3px; }
+.partner-link:hover { color: var(--color-brand-primary); }
+.partner-role { font-size: 0.78rem; font-weight: 700; color: var(--color-brand-primary); margin-bottom: 0.08rem; }
+.partner-former { font-size: 0.76rem; color: var(--color-text-muted); margin-bottom: 0.7rem; }
+.partner-desc { font-size: 0.86rem; color: var(--color-text-sub); line-height: 1.8; }
+.partner-message {
+  text-align: center;
+  background: var(--color-bg-muted);
+  border-radius: 12px;
+  padding: 1.4rem;
+  font-size: 0.92rem;
+  color: var(--color-text-sub);
+  font-weight: 600;
+}
+/* Coming Soon パートナーカード */
+.partner-card--soon {
+  opacity: 0.7;
+  border-style: dashed;
+  border-color: rgba(0,0,0,0.12);
+  background: var(--color-bg-warm);
+  pointer-events: none;
+}
+.partner-avatar--soon {
+  background: rgba(0,0,0,0.1);
+  color: var(--color-text-muted);
+}
+.partner-coming-soon {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  background: rgba(0,0,0,0.06);
+  color: var(--color-text-muted);
+  border-radius: 99px;
+  padding: 0.22rem 0.75rem;
+  border: 1px solid rgba(0,0,0,0.1);
+  margin-bottom: 0.6rem;
+  text-transform: uppercase;
+}
+
+/* ===== Other Cases ===== */
+.other-cases {
+  margin-top: 3rem;
+}
+.other-cases-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-text-sub);
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--color-bg-muted);
+}
+.other-cases-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+.other-case-card {
+  background: var(--color-bg-body);
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 1px solid rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.other-case-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-sm);
+}
+.other-case-industry {
+  display: inline-block;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--color-brand-primary);
+  background: rgba(26,107,104,0.08);
+  border-radius: 99px;
+  padding: 0.18rem 0.65rem;
+  border: 1px solid rgba(26,107,104,0.12);
+  align-self: flex-start;
+}
+.other-case-card h4 {
+  font-size: 0.9rem;
+  font-weight: 700;
+  line-height: 1.5;
+  color: var(--color-text-main);
+  margin: 0;
+}
+.other-case-card > p {
+  font-size: 0.82rem;
+  color: var(--color-text-sub);
+  line-height: 1.8;
+  margin: 0;
+}
+.other-case-results {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  flex: 1;
+}
+.other-case-results li {
+  font-size: 0.78rem;
+  color: var(--color-text-sub);
+  padding-left: 1rem;
+  position: relative;
+  line-height: 1.6;
+}
+.other-case-results li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  color: var(--color-brand-accent);
+  font-size: 0.65rem;
+  top: 0.22rem;
+}
+.other-case-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: auto;
+  padding-top: 0.3rem;
+}
+.other-case-tags span {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  background: var(--color-bg-muted);
+  border-radius: 4px;
+  padding: 0.12rem 0.5rem;
+}
+
+/* ===== CTA Section ===== */
+.cta-section { background: var(--gradient-brand); padding: 6rem 0; }
+.cta-wrap { text-align: center; max-width: 600px; margin: 0 auto; }
+.cta-title { font-size: clamp(1.4rem, 3.2vw, 2rem); color: #fff; margin-bottom: 1.2rem; line-height: 1.4; }
+.cta-lead { font-size: 1.02rem; color: rgba(255,255,255,0.85); margin-bottom: 2.5rem; line-height: 1.8; }
+.cta-btn { font-size: 1.1rem; padding: 1.1rem 3rem; }
+.cta-actions { margin-bottom: 0.5rem; }
+.cta-notes { margin-top: 2rem; display: flex; flex-direction: column; gap: 0.45rem; }
+.cta-notes p { font-size: 0.83rem; color: rgba(255,255,255,0.72); }
+
+/* ===== About: Profile + Business 2-col ===== */
+.about-profile-biz-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3.5rem;
+  align-items: start;
+}
+.about-profile-col { display: flex; flex-direction: column; gap: 1rem; }
+.about-biz-col { display: flex; flex-direction: column; gap: 0; }
+/* 2カラム: 左写真・右プロフィール */
+.about-profile-2col {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  gap: 3rem;
+  align-items: start;
+}
+.about-photo-wrap {
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  aspect-ratio: 3 / 4;
+  background: var(--color-bg-muted);
+  border: 3px solid rgba(26,107,104,0.12);
+}
+.about-photo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  transition: transform 0.4s ease;
+}
+.about-photo-wrap:hover .about-photo-img { transform: scale(1.03); }
+.about-info-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding-top: 0.5rem;
+}
+.about-intro-name {
+  font-size: clamp(1.3rem, 2.2vw, 1.7rem);
+  font-family: var(--font-family-serif);
+  margin: 0 0 0.15rem;
+  line-height: 1.2;
+}
+.about-intro-role {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--color-brand-primary);
+  margin: 0;
+}
+.about-intro-lead {
+  font-size: 0.92rem;
+  color: var(--color-text-sub);
+  line-height: 1.9;
+  margin: 0;
+}
+.about-intro-certs { display: flex; flex-wrap: wrap; gap: 0.35rem; align-items: center; }
+.cert-hint { font-size: 0.68rem; color: #9ca3af; margin: 0; width: 100%; }
+.cert-tag {
+  font-size: 0.73rem;
+  font-weight: 600;
+  padding: 0.22rem 0.7rem;
+  border-radius: 99px;
+  background: var(--color-bg-muted);
+  color: var(--color-text-sub);
+  border: 1px solid rgba(0,0,0,0.06);
+}
+.cert-tag--primary {
+  background: rgba(26,107,104,0.08);
+  color: var(--color-brand-primary);
+  border-color: rgba(26,107,104,0.18);
+  font-weight: 700;
+}
+.cert-tag {
+  cursor: pointer;
+  transition: background 0.15s, box-shadow 0.15s;
+}
+.cert-tag:hover {
+  box-shadow: var(--shadow-sm);
+  background: rgba(26,107,104,0.12);
+}
+
+/* ===== About Story / Biz Full ===== */
+.about-story-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.about-story-col .section-title {
+  font-size: 1.4rem;
+  margin-bottom: 0;
+}
+.about-biz-full {}
+.about-biz-full .info-dl {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem 2.5rem;
+}
+.info-row--col3 { grid-row: span 2; }
+.biz-service-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 0.75rem;
+}
+.biz-service-card {
+  padding: 0.25rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.biz-service-card:hover {}
+.biz-service-title {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+  line-height: 1.65;
+  margin: 0;
+}
+.biz-service-sub {
+  font-size: 0.77rem;
+  color: var(--color-text-muted);
+  line-height: 1.7;
+  margin: 0;
+}
+@media (max-width: 768px) {
+  .about-biz-full .info-dl { grid-template-columns: 1fr; }
+  .info-row--col3 { grid-row: auto; }
+}
+
+
+/* ===== Cert Modal ===== */
+.cert-modal-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  z-index: 9000;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+.cert-modal-backdrop.is-open {
+  display: flex;
+}
+.cert-modal {
+  position: relative;
+  background: #fff;
+  border-radius: 16px;
+  padding: 2.5rem;
+  max-width: 480px;
+  width: 100%;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+  animation: modalIn 0.2s ease;
+}
+@keyframes modalIn {
+  from { opacity: 0; transform: translateY(12px) scale(0.97); }
+  to   { opacity: 1; transform: none; }
+}
+.cert-modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid rgba(0,0,0,0.1);
+  background: var(--color-bg-muted);
+  cursor: pointer;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+}
+.cert-modal-close:hover { background: rgba(0,0,0,0.1); }
+.cert-modal-level-wrap { margin-bottom: 0.75rem; }
+.cert-modal-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+  line-height: 1.4;
+  margin-bottom: 1rem;
+}
+.cert-modal-desc {
+  font-size: 0.9rem;
+  color: var(--color-text-sub);
+  line-height: 1.9;
+  margin: 0;
+}
+
+/* ===== Client Record (伴走実績) ===== */
+.client-record {
+  margin-top: 2.5rem;
+  padding-top: 2.5rem;
+  border-top: 2px solid var(--color-bg-muted);
+}
+.client-record-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-text-sub);
+  margin-bottom: 1.25rem;
+}
+.client-record-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 0.8rem;
+}
+.client-record-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  color: var(--color-text-sub);
+  background: var(--color-bg-body);
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 99px;
+  padding: 0.35rem 0.95rem;
+  line-height: 1.4;
+  transition: box-shadow 0.2s;
+}
+.client-record-item--linked {
+  color: var(--color-brand-primary);
+  font-weight: 600;
+  border-color: rgba(26,107,104,0.2);
+  background: rgba(26,107,104,0.04);
+}
+.client-record-item--linked:hover { box-shadow: var(--shadow-sm); text-decoration: none; }
+.client-record-badge {
+  font-size: 0.65rem;
+  background: var(--color-brand-primary);
+  color: #fff;
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.client-record-note {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+  margin: 0;
+}
+
+/* ===== Seminar note (compact) ===== */
+.seminar-note {
+  margin-top: 1.75rem;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  line-height: 1.8;
+}
+.seminar-note-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--color-brand-primary);
+  background: rgba(26,107,104,0.07);
+  border-radius: 99px;
+  padding: 0.15rem 0.6rem;
+  margin-right: 0.6rem;
+  vertical-align: middle;
+}
+
+/* ===== Career list simple ===== */
+.career-list-simple { display: flex; flex-direction: column; gap: 0; }
+.career-list-item {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 1.25rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  align-items: baseline;
+}
+.career-list-item:first-child { padding-top: 0; }
+.career-list-item:last-child { border-bottom: none; padding-bottom: 0; }
+.career-list-item--highlight .career-list-text {
+  font-weight: 700;
+  color: var(--color-brand-primary);
+}
+.career-list-period {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-brand-primary);
+  background: rgba(26,107,104,0.07);
+  border-radius: 99px;
+  padding: 0.18rem 0.6rem;
+  text-align: center;
+  white-space: nowrap;
+}
+.career-list-text { font-size: 0.9rem; color: var(--color-text-sub); line-height: 1.7; }
+
+/* ===== Profile Section ===== */
+.profile-message-bar {
+  background: linear-gradient(135deg, rgba(26,107,104,0.06), rgba(121,179,27,0.05));
+  border-left: 4px solid var(--color-brand-primary);
+  border-radius: 0 12px 12px 0;
+  padding: 1.25rem 2rem;
+}
+.profile-message-bar p { font-size: 1.05rem; font-weight: 700; color: var(--color-text-main); line-height: 1.7; }
+.profile-divider {
+  border: none;
+  border-top: 1px dashed rgba(0,0,0,0.1);
+  margin: 2.5rem 0;
+}
+.content-heading {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-brand-primary);
+  letter-spacing: 0.06em;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.content-heading::before {
+  content: '';
+  display: inline-block;
+  width: 4px;
+  height: 1em;
+  background: var(--color-brand-primary);
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+/* ===== Career Timeline ===== */
+.career-timeline { display: flex; flex-direction: column; }
+.career-item {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 1.5rem;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+.career-item:first-child { padding-top: 0; }
+.career-item:last-child { border-bottom: none; padding-bottom: 0; }
+.career-item--highlight .career-body {
+  background: linear-gradient(135deg, rgba(26,107,104,0.04), rgba(121,179,27,0.04));
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  margin: -0.85rem -1rem;
+}
+.career-period {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--color-brand-primary);
+  background: rgba(26,107,104,0.07);
+  border-radius: 99px;
+  padding: 0.22rem 0.7rem;
+  height: fit-content;
+  text-align: center;
+  white-space: nowrap;
+  align-self: flex-start;
+  margin-top: 0.1rem;
+}
+.career-body h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.35rem; color: var(--color-text-main); }
+.career-body p { font-size: 0.85rem; color: var(--color-text-sub); line-height: 1.85; margin: 0; }
+
+/* ===== Expertise Grid ===== */
+.expertise-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+.expertise-item {
+  display: flex;
+  gap: 0.85rem;
+  align-items: flex-start;
+  background: #fff;
+  border-radius: 10px;
+  padding: 1.1rem;
+  border: 1px solid rgba(0,0,0,0.05);
+  transition: box-shadow 0.2s;
+}
+.expertise-item:hover { box-shadow: var(--shadow-sm); }
+.expertise-icon-wrap { font-size: 1.4rem; flex-shrink: 0; line-height: 1; }
+.expertise-text h4 { font-size: 0.88rem; font-weight: 700; margin-bottom: 0.3rem; color: var(--color-text-main); }
+.expertise-text p { font-size: 0.78rem; color: var(--color-text-muted); line-height: 1.75; margin: 0; }
+
+/* ===== Cert Detail Grid ===== */
+.cert-detail-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
+.cert-detail-item {
+  background: #fff;
+  border-radius: 10px;
+  padding: 1.25rem 1.4rem;
+  border: 1px solid rgba(0,0,0,0.05);
+}
+.cert-detail-header { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.65rem; flex-wrap: wrap; }
+.cert-detail-header h4 { font-size: 0.95rem; font-weight: 700; margin: 0; color: var(--color-text-main); }
+.cert-level {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 0.15rem 0.55rem;
+  border-radius: 3px;
+  background: rgba(0,0,0,0.06);
+  color: var(--color-text-muted);
+  border: 1px solid rgba(0,0,0,0.08);
+  white-space: nowrap;
+}
+.cert-level--national { background: rgba(26,107,104,0.1); color: var(--color-brand-primary); border-color: rgba(26,107,104,0.2); }
+.cert-level--gov { background: rgba(121,179,27,0.1); color: var(--color-brand-accent); border-color: rgba(121,179,27,0.2); }
+.cert-detail-item > p { font-size: 0.83rem; color: var(--color-text-sub); line-height: 1.85; margin: 0; }
+
+/* ===== About Page - Creed / Story ===== */
+.about-profile-col .creed-list { display: flex; flex-direction: column; gap: 0.6rem; }
+.about-profile-col .creed-item {
+  font-size: 0.97rem;
+  font-weight: 700;
+  color: var(--color-text-main);
+  line-height: 1.7;
+  padding: 1rem 1.25rem;
+  background: var(--color-bg-warm);
+  border-radius: 10px;
+  border-left: 3px solid var(--color-brand-primary);
+  box-shadow: var(--shadow-sm);
+}
+.story-inline {
+  border-top: 1px solid rgba(26,107,104,0.15);
+  padding-top: 1.5rem;
+  margin-top: 0.5rem;
+}
+.story-inline > .story-title { margin-top: 0; }
+.story-title { font-size: 1.05rem; color: var(--color-brand-primary); margin-bottom: 1.25rem; padding-left: 1rem; border-left: 4px solid var(--color-brand-primary); line-height: 1.5; }
+.story-body p { font-size: 0.92rem; color: var(--color-text-sub); line-height: 2; margin-bottom: 1rem; text-align: justify; }
+.story-body p:last-child { margin-bottom: 0; }
+
+/* ===== Business ===== */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+.about-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 2.5rem;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(0,0,0,0.05);
+}
+.about-card-heading {
+  font-size: 1rem;
+  color: var(--color-brand-primary);
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 2px solid rgba(26,107,104,0.15);
+  display: inline-block;
+  font-family: var(--font-family-serif);
+}
+.info-dl { display: flex; flex-direction: column; gap: 1.1rem; }
+.info-row { border-bottom: 1px dashed rgba(0,0,0,0.08); padding-bottom: 1rem; }
+.info-row:last-child { border-bottom: none; padding-bottom: 0; }
+.info-row dt { font-size: 0.8rem; font-weight: 700; color: var(--color-brand-primary); margin-bottom: 0.25rem; }
+.info-row dd { font-size: 0.9rem; color: var(--color-text-sub); line-height: 1.8; }
+.info-row ul { list-style: disc; padding-left: 1.2rem; }
+.info-row li { margin-bottom: 0.2rem; }
+.client-list { list-style: none; }
+.client-list li { padding: 0.55rem 0; border-bottom: 1px solid rgba(0,0,0,0.05); font-size: 0.9rem; color: var(--color-text-sub); }
+.client-list li:last-child { border-bottom: none; }
+.client-link { color: var(--color-brand-primary); font-weight: 600; display: flex; align-items: center; gap: 0.5rem; }
+.client-link:hover { text-decoration: underline; }
+.badge { font-size: 0.68rem; background: var(--color-brand-primary); color: #fff; padding: 2px 6px; border-radius: 3px; font-weight: 600; }
+.client-note { font-size: 0.82rem; color: var(--color-text-muted); font-style: italic; }
+
+/* ===== Seminar ===== */
+.seminar-list { display: flex; flex-direction: column; gap: 1rem; max-width: 700px; }
+.seminar-item {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 1.5rem;
+  padding: 1.25rem;
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid rgba(0,0,0,0.05);
+  box-shadow: var(--shadow-sm);
+}
+.seminar-date { font-weight: 700; color: var(--color-brand-primary); font-size: 0.85rem; }
+.seminar-body h4 { font-size: 0.95rem; margin-bottom: 0.25rem; }
+.seminar-body p { font-size: 0.85rem; color: var(--color-text-muted); }
+
+/* ===== Responsive ===== */
+@media (max-width: 1024px) {
+  .hero-content { grid-template-columns: 1fr; gap: 2rem; }
+  .hero-image-wrap { max-width: 520px; margin: 0 auto; }
+  .creed-list { grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+  .expertise-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+  .section { padding: 1rem 0; }
+  .creed-section { padding: 1rem 0; }
+  .hero { padding: 4rem 0; min-height: 60vh; }
+  .hero-title { margin-bottom: 0; }
+  .hero-lead { margin-bottom: 1.4rem; }
+  .hero-actions { flex-direction: column; }
+  .hero-actions > a { flex: none; width: 100%; }
+  .hero-logo { width: 88px; height: 88px; border-radius: 16px; }
+  .hero-image-badge { bottom: -0.5rem; left: 0; padding: 0.6rem 0.9rem; }
+  .hero-image-badge-num { font-size: 1.2rem; }
+  .creed-list { grid-template-columns: 1fr; }
+  .creed-item { max-width: 100%; }
+  .problem-message { padding: 1.25rem 1rem; }
+  .problem-grid { grid-template-columns: 1fr; }
+  .solution-grid { grid-template-columns: 1fr; }
+  .philosophy-wrap { grid-template-columns: 1fr; gap: 2rem; }
+  .case-wrap { padding: 2rem 1.25rem; }
+  .case-header { flex-direction: column; align-items: flex-start; }
+  .case-header-photos { width: 100%; justify-content: flex-start; }
+  .case-header-photo { width: calc((100% - 1.5rem) / 3); max-width: none; }
+  .case-flow { grid-template-columns: 1fr; gap: 1rem; }
+  .case-arrow { transform: rotate(90deg); padding: 0; justify-content: center; }
+  .case-voices { grid-template-columns: 1fr; }
+  .service-step { grid-template-columns: 1fr; gap: 0.75rem; }
+  .step-head { flex-direction: row; align-items: center; }
+  .career-list-item { grid-template-columns: 1fr; gap: 0.3rem; }
+  .career-list-period { width: fit-content; }
+  .about-profile-biz-wrap { grid-template-columns: 1fr; gap: 2rem; }
+  .about-profile-2col { grid-template-columns: 1fr; gap: 2rem; }
+  .about-photo-wrap { aspect-ratio: 4 / 3; width: 50%; margin: 0 auto; }
+  .about-intro-certs { justify-content: center; }
+  .partner-grid { grid-template-columns: 1fr; }
+  .partner-card { flex-direction: column; }
+  .other-cases-grid { grid-template-columns: 1fr; }
+  .career-item { grid-template-columns: 1fr; gap: 0.4rem; }
+  .career-period { width: fit-content; }
+  .expertise-grid { grid-template-columns: 1fr; }
+  .cert-detail-grid { grid-template-columns: 1fr; }
+  .two-col { grid-template-columns: 1fr; }
+  .seminar-item { grid-template-columns: 1fr; gap: 0.5rem; }
+}
+
+@media (max-width: 430px) {
+  .section { padding: 1rem 0; }
+  .creed-section { padding: 1rem 0; }
+  .news-strip-item {
+    align-items: flex-start;
+    gap: 0.35rem;
+  }
+
+  .news-strip-date {
+    font-size: 0.72rem;
+  }
+
+  .news-strip-title {
+    font-size: 0.86rem;
+    line-height: 1.45;
+  }
+
+  .hero {
+    padding: 2rem 0;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.7rem;
+    padding: 0.3rem 0.75rem;
+    margin-bottom: 0.9rem;
+  }
+
+  .hero-title {
+    font-size: 1.6rem;
+    line-height: 1.35;
+  }
+
+  .hero-lead {
+    font-size: 0.95rem;
+    line-height: 1.75;
+  }
+
+  .btn-accent,
+  .btn-secondary {
+    width: 100%;
+    padding: 0.9rem 1rem;
+    font-size: 0.95rem;
+  }
+
+  .case-wrap {
+    padding: 1.5rem 0.95rem;
+  }
+
+  .case-company {
+    font-size: 1.15rem;
+  }
+
+  .case-result {
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem;
+  }
+
+  .other-case-card {
+    padding: 1.15rem;
+  }
+
+  .profile-message-bar {
+    padding: 1rem 0.9rem;
+  }
+
+  .profile-message-bar p {
+    font-size: 0.95rem;
+  }
+
+  .about-photo-wrap {
+    aspect-ratio: 3 / 4;
+  }
+}
+</style>

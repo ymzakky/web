@@ -1,0 +1,592 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="PDF請求書のAI自動読取・記帳システム"
+  description="請求書PDFをフォルダに入れるだけ。AIが読み取り・記帳・整理を全自動化します。電子帳簿保存法・インボイス制度にも自動対応。"
+>
+  <div class="tools-article">
+    <div class="article-area">
+
+      <!-- パンくず -->
+      <nav class="breadcrumb">
+        <a href="/">ホーム</a> / <a href="/tools">ツール紹介</a> / PDF請求書AI自動記帳
+      </nav>
+
+      <!-- 日付・タグ -->
+      <p class="article-date">2026.03</p>
+      <div class="article-tags">
+        <span>#構築実績</span>
+        <span>#経理・会計</span>
+        <span>#文書管理</span>
+        <span>#業務自動化</span>
+        <span>#AI活用</span>
+        <span>#電子帳簿保存法</span>
+        <span>#インボイス制度</span>
+      </div>
+
+      <!-- アイキャッチ -->
+      <figure class="eyecatch">
+        <img src="/assets/images/case-study-invoice-eyecatch.svg" alt="PDFをフォルダに入れるだけで、AIが読み取りから記帳まで自動化するシステムのフロー図"/>
+        <figcaption>PDFをフォルダに入れるだけで、AIが読み取りから記帳まで自動化するシステムです。</figcaption>
+      </figure>
+
+      <!-- タイトル -->
+      <h1>請求書PDFをフォルダに入れるだけ。<br>AIが読み取り・記帳・整理を全自動化</h1>
+
+      <!-- メタカード -->
+      <div class="meta-card">
+        <div class="meta-card-title">CASE STUDY OVERVIEW</div>
+        <div class="meta-grid">
+          <div class="meta-item">
+            <div class="meta-item-label">タイトル</div>
+            <div class="meta-item-value">PDF請求書のAI自動読取・記帳システム</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-item-label">想定読者</div>
+            <div class="meta-item-value">請求書の整理・記帳に時間を取られている経理担当者や事業主の方</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-item-label">対象課題</div>
+            <div class="meta-item-value">PDF請求書の手作業での読み取り・ファイル名変更・台帳入力の負担</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-item-label">得られる効果</div>
+            <div class="meta-item-value">請求書の整理・記帳作業がほぼゼロになり、電子帳簿保存法にも自動で対応</div>
+          </div>
+          <div class="meta-item full">
+            <div class="meta-item-label">技術タグ</div>
+            <div class="tech-tags">
+              <span>Google Apps Script</span>
+              <span>Google Workspace</span>
+              <span>Google Drive</span>
+              <span>Google Sheets</span>
+              <span>Claude Vision API</span>
+              <span>経理・会計業務</span>
+              <span>電子帳簿保存法対応</span>
+              <span>インボイス制度対応</span>
+              <span>開発費：5〜10万円規模</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 共感パート -->
+      <h2>「請求書の整理、また今月も後回し…」<br>そのお悩み、解決できます</h2>
+
+      <p>毎月、取引先から届くPDFの請求書。「これ、いつの請求だったっけ？」「ファイル名、もう少しわかりやすくしておけばよかった…」「台帳に入力するの、忘れてた」——そんな経験はありませんか？</p>
+
+      <p>特に2024年1月からの電子帳簿保存法（電子的に受け取った書類の保存に関する法律）の完全義務化や、インボイス制度（適格請求書登録番号の記録が必要な制度）への対応も加わり、「ちゃんと整理しなきゃ」と思いながらも手が回らない…という方が増えています。</p>
+
+      <p>このツールは、そんな「請求書まわりの地味な作業」をまるごと自動化します。Google DriveのフォルダにPDFを入れるだけで、AIが中身を読み取り、ファイル名の変更から台帳への記帳まで、すべて自動で完了します。</p>
+
+      <!-- Before / After -->
+      <h2>Before / After</h2>
+      <div class="ba-grid">
+        <div class="ba-card before">
+          <h4>Before：手作業での管理</h4>
+          <ul class="ba-list">
+            <li>PDFを1件ずつ開いて、日付・金額・請求元を確認</li>
+            <li>ファイル名を手動で変更（ルールがバラバラになりがち）</li>
+            <li>スプレッドシートに1行ずつ手入力</li>
+            <li>登録番号の記録を忘れがち</li>
+            <li>勘定科目の判断に迷う</li>
+          </ul>
+        </div>
+        <div class="ba-card after">
+          <h4>After：フォルダに入れるだけ</h4>
+          <ul class="ba-list">
+            <li>AIがPDFの中身を自動読み取り</li>
+            <li>電帳法対応のファイル名に自動リネーム</li>
+            <li>17項目をスプレッドシートに自動記録</li>
+            <li>インボイス登録番号も自動抽出</li>
+            <li>勘定科目もAIが自動判定</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 仕組みの流れ -->
+      <h2>仕組みの流れ</h2>
+
+      <figure class="dataflow-figure">
+        <img src="/assets/images/case-study-invoice.svg" alt="データの流れ：PDF投入からClaude Vision解析を経てスプレッドシート記録・リネームするフロー図"/>
+        <figcaption>▲ PDF投入からAI解析・記帳・ファイル整理までの全体像</figcaption>
+      </figure>
+
+      <div class="flow-diagram">
+        <div class="flow-step">
+          <div class="flow-num">1</div>
+          <div class="flow-body">
+            <div class="flow-title">Google Drive のフォルダにPDFを入れる</div>
+            <div class="flow-desc">指定のフォルダに請求書や領収書のPDFを保存するだけ。Google ドキュメント形式にも対応しています。</div>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-num">2</div>
+          <div class="flow-body">
+            <div class="flow-title">5分ごとに自動で新しいファイルを検出</div>
+            <div class="flow-desc">システムが5分おきにフォルダをチェック。新しいファイルがあれば自動で処理を開始します。</div>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-num">3</div>
+          <div class="flow-body">
+            <div class="flow-title">AIが請求書の中身を読み取り</div>
+            <div class="flow-desc">Claude Vision（画像を理解できるAI）が、書類種別・請求日・請求元・金額・税額・インボイス登録番号などを自動で抽出。勘定科目も自動で判定します。</div>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-num">4</div>
+          <div class="flow-body">
+            <div class="flow-title">ファイル名を自動で整理</div>
+            <div class="flow-desc">「請求書_20260306_東京カラー印刷_33000」のように、電子帳簿保存法に対応したわかりやすい名前に自動リネームします。</div>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-num">5</div>
+          <div class="flow-body">
+            <div class="flow-title">スプレッドシートに自動記録＋メールでお知らせ</div>
+            <div class="flow-desc">読み取った情報をスプレッドシートに17項目自動入力。読み取れなかった項目があれば色付けで表示され、メールでもお知らせが届きます。</div>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-num">6</div>
+          <div class="flow-body">
+            <div class="flow-title">正常・異常フォルダに自動振分け</div>
+            <div class="flow-desc">必要な情報がすべて取得できたファイルは「正常」フォルダへ、不足があるファイルは「要確認」フォルダへ自動で移動します。</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 事業用・プライベート用の補足 -->
+      <h2>事業用とプライベート用、それぞれに対応</h2>
+
+      <p>このシステムは、事業用とプライベート用でそれぞれ別の設定を用意できます。事業用ではインボイス登録番号や勘定科目など9項目を必須チェックし、プライベート用では書類種別・日付・請求元・概要・税込金額の5項目に絞ってチェックします。</p>
+
+      <p>設定ファイルを差し替えるだけで切り替えられるので、事業規模や用途に合わせて柔軟に使えます。</p>
+
+      <!-- 得られる効果 -->
+      <h2>得られる効果</h2>
+      <div class="effect-grid">
+        <div class="effect-item">
+          <div class="effect-num">約0分</div>
+          <div class="effect-label">請求書の手入力時間</div>
+        </div>
+        <div class="effect-item">
+          <div class="effect-num">17項目</div>
+          <div class="effect-label">自動でスプレッドシートに記録</div>
+        </div>
+        <div class="effect-item">
+          <div class="effect-num">自動</div>
+          <div class="effect-label">電帳法・インボイス対応</div>
+        </div>
+        <div class="effect-item">
+          <div class="effect-num">即時</div>
+          <div class="effect-label">異常検出とメール通知</div>
+        </div>
+      </div>
+
+      <!-- 機材・環境の補足 -->
+      <div class="note-box">
+        <div class="note-box-title">利用に必要な環境</div>
+        <p>このシステムはGoogle Workspace（GmailやGoogle Driveを含むGoogleのクラウドサービス）の環境で動作します。無料のGoogleアカウントでも利用可能です。</p>
+        <p>AIの読み取りにはClaude API（Anthropic社のAIサービス）の利用料が別途かかりますが、請求書1件あたり数円程度と非常に低コストです。</p>
+      </div>
+
+      <!-- 技術的なポイント -->
+      <h2>技術的なポイント</h2>
+
+      <h3>PDFを直接AIに送信する仕組み</h3>
+      <p>従来のOCR（画像から文字を読み取る技術）とは異なり、このシステムではPDFをそのままAIに送信します。AIが書類のレイアウトごと理解するため、複雑な請求書でも高い精度で情報を抽出できます。</p>
+
+      <h3>勘定科目の自動判定</h3>
+      <p>「この請求書は通信費？消耗品費？」という悩みも、AIが請求内容から自動で判定します。判定に使う勘定科目のリスト（租税公課・旅費交通費・通信費など15種類）は、御社の業務に合わせてカスタマイズできます。</p>
+
+      <h3>読み取り精度の「見える化」</h3>
+      <p>AIの読み取りには、「高・中・低」の信頼度が付与されます。必須項目に不足があればスプレッドシート上でそのセルが色付けされるので、「どの請求書を確認すればいいか」がひと目でわかります。</p>
+
+      <!-- こんな方に向いています -->
+      <h2>こんな方に向いています</h2>
+
+      <p>毎月数十件の請求書を手作業で整理している方、電子帳簿保存法への対応が気になりながらも何から始めればいいか迷っている方、経理の専任担当を置くほどではないけれど整理はきちんとしたい方におすすめです。Google Driveをふだんからお使いであれば、導入もスムーズです。</p>
+
+      <p>一方で、月に数百件以上の大量処理が必要な場合や、会計ソフトとの連動が必須の場合は、別のアプローチのほうが合うこともあります。お気軽にご相談ください。</p>
+
+      <!-- CTA -->
+      <div class="cta-section">
+        <h2>「うちでも使える？」と思ったら</h2>
+        <p>請求書の整理方法や現在のお悩みをお聞かせください。<br>御社の状況に合わせた最適な方法をご提案します。</p>
+        <a href="/#contact" class="cta-btn">お問い合わせはこちら</a>
+      </div>
+
+      <!-- 戻るリンク -->
+      <div class="back-link">
+        <a href="/tools">← ツール紹介一覧へ戻る</a>
+      </div>
+
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  /* ===== ローカル変数（サイト変数にマッピング） ===== */
+  .tools-article {
+    --color-primary:       var(--color-brand-primary);
+    --color-primary-light: rgba(26,107,104,0.1);
+    --color-primary-dark:  var(--color-brand-primary-dark);
+    --color-accent:        var(--color-brand-warm);
+    --color-accent-light:  rgba(200,125,90,0.12);
+    --color-text:          var(--color-text-main);
+    --color-text-light:    var(--color-text-sub);
+    --color-bg:            var(--color-bg-body);
+    --color-white:         #ffffff;
+    --color-border:        rgba(0,0,0,0.11);
+    --color-tag-bg:        var(--color-bg-muted);
+    --max-width:           780px;
+    --radius:              8px;
+  }
+
+  /* ===== 記事エリア ===== */
+  .article-area {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 24px 20px 80px;
+  }
+
+  /* ===== パンくず ===== */
+  .breadcrumb {
+    font-size: 12.5px;
+    color: var(--color-text-light);
+    margin-bottom: 20px;
+  }
+  .breadcrumb a {
+    color: var(--color-text-light);
+    transition: color 0.2s;
+  }
+  .breadcrumb a:hover {
+    color: var(--color-primary);
+  }
+
+  /* ===== 日付・タグ ===== */
+  .article-date {
+    font-size: 13px;
+    color: var(--color-text-light);
+    margin-bottom: 8px;
+  }
+  .article-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 20px;
+  }
+  .article-tags span {
+    font-size: 12px;
+    background: var(--color-tag-bg);
+    padding: 3px 10px;
+    border-radius: 4px;
+    color: var(--color-text-light);
+  }
+
+  /* ===== アイキャッチ ===== */
+  .eyecatch {
+    margin: 0 0 36px;
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    background: var(--color-white);
+  }
+  .eyecatch img { width: 100%; height: auto; display: block; }
+  .eyecatch figcaption {
+    font-size: 12px;
+    color: var(--color-text-light);
+    padding: 8px 14px;
+    border-top: 1px solid var(--color-border);
+    background: var(--color-bg);
+  }
+
+  /* ===== 見出し ===== */
+  .tools-article h1 {
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1.5;
+    margin-bottom: 32px;
+    color: var(--color-text);
+  }
+  .tools-article h2 {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.5;
+    margin: 48px 0 20px;
+    padding-bottom: 8px;
+    border-bottom: 3px solid var(--color-primary);
+  }
+  .tools-article h3 {
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.5;
+    margin: 32px 0 12px;
+    padding-left: 14px;
+    border-left: 4px solid var(--color-accent);
+  }
+  .tools-article p { margin-bottom: 16px; }
+
+  /* ===== メタカード ===== */
+  .meta-card {
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 28px;
+    margin-bottom: 40px;
+  }
+  .meta-card-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--color-primary);
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    margin-bottom: 16px;
+  }
+  .meta-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .meta-item-label {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 4px;
+  }
+  .meta-item-value {
+    font-size: 14px;
+    color: var(--color-text-light);
+    line-height: 1.7;
+  }
+  .meta-item.full { grid-column: 1 / -1; }
+  .tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 8px;
+  }
+  .tech-tags span {
+    font-size: 11.5px;
+    font-weight: 500;
+    border: 1px solid var(--color-border);
+    padding: 2px 10px;
+    border-radius: 4px;
+    color: var(--color-text-light);
+  }
+
+  /* ===== Before/After ===== */
+  .ba-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .ba-card {
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 20px;
+  }
+  .ba-card.before { border-top: 4px solid #b0b0b0; }
+  .ba-card.after  { border-top: 4px solid var(--color-primary); }
+  .ba-card h4 {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .ba-card.before h4 { color: #888; }
+  .ba-card.after h4  { color: var(--color-primary); }
+  .ba-list { list-style: none; padding: 0; }
+  .ba-list li {
+    font-size: 14px;
+    padding: 4px 0 4px 24px;
+    position: relative;
+    line-height: 1.7;
+  }
+  .ba-card.before .ba-list li::before {
+    content: '\00D7';
+    position: absolute;
+    left: 4px;
+    color: #aaa;
+    font-weight: 700;
+  }
+  .ba-card.after .ba-list li::before {
+    content: '\2713';
+    position: absolute;
+    left: 2px;
+    color: var(--color-primary);
+    font-weight: 700;
+  }
+
+  /* ===== データフロー図 ===== */
+  .dataflow-figure {
+    margin: 20px 0 32px;
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    background: var(--color-white);
+  }
+  .dataflow-figure img { width: 100%; height: auto; display: block; }
+  .dataflow-figure figcaption {
+    font-size: 12.5px;
+    color: var(--color-text-light);
+    padding: 8px 14px;
+    border-top: 1px solid var(--color-border);
+    background: var(--color-bg);
+  }
+
+  /* ===== フロー図 ===== */
+  .flow-diagram { margin-bottom: 32px; }
+  .flow-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 4px;
+    position: relative;
+  }
+  .flow-step::after {
+    content: '';
+    position: absolute;
+    left: 17px;
+    top: 38px;
+    width: 2px;
+    height: calc(100% + 4px);
+    background: var(--color-primary-light);
+  }
+  .flow-step:last-child::after { display: none; }
+  .flow-num {
+    flex-shrink: 0;
+    width: 34px;
+    height: 34px;
+    background: var(--color-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 14px;
+    font-weight: 700;
+    position: relative;
+    z-index: 1;
+  }
+  .flow-body { padding-bottom: 20px; }
+  .flow-title {
+    font-size: 14.5px;
+    font-weight: 700;
+    margin-bottom: 2px;
+  }
+  .flow-desc {
+    font-size: 13.5px;
+    color: var(--color-text-light);
+  }
+
+  /* ===== 効果カード ===== */
+  .effect-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+  .effect-item {
+    background: var(--color-primary-light);
+    border-radius: var(--radius);
+    padding: 20px 16px;
+    text-align: center;
+  }
+  .effect-num {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 4px;
+  }
+  .effect-label {
+    font-size: 13.5px;
+    color: var(--color-text);
+  }
+
+  /* ===== ノートボックス ===== */
+  .note-box {
+    background: var(--color-accent-light);
+    border-left: 4px solid var(--color-accent);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 18px 20px;
+    margin: 24px 0;
+  }
+  .note-box-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--color-accent);
+    margin-bottom: 6px;
+  }
+  .note-box p {
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+  .note-box p:last-child { margin-bottom: 0; }
+
+  /* ===== CTAセクション ===== */
+  .cta-section {
+    background: var(--color-primary-light);
+    border-radius: var(--radius);
+    padding: 40px 24px;
+    text-align: center;
+    margin: 48px 0;
+  }
+  .cta-section h2 {
+    border: none;
+    margin: 0 0 12px;
+    padding: 0;
+    font-size: 20px;
+  }
+  .cta-section p {
+    font-size: 15px;
+    color: var(--color-text-light);
+    margin-bottom: 20px;
+  }
+  .cta-btn {
+    display: inline-block;
+    background: var(--color-primary);
+    color: white;
+    padding: 12px 36px;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .cta-btn:hover {
+    background: var(--color-primary-dark);
+    text-decoration: none;
+  }
+
+  /* ===== 戻るリンク ===== */
+  .back-link {
+    text-align: center;
+    margin: 32px 0;
+  }
+  .back-link a {
+    font-size: 14px;
+    color: var(--color-primary);
+  }
+
+  /* ===== モバイル ===== */
+  @media (max-width: 640px) {
+    .tools-article h1 { font-size: 21px; }
+    .ba-grid { grid-template-columns: 1fr; }
+    .effect-grid { grid-template-columns: 1fr; }
+    .meta-grid { grid-template-columns: 1fr; }
+    .eyecatch,
+    .dataflow-figure {
+      margin-left: -20px;
+      margin-right: -20px;
+      border-radius: 0;
+      border-left: none;
+      border-right: none;
+    }
+  }
+</style>
