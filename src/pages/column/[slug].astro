@@ -58,6 +58,12 @@ const formattedDate = entry.data.date.replace(/-/g, '.');
           <Content />
         </div>
 
+        <!-- お問い合わせ -->
+        <div class="column-cta">
+          <p class="column-cta-lead">ご相談・お問い合わせはお気軽にどうぞ。<br>ITの専門用語は不要です。現場の言葉でお聞かせください。</p>
+          <a href="https://forms.gle/iaMWnnnnWmsciXcv8" class="column-cta-btn" target="_blank" rel="noopener">個別相談を申し込む</a>
+        </div>
+
       </article>
 
       <!-- 戻るリンク -->
@@ -214,6 +220,34 @@ const formattedDate = entry.data.date.replace(/-/g, '.');
   font-size: 0.88rem;
 }
 
+/* お問い合わせCTA */
+.column-cta {
+  text-align: center;
+  padding: 2rem 3rem 2.5rem;
+  border-top: 1px dashed rgba(0,0,0,0.1);
+}
+.column-cta-lead {
+  font-size: 0.9rem;
+  color: var(--color-text-sub);
+  line-height: 1.8;
+  margin-bottom: 1.25rem;
+}
+.column-cta-btn {
+  display: inline-block;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #fff;
+  background: var(--color-brand-primary);
+  padding: 0.7rem 2rem;
+  border-radius: 99px;
+  text-decoration: none;
+  transition: opacity 0.15s, box-shadow 0.15s;
+}
+.column-cta-btn:hover {
+  opacity: 0.85;
+  box-shadow: var(--shadow-sm);
+}
+
 /* 戻るリンク */
 .column-back {
   text-align: center;
@@ -244,6 +278,7 @@ const formattedDate = entry.data.date.replace(/-/g, '.');
   .column-detail-wrap { padding: 2rem 0 4rem; }
   .column-article-header { padding: 1.75rem 1.5rem 1.5rem; }
   .column-article-body { padding: 1.75rem 1.5rem; }
+  .column-cta { padding: 1.75rem 1.5rem 2rem; }
 }
 
 @media (max-width: 430px) {
@@ -270,6 +305,10 @@ const formattedDate = entry.data.date.replace(/-/g, '.');
     padding: 1.25rem 1rem;
     font-size: 0.9rem;
     line-height: 1.9;
+  }
+
+  .column-cta {
+    padding: 1.25rem 1rem 1.75rem;
   }
 
   .column-article-body :global(h2) {
