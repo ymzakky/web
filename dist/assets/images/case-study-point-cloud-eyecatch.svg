@@ -1,0 +1,218 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+<defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0%" stop-color="#e8f3ed"/>
+    <stop offset="100%" stop-color="#f5f9f7"/>
+  </linearGradient>
+  <marker id="arrG" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto">
+    <path d="M0,0.5 L7,4 L0,7.5 Z" fill="#2a6041"/>
+  </marker>
+  <marker id="arrO" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto">
+    <path d="M0,0.5 L7,4 L0,7.5 Z" fill="#c87533"/>
+  </marker>
+</defs>
+<rect width="1200" height="630" fill="url(#bg)"/>
+<g>
+  <rect x="100" y="170" width="150" height="200" rx="10" fill="#ffffff" stroke="#c87533" stroke-width="2.5"/>
+  <path d="M 220 170 L 250 200 L 220 200 Z" fill="#fdf4ec" stroke="#c87533" stroke-width="2"/>
+  <rect x="100" y="170" width="150" height="32" rx="10" fill="#fdf4ec"/>
+  <rect x="100" y="190" width="150" height="12" fill="#fdf4ec"/>
+  <text x="175" y="191" text-anchor="middle" font-family='"Noto Sans CJK JP", "Noto Sans JP", sans-serif' font-size="13" font-weight="700" fill="#c87533">LAS 点群データ</text>
+  <polygon points="118,280 175,240 232,280 232,320 175,300 118,320" fill="none" stroke="#5a5a5a" stroke-width="0.8" opacity="0.4"/>
+  <circle cx="189.8" cy="252.1" r="0.9" fill="#2a6041" opacity="0.55"/>
+  <circle cx="145.7" cy="304.3" r="1.2" fill="#2a6041" opacity="0.55"/>
+  <circle cx="216.6" cy="273.6" r="1.0" fill="#2a6041" opacity="0.55"/>
+  <circle cx="125.2" cy="284.8" r="1.1" fill="#2a6041" opacity="0.55"/>
+  <circle cx="124.8" cy="284.1" r="1.2" fill="#2a6041" opacity="0.55"/>
+  <circle cx="179.8" cy="260.2" r="1.1" fill="#2a6041" opacity="0.55"/>
+  <circle cx="207.8" cy="263.4" r="1.3" fill="#2a6041" opacity="0.55"/>
+  <circle cx="196.0" cy="276.9" r="0.8" fill="#2a6041" opacity="0.55"/>
+  <circle cx="223.5" cy="289.5" r="0.8" fill="#2a6041" opacity="0.55"/>
+  <circle cx="132.3" cy="312.4" r="1.1" fill="#2a6041" opacity="0.55"/>
+  <circle cx="207.6" cy="304.6" r="1.1" fill="#2a6041" opacity="0.55"/>
+  <circle cx="225.2" cy="292.2" r="1.1" fill="#2a6041" opacity="0.55"/>
+  <circle cx="209.9" cy="298.8" r="1.3" fill="#2a6041" opacity="0.55"/>
+  <circle cx="183.2" cy="298.1" r="0.7" fill="#2a6041" opacity="0.55"/>
+  <circle cx="146.2" cy="277.5" r="0.8" fill="#2a6041" opacity="0.55"/>
+  <circle cx="146.7" cy="265.9" r="0.9" fill="#2a6041" opacity="0.55"/>
+  <circle cx="189.4" cy="275.6" r="1.0" fill="#2a6041" opacity="0.55"/>
+  <circle cx="144.2" cy="277.2" r="1.4" fill="#2a6041" opacity="0.55"/>
+  <circle cx="190.7" cy="293.0" r="0.8" fill="#2a6041" opacity="0.55"/>
+  <circle cx="199.3" cy="267.3" r="1.0" fill="#2a6041" opacity="0.55"/>
+  <circle cx="226.9" cy="304.3" r="1.1" fill="#2a6041" opacity="0.55"/>
+  <circle cx="194.6" cy="309.6" r="1.2" fill="#2a6041" opacity="0.55"/>
+  <circle cx="146.3" cy="262.1" r="0.9" fill="#2a6041" opacity="0.55"/>
+  <circle cx="150.4" cy="270.5" r="1.4" fill="#2a6041" opacity="0.55"/>
+  <circle cx="214.9" cy="284.4" r="1.2" fill="#2a6041" opacity="0.55"/>
+  <circle cx="163.9" cy="313.8" r="1.0" fill="#2a6041" opacity="0.55"/>
+  <circle cx="150.1" cy="272.9" r="1.1" fill="#2a6041" opacity="0.55"/>
+  <circle cx="149.9" cy="294.1" r="1.3" fill="#2a6041" opacity="0.55"/>
+  <circle cx="164.3" cy="263.4" r="1.4" fill="#2a6041" opacity="0.55"/>
+  <circle cx="176.0" cy="247.9" r="0.7" fill="#2a6041" opacity="0.55"/>
+  <circle cx="133.6" cy="301.0" r="1.3" fill="#2a6041" opacity="0.55"/>
+  <circle cx="166.7" cy="250.5" r="1.0" fill="#2a6041" opacity="0.55"/>
+  <circle cx="227.6" cy="299.7" r="1.4" fill="#2a6041" opacity="0.55"/>
+  <circle cx="213.2" cy="267.4" r="1.2" fill="#2a6041" opacity="0.55"/>
+  <circle cx="194.3" cy="289.2" r="0.9" fill="#2a6041" opacity="0.55"/>
+  <circle cx="189.9" cy="258.2" r="1.0" fill="#2a6041" opacity="0.55"/>
+  <circle cx="170.1" cy="316.5" r="1.3" fill="#2a6041" opacity="0.55"/>
+  <circle cx="149.9" cy="288.8" r="0.8" fill="#2a6041" opacity="0.55"/>
+  <circle cx="218.7" cy="313.6" r="0.9" fill="#2a6041" opacity="0.55"/>
+  <circle cx="189.7" cy="292.8" r="0.8" fill="#2a6041" opacity="0.55"/>
+  <circle cx="202.8" cy="292.1" r="1.2" fill="#2a6041" opacity="0.55"/>
+  <circle cx="178.2" cy="242.3" r="0.9" fill="#2a6041" opacity="0.55"/>
+  <circle cx="124.1" cy="316.9" r="1.3" fill="#2a6041" opacity="0.55"/>
+  <circle cx="210.2" cy="281.7" r="0.7" fill="#2a6041" opacity="0.55"/>
+  <circle cx="215.1" cy="317.2" r="0.8" fill="#2a6041" opacity="0.55"/>
+  <circle cx="173.5" cy="246.5" r="1.2" fill="#2a6041" opacity="0.55"/>
+  <circle cx="203.2" cy="267.5" r="1.0" fill="#2a6041" opacity="0.55"/>
+  <circle cx="180.3" cy="263.9" r="1.3" fill="#2a6041" opacity="0.55"/>
+  <circle cx="166.9" cy="261.5" r="1.1" fill="#2a6041" opacity="0.55"/>
+  <circle cx="199.4" cy="269.8" r="0.9" fill="#2a6041" opacity="0.55"/>
+  <circle cx="227.5" cy="304.9" r="1.0" fill="#2a6041" opacity="0.55"/>
+  <circle cx="176.9" cy="250.8" r="0.9" fill="#2a6041" opacity="0.55"/>
+  <circle cx="157.8" cy="292.0" r="0.9" fill="#2a6041" opacity="0.55"/>
+  <circle cx="145.3" cy="265.0" r="1.1" fill="#2a6041" opacity="0.55"/>
+  <circle cx="146.3" cy="314.3" r="1.3" fill="#2a6041" opacity="0.55"/>
+  <circle cx="129.5" cy="283.4" r="1.2" fill="#2a6041" opacity="0.55"/>
+  <circle cx="144.7" cy="269.0" r="1.4" fill="#2a6041" opacity="0.55"/>
+  <circle cx="182.5" cy="280.6" r="1.2" fill="#2a6041" opacity="0.55"/>
+  <circle cx="207.6" cy="273.8" r="0.8" fill="#2a6041" opacity="0.55"/>
+  <circle cx="167.7" cy="276.8" r="1.0" fill="#2a6041" opacity="0.55"/>
+  <circle cx="199.3" cy="299.4" r="1.4" fill="#2a6041" opacity="0.55"/>
+  <circle cx="132.4" cy="290.1" r="0.9" fill="#2a6041" opacity="0.55"/>
+  <circle cx="213.3" cy="280.1" r="0.8" fill="#2a6041" opacity="0.55"/>
+  <circle cx="169.6" cy="276.0" r="0.9" fill="#2a6041" opacity="0.55"/>
+  <circle cx="148.5" cy="315.3" r="1.0" fill="#2a6041" opacity="0.55"/>
+  <circle cx="213.3" cy="296.1" r="0.7" fill="#2a6041" opacity="0.55"/>
+  <circle cx="227.9" cy="313.0" r="1.4" fill="#2a6041" opacity="0.55"/>
+  <circle cx="220.2" cy="312.7" r="0.8" fill="#2a6041" opacity="0.55"/>
+  <circle cx="173.5" cy="257.9" r="1.0" fill="#2a6041" opacity="0.55"/>
+  <circle cx="128.2" cy="290.7" r="1.4" fill="#2a6041" opacity="0.55"/>
+  <circle cx="150.1" cy="306.5" r="1.0" fill="#2a6041" opacity="0.55"/>
+  <circle cx="166.8" cy="316.8" r="1.4" fill="#2a6041" opacity="0.55"/>
+  <circle cx="180.9" cy="298.6" r="0.8" fill="#2a6041" opacity="0.55"/>
+  <circle cx="153.5" cy="318.0" r="1.1" fill="#2a6041" opacity="0.55"/>
+  <circle cx="179.5" cy="300.6" r="0.7" fill="#2a6041" opacity="0.55"/>
+  <circle cx="183.9" cy="283.3" r="1.3" fill="#2a6041" opacity="0.55"/>
+  <circle cx="138.7" cy="317.9" r="0.8" fill="#2a6041" opacity="0.55"/>
+  <circle cx="141.7" cy="297.1" r="1.2" fill="#2a6041" opacity="0.55"/>
+  <circle cx="146.9" cy="266.9" r="1.3" fill="#2a6041" opacity="0.55"/>
+  <circle cx="148.1" cy="295.2" r="1.1" fill="#2a6041" opacity="0.55"/>
+  <circle cx="166.4" cy="289.2" r="1.1" fill="#2a6041" opacity="0.55"/>
+  <circle cx="221.1" cy="282.1" r="1.2" fill="#2a6041" opacity="0.55"/>
+  <circle cx="147.3" cy="283.4" r="1.2" fill="#2a6041" opacity="0.55"/>
+  <circle cx="153.8" cy="275.5" r="1.2" fill="#2a6041" opacity="0.55"/>
+  <circle cx="129.7" cy="293.9" r="1.4" fill="#2a6041" opacity="0.55"/>
+  <circle cx="227.6" cy="280.1" r="0.8" fill="#2a6041" opacity="0.55"/>
+  <circle cx="150.1" cy="315.8" r="1.3" fill="#2a6041" opacity="0.55"/>
+  <circle cx="215.2" cy="287.3" r="0.8" fill="#2a6041" opacity="0.55"/>
+  <circle cx="210.4" cy="303.6" r="1.1" fill="#2a6041" opacity="0.55"/>
+  <circle cx="226.6" cy="304.9" r="0.7" fill="#2a6041" opacity="0.55"/>
+  <circle cx="208.6" cy="280.5" r="1.2" fill="#2a6041" opacity="0.55"/>
+  <circle cx="221.5" cy="279.0" r="0.8" fill="#2a6041" opacity="0.55"/>
+  <circle cx="133.3" cy="297.3" r="0.9" fill="#2a6041" opacity="0.55"/>
+  <circle cx="186.1" cy="299.6" r="0.8" fill="#2a6041" opacity="0.55"/>
+  <circle cx="189.2" cy="268.5" r="1.0" fill="#2a6041" opacity="0.55"/>
+  <circle cx="218.0" cy="312.3" r="0.8" fill="#2a6041" opacity="0.55"/>
+  <circle cx="166.9" cy="266.2" r="0.7" fill="#2a6041" opacity="0.55"/>
+  <circle cx="203.7" cy="298.3" r="0.9" fill="#2a6041" opacity="0.55"/>
+  <circle cx="200.6" cy="292.2" r="1.0" fill="#2a6041" opacity="0.55"/>
+  <circle cx="123.0" cy="279.7" r="1.3" fill="#2a6041" opacity="0.55"/>
+  <circle cx="217.8" cy="297.3" r="1.3" fill="#2a6041" opacity="0.55"/>
+  <circle cx="183.7" cy="257.1" r="0.8" fill="#2a6041" opacity="0.55"/>
+  <circle cx="154.7" cy="313.4" r="1.3" fill="#2a6041" opacity="0.55"/>
+  <circle cx="213.2" cy="314.6" r="0.8" fill="#2a6041" opacity="0.55"/>
+  <circle cx="148.5" cy="264.9" r="1.2" fill="#2a6041" opacity="0.55"/>
+  <circle cx="215.7" cy="289.5" r="1.1" fill="#2a6041" opacity="0.55"/>
+  <circle cx="138.4" cy="316.2" r="1.3" fill="#2a6041" opacity="0.55"/>
+  <circle cx="225.5" cy="311.6" r="1.3" fill="#2a6041" opacity="0.55"/>
+  <circle cx="124.6" cy="308.2" r="0.9" fill="#2a6041" opacity="0.55"/>
+  <circle cx="220.7" cy="310.5" r="1.3" fill="#2a6041" opacity="0.55"/>
+  <circle cx="207.9" cy="278.3" r="1.3" fill="#2a6041" opacity="0.55"/>
+  <circle cx="133.5" cy="313.5" r="1.3" fill="#2a6041" opacity="0.55"/>
+  <circle cx="145.6" cy="309.1" r="1.0" fill="#2a6041" opacity="0.55"/>
+  <circle cx="154.4" cy="306.6" r="0.9" fill="#2a6041" opacity="0.55"/>
+  <circle cx="124.5" cy="284.0" r="0.9" fill="#2a6041" opacity="0.55"/>
+  <circle cx="213.6" cy="318.2" r="0.9" fill="#2a6041" opacity="0.55"/>
+  <circle cx="190.0" cy="278.3" r="1.4" fill="#2a6041" opacity="0.55"/>
+  <circle cx="178.8" cy="315.3" r="0.8" fill="#2a6041" opacity="0.55"/>
+  <circle cx="224.9" cy="283.0" r="1.4" fill="#2a6041" opacity="0.55"/>
+  <circle cx="150.1" cy="264.2" r="1.0" fill="#2a6041" opacity="0.55"/>
+  <text x="175" y="350" text-anchor="middle" font-family='"Noto Sans CJK JP", "Noto Sans JP", sans-serif' font-size="13" fill="#2c2c2c">1棟分に切り出し済み</text>
+  <text x="175" y="396" text-anchor="middle" font-family='"Noto Sans CJK JP", "Noto Sans JP", sans-serif' font-size="13" fill="#5a5a5a">入力</text>
+  <rect x="92" y="412" width="166" height="34" rx="17" fill="#c87533"/>
+  <text x="175" y="434" text-anchor="middle" font-family='"Noto Sans CJK JP", "Noto Sans JP", sans-serif' font-size="13" font-weight="700" fill="#ffffff">東京都デジタルツイン</text>
+</g>
+<line x1="270" y1="275" x2="490" y2="275" stroke="#2a6041" stroke-width="2.5" stroke-dasharray="9,6" marker-end="url(#arrG)" opacity="0.85"/>
+<rect x="338" y="252" width="84" height="24" rx="12" fill="#ffffff" stroke="#2a6041" stroke-width="1"/>
+<text x="380" y="269" text-anchor="middle" font-family='"Noto Sans CJK JP", "Noto Sans JP", sans-serif' font-size="12" font-weight="700" fill="#2a6041">屋根面を抽出</text>
+<circle cx="600" cy="275" r="115" fill="#e8f3ed" opacity="0.9"/>
+<line x1="715.0" y1="275.0" x2="730.0" y2="275.0" stroke="#e8f3ed" stroke-width="14" stroke-linecap="round" opacity="0.95"/>
+<line x1="699.6" y1="332.5" x2="712.6" y2="340.0" stroke="#e8f3ed" stroke-width="14" stroke-linecap="round" opacity="0.95"/>
+<line x1="657.5" y1="374.6" x2="665.0" y2="387.6" stroke="#e8f3ed" stroke-width="14" stroke-linecap="round" opacity="0.95"/>
+<line x1="600.0" y1="390.0" x2="600.0" y2="405.0" stroke="#e8f3ed" stroke-width="14" stroke-linecap="round" opacity="0.95"/>
+<line x1="542.5" y1="374.6" x2="535.0" y2="387.6" stroke="#e8f3ed" stroke-width="14" stroke-linecap="round" opacity="0.95"/>
+<line x1="500.4" y1="332.5" x2="487.4" y2="340.0" stroke="#e8f3ed" stroke-width="14" stroke-linecap="round" opacity="0.95"/>
+<line x1="485.0" y1="275.0" x2="470.0" y2="275.0" stroke="#e8f3ed" stroke-width="14" stroke-linecap="round" opacity="0.95"/>
+<line x1="500.4" y1="217.5" x2="487.4" y2="210.0" stroke="#e8f3ed" stroke-width="14" stroke-linecap="round" opacity="0.95"/>
+<line x1="542.5" y1="175.4" x2="535.0" y2="162.4" stroke="#e8f3ed" stroke-width="14" stroke-linecap="round" opacity="0.95"/>
+<line x1="600.0" y1="160.0" x2="600.0" y2="145.0" stroke="#e8f3ed" stroke-width="14" stroke-linecap="round" opacity="0.95"/>
+<line x1="657.5" y1="175.4" x2="665.0" y2="162.4" stroke="#e8f3ed" stroke-width="14" stroke-linecap="round" opacity="0.95"/>
+<line x1="699.6" y1="217.5" x2="712.6" y2="210.0" stroke="#e8f3ed" stroke-width="14" stroke-linecap="round" opacity="0.95"/>
+<circle cx="600" cy="275" r="100" fill="#2a6041"/>
+<circle cx="600" cy="275" r="100" fill="none" stroke="#1d4a30" stroke-width="3"/>
+<text x="600" y="258" text-anchor="middle" font-family='"Noto Sans CJK JP", "Noto Sans JP", sans-serif' font-size="20" font-weight="700" fill="#ffffff">屋根面解析</text>
+<text x="600" y="288" text-anchor="middle" font-family='"Noto Sans CJK JP", "Noto Sans JP", sans-serif' font-size="20" font-weight="700" fill="#ffffff">＋配置計算</text>
+<line x1="552" y1="305" x2="648" y2="305" stroke="#c87533" stroke-width="2" opacity="0.85"/>
+<text x="600" y="328" text-anchor="middle" font-family='"Noto Sans CJK JP", "Noto Sans JP", sans-serif' font-size="13" fill="#ffffff" opacity="0.9">RANSAC + MBR</text>
+<text x="600" y="426" text-anchor="middle" font-family='"Noto Sans CJK JP", "Noto Sans JP", sans-serif' font-size="13" fill="#5a5a5a">処理エンジン</text>
+<line x1="715" y1="275" x2="900" y2="275" stroke="#c87533" stroke-width="2.5" stroke-dasharray="9,6" marker-end="url(#arrO)"/>
+<rect x="752" y="252" width="98" height="24" rx="12" fill="#ffffff" stroke="#c87533" stroke-width="1"/>
+<text x="801" y="269" text-anchor="middle" font-family='"Noto Sans CJK JP", "Noto Sans JP", sans-serif' font-size="12" font-weight="700" fill="#c87533">A4横スライド化</text>
+<rect x="900" y="130" width="260" height="230" rx="6" fill="#ffffff" stroke="#5a5a5a" stroke-width="2"/>
+<rect x="900" y="130" width="260" height="24" rx="6" fill="#2c2c2c"/>
+<rect x="900" y="146" width="260" height="8" fill="#2c2c2c"/>
+<text x="1030" y="147" text-anchor="middle" font-family='"Noto Sans CJK JP", "Noto Sans JP", sans-serif' font-size="11" font-weight="700" fill="#ffffff">太陽光パネル搭載概算図</text>
+<rect x="908" y="162" width="118" height="100" fill="#e8f3ed" opacity="0.4" stroke="#5a5a5a" stroke-width="0.8"/>
+<text x="967" y="174" text-anchor="middle" font-family='"Noto Sans CJK JP", "Noto Sans JP", sans-serif' font-size="9" font-weight="700" fill="#2c2c2c">① 屋根平面図</text>
+<polygon points="922,200 1012,200 1012,250 922,250" fill="#ffffff" stroke="#2c2c2c" stroke-width="1.5"/>
+<line x1="922" y1="225" x2="1012" y2="225" stroke="#5a5a5a" stroke-width="1.2"/>
+<line x1="922" y1="256" x2="1012" y2="256" stroke="#5a5a5a" stroke-width="0.6"/>
+<circle cx="1008" cy="206" r="5" fill="#ffffff" stroke="#2c2c2c" stroke-width="0.7"/>
+<path d="M 1008,201 L 1006,206 L 1010,206 Z" fill="#2c2c2c"/>
+<rect x="1034" y="162" width="118" height="100" fill="#e8f3ed" opacity="0.4" stroke="#5a5a5a" stroke-width="0.8"/>
+<text x="1093" y="174" text-anchor="middle" font-family='"Noto Sans CJK JP", "Noto Sans JP", sans-serif' font-size="9" font-weight="700" fill="#2c2c2c">② パネル搭載図</text>
+<polygon points="1048,200 1138,200 1138,250 1048,250" fill="#ffffff" stroke="#2c2c2c" stroke-width="1.5"/>
+<line x1="1048" y1="225" x2="1138" y2="225" stroke="#5a5a5a" stroke-width="1.2"/>
+<rect x="1054" y="206" width="9" height="14" fill="#444444" stroke="#ffffff" stroke-width="0.5"/>
+<rect x="1065" y="206" width="9" height="14" fill="#444444" stroke="#ffffff" stroke-width="0.5"/>
+<rect x="1076" y="206" width="9" height="14" fill="#444444" stroke="#ffffff" stroke-width="0.5"/>
+<rect x="1087" y="206" width="9" height="14" fill="#444444" stroke="#ffffff" stroke-width="0.5"/>
+<rect x="1098" y="206" width="9" height="14" fill="#444444" stroke="#ffffff" stroke-width="0.5"/>
+<rect x="1109" y="206" width="9" height="14" fill="#444444" stroke="#ffffff" stroke-width="0.5"/>
+<rect x="1120" y="206" width="9" height="14" fill="#444444" stroke="#ffffff" stroke-width="0.5"/>
+<circle cx="1134" cy="206" r="5" fill="#ffffff" stroke="#2c2c2c" stroke-width="0.7"/>
+<path d="M 1134,201 L 1132,206 L 1136,206 Z" fill="#2c2c2c"/>
+<rect x="908" y="272" width="244" height="60" fill="#e8f3ed" stroke="#5a5a5a" stroke-width="0.6"/>
+<text x="918" y="288" font-family='"Noto Sans CJK JP", "Noto Sans JP", sans-serif' font-size="9.5" font-weight="700" fill="#5a5a5a" letter-spacing="0.05em">SUMMARY</text>
+<text x="918" y="314" font-family='"Noto Sans CJK JP", "Noto Sans JP", sans-serif' font-size="18" font-weight="700" fill="#2a6041">14 枚</text>
+<text x="972" y="314" font-family='"Noto Sans CJK JP", "Noto Sans JP", sans-serif' font-size="13" fill="#2c2c2c">/ 6.16 kW</text>
+<text x="1055" y="314" font-family='"Noto Sans CJK JP", "Noto Sans JP", sans-serif' font-size="11" fill="#5a5a5a">南面 8 / 北面 6</text>
+<text x="1030" y="346" text-anchor="middle" font-family='"Noto Sans CJK JP", "Noto Sans JP", sans-serif' font-size="8.5" fill="#5a5a5a" opacity="0.85">出典: 東京都デジタルツイン (CC BY 4.0)</text>
+<rect x="940" y="386" width="180" height="34" rx="17" fill="#c87533"/>
+<text x="1030" y="408" text-anchor="middle" font-family='"Noto Sans CJK JP", "Noto Sans JP", sans-serif' font-size="13" font-weight="700" fill="#ffffff">PowerPoint A4横 1枚</text>
+<rect x="180" y="489" width="840" height="60" rx="30" fill="#ffffff" stroke="#2a6041" stroke-width="2.5"/>
+<circle cx="197.0" cy="519.0" r="12" fill="#2a6041"/>
+<path d="M 191.5,519.0 L 195.5,523.0 L 202.0,514.5" stroke="#ffffff" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="215.0" y="524.5" font-family='"Noto Sans CJK JP", "Noto Sans JP", sans-serif' font-size="14" font-weight="700" fill="#2c2c2c">営業初期説明に最適</text>
+<circle cx="407.0" cy="519.0" r="12" fill="#2a6041"/>
+<path d="M 401.5,519.0 L 405.5,523.0 L 412.0,514.5" stroke="#ffffff" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="425.0" y="524.5" font-family='"Noto Sans CJK JP", "Noto Sans JP", sans-serif' font-size="14" font-weight="700" fill="#2c2c2c">複数面の屋根に対応</text>
+<circle cx="617.0" cy="519.0" r="12" fill="#2a6041"/>
+<path d="M 611.5,519.0 L 615.5,523.0 L 622.0,514.5" stroke="#ffffff" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="635.0" y="524.5" font-family='"Noto Sans CJK JP", "Noto Sans JP", sans-serif' font-size="14" font-weight="700" fill="#2c2c2c">概算をすばやく可視化</text>
+<circle cx="827.0" cy="519.0" r="12" fill="#2a6041"/>
+<path d="M 821.5,519.0 L 825.5,523.0 L 832.0,514.5" stroke="#ffffff" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="845.0" y="524.5" font-family='"Noto Sans CJK JP", "Noto Sans JP", sans-serif' font-size="14" font-weight="700" fill="#2c2c2c">施工図ではなくイメージ図</text>
+</svg>
