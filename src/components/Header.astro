@@ -12,7 +12,14 @@
         <li><a href="/#case">導入事例</a></li>
         <li><a href="/tools">ツール紹介</a></li>
         <li><a href="/column">コラム</a></li>
-        <li><a href="/#about">私たちについて</a></li>
+        <li class="has-submenu">
+          <a href="/#about" class="submenu-trigger" aria-haspopup="true" aria-expanded="false">私たちについて</a>
+          <ul class="submenu">
+            <li><a href="/#philosophy">経営理念</a></li>
+            <li><a href="/#about">代表者紹介</a></li>
+            <li><a href="/#partner">パートナーシップ</a></li>
+          </ul>
+        </li>
         <li><a href="/#contact" class="btn-contact">お問い合わせ</a></li>
       </ul>
     </nav>
@@ -28,6 +35,24 @@
   toggle?.addEventListener('click', () => {
     nav?.classList.toggle('is-open');
     toggle.classList.toggle('is-open');
+  });
+
+  // モバイルでサブメニューをタップ展開
+  const submenuTriggers = document.querySelectorAll('.has-submenu > .submenu-trigger');
+  submenuTriggers.forEach((trigger) => {
+    trigger.addEventListener('click', (e) => {
+      if (window.matchMedia('(max-width: 768px)').matches) {
+        const parent = trigger.parentElement;
+        if (parent && !parent.classList.contains('is-open')) {
+          e.preventDefault();
+          document.querySelectorAll('.has-submenu.is-open').forEach((el) => {
+            if (el !== parent) el.classList.remove('is-open');
+          });
+          parent.classList.add('is-open');
+          trigger.setAttribute('aria-expanded', 'true');
+        }
+      }
+    });
   });
 </script>
 
@@ -74,10 +99,14 @@
     font-family: var(--font-family-serif);
   }
 
-  .site-nav ul {
+  .site-nav > ul {
     display: flex;
     gap: 2rem;
     align-items: center;
+    list-style: none;
+  }
+
+  .site-nav ul {
     list-style: none;
   }
 
@@ -108,6 +137,95 @@
 
   .site-nav a:not(.btn-contact):hover::after {
     width: 100%;
+  }
+
+  /* ===== サブメニュー ===== */
+  .has-submenu {
+    position: relative;
+  }
+
+  .submenu-trigger::before {
+    content: '';
+    display: inline-block;
+    width: 0.4em;
+    height: 0.4em;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(45deg) translateY(-2px);
+    margin-right: 0.4em;
+    vertical-align: middle;
+    transition: transform 0.25s;
+    opacity: 0.7;
+  }
+
+  .has-submenu:hover .submenu-trigger::before,
+  .has-submenu.is-open .submenu-trigger::before {
+    transform: rotate(225deg) translateY(0);
+    opacity: 1;
+  }
+
+  .submenu {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(8px);
+    min-width: 140px;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(26,107,104,0.1);
+    border-radius: 6px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    padding: 0.25rem 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+    margin-top: 8px;
+  }
+
+  /* ホバーが途切れないよう、トリガーとサブメニュー間に透明な橋渡し */
+  .has-submenu::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    height: 16px;
+  }
+
+  .has-submenu:hover .submenu,
+  .has-submenu:focus-within .submenu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  .submenu li {
+    width: 100%;
+  }
+
+  .submenu a {
+    display: block;
+    padding: 0.35rem 0.9rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--color-text-sub);
+    white-space: nowrap;
+    transition: background 0.18s, color 0.18s;
+  }
+
+  .submenu a::after {
+    display: none !important;
+  }
+
+  .submenu a:hover {
+    background: rgba(26,107,104,0.06);
+    color: var(--color-brand-primary);
   }
 
   .btn-contact {
@@ -184,10 +302,65 @@
       display: block;
     }
 
-    .site-nav ul {
+    .site-nav > ul {
       flex-direction: column;
       gap: 1rem;
       align-items: flex-start;
+    }
+
+    /* モバイル: サブメニューはアコーディオン的に展開 */
+    .has-submenu {
+      width: 100%;
+    }
+
+    .submenu,
+    .submenu li {
+      gap: 0;
+      margin: 0;
+    }
+
+    .has-submenu::after { display: none; }
+
+    .submenu {
+      position: static;
+      transform: none;
+      box-shadow: none;
+      border: none;
+      background: transparent;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      padding: 0.4rem 0 0.2rem 1rem;
+      margin-top: 0.4rem;
+      min-width: 0;
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      visibility: hidden;
+      transition: max-height 0.25s ease, opacity 0.25s ease, visibility 0.25s;
+    }
+
+    .has-submenu.is-open .submenu {
+      max-height: 300px;
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* モバイルではホバーで開かない */
+    .has-submenu:hover .submenu {
+      opacity: 0;
+      visibility: hidden;
+      transform: none;
+    }
+
+    .has-submenu.is-open:hover .submenu,
+    .has-submenu.is-open .submenu {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .submenu a {
+      padding: 0.5rem 0;
+      font-size: 0.85rem;
     }
 
     .btn-contact {
