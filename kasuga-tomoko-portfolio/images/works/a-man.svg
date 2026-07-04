@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" role="img">
+  <rect width="800" height="1000" fill="#1E1813"/>
+  <g><polygon points="99,109 102,109 274,580 264,580" fill="#C9A24B" opacity="0.47"/>
+    <polygon points="125,122 128,122 249,441 237,441" fill="#C6CAD0" opacity="0.50"/>
+    <polygon points="189,110 191,110 424,740 409,740" fill="#C6CAD0" opacity="0.70"/>
+    <polygon points="222,109 227,109 333,389 320,389" fill="#C9A24B" opacity="0.44"/>
+    <polygon points="269,153 271,153 446,624 434,624" fill="#C6CAD0" opacity="0.48"/>
+    <polygon points="314,151 316,151 505,662 493,662" fill="#C6CAD0" opacity="0.59"/>
+    <polygon points="368,133 370,133 510,508 499,508" fill="#C9A24B" opacity="0.79"/>
+    <polygon points="415,152 419,152 596,643 587,643" fill="#C6CAD0" opacity="0.70"/>
+    <polygon points="467,144 472,144 646,628 636,628" fill="#C6CAD0" opacity="0.38"/>
+    <polygon points="496,155 499,155 648,554 635,554" fill="#C9A24B" opacity="0.49"/>
+    <polygon points="557,122 561,122 663,395 652,395" fill="#C6CAD0" opacity="0.72"/>
+    <polygon points="589,106 591,106 724,456 711,456" fill="#C6CAD0" opacity="0.50"/>
+    <polygon points="634,134 637,134 804,592 795,592" fill="#C9A24B" opacity="0.73"/>
+    <polygon points="685,117 689,117 904,710 892,710" fill="#C6CAD0" opacity="0.66"/></g>
+
+  <g stroke="#C9A24B" stroke-width="1.5" fill="none" opacity="0.9">
+    <path d="M40 110 V40 H110"/>
+    <path d="M690 40 H760 V110"/>
+    <path d="M760 890 V960 H690"/>
+    <path d="M110 960 H40 V890"/>
+  </g>
+
+  <g text-anchor="middle" font-family='"Shippori Mincho","Yu Mincho","Hiragino Mincho ProN",serif'>
+    <text x="400.0" y="492.0" font-size="44" fill="#F2EBDC"
+          letter-spacing="6">《A MAN》</text>
+    <text x="400.0" y="552.0" font-size="22" fill="#F2EBDC"
+          opacity="0.66" letter-spacing="8">写真差し替え予定</text>
+  </g>
+</svg>

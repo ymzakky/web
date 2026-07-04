@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" role="img">
+  <rect width="800" height="1000" fill="#1E1813"/>
+  <g><line x1="256" y1="300" x2="633" y2="81" stroke="#E6C87A" stroke-width="2.0" opacity="0.56"/>
+    <line x1="256" y1="300" x2="465" y2="206" stroke="#C9A24B" stroke-width="2.4" opacity="0.52"/>
+    <line x1="256" y1="300" x2="590" y2="175" stroke="#C9A24B" stroke-width="0.9" opacity="0.45"/>
+    <line x1="256" y1="300" x2="533" y2="221" stroke="#C9A24B" stroke-width="2.4" opacity="0.39"/>
+    <line x1="256" y1="300" x2="735" y2="195" stroke="#E6C87A" stroke-width="2.0" opacity="0.44"/>
+    <line x1="256" y1="300" x2="579" y2="263" stroke="#C9A24B" stroke-width="1.4" opacity="0.41"/>
+    <line x1="256" y1="300" x2="617" y2="274" stroke="#C9A24B" stroke-width="1.8" opacity="0.80"/>
+    <line x1="256" y1="300" x2="617" y2="313" stroke="#C9A24B" stroke-width="1.6" opacity="0.31"/>
+    <line x1="256" y1="300" x2="604" y2="335" stroke="#E6C87A" stroke-width="0.8" opacity="0.80"/>
+    <line x1="256" y1="300" x2="665" y2="370" stroke="#C9A24B" stroke-width="2.0" opacity="0.64"/>
+    <line x1="256" y1="300" x2="672" y2="413" stroke="#C9A24B" stroke-width="1.8" opacity="0.34"/>
+    <line x1="256" y1="300" x2="769" y2="458" stroke="#C9A24B" stroke-width="1.3" opacity="0.38"/>
+    <line x1="256" y1="300" x2="633" y2="466" stroke="#E6C87A" stroke-width="0.9" opacity="0.50"/>
+    <line x1="256" y1="300" x2="550" y2="445" stroke="#C9A24B" stroke-width="2.4" opacity="0.58"/>
+    <line x1="256" y1="300" x2="545" y2="480" stroke="#C9A24B" stroke-width="2.4" opacity="0.72"/>
+    <line x1="256" y1="300" x2="466" y2="448" stroke="#C9A24B" stroke-width="1.4" opacity="0.75"/>
+    <line x1="256" y1="300" x2="462" y2="467" stroke="#E6C87A" stroke-width="1.9" opacity="0.79"/>
+    <line x1="256" y1="300" x2="446" y2="484" stroke="#C9A24B" stroke-width="1.2" opacity="0.38"/>
+    <line x1="256" y1="300" x2="607" y2="723" stroke="#C9A24B" stroke-width="1.4" opacity="0.50"/>
+    <line x1="256" y1="300" x2="402" y2="497" stroke="#C9A24B" stroke-width="1.5" opacity="0.47"/>
+    <line x1="256" y1="300" x2="470" y2="638" stroke="#E6C87A" stroke-width="1.0" opacity="0.44"/>
+    <line x1="256" y1="300" x2="395" y2="553" stroke="#C9A24B" stroke-width="1.7" opacity="0.35"/>
+    <line x1="256" y1="300" x2="410" y2="654" stroke="#C9A24B" stroke-width="1.1" opacity="0.66"/>
+    <line x1="256" y1="300" x2="338" y2="529" stroke="#C9A24B" stroke-width="1.7" opacity="0.82"/>
+    <line x1="256" y1="300" x2="380" y2="808" stroke="#E6C87A" stroke-width="1.4" opacity="0.42"/>
+    <line x1="256" y1="300" x2="310" y2="599" stroke="#C9A24B" stroke-width="1.6" opacity="0.50"/>
+    <line x1="256" y1="300" x2="304" y2="802" stroke="#C9A24B" stroke-width="1.4" opacity="0.82"/>
+    <line x1="256" y1="300" x2="265" y2="784" stroke="#C9A24B" stroke-width="1.5" opacity="0.55"/>
+    <line x1="256" y1="300" x2="227" y2="766" stroke="#E6C87A" stroke-width="1.7" opacity="0.79"/>
+    <line x1="256" y1="300" x2="214" y2="597" stroke="#C9A24B" stroke-width="1.6" opacity="0.36"/>
+    <line x1="256" y1="300" x2="157" y2="811" stroke="#C9A24B" stroke-width="1.7" opacity="0.35"/>
+    <line x1="256" y1="300" x2="126" y2="751" stroke="#C9A24B" stroke-width="1.0" opacity="0.60"/>
+    <line x1="256" y1="300" x2="140" y2="608" stroke="#E6C87A" stroke-width="2.3" opacity="0.39"/>
+    <line x1="256" y1="300" x2="101" y2="610" stroke="#C9A24B" stroke-width="1.2" opacity="0.43"/></g>
+
+  <g stroke="#C9A24B" stroke-width="1.5" fill="none" opacity="0.9">
+    <path d="M40 110 V40 H110"/>
+    <path d="M690 40 H760 V110"/>
+    <path d="M760 890 V960 H690"/>
+    <path d="M110 960 H40 V890"/>
+  </g>
+
+  <g text-anchor="middle" font-family='"Shippori Mincho","Yu Mincho","Hiragino Mincho ProN",serif'>
+    <text x="400.0" y="492.0" font-size="40" fill="#F2EBDC"
+          letter-spacing="6">《煌〜きらめき〜》</text>
+    <text x="400.0" y="552.0" font-size="22" fill="#F2EBDC"
+          opacity="0.66" letter-spacing="8">写真差し替え予定</text>
+  </g>
+</svg>

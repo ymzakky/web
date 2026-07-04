@@ -1,0 +1,1042 @@
+/* =========================================================
+   沈金師 春日友子 ポートフォリオサイト
+   Design tokens + components + print styles
+   配色: 漆黒 × 生成り × 金 (朱は装飾・大型文字限定)
+   ========================================================= */
+
+:root {
+  /* Colors */
+  --urushi-900: #14100C;   /* ページ背景: 暖色系漆黒 */
+  --urushi-800: #1E1813;   /* カード・表面 */
+  --urushi-700: #2B231B;   /* 罫線・ホバー面 */
+  --kinari:     #F2EBDC;   /* 本文テキスト (生成り) */
+  --kinari-dim: #C9BFAC;   /* 補助テキスト */
+  --gold:       #C9A24B;   /* 金: リンク・アクセント */
+  --gold-bright:#E6C87A;   /* 金の明部: 見出し・ホバー */
+  --shu:        #B3341F;   /* 朱: 罫線・装飾・大型文字のみ */
+  --shu-bright: #D9482B;   /* 朱の明部 */
+  --paper:      #F5F0E4;   /* 引用ボックス・印刷面 */
+  --sumi:       #241E18;   /* paper 上のテキスト */
+
+  /* Typography */
+  --font-serif: "Shippori Mincho", "Yu Mincho", "Hiragino Mincho ProN", serif;
+  --font-sans: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif;
+  --fs-sm: 0.875rem;
+  --fs-base: 1rem;
+  --fs-lg: 1.1875rem;
+  --fs-xl: 1.5rem;
+  --fs-2xl: 1.875rem;
+  --fs-3xl: 2.375rem;
+  --fs-4xl: 3rem;
+
+  /* Spacing (8px base) */
+  --sp-1: 8px;
+  --sp-2: 16px;
+  --sp-3: 24px;
+  --sp-4: 32px;
+  --sp-5: 48px;
+  --sp-6: 64px;
+  --sp-7: 96px;
+  --sp-8: 128px;
+
+  --container: 70rem;
+  --container-narrow: 40rem;
+  --transition: 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* ---------- Base ---------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+body {
+  background: var(--urushi-900);
+  color: var(--kinari);
+  font-family: var(--font-sans);
+  font-size: var(--fs-base);
+  line-height: 2;
+  letter-spacing: 0.05em;
+  -webkit-font-smoothing: antialiased;
+}
+
+@media (min-width: 768px) {
+  body {
+    font-size: 1.0625rem;
+  }
+}
+
+img,
+svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.08em;
+  font-feature-settings: "palt";
+  color: var(--gold-bright);
+}
+
+p + p {
+  margin-top: 1em;
+}
+
+a {
+  color: var(--gold);
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+  text-decoration-thickness: 1px;
+  transition: color var(--transition);
+}
+
+a:hover {
+  color: var(--gold-bright);
+}
+
+:focus-visible {
+  outline: 2px solid var(--gold-bright);
+  outline-offset: 3px;
+}
+
+ul, ol {
+  padding-left: 1.5em;
+}
+
+em {
+  font-style: normal;
+  font-weight: 700;
+}
+
+/* ---------- Skip link ---------- */
+
+.skip-link {
+  position: absolute;
+  left: var(--sp-2);
+  top: -100px;
+  z-index: 100;
+  background: var(--paper);
+  color: var(--sumi);
+  padding: var(--sp-1) var(--sp-2);
+  border-radius: 4px;
+}
+
+.skip-link:focus {
+  top: var(--sp-2);
+}
+
+/* ---------- Header / Nav ---------- */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(20, 16, 12, 0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--urushi-700);
+}
+
+.site-header__inner {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: var(--sp-2) var(--sp-3);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-1) var(--sp-3);
+}
+
+.site-brand {
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.3;
+}
+
+.site-brand__title {
+  font-family: var(--font-serif);
+  font-size: var(--fs-lg);
+  color: var(--kinari);
+  letter-spacing: 0.14em;
+}
+
+.site-brand__sub {
+  font-size: 0.6875rem;
+  color: var(--kinari-dim);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.nav-toggle {
+  display: none;
+  background: none;
+  border: 1px solid var(--urushi-700);
+  border-radius: 4px;
+  color: var(--kinari);
+  font-family: var(--font-sans);
+  font-size: var(--fs-sm);
+  letter-spacing: 0.1em;
+  padding: var(--sp-1) var(--sp-2);
+  cursor: pointer;
+}
+
+.site-nav ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-1) var(--sp-3);
+}
+
+.site-nav a {
+  text-decoration: none;
+  color: var(--kinari-dim);
+  font-size: var(--fs-sm);
+  letter-spacing: 0.12em;
+  padding: 4px 0;
+  border-bottom: 1px solid transparent;
+}
+
+.site-nav a:hover {
+  color: var(--gold-bright);
+}
+
+.site-nav a[aria-current="page"] {
+  color: var(--gold);
+  border-bottom-color: var(--gold);
+}
+
+/* JSが有効なときだけモバイルでnavを畳む (無効時は常時表示) */
+@media (max-width: 767px) {
+  .js .nav-toggle {
+    display: block;
+  }
+
+  .js .site-nav {
+    display: none;
+    width: 100%;
+  }
+
+  .js .site-nav.is-open {
+    display: block;
+  }
+
+  .js .site-nav ul {
+    flex-direction: column;
+    gap: 0;
+    padding: var(--sp-2) 0;
+  }
+
+  .js .site-nav a {
+    display: block;
+    padding: var(--sp-1) 0;
+    font-size: var(--fs-base);
+  }
+}
+
+/* ---------- Layout ---------- */
+
+.container {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding-left: var(--sp-3);
+  padding-right: var(--sp-3);
+}
+
+.container--narrow {
+  max-width: var(--container-narrow);
+}
+
+.section {
+  padding: var(--sp-6) 0;
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding: var(--sp-7) 0;
+  }
+}
+
+.section--alt {
+  background: var(--urushi-800);
+}
+
+.kicker {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: var(--sp-2);
+}
+
+.section h2 {
+  font-size: var(--fs-2xl);
+  margin-bottom: var(--sp-4);
+}
+
+.section h3 {
+  font-size: var(--fs-xl);
+  margin: var(--sp-5) 0 var(--sp-2);
+}
+
+.section h3:first-of-type {
+  margin-top: 0;
+}
+
+.section-lead {
+  color: var(--kinari-dim);
+  max-width: var(--container-narrow);
+  margin-bottom: var(--sp-4);
+}
+
+.prose {
+  max-width: var(--container-narrow);
+}
+
+.prose h3 {
+  font-size: var(--fs-xl);
+  margin: var(--sp-6) 0 var(--sp-2);
+}
+
+.rule {
+  border: 0;
+  height: 1px;
+  background: linear-gradient(to right, var(--shu), transparent 70%);
+  margin: var(--sp-5) 0;
+}
+
+/* ---------- Hero ---------- */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: var(--sp-7) 0;
+  border-bottom: 1px solid var(--urushi-700);
+}
+
+.hero__inner {
+  position: relative;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--sp-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+.hero__title {
+  font-size: var(--fs-3xl);
+  font-weight: 500;
+  color: var(--kinari);
+}
+
+.hero__title .hero__role {
+  display: block;
+  font-size: var(--fs-lg);
+  color: var(--gold);
+  letter-spacing: 0.3em;
+  margin-bottom: var(--sp-2);
+}
+
+.hero__en {
+  font-size: var(--fs-sm);
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--kinari-dim);
+}
+
+.hero__lead {
+  max-width: 34em;
+  color: var(--kinari-dim);
+}
+
+@media (min-width: 768px) {
+  .hero {
+    padding: var(--sp-8) 0;
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+  }
+
+  .hero__title {
+    writing-mode: vertical-rl;
+    font-size: var(--fs-4xl);
+    letter-spacing: 0.22em;
+    max-height: 22em;
+  }
+
+  .hero__title .hero__role {
+    margin-bottom: 0;
+    margin-left: var(--sp-2);
+  }
+
+  .hero__inner {
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--sp-6);
+  }
+}
+
+.hero__bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+/* ---------- Pull quote ---------- */
+
+.pull-quote {
+  border-left: 2px solid var(--shu);
+  padding: var(--sp-2) 0 var(--sp-2) var(--sp-3);
+  margin: var(--sp-5) 0;
+  max-width: 36em;
+}
+
+.pull-quote p {
+  font-family: var(--font-serif);
+  font-size: var(--fs-xl);
+  line-height: 1.9;
+  color: var(--kinari);
+}
+
+.pull-quote cite {
+  display: block;
+  margin-top: var(--sp-2);
+  font-style: normal;
+  font-size: var(--fs-sm);
+  color: var(--kinari-dim);
+}
+
+@media (min-width: 768px) {
+  .pull-quote p {
+    font-size: var(--fs-2xl);
+  }
+}
+
+/* ---------- Quotable (引用用プロフィール) ---------- */
+
+.quotable {
+  background: var(--paper);
+  color: var(--sumi);
+  border-radius: 4px;
+  padding: var(--sp-4);
+  margin: var(--sp-4) 0;
+  max-width: 44em;
+}
+
+.quotable__label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--shu);
+  margin-bottom: var(--sp-2);
+}
+
+.quotable p {
+  line-height: 1.9;
+}
+
+/* ---------- Buttons ---------- */
+
+.btn {
+  display: inline-block;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  text-decoration: none;
+  font-size: var(--fs-sm);
+  letter-spacing: 0.18em;
+  padding: var(--sp-1) var(--sp-4);
+  border-radius: 2px;
+  transition: background var(--transition), color var(--transition);
+}
+
+.btn:hover {
+  background: var(--gold);
+  color: var(--urushi-900);
+}
+
+/* ---------- Cards ---------- */
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: var(--sp-3);
+  margin-top: var(--sp-4);
+}
+
+.card {
+  background: var(--urushi-800);
+  border: 1px solid var(--urushi-700);
+  border-radius: 4px;
+  padding: var(--sp-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+
+.card h3 {
+  font-size: var(--fs-lg);
+  margin: 0;
+}
+
+.card p {
+  font-size: var(--fs-sm);
+  color: var(--kinari-dim);
+  line-height: 1.9;
+}
+
+.card .card__link {
+  margin-top: auto;
+  font-size: var(--fs-sm);
+}
+
+.card--work {
+  padding: 0;
+  overflow: hidden;
+}
+
+.card--work .card__body {
+  padding: var(--sp-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+  flex: 1;
+}
+
+/* ---------- Work media (placeholder swap) ---------- */
+
+.work-media {
+  background: var(--urushi-800);
+  border: 1px solid var(--urushi-700);
+}
+
+.work-media img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+
+.work-media--wide img {
+  aspect-ratio: 16 / 10;
+}
+
+.work-media figcaption {
+  font-size: 0.75rem;
+  color: var(--kinari-dim);
+  padding: var(--sp-1) var(--sp-2);
+  border-top: 1px solid var(--urushi-700);
+}
+
+/* ---------- Works page article ---------- */
+
+.work {
+  display: grid;
+  gap: var(--sp-4);
+  padding: var(--sp-6) 0;
+  border-bottom: 1px solid var(--urushi-700);
+}
+
+.work:last-of-type {
+  border-bottom: 0;
+}
+
+@media (min-width: 900px) {
+  .work {
+    grid-template-columns: minmax(280px, 420px) 1fr;
+    align-items: start;
+  }
+
+  .work--featured {
+    grid-template-columns: minmax(320px, 520px) 1fr;
+  }
+
+  .work:nth-of-type(even) .work__media {
+    order: 2;
+  }
+}
+
+.work h3 {
+  font-size: var(--fs-2xl);
+  margin: 0 0 var(--sp-2);
+}
+
+.work__body p {
+  max-width: 38em;
+}
+
+.spec-table {
+  width: 100%;
+  max-width: 38em;
+  border-collapse: collapse;
+  margin: var(--sp-3) 0;
+  font-size: var(--fs-sm);
+}
+
+.spec-table th,
+.spec-table td {
+  text-align: left;
+  vertical-align: top;
+  padding: var(--sp-1) var(--sp-2) var(--sp-1) 0;
+  border-bottom: 1px solid var(--urushi-700);
+  font-weight: 400;
+}
+
+.spec-table th {
+  white-space: nowrap;
+  color: var(--gold);
+  width: 8em;
+}
+
+/* ---------- 年譜 / メディア表 ---------- */
+
+.nenpu {
+  width: 100%;
+  max-width: 52em;
+  border-collapse: collapse;
+  margin: var(--sp-3) 0;
+}
+
+.nenpu caption {
+  text-align: left;
+  font-size: var(--fs-sm);
+  color: var(--kinari-dim);
+  padding-bottom: var(--sp-2);
+}
+
+.nenpu th,
+.nenpu td {
+  text-align: left;
+  vertical-align: top;
+  padding: var(--sp-2) var(--sp-3) var(--sp-2) 0;
+  border-bottom: 1px solid var(--urushi-700);
+  font-weight: 400;
+  line-height: 1.9;
+}
+
+.nenpu th[scope="row"] {
+  font-family: var(--font-serif);
+  color: var(--gold);
+  white-space: nowrap;
+  width: 6em;
+}
+
+.nenpu thead th {
+  font-size: var(--fs-sm);
+  color: var(--kinari-dim);
+  border-bottom: 1px solid var(--gold);
+}
+
+@media (max-width: 600px) {
+  .nenpu,
+  .nenpu tbody,
+  .nenpu tr,
+  .nenpu th,
+  .nenpu td {
+    display: block;
+    width: 100%;
+  }
+
+  .nenpu thead {
+    display: none;
+  }
+
+  .nenpu th[scope="row"] {
+    border-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .nenpu td {
+    padding-top: 4px;
+  }
+}
+
+/* ---------- 工程ステップ ---------- */
+
+.steps {
+  list-style: none;
+  padding: 0;
+  counter-reset: step;
+  display: grid;
+  gap: var(--sp-3);
+  margin: var(--sp-4) 0;
+}
+
+@media (min-width: 768px) {
+  .steps {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1080px) {
+  .steps {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.steps li {
+  counter-increment: step;
+  background: var(--urushi-800);
+  border: 1px solid var(--urushi-700);
+  border-radius: 4px;
+  padding: var(--sp-3);
+  position: relative;
+}
+
+.steps li::before {
+  content: counter(step, decimal-leading-zero);
+  font-family: var(--font-serif);
+  font-size: var(--fs-2xl);
+  color: var(--shu-bright);
+  display: block;
+  line-height: 1;
+  margin-bottom: var(--sp-2);
+}
+
+.steps h3 {
+  font-size: var(--fs-lg);
+  margin: 0 0 var(--sp-1);
+}
+
+.steps p {
+  font-size: var(--fs-sm);
+  color: var(--kinari-dim);
+  line-height: 1.9;
+}
+
+/* ---------- 3列対比カード (沈金/蒔絵/螺鈿) ---------- */
+
+.compare-grid {
+  display: grid;
+  gap: var(--sp-3);
+  margin: var(--sp-4) 0;
+}
+
+@media (min-width: 768px) {
+  .compare-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.compare-grid .card--focus {
+  border-color: var(--gold);
+}
+
+.compare-grid .card__verb {
+  font-family: var(--font-serif);
+  font-size: var(--fs-xl);
+  color: var(--gold-bright);
+}
+
+/* ---------- 系譜 ---------- */
+
+.lineage {
+  list-style: none;
+  padding: 0;
+  margin: var(--sp-4) 0;
+  max-width: 38em;
+}
+
+.lineage li {
+  position: relative;
+  padding: 0 0 var(--sp-3) var(--sp-4);
+  border-left: 1px solid var(--shu);
+}
+
+.lineage li:last-child {
+  padding-bottom: 0;
+}
+
+.lineage li::before {
+  content: "";
+  position: absolute;
+  left: -5px;
+  top: 0.6em;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--gold);
+}
+
+.lineage .lineage__name {
+  font-family: var(--font-serif);
+  font-size: var(--fs-lg);
+  color: var(--kinari);
+  display: block;
+}
+
+.lineage p {
+  font-size: var(--fs-sm);
+  color: var(--kinari-dim);
+  line-height: 1.9;
+}
+
+/* ---------- Notes ---------- */
+
+.note {
+  font-size: var(--fs-sm);
+  color: var(--kinari-dim);
+  border-left: 2px solid var(--urushi-700);
+  padding-left: var(--sp-2);
+  margin: var(--sp-3) 0;
+  line-height: 1.9;
+}
+
+.aside-note {
+  background: var(--urushi-800);
+  border: 1px solid var(--urushi-700);
+  border-left: 2px solid var(--gold);
+  border-radius: 0 4px 4px 0;
+  padding: var(--sp-3);
+  margin: var(--sp-4) 0;
+  max-width: 40em;
+  font-size: var(--fs-sm);
+  line-height: 1.9;
+}
+
+.aside-note .aside-note__label {
+  display: block;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: 0.12em;
+  margin-bottom: var(--sp-1);
+}
+
+/* ---------- 個展・お知らせ ---------- */
+
+.event-box {
+  background: var(--urushi-800);
+  border: 1px solid var(--gold);
+  border-radius: 4px;
+  padding: var(--sp-4);
+  margin: var(--sp-4) 0;
+  max-width: 44em;
+}
+
+.event-box h3 {
+  font-size: var(--fs-xl);
+  margin: 0 0 var(--sp-2);
+}
+
+.event-box dl {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--sp-1) var(--sp-3);
+  font-size: var(--fs-sm);
+}
+
+.event-box dt {
+  color: var(--gold);
+  white-space: nowrap;
+}
+
+.status-tag {
+  display: inline-block;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  border: 1px solid var(--kinari-dim);
+  color: var(--kinari-dim);
+  border-radius: 2px;
+  padding: 2px 10px;
+  margin-left: var(--sp-2);
+  vertical-align: middle;
+}
+
+/* ---------- Contact ---------- */
+
+.contact-list {
+  list-style: none;
+  padding: 0;
+  margin: var(--sp-3) 0;
+  max-width: 38em;
+}
+
+.contact-list li {
+  padding: var(--sp-2) 0;
+  border-bottom: 1px solid var(--urushi-700);
+}
+
+.checklist {
+  max-width: 38em;
+  margin: var(--sp-3) 0;
+}
+
+.checklist li {
+  margin-bottom: var(--sp-1);
+}
+
+/* ---------- Footer ---------- */
+
+.site-footer {
+  border-top: 1px solid var(--urushi-700);
+  padding: var(--sp-6) 0;
+  margin-top: var(--sp-6);
+}
+
+.site-footer__inner {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--sp-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+}
+
+.site-footer__brand {
+  font-family: var(--font-serif);
+  font-size: var(--fs-lg);
+  letter-spacing: 0.14em;
+  color: var(--kinari);
+}
+
+.site-footer nav ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-1) var(--sp-3);
+  font-size: var(--fs-sm);
+}
+
+.site-footer__sns {
+  font-size: var(--fs-sm);
+  color: var(--kinari-dim);
+}
+
+.site-footer__copy {
+  font-size: 0.75rem;
+  color: var(--kinari-dim);
+  letter-spacing: 0.1em;
+}
+
+/* ---------- Reveal (progressive enhancement) ---------- */
+
+.js .reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.js .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .js .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------- Print (profile.html がプレスキットになる) ---------- */
+
+@media print {
+  body {
+    background: #fff;
+    color: #1a1a1a;
+    font-size: 10.5pt;
+    line-height: 1.8;
+  }
+
+  .site-header,
+  .site-footer nav,
+  .nav-toggle,
+  .skip-link,
+  .hero__bg,
+  .btn {
+    display: none !important;
+  }
+
+  h1, h2, h3, h4,
+  .kicker,
+  .lineage .lineage__name,
+  .nenpu th[scope="row"] {
+    color: #1a1a1a;
+  }
+
+  a {
+    color: #1a1a1a;
+    text-decoration: none;
+  }
+
+  .quotable {
+    border: 1px solid #999;
+    background: #fff;
+    color: #1a1a1a;
+  }
+
+  .quotable__label {
+    color: #1a1a1a;
+  }
+
+  .card,
+  .aside-note,
+  .event-box,
+  .steps li {
+    background: #fff;
+    border-color: #ccc;
+  }
+
+  .card p,
+  .steps p,
+  .note,
+  .aside-note,
+  .section-lead,
+  .pull-quote cite,
+  .lineage p,
+  .site-footer__sns,
+  .site-footer__copy {
+    color: #444;
+  }
+
+  .nenpu th,
+  .nenpu td,
+  .spec-table th,
+  .spec-table td {
+    border-bottom-color: #ccc;
+  }
+
+  .pull-quote {
+    border-left-color: #999;
+  }
+
+  .pull-quote p {
+    color: #1a1a1a;
+  }
+
+  .work-media,
+  .hero {
+    border-color: #ccc;
+  }
+}

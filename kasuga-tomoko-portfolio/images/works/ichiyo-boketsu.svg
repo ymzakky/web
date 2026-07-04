@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" role="img">
+  <rect width="800" height="1000" fill="#1E1813"/>
+  <g><path d="M125 338 Q 135 504 125 669" fill="none" stroke="#C9A24B" stroke-width="1.8" opacity="0.75"/>
+    <path d="M154 180 Q 153 429 154 679" fill="none" stroke="#C9CDD2" stroke-width="1.2" opacity="0.40"/>
+    <path d="M174 277 Q 153 518 174 759" fill="none" stroke="#C9A24B" stroke-width="1.2" opacity="0.69"/>
+    <path d="M193 308 Q 177 452 193 597" fill="none" stroke="#C9A24B" stroke-width="1.3" opacity="0.33"/>
+    <path d="M209 243 Q 224 367 209 490" fill="none" stroke="#C9CDD2" stroke-width="1.1" opacity="0.48"/>
+    <path d="M229 214 Q 254 460 229 705" fill="none" stroke="#C9A24B" stroke-width="1.1" opacity="0.47"/>
+    <path d="M254 243 Q 266 407 254 571" fill="none" stroke="#C9CDD2" stroke-width="2.0" opacity="0.30"/>
+    <path d="M277 258 Q 264 393 277 528" fill="none" stroke="#C9A24B" stroke-width="1.8" opacity="0.64"/>
+    <path d="M303 317 Q 303 507 303 697" fill="none" stroke="#C9A24B" stroke-width="1.4" opacity="0.33"/>
+    <path d="M319 337 Q 296 490 319 643" fill="none" stroke="#C9CDD2" stroke-width="1.1" opacity="0.55"/>
+    <path d="M335 183 Q 315 310 335 437" fill="none" stroke="#C9A24B" stroke-width="1.3" opacity="0.42"/>
+    <path d="M361 268 Q 358 370 361 473" fill="none" stroke="#C9A24B" stroke-width="1.9" opacity="0.40"/>
+    <path d="M384 289 Q 359 476 384 662" fill="none" stroke="#C9CDD2" stroke-width="0.9" opacity="0.57"/>
+    <path d="M405 155 Q 405 384 405 613" fill="none" stroke="#C9A24B" stroke-width="1.0" opacity="0.64"/>
+    <path d="M419 166 Q 405 276 419 386" fill="none" stroke="#C9CDD2" stroke-width="0.8" opacity="0.35"/>
+    <path d="M448 237 Q 426 367 448 497" fill="none" stroke="#C9CDD2" stroke-width="0.9" opacity="0.41"/>
+    <path d="M462 177 Q 438 412 462 648" fill="none" stroke="#C9CDD2" stroke-width="1.0" opacity="0.52"/>
+    <path d="M488 213 Q 469 363 488 513" fill="none" stroke="#C9A24B" stroke-width="1.1" opacity="0.48"/>
+    <path d="M513 269 Q 524 377 513 484" fill="none" stroke="#C9A24B" stroke-width="1.3" opacity="0.38"/>
+    <path d="M531 272 Q 512 437 531 602" fill="none" stroke="#C9A24B" stroke-width="1.6" opacity="0.36"/>
+    <path d="M548 259 Q 550 518 548 777" fill="none" stroke="#C9A24B" stroke-width="0.8" opacity="0.37"/>
+    <path d="M570 265 Q 563 409 570 553" fill="none" stroke="#C9A24B" stroke-width="1.0" opacity="0.35"/>
+    <path d="M593 191 Q 593 362 593 532" fill="none" stroke="#C9A24B" stroke-width="1.6" opacity="0.36"/>
+    <path d="M614 161 Q 590 335 614 508" fill="none" stroke="#C9A24B" stroke-width="1.4" opacity="0.77"/>
+    <path d="M638 141 Q 619 368 638 596" fill="none" stroke="#C9A24B" stroke-width="0.8" opacity="0.62"/>
+    <path d="M655 254 Q 633 379 655 504" fill="none" stroke="#C9CDD2" stroke-width="1.8" opacity="0.60"/></g>
+
+  <g stroke="#C9A24B" stroke-width="1.5" fill="none" opacity="0.9">
+    <path d="M40 110 V40 H110"/>
+    <path d="M690 40 H760 V110"/>
+    <path d="M760 890 V960 H690"/>
+    <path d="M110 960 H40 V890"/>
+  </g>
+
+  <g text-anchor="middle" font-family='"Shippori Mincho","Yu Mincho","Hiragino Mincho ProN",serif'>
+    <text x="400.0" y="492.0" font-size="32" fill="#F2EBDC"
+          letter-spacing="6">《「一葉女子の墓」一部模写》</text>
+    <text x="400.0" y="552.0" font-size="22" fill="#F2EBDC"
+          opacity="0.66" letter-spacing="8">写真差し替え予定</text>
+  </g>
+</svg>
