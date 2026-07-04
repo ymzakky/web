@@ -27,7 +27,7 @@
 5. **作品情報** — 各作品の素材・寸法・制作年・正式名称(`works.html`)。
 6. **受賞・展示歴の正式表記** — 「入選」「推薦」「出展」等の表記は出典により揺れがあります
    (`profile.html` の年譜)。
-7. **英語表記** — 人名ローマ字(Kasuga Tomoko / Tomoko Kasuga の姓名順)、展覧会名の英訳
+7. **英語表記** — 人名ローマ字(Kasuga Yuko / Yuko Kasuga の姓名順)、展覧会名の英訳
    (`en/index.html` は暫定訳)。
 8. **SNSリンク** — Instagram(@chinkinshi_yuko)・note のURLの実在確認。Facebookページは
    URLが未確認のため「検索」案内にしています。判明したらリンクに差し替えてください。
@@ -68,7 +68,7 @@ python3 -m http.server 8000
 ```
 
 すべてのリンク・アセットは相対パスのため、サブディレクトリ配下
-(例: `https://example.com/kasuga-tomoko-portfolio/`)でもドメイン直下でも動作します。
+(例: `https://example.com/kasuga-yuko-portfolio/`)でもドメイン直下でも動作します。
 
 ## デプロイ
 
