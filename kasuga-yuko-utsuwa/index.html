@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <!--
+    沈金師・春日友子「暮らしの道具」ランディングページ
+    ============================================================
+    注意: 本ページ内の【要確認】表記(価格・納期・料金・URL・住所・
+    ギフト対応など)はすべてダミーです。公開前に必ず本人確認のうえ
+    確定情報に差し替えてください(詳細は同フォルダの README.md)。
+  -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>暮らしの道具 | 沈金師 春日友子 — ふだん使いの箸と漆器、金継ぎの相談</title>
+  <meta name="description" content="沈金師・春日友子がつくる、ふだん使いの箸と漆器のお店。欠けた器・割れた器の金継ぎのご相談も。毎日の食卓に、少しだけ特別を。">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="暮らしの道具 | 沈金師 春日友子">
+  <meta property="og:description" content="沈金師がつくる、ふだん使いの箸と漆器。欠けた器の金継ぎのご相談も。">
+  <meta property="og:locale" content="ja_JP">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Crect%20width='32'%20height='32'%20rx='6'%20fill='%23FAF6F0'/%3E%3Ccircle%20cx='10'%20cy='16'%20r='2'%20fill='%23C0A062'/%3E%3Ccircle%20cx='16'%20cy='16'%20r='2'%20fill='%239E3B2F'/%3E%3Ccircle%20cx='22'%20cy='16'%20r='2'%20fill='%23C0A062'/%3E%3C/svg%3E">
+
+  <style>
+    /* ==========================================================
+       設計メモ
+       - ベース: 白〜生成り / アクセント: 弁柄 #9E3B2F・金 #C0A062
+       - 文字: 墨色 #2B2B2B / 見出し: Zen Old Mincho / 本文: Noto Sans JP
+       - モバイルファースト。装飾は罫線・余白・沈金風の点線のみ
+       ========================================================== */
+    :root {
+      --white: #FFFFFF;
+      --kinari: #FAF6F0;
+      --kinari-deep: #F3EDE3;
+      --sumi: #2B2B2B;
+      --sumi-soft: #55504A;
+      --bengara: #9E3B2F;
+      --bengara-deep: #83291F;
+      --kin: #C0A062;
+      --kin-pale: #E5D9BF;
+      --line: #E3DCD0;
+      --serif: "Zen Old Mincho", "Hiragino Mincho ProN", serif;
+      --sans: "Noto Sans JP", "Hiragino Kaku Gothic ProN", sans-serif;
+      --maxw: 1080px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 4.5rem;
+    }
+
+    body {
+      font-family: var(--sans);
+      font-size: 1rem;
+      line-height: 1.9;
+      color: var(--sumi);
+      background: var(--white);
+      -webkit-font-smoothing: antialiased;
+      overflow-wrap: anywhere;
+    }
+
+    img, svg { max-width: 100%; height: auto; display: block; }
+    a { color: var(--bengara); }
+    a:hover { opacity: .8; }
+
+    h1, h2, h3 { font-family: var(--serif); font-weight: 500; line-height: 1.5; }
+
+    .skip-link {
+      position: absolute; left: -9999px; top: 0;
+      background: var(--sumi); color: var(--white); padding: .5em 1em; z-index: 200;
+    }
+    .skip-link:focus { left: 0; }
+
+    .container {
+      max-width: var(--maxw);
+      margin-inline: auto;
+      padding-inline: 1.25rem;
+    }
+
+    /* ---- 沈金風の点線モチーフ ---- */
+    .tenten {
+      display: flex; justify-content: center; gap: .6rem;
+      margin: 0 auto 1.5rem;
+    }
+    .tenten i {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--kin);
+    }
+    .tenten i:nth-child(2) { background: var(--bengara); }
+
+    /* ==================== ヘッダー ==================== */
+    .site-header {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255, 255, 255, .94);
+      backdrop-filter: blur(6px);
+      border-bottom: 1px solid var(--line);
+    }
+    .site-header__inner {
+      max-width: var(--maxw); margin-inline: auto;
+      padding: .8rem 1.25rem;
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    }
+    .brand { text-decoration: none; color: var(--sumi); line-height: 1.35; }
+    .brand__main { font-family: var(--serif); font-size: 1.05rem; letter-spacing: .06em; display: block; }
+    .brand__sub { font-size: .68rem; color: var(--sumi-soft); letter-spacing: .12em; display: block; }
+
+    .nav-toggle {
+      display: inline-flex; flex-direction: column; justify-content: center; gap: 5px;
+      width: 44px; height: 44px; padding: 10px;
+      background: none; border: 1px solid var(--line); border-radius: 6px;
+      cursor: pointer;
+    }
+    .nav-toggle span {
+      display: block; height: 2px; width: 100%;
+      background: var(--sumi); transition: transform .25s, opacity .25s;
+    }
+    .nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+    .nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .site-nav {
+      display: none;
+      position: absolute; top: 100%; left: 0; right: 0;
+      background: var(--white); border-bottom: 1px solid var(--line);
+      padding: .5rem 1.25rem 1.25rem;
+    }
+    .site-nav.is-open { display: block; }
+    .site-nav ul { list-style: none; }
+    .site-nav a {
+      display: block; padding: .7rem .25rem;
+      color: var(--sumi); text-decoration: none;
+      border-bottom: 1px dotted var(--line);
+      font-size: .95rem;
+    }
+    .site-nav a.nav-cta { color: var(--bengara); font-weight: 500; }
+
+    @media (min-width: 880px) {
+      .nav-toggle { display: none; }
+      .site-nav {
+        display: block; position: static; border: none; padding: 0; background: none;
+      }
+      .site-nav ul { display: flex; gap: 1.4rem; }
+      .site-nav a { border: none; padding: .3rem 0; font-size: .88rem; letter-spacing: .04em; }
+    }
+
+    /* ==================== セクション共通 ==================== */
+    .section { padding: 4rem 0; }
+    .section--kinari { background: var(--kinari); }
+    .section-head { text-align: center; margin-bottom: 2.5rem; }
+    .section-head .en {
+      display: block; font-size: .72rem; letter-spacing: .28em;
+      color: var(--kin); text-transform: uppercase; margin-bottom: .6rem;
+      font-weight: 500;
+    }
+    .section-head h2 { font-size: 1.6rem; letter-spacing: .08em; }
+    .section-head .lead {
+      max-width: 38em; margin: 1.2rem auto 0;
+      font-size: .95rem; color: var(--sumi-soft); text-align: left;
+    }
+    @media (min-width: 880px) {
+      .section { padding: 5.5rem 0; }
+      .section-head h2 { font-size: 1.9rem; }
+      .section-head .lead { text-align: center; }
+    }
+
+    /* ---- ダミー表記バッジ ---- */
+    .tbc {
+      display: inline-block;
+      font-size: .68rem; color: var(--sumi-soft);
+      border: 1px solid var(--line); border-radius: 3px;
+      padding: 0 .4em; margin-left: .4em;
+      vertical-align: middle; white-space: nowrap;
+      font-family: var(--sans);
+    }
+
+    /* ---- 写真プレースホルダー ---- */
+    .ph {
+      position: relative;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(192,160,98,.14), transparent 60%),
+        var(--kinari-deep);
+      border: 1px dashed var(--kin);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: 1rem;
+      color: var(--sumi-soft); font-size: .78rem; line-height: 1.7;
+    }
+    .ph::before {
+      content: ""; position: absolute; inset: 8px;
+      border: 1px dotted var(--kin-pale); border-radius: 5px;
+      pointer-events: none;
+    }
+    .ph strong { display: block; font-weight: 500; color: var(--sumi); font-size: .82rem; margin-bottom: .2rem; }
+
+    /* ==================== ヒーロー ==================== */
+    .hero {
+      background: linear-gradient(180deg, var(--white) 0%, var(--kinari) 100%);
+      padding: 4rem 0 4.5rem;
+      border-bottom: 1px solid var(--line);
+    }
+    .hero__inner { display: grid; gap: 2.5rem; }
+    .hero__copy { text-align: center; }
+    .hero__kicker {
+      font-size: .8rem; letter-spacing: .2em; color: var(--bengara);
+      margin-bottom: 1.4rem; font-weight: 500;
+    }
+    .hero h1 {
+      font-size: clamp(1.7rem, 5.5vw, 2.7rem);
+      letter-spacing: .1em; line-height: 1.7;
+      margin-bottom: 1.2rem;
+    }
+    .hero__sub {
+      font-size: .95rem; color: var(--sumi-soft);
+      max-width: 28em; margin-inline: auto;
+    }
+    .hero__cta {
+      margin-top: 2.2rem;
+      display: flex; flex-direction: column; align-items: center; gap: .9rem;
+    }
+    .btn {
+      display: inline-block;
+      font-family: var(--sans); font-size: .95rem; font-weight: 500;
+      letter-spacing: .08em; text-decoration: none; text-align: center;
+      padding: .95em 2.6em; border-radius: 999px;
+      transition: opacity .2s, transform .2s;
+      min-width: 240px;
+    }
+    .btn:hover { opacity: .88; transform: translateY(-1px); }
+    .btn--primary { background: var(--bengara); color: var(--white); }
+    .btn--secondary {
+      background: var(--white); color: var(--sumi);
+      border: 1px solid var(--sumi);
+    }
+    .hero__ph { aspect-ratio: 16 / 10; }
+    @media (min-width: 880px) {
+      .hero { padding: 5.5rem 0 6rem; }
+      .hero__inner { grid-template-columns: 1.05fr .95fr; align-items: center; gap: 3.5rem; }
+      .hero__copy { text-align: left; }
+      .hero__sub { margin-inline: 0; }
+      .hero__cta { flex-direction: row; align-items: flex-start; }
+    }
+
+    /* ==================== 商品カード ==================== */
+    .chinkin-note {
+      max-width: 42em; margin: 0 auto 2.8rem;
+      background: var(--white); border: 1px solid var(--line); border-radius: 8px;
+      padding: 1.4rem 1.5rem;
+      font-size: .92rem; color: var(--sumi-soft);
+    }
+    .chinkin-note dt {
+      font-family: var(--serif); font-size: 1.05rem; color: var(--sumi);
+      margin-bottom: .5rem; letter-spacing: .06em;
+    }
+    .products {
+      display: grid; gap: 1.6rem;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      list-style: none;
+    }
+    .product-card {
+      background: var(--white); border: 1px solid var(--line); border-radius: 10px;
+      overflow: hidden;
+      display: flex; flex-direction: column;
+    }
+    .product-card .ph { aspect-ratio: 4 / 3; border: none; border-bottom: 1px dashed var(--kin); border-radius: 0; }
+    .product-card .ph::before { border-radius: 0; }
+    .product-card__body { padding: 1.2rem 1.3rem 1.4rem; display: flex; flex-direction: column; gap: .4rem; flex: 1; }
+    .product-card h3 { font-size: 1.08rem; letter-spacing: .05em; }
+    .product-card .desc { font-size: .85rem; color: var(--sumi-soft); flex: 1; }
+    .product-card .price {
+      font-family: var(--serif); font-size: 1rem; color: var(--sumi);
+      border-top: 1px dotted var(--line); padding-top: .7rem; margin-top: .5rem;
+    }
+    .order-note {
+      margin-top: 2.2rem; text-align: center; font-size: .92rem;
+    }
+    .order-note a { font-weight: 500; }
+
+    /* ==================== 金継ぎ ==================== */
+    .kintsugi-value {
+      max-width: 40em; margin: 0 auto 3rem;
+      font-size: .95rem;
+    }
+    .steps {
+      list-style: none; counter-reset: step;
+      display: grid; gap: 1.4rem;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      margin-bottom: 2.5rem;
+    }
+    .steps li {
+      counter-increment: step;
+      background: var(--white); border: 1px solid var(--line); border-radius: 10px;
+      padding: 1.6rem 1.4rem 1.5rem; position: relative;
+    }
+    .steps li::before {
+      content: counter(step);
+      display: flex; align-items: center; justify-content: center;
+      width: 2.4rem; height: 2.4rem; border-radius: 50%;
+      background: var(--kinari); border: 1px solid var(--kin);
+      color: var(--bengara); font-family: var(--serif); font-size: 1.15rem;
+      margin-bottom: .9rem;
+    }
+    .steps h3 { font-size: 1.05rem; margin-bottom: .5rem; letter-spacing: .04em; }
+    .steps p { font-size: .85rem; color: var(--sumi-soft); }
+    .kintsugi-cta { text-align: center; }
+
+    /* ==================== 良さ4点 ==================== */
+    .merits {
+      list-style: none;
+      display: grid; gap: 1.4rem;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+    .merits li {
+      background: var(--white); border: 1px solid var(--line); border-radius: 10px;
+      padding: 1.6rem 1.5rem;
+    }
+    .merits h3 {
+      font-size: 1.05rem; letter-spacing: .04em; margin-bottom: .6rem;
+      padding-bottom: .6rem; border-bottom: 1px dotted var(--kin);
+    }
+    .merits p { font-size: .88rem; color: var(--sumi-soft); }
+    .column-box {
+      margin-top: 2.4rem;
+      border-left: 3px solid var(--kin);
+      background: var(--white);
+      padding: 1.1rem 1.4rem;
+      font-size: .88rem; color: var(--sumi-soft);
+    }
+    .column-box b { color: var(--sumi); font-weight: 500; }
+
+    /* ==================== お手入れ ==================== */
+    .care-message {
+      text-align: center; font-family: var(--serif);
+      font-size: 1.25rem; letter-spacing: .1em;
+      margin-bottom: 2.2rem;
+    }
+    .care-list {
+      max-width: 42em; margin-inline: auto;
+      list-style: none;
+      background: var(--kinari); border-radius: 10px;
+      padding: 1.6rem 1.5rem;
+    }
+    .care-list li {
+      display: flex; gap: .9rem; align-items: flex-start;
+      padding: .85rem .2rem;
+      font-size: .92rem;
+    }
+    .care-list li + li { border-top: 1px dotted var(--line); }
+    .care-list .mark {
+      flex: none; margin-top: .55em;
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--kin);
+    }
+    .care-list li.ng .mark { background: var(--bengara); }
+    .care-list b { font-weight: 500; }
+    .care-source {
+      max-width: 42em; margin: 1rem auto 0;
+      font-size: .78rem; color: var(--sumi-soft); text-align: right;
+    }
+    .care-back {
+      max-width: 42em; margin: 2.2rem auto 0;
+      background: var(--white); border: 1px solid var(--kin-pale); border-radius: 8px;
+      padding: 1.2rem 1.4rem; font-size: .92rem; text-align: center;
+    }
+
+    /* ==================== つくり手 ==================== */
+    .maker { display: grid; gap: 2rem; max-width: 780px; margin-inline: auto; }
+    .maker__ph { aspect-ratio: 4 / 5; max-width: 260px; margin-inline: auto; width: 100%; }
+    .maker__text { font-size: .95rem; }
+    .maker__text h3 {
+      font-size: 1.3rem; letter-spacing: .08em; margin-bottom: 1rem;
+    }
+    .maker__text .title-line { font-size: .8rem; color: var(--kin); letter-spacing: .18em; display: block; margin-bottom: .3rem; }
+    .maker__text p { margin-bottom: 1rem; color: var(--sumi-soft); }
+    .maker__text p:last-of-type { margin-bottom: 0; }
+    .maker__link { font-size: .88rem; margin-top: 1.2rem; }
+    @media (min-width: 720px) {
+      .maker { grid-template-columns: 260px 1fr; align-items: start; }
+      .maker__ph { margin-inline: 0; }
+    }
+
+    /* ==================== FAQ ==================== */
+    .faq { max-width: 46em; margin-inline: auto; }
+    .faq details {
+      background: var(--white); border: 1px solid var(--line); border-radius: 8px;
+      margin-bottom: .9rem; overflow: hidden;
+    }
+    .faq summary {
+      cursor: pointer; list-style: none;
+      padding: 1.05rem 3rem 1.05rem 1.3rem;
+      font-weight: 500; font-size: .95rem; position: relative;
+    }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary::before {
+      content: "Q"; font-family: var(--serif); color: var(--bengara);
+      margin-right: .7em;
+    }
+    .faq summary::after {
+      content: "+"; position: absolute; right: 1.2rem; top: 50%;
+      transform: translateY(-50%);
+      color: var(--kin); font-size: 1.3rem; font-family: var(--serif);
+    }
+    .faq details[open] summary::after { content: "−"; }
+    .faq .answer {
+      padding: 0 1.3rem 1.2rem; font-size: .9rem; color: var(--sumi-soft);
+      border-top: 1px dotted var(--line); padding-top: 1rem; margin: 0 1.3rem 1.2rem; padding-inline: 0;
+    }
+
+    /* ==================== お問い合わせ ==================== */
+    .contact-grid { display: grid; gap: 2.5rem; max-width: 900px; margin-inline: auto; }
+    .contact-form {
+      background: var(--white); border: 1px solid var(--line); border-radius: 10px;
+      padding: 1.8rem 1.5rem;
+    }
+    .contact-form .form-note {
+      font-size: .8rem; color: var(--sumi-soft); margin-bottom: 1.4rem;
+    }
+    .field { margin-bottom: 1.2rem; }
+    .field label { display: block; font-size: .85rem; font-weight: 500; margin-bottom: .4rem; }
+    .field .req { color: var(--bengara); font-size: .75rem; margin-left: .3em; }
+    .field input, .field select, .field textarea {
+      width: 100%; font: inherit; font-size: .95rem;
+      padding: .7em .9em;
+      border: 1px solid var(--line); border-radius: 6px;
+      background: var(--kinari);
+      color: var(--sumi);
+    }
+    .field input:focus, .field select:focus, .field textarea:focus {
+      outline: 2px solid var(--kin); background: var(--white);
+    }
+    .field textarea { min-height: 8em; resize: vertical; }
+    .contact-form button { border: none; cursor: pointer; width: 100%; }
+    .contact-aside { font-size: .9rem; }
+    .contact-aside h3 { font-size: 1.05rem; margin-bottom: .8rem; letter-spacing: .05em; }
+    .sns-list { list-style: none; margin-top: .5rem; }
+    .sns-list li { padding: .5rem 0; border-bottom: 1px dotted var(--line); }
+    .sns-list a { text-decoration: none; font-weight: 500; }
+    .sns-list .sns-note { font-size: .78rem; color: var(--sumi-soft); display: block; }
+    @media (min-width: 880px) {
+      .contact-grid { grid-template-columns: 1.2fr .8fr; align-items: start; }
+    }
+
+    /* ==================== フッター ==================== */
+    .site-footer {
+      background: var(--kinari-deep);
+      border-top: 1px solid var(--line);
+      padding: 2.5rem 0 2rem;
+      text-align: center;
+      font-size: .8rem; color: var(--sumi-soft);
+    }
+    .site-footer .brand__main { font-size: 1rem; }
+    .site-footer nav { margin: 1.2rem 0; }
+    .site-footer nav a {
+      color: var(--sumi-soft); text-decoration: none; margin: 0 .7em; font-size: .8rem;
+    }
+    .site-footer .copy { margin-top: 1.2rem; letter-spacing: .05em; }
+
+    /* ---- ふわっと表示(JS無効時も表示される) ---- */
+    .reveal { opacity: 0; transform: translateY(14px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.is-visible, .no-observer .reveal { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">本文へ進む</a>
+
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="brand" href="#top">
+        <span class="brand__main">春日友子の暮らしの道具</span>
+        <span class="brand__sub">CHINKIN &amp; KINTSUGI — KASUGA YUKO</span>
+      </a>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="メニューを開く">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="site-nav" id="site-nav" aria-label="ページ内メニュー">
+        <ul>
+          <li><a href="#products">うつわ</a></li>
+          <li><a href="#kintsugi">金継ぎ</a></li>
+          <li><a href="#merits">漆器の良さ</a></li>
+          <li><a href="#care">お手入れ</a></li>
+          <li><a href="#maker">つくり手</a></li>
+          <li><a href="#faq">よくある質問</a></li>
+          <li><a href="#contact" class="nav-cta">お問い合わせ</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ==================== (1) ヒーロー ==================== -->
+    <section class="hero" id="top">
+      <div class="container hero__inner">
+        <div class="hero__copy">
+          <p class="hero__kicker">沈金師・春日友子の、うつわのお店</p>
+          <h1>毎日の食卓に、<br>少しだけ特別を。</h1>
+          <p class="hero__sub">
+            沈金師がつくる、ふだん使いの箸と漆器。<br>
+            欠けた器・割れた器の金継ぎのご相談も、どうぞお気軽に。
+          </p>
+          <div class="hero__cta">
+            <a class="btn btn--primary" href="#products">うつわを見る</a>
+            <a class="btn btn--secondary" href="#kintsugi">金継ぎを相談する</a>
+          </div>
+        </div>
+        <div class="ph hero__ph">
+          <p>
+            <strong>写真イメージ（差し替え予定）</strong>
+            朝の食卓。ごはんと味噌汁のそばに置かれた、金の線が細くきらめく沈金の箸。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== (2) 商品紹介 ==================== -->
+    <section class="section" id="products" aria-labelledby="products-heading">
+      <div class="container">
+        <div class="section-head">
+          <div class="tenten" aria-hidden="true"><i></i><i></i><i></i></div>
+          <span class="en">Chinkin Tableware</span>
+          <h2 id="products-heading">沈金の箸と漆器</h2>
+          <p class="lead">
+            ハレの日のためだけの器ではなく、今日の食卓から使っていただきたい。
+            そんな想いでつくっている、ふだん使いの品々です。
+          </p>
+        </div>
+
+        <dl class="chinkin-note reveal">
+          <dt>沈金（ちんきん）って、なんですか？</dt>
+          <dd>
+            漆を塗って仕上げた表面に、ノミで髪の毛ほどの細い線を彫り、
+            その溝に金を沈めて模様を描く——輪島に伝わる伝統の飾り方です。
+            金は表面に「のっている」のではなく、彫った線の中に「しまわれている」ので、
+            毎日使ってもすぐに剥がれてしまうような装飾ではありません。
+          </dd>
+        </dl>
+
+        <ul class="products">
+          <li class="product-card reveal">
+            <div class="ph">
+              <p><strong>写真イメージ（差し替え予定）</strong>箸置きにかかった夫婦箸。持ち手に草花の沈金。</p>
+            </div>
+            <div class="product-card__body">
+              <h3>沈金箸（一膳）</h3>
+              <p class="desc">まずはここから、という方に。持ち手に小さな草花の模様を彫った、毎日使いの箸です。色・柄違いで夫婦箸にも。</p>
+              <p class="price">¥0,000 <span class="tbc">価格ダミー・要確認</span></p>
+            </div>
+          </li>
+          <li class="product-card reveal">
+            <div class="ph">
+              <p><strong>写真イメージ（差し替え予定）</strong>手のひらに包まれた汁椀。湯気の立つ味噌汁。</p>
+            </div>
+            <div class="product-card__body">
+              <h3>汁椀</h3>
+              <p class="desc">軽くて、熱い味噌汁を入れてもそのまま持てる。漆の椀の良さがいちばん伝わる定番。縁にひとすじの沈金を。</p>
+              <p class="price">¥00,000 <span class="tbc">価格ダミー・要確認</span></p>
+            </div>
+          </li>
+          <li class="product-card reveal">
+            <div class="ph">
+              <p><strong>写真イメージ（差し替え予定）</strong>菓子と豆皿。木漏れ日のような金の点模様。</p>
+            </div>
+            <div class="product-card__body">
+              <h3>豆皿・小皿</h3>
+              <p class="desc">お菓子に、薬味に、アクセサリーの置き場所に。食卓の景色がふっと変わる、小さな一枚です。</p>
+              <p class="price">¥0,000 <span class="tbc">価格ダミー・要確認</span></p>
+            </div>
+          </li>
+          <li class="product-card reveal">
+            <div class="ph">
+              <p><strong>写真イメージ（差し替え予定）</strong>名前の入った箸と桐箱。贈り物の包み紙。</p>
+            </div>
+            <div class="product-card__body">
+              <h3>名入れ箸（贈り物に）</h3>
+              <p class="desc">お名前やひとことを沈金で彫り込みます。結婚のお祝い、両親への贈り物、退職の記念などに選ばれています。</p>
+              <p class="price">¥0,000〜 <span class="tbc">価格ダミー・要確認</span></p>
+            </div>
+          </li>
+        </ul>
+
+        <p class="order-note reveal">
+          名入れ・柄のオーダーもご相談いただけます。「こんな模様を」というご希望は<a href="#contact">お問い合わせ</a>からどうぞ。
+        </p>
+      </div>
+    </section>
+
+    <!-- ==================== (3) 金継ぎ ==================== -->
+    <section class="section section--kinari" id="kintsugi" aria-labelledby="kintsugi-heading">
+      <div class="container">
+        <div class="section-head">
+          <div class="tenten" aria-hidden="true"><i></i><i></i><i></i></div>
+          <span class="en">Kintsugi Repair</span>
+          <h2 id="kintsugi-heading">割れた・欠けた器、<br>捨てる前にご相談ください</h2>
+        </div>
+
+        <div class="kintsugi-value reveal">
+          <p>
+            金継ぎは、割れやひびを漆でつなぎ、継ぎ目に金を施す日本の修理の文化です。
+            壊れた跡を隠すのではなく、その跡ごと「景色」として美しくする——
+            思い出のある器が、割れる前とはまた違う表情で、もう一度食卓に戻ってきます。
+          </p>
+        </div>
+
+        <ol class="steps">
+          <li class="reveal">
+            <h3>写真を送ってご相談</h3>
+            <p>器の全体と、割れ・欠けの部分の写真をお送りください。「直せるかどうか」の段階からで大丈夫です。相談は無料です。<span class="tbc">要確認</span></p>
+          </li>
+          <li class="reveal">
+            <h3>お見積り</h3>
+            <p>器の状態と大きさから、料金と仕上がりまでの期間の目安をお伝えします。内容にご納得いただいてから器をお送りいただきます。</p>
+          </li>
+          <li class="reveal">
+            <h3>修理・お届け</h3>
+            <p>漆を使った本格的な金継ぎは、乾かしては重ねる作業の繰り返し。数か月単位のお時間をいただきます。<span class="tbc">納期ダミー・要確認</span></p>
+          </li>
+        </ol>
+
+        <div class="kintsugi-cta reveal">
+          <a class="btn btn--primary" href="#contact">金継ぎを相談する</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== (4) 和食器・漆器の良さ ==================== -->
+    <section class="section" id="merits" aria-labelledby="merits-heading">
+      <div class="container">
+        <div class="section-head">
+          <div class="tenten" aria-hidden="true"><i></i><i></i><i></i></div>
+          <span class="en">Why Lacquerware</span>
+          <h2 id="merits-heading">改めて知る、漆の器の良さ</h2>
+          <p class="lead">
+            「高級そう」「扱いがむずかしそう」——じつはその逆で、
+            漆の器はもともと、毎日の暮らしのための道具です。
+          </p>
+        </div>
+
+        <ul class="merits">
+          <li class="reveal">
+            <h3>軽くて、口当たりがやさしい</h3>
+            <p>木でできた漆の器はとても軽く、手のひらになじみます。縁に口をつけたときの、陶器とも金属とも違うやわらかな感触は、汁椀でいちばんよくわかります。</p>
+          </li>
+          <li class="reveal">
+            <h3>熱い汁物を入れても、持てる</h3>
+            <p>木は熱を伝えにくい素材。熱々の味噌汁を注いでも椀を手で持つことができ、中身は冷めにくい。汁物のための器として、理にかなったつくりです。</p>
+          </li>
+          <li class="reveal">
+            <h3>天然の漆には抗菌性がある</h3>
+            <p>漆の塗膜に抗菌性があることは、公的な研究機関の試験でも報告されています※。じつは日々の食卓にこそ向いている素材です。</p>
+          </li>
+          <li class="reveal">
+            <h3>直しながら、何十年も使える</h3>
+            <p>塗り直しや金継ぎで手を入れながら、親から子へと使い続けられるのが漆器です。「買い替える器」ではなく「直して使い続ける器」——ものを大切にしたい今の暮らしに、むしろ新しい選択肢です。</p>
+          </li>
+        </ul>
+
+        <aside class="column-box reveal">
+          <b>ちいさな豆知識</b> —— かつてヨーロッパでは、漆器全般が「japan」と呼ばれていました。磁器が「china」なら、漆器は「japan」。それほど漆の器は、日本を代表する道具だったのです。
+        </aside>
+        <p class="care-source reveal">※ 例：岩手県工業技術センター「漆塗膜の抗菌性の検証」（研究報告第16号、2009年）ほか。特定の菌を対象とした試験条件下での結果であり、あらゆる菌への効果を保証するものではありません。</p>
+      </div>
+    </section>
+
+    <!-- ==================== (5) お手入れ ==================== -->
+    <section class="section section--kinari" id="care" aria-labelledby="care-heading">
+      <div class="container">
+        <div class="section-head">
+          <div class="tenten" aria-hidden="true"><i></i><i></i><i></i></div>
+          <span class="en">Daily Care</span>
+          <h2 id="care-heading">漆器のお手入れは、むずかしくない</h2>
+          <p class="lead">
+            特別な道具も、特別な手間もいりません。
+            ほかの食器とほとんど同じ。気をつけることは、じつはこれだけです。
+          </p>
+        </div>
+
+        <p class="care-message reveal">「洗って、拭く」。ほぼ、それだけです。</p>
+
+        <ul class="care-list reveal">
+          <li>
+            <span class="mark" aria-hidden="true"></span>
+            <span><b>ふだんの洗いもの：</b>中性洗剤と、やわらかいスポンジでOK。ほかの食器と一緒で大丈夫です。たわしや磨き粉だけは避けてください。</span>
+          </li>
+          <li>
+            <span class="mark" aria-hidden="true"></span>
+            <span><b>洗ったあと：</b>やわらかい布で水気をさっと拭き取ります。これがいちばんのツヤの秘訣です。</span>
+          </li>
+          <li class="ng">
+            <span class="mark" aria-hidden="true"></span>
+            <span><b>避けたいこと：</b>食洗機・電子レンジ・長時間のつけ置き。漆の器が苦手なのは、この3つくらいです。</span>
+          </li>
+          <li>
+            <span class="mark" aria-hidden="true"></span>
+            <span><b>しまうとき：</b>直射日光と極端な乾燥を避けて。食器棚にふつうにしまっていただければ十分です。</span>
+          </li>
+          <li>
+            <span class="mark" aria-hidden="true"></span>
+            <span><b>カサついてきたら：</b>しまい込まず、むしろ使ってください。使って、洗って、拭く——その繰り返しでツヤが戻っていきます。「使うこと」が、いちばんのお手入れです。</span>
+          </li>
+        </ul>
+        <p class="care-source reveal">お手入れの基本は、消費者庁「家庭用品品質表示法」の漆器の取扱い表示基準に沿っています。</p>
+
+        <div class="care-back reveal">
+          それでも、うっかり欠けたり割れたりすることはあります。<br>
+          そのときは捨てずに——<a href="#kintsugi">金継ぎで直せます</a>。
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== (6) つくり手 ==================== -->
+    <section class="section" id="maker" aria-labelledby="maker-heading">
+      <div class="container">
+        <div class="section-head">
+          <div class="tenten" aria-hidden="true"><i></i><i></i><i></i></div>
+          <span class="en">Maker</span>
+          <h2 id="maker-heading">つくり手のこと</h2>
+        </div>
+
+        <div class="maker">
+          <div class="ph maker__ph reveal">
+            <p><strong>写真イメージ（差し替え予定）</strong>作業場でノミを持つ手元。あたたかい自然光。</p>
+          </div>
+          <div class="maker__text reveal">
+            <h3><span class="title-line">沈金師</span>春日 友子<span style="font-size:.7em; color:var(--sumi-soft); margin-left:.6em;">かすが ゆうこ</span></h3>
+            <p>
+              輪島塗のふるさと・石川県輪島市で漆芸を学び、人間国宝（重要無形文化財「沈金」保持者）・前史雄氏に師事。
+              以来、ノミ一本で漆に模様を彫り、金を沈める沈金の仕事を続けています。
+            </p>
+            <p>
+              百貨店の和食器売場で実演販売をしていた頃から、変わらない想いがあります。
+              それは、漆器を棚の奥にしまわれる「特別なもの」ではなく、
+              日々の暮らしの中でこそ使ってほしい、ということ。
+              毎日手に取るものだからこそ、そこに小さな美しさを彫り込みたいと思っています。
+            </p>
+            <p class="maker__link">
+              アーティストとしての作品・展覧会情報は、<a href="https://chinkinshi-yuko.art/" rel="noopener">作家サイト</a>でご覧いただけます。<span class="tbc">URL要確認</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== (7) よくある質問 ==================== -->
+    <section class="section section--kinari" id="faq" aria-labelledby="faq-heading">
+      <div class="container">
+        <div class="section-head">
+          <div class="tenten" aria-hidden="true"><i></i><i></i><i></i></div>
+          <span class="en">FAQ</span>
+          <h2 id="faq-heading">よくある質問</h2>
+        </div>
+
+        <div class="faq">
+          <details class="reveal">
+            <summary>金継ぎの料金と納期の目安を教えてください。</summary>
+            <p class="answer">
+              器の大きさと壊れ方（欠け・ひび・割れの数）によって変わるため、写真を拝見してからお見積りしています。
+              目安の料金・期間は現在準備中です。<span class="tbc">料金・納期ダミー・要確認</span>
+              本漆を使う金継ぎは乾燥と重ねの繰り返しのため、数か月単位のお時間をいただくことが多いです。
+            </p>
+          </details>
+          <details class="reveal">
+            <summary>漆かぶれは大丈夫ですか？</summary>
+            <p class="answer">
+              かぶれの原因になるのは、乾く前の「生の漆」です。しっかりと硬化させて仕上げた漆器や金継ぎの器で、
+              ふだんの使用によりかぶれることは基本的にありません。ごくまれに肌の敏感な方が反応する場合はありますので、
+              ご心配な方はご相談ください。
+            </p>
+          </details>
+          <details class="reveal">
+            <summary>ギフト包装はできますか？</summary>
+            <p class="answer">
+              贈り物用の包装・熨斗などの対応は準備中です。<span class="tbc">要確認</span>
+              名入れ箸など、お祝いの品のご相談はお問い合わせフォームからお気軽にどうぞ。
+            </p>
+          </details>
+          <details class="reveal">
+            <summary>食洗機や電子レンジは使えますか？</summary>
+            <p class="answer">
+              申し訳ありませんが、どちらも避けてください。急な熱と乾燥は漆の器がいちばん苦手とするものです。
+              手洗いといっても、中性洗剤とスポンジでさっと洗って拭くだけ——詳しくは<a href="#care">お手入れ方法</a>をご覧ください。
+            </p>
+          </details>
+          <details class="reveal">
+            <summary>どんな器でも金継ぎできますか？</summary>
+            <p class="answer">
+              陶器・磁器の欠け、ひび、数片程度の割れは多くの場合ご相談いただけます。
+              粉々に割れてしまったものや、ガラスなど素材によっては難しい場合もありますので、
+              まずは写真を添えてご相談ください。
+            </p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== (8) お問い合わせ ==================== -->
+    <section class="section" id="contact" aria-labelledby="contact-heading">
+      <div class="container">
+        <div class="section-head">
+          <div class="tenten" aria-hidden="true"><i></i><i></i><i></i></div>
+          <span class="en">Contact</span>
+          <h2 id="contact-heading">お問い合わせ</h2>
+          <p class="lead">
+            うつわのこと、名入れやオーダーのこと、金継ぎのこと。
+            「これって相談していいのかな？」という段階から、どうぞお気軽に。
+          </p>
+        </div>
+
+        <div class="contact-grid">
+          <form class="contact-form reveal" action="#" method="post">
+            <p class="form-note">
+              ※ このフォームは現在準備中のため、まだ送信できません。<span class="tbc">送信先・要確認</span>
+            </p>
+            <div class="field">
+              <label for="f-name">お名前<span class="req">必須</span></label>
+              <input id="f-name" name="name" type="text" autocomplete="name" placeholder="例）山田 花子">
+            </div>
+            <div class="field">
+              <label for="f-email">メールアドレス<span class="req">必須</span></label>
+              <input id="f-email" name="email" type="email" autocomplete="email" placeholder="例）hanako@example.com">
+            </div>
+            <div class="field">
+              <label for="f-topic">ご相談の種類</label>
+              <select id="f-topic" name="topic">
+                <option>うつわの購入について</option>
+                <option>名入れ・オーダーについて</option>
+                <option>金継ぎの相談（写真は後ほどお送りください）</option>
+                <option>その他</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="f-message">ご相談内容</label>
+              <textarea id="f-message" name="message" placeholder="例）祖母から譲り受けた小鉢が欠けてしまいました。直せるか相談したいです。"></textarea>
+            </div>
+            <button class="btn btn--primary" type="submit">送信する（準備中）</button>
+          </form>
+
+          <aside class="contact-aside reveal">
+            <h3>SNSでも発信しています</h3>
+            <p>制作の様子や、器のある食卓の風景をお届けしています。</p>
+            <ul class="sns-list">
+              <li>
+                <a href="#" rel="noopener">Facebook</a>
+                <span class="sns-note">「沈金師 春日友子」で検索<span class="tbc">URL要確認</span></span>
+              </li>
+              <li>
+                <a href="https://note.com/chinkinshi_yuko" rel="noopener">note</a>
+                <span class="sns-note">エッセイ・制作の記録<span class="tbc">URL要確認</span></span>
+              </li>
+            </ul>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <span class="brand__main">春日友子の暮らしの道具</span>
+      <nav aria-label="フッターメニュー">
+        <a href="#products">うつわ</a><a href="#kintsugi">金継ぎ</a><a href="#care">お手入れ</a><a href="#faq">よくある質問</a><a href="#contact">お問い合わせ</a>
+      </nav>
+      <p>特定商取引法に基づく表記・所在地などの情報は、販売開始時に掲載します。<span class="tbc">要確認</span></p>
+      <p class="copy">&copy; Kasuga Yuko. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      // ハンバーガーメニュー開閉
+      var toggle = document.querySelector('.nav-toggle');
+      var nav = document.getElementById('site-nav');
+      toggle.addEventListener('click', function () {
+        var open = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', String(!open));
+        toggle.setAttribute('aria-label', open ? 'メニューを開く' : 'メニューを閉じる');
+        nav.classList.toggle('is-open', !open);
+      });
+      // ナビのリンクを押したら閉じる(モバイル)
+      nav.addEventListener('click', function (e) {
+        if (e.target.tagName === 'A') {
+          toggle.setAttribute('aria-expanded', 'false');
+          nav.classList.remove('is-open');
+        }
+      });
+
+      // ふわっと表示(対応していない環境ではCSS側で常時表示)
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              io.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12 });
+        document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+      } else {
+        document.documentElement.classList.add('no-observer');
+      }
+
+      // フォームは準備中(ダミー): 送信させない
+      var form = document.querySelector('.contact-form');
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        alert('お問い合わせフォームは現在準備中です。恐れ入りますが、SNSのメッセージなどからご連絡ください。');
+      });
+    })();
+  </script>
+</body>
+</html>
