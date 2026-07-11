@@ -21,8 +21,7 @@
   }
   header{ padding:20px 24px 16px; background:var(--panel); border-bottom:1px solid var(--line); }
 
-  .poc-guide{ background:#eef4f0; border-bottom:1px solid var(--line); }
-  .poc-guide-inner{ padding:18px 24px 20px; }
+  .guide-modal{ max-width:520px; }
   .poc-tag{
     display:inline-block; background:var(--green-deep); color:#fff;
     font-size:.74rem; font-weight:700; padding:3px 12px; border-radius:999px; margin-bottom:10px;
@@ -31,7 +30,13 @@
   .poc-list{ margin:0 0 10px; padding-left:1.2em; font-size:.82rem; color:var(--ink); }
   .poc-list li{ margin-bottom:5px; }
   .poc-list strong{ color:var(--green-deep); }
-  .poc-privacy{ margin:0; font-size:.78rem; color:var(--muted); }
+  .poc-privacy{ margin:0 0 14px; font-size:.78rem; color:var(--muted); }
+  .guide-actions{ text-align:center; padding-top:6px; border-top:1px dashed var(--line); margin-top:4px; }
+  .guide-ok{
+    margin-top:12px; border:1px solid var(--green-deep); background:var(--green-deep); color:#fff;
+    font-family:inherit; font-size:.88rem; font-weight:700; padding:10px 24px; border-radius:999px; cursor:pointer;
+  }
+  .guide-ok:hover{ background:#3d6350; }
   header h1{margin:0; font-size:1.2rem; font-weight:700;}
   header p{margin:5px 0 0; font-size:.82rem; color:var(--muted);}
   .demo-badge{ display:inline-block; margin-left:8px; padding:1px 9px; border-radius:999px;
@@ -71,6 +76,64 @@
   .sw.blocked{background:var(--blocked);}
 
   main{padding:20px 16px 40px;}
+
+  /* 設備情報アコーディオン（強調） */
+  .acc-wrap{ padding:16px 16px 0; }
+  .accordion{ background:#fff; border:2px solid var(--green); border-radius:12px; overflow:hidden;
+    margin-bottom:0; box-shadow:0 3px 12px rgba(79,122,98,.16); }
+  .acc-toggle{
+    width:100%; border:0; background:var(--green-deep);
+    font-family:inherit; font-size:1rem; font-weight:700; color:#fff;
+    padding:15px 20px; cursor:pointer; display:flex; align-items:center; justify-content:space-between; gap:10px;
+  }
+  .acc-toggle:hover{ background:#3d6350; }
+  .acc-toggle .acc-label{ display:flex; align-items:center; gap:9px; }
+  .acc-icon{ transition:transform .2s ease; font-size:.85rem; }
+  .acc-toggle[aria-expanded="true"] .acc-icon{ transform:rotate(180deg); }
+  .acc-panel{ display:none; padding:18px; border-top:1px solid var(--line); background:#f7faf8; }
+  .acc-panel.open{ display:block; }
+  @keyframes accPulse{ 0%,100%{ box-shadow:0 3px 12px rgba(79,122,98,.16);} 50%{ box-shadow:0 3px 18px rgba(79,122,98,.4);} }
+  .accordion.hint-pulse{ animation:accPulse 1.6s ease-in-out 2; }
+
+  /* スライダー */
+  .slider{ position:relative; max-width:560px; margin:0 auto; }
+  .slides{ overflow:hidden; border-radius:10px; border:1px solid var(--line); }
+  .slide{ display:none; }
+  .slide.active{ display:block; }
+  .slide-img{
+    width:100%; aspect-ratio:16/10; background:var(--green-soft);
+    display:flex; align-items:center; justify-content:center;
+    color:var(--green-deep); font-size:1.4rem; font-weight:700; letter-spacing:.05em;
+    border-bottom:1px solid var(--line); overflow:hidden;
+  }
+  .slide-img svg{ width:100%; height:100%; display:block; }
+  .slide-img img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .slide-body{ padding:14px 16px 16px; }
+  .slide-title{ font-size:1.05rem; font-weight:700; color:var(--ink); margin:0 0 4px; }
+  .slide-title .kind{
+    font-size:.68rem; font-weight:700; padding:2px 8px; border-radius:999px; margin-left:8px; vertical-align:middle;
+  }
+  .slide-title .kind.dev{ background:var(--green-soft); color:var(--green-deep); }
+  .slide-title .kind.room{ background:#f3e9ef; color:#9a6b8a; }
+  .slide-spec{ display:flex; flex-wrap:wrap; gap:6px 16px; margin:8px 0 10px; font-size:.8rem; }
+  .slide-spec span{ color:var(--muted); }
+  .slide-spec b{ color:var(--ink); font-weight:600; }
+  .slide-note{ font-size:.83rem; color:var(--ink); margin:0; }
+  .slider-arrow{
+    position:absolute; top:31%; transform:translateY(-50%);
+    border:0; background:rgba(255,255,255,.9); color:var(--green-deep);
+    width:36px; height:36px; border-radius:50%; font-size:1.4rem; cursor:pointer;
+    box-shadow:0 2px 8px rgba(0,0,0,.15); display:flex; align-items:center; justify-content:center;
+  }
+  .slider-arrow:hover{ background:#fff; }
+  .slider-arrow.prev{ left:8px; }
+  .slider-arrow.next{ right:8px; }
+  .slider-dots{ display:flex; gap:6px; justify-content:center; flex-wrap:wrap; margin-top:12px; }
+  .slider-dots button{
+    width:9px; height:9px; border-radius:50%; border:1px solid var(--green);
+    background:#fff; cursor:pointer; padding:0;
+  }
+  .slider-dots button.active{ background:var(--green); }
   .table-wrap{ background:var(--panel); border:1px solid var(--line); border-radius:10px; overflow:auto; }
   table{border-collapse:collapse; width:100%; table-layout:fixed; font-size:.8rem;}
   col.datecol{ width:58px; }
@@ -124,10 +187,12 @@
   .modal{
     background:#fff; border-radius:12px; max-width:440px; width:100%;
     box-shadow:0 12px 40px rgba(0,0,0,.25); overflow:hidden;
+    max-height:90vh; display:flex; flex-direction:column;
   }
   .modal-head{
     padding:16px 20px; background:linear-gradient(0deg,var(--green-soft),#fff);
     border-bottom:1px solid var(--line); display:flex; align-items:center; justify-content:space-between;
+    flex-shrink:0;
   }
   .modal-head h2{ margin:0; font-size:1.1rem; color:var(--green-deep); }
   .modal-close{
@@ -135,7 +200,7 @@
     line-height:1; padding:4px 8px; border-radius:6px;
   }
   .modal-close:hover{ background:var(--green-soft); color:var(--ink); }
-  .modal-body{ padding:18px 20px 22px; font-size:.85rem; }
+  .modal-body{ padding:18px 20px 22px; font-size:.85rem; overflow-y:auto; }
   .modal-body dl{ margin:0; display:grid; grid-template-columns:auto 1fr; gap:8px 14px; }
   .modal-body dt{ color:var(--muted); font-size:.78rem; white-space:nowrap; }
   .modal-body dd{ margin:0; font-weight:600; }
@@ -143,31 +208,26 @@
 </style>
 </head>
 <body>
-<div class="poc-guide">
-  <div class="poc-guide-inner">
-    <div class="poc-tag">この画面について（PoC・動作確認用）</div>
-    <p class="poc-lead">
-      本画面は、Googleカレンダーを使って「PWT装置8台＋個室（桜・梅）の空き状況を、顧客が自ら確認できるか」を検証するためのPoC（試作）です。
-      表示中のデータはすべてサンプルであり、実際の予約状況ではありません。
-    </p>
-    <ul class="poc-list">
-      <li><strong>空き状況の見方</strong>：日付×設備のマスに、予約あり／調整日／使用不可／空きを色で表示します（凡例は表の上）。</li>
-      <li><strong>調整日</strong>：装置の予約最終日の翌日を、段取り替えのため自動的に使用不可としています（個室にはありません）。</li>
-      <li><strong>使用不可</strong>：メンテナンス等でカレンダーに印を付けた日を反映します。</li>
-      <li><strong>設備の詳細</strong>：見出しの「#1〜#8」「桜・梅」を押すと、設備概要が表示されます。</li>
-      <li><strong>月の切り替え</strong>：前月／翌月ボタン、または年月を選んで「表示」で移動できます。</li>
-      <li><strong>問い合わせ</strong>：予約・相談は画面下部のボタンから受託サービスの問い合わせフォームへ進みます。</li>
-    </ul>
-    <p class="poc-privacy">
-      なお、他社の試験内容（顧客名・品番など）は表示されません。マスには「予約あり」等の状態のみが出ます。
-    </p>
-  </div>
-</div>
-
 <header>
   <h1>PWT装置 空き状況ダッシュボード<span class="demo-badge">サンプルデータ</span></h1>
-  <p>パワーサイクル試験受託サービス ／ 1日単位・表示イメージ確認用｜キーナスデザイン株式会社</p>
 </header>
+
+<div class="acc-wrap">
+  <div class="accordion" id="accordion">
+    <button class="acc-toggle" id="accToggle" aria-expanded="false">
+      <span class="acc-label"><span>設備情報を見る</span></span>
+      <span class="acc-icon" id="accIcon">▼</span>
+    </button>
+    <div class="acc-panel" id="accPanel">
+      <div class="slider" id="slider">
+        <div class="slides" id="slides"></div>
+        <button class="slider-arrow prev" id="slidePrev" aria-label="前へ">‹</button>
+        <button class="slider-arrow next" id="slideNext" aria-label="次へ">›</button>
+        <div class="slider-dots" id="slideDots"></div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="navbar">
   <button class="nav-btn" id="prev">◀ 前月</button>
@@ -202,7 +262,7 @@
 
   <div class="contact-wrap">
     <a class="contact-btn" href="https://keenus.jp/contact-form/jutaku-form/" target="_blank" rel="noopener">
-      受託サービスに問い合わせる ↗
+      問い合わせる ↗
     </a>
     <div class="contact-note">空き状況の確認・予約のご相談はこちらから（別タブで開きます）</div>
   </div>
@@ -216,6 +276,38 @@
       <button class="modal-close" id="modalClose" aria-label="閉じる">×</button>
     </div>
     <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<!-- この画面について（初回表示）モーダル -->
+<div class="modal-overlay" id="guideModal">
+  <div class="modal guide-modal" role="dialog" aria-modal="true" aria-labelledby="guideTitle">
+    <div class="modal-head">
+      <h2 id="guideTitle">この画面について</h2>
+      <button class="modal-close" id="guideClose" aria-label="閉じる">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="poc-tag">PoC・動作確認用</div>
+      <p class="poc-lead">
+        本画面は、Googleカレンダーを使って「PWT装置8台＋個室（桜・梅）の空き状況を、顧客が自ら確認できるか」を検証するためのPoC（試作）です。
+        表示中のデータはすべてサンプルであり、実際の予約状況ではありません。
+      </p>
+      <ul class="poc-list">
+        <li><strong>設備情報</strong>：画面上部の緑色の「設備情報を見る」を押すと開き、各号機・休憩室（桜・梅）の写真と概要をスライダーで確認できます。</li>
+        <li><strong>空き状況の見方</strong>：日付×設備のマスに、予約あり／調整日／使用不可／空きを色で表示します（凡例は表の上）。</li>
+        <li><strong>調整日</strong>：装置の予約最終日の翌日を、段取り替えのため自動的に使用不可としています（個室にはありません）。</li>
+        <li><strong>使用不可</strong>：メンテナンス等でカレンダーに印を付けた日を反映します。</li>
+        <li><strong>設備の詳細</strong>：見出しの「#1〜#8」「桜・梅」を押すと設備概要が表示されます。</li>
+        <li><strong>月の切り替え</strong>：前月／翌月ボタン、または年月を選んで「表示」で移動できます。</li>
+        <li><strong>問い合わせ</strong>：予約・相談は画面下部のボタンから受託サービスの問い合わせフォームへ進みます。</li>
+      </ul>
+      <p class="poc-privacy">
+        なお、他社の試験内容（顧客名・品番など）は表示されません。マスには「予約あり」等の状態のみが出ます。
+      </p>
+      <div class="guide-actions">
+        <button class="guide-ok" id="guideOk">閉じて画面を見る</button>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -374,6 +466,147 @@
     viewMonth = parseInt(document.getElementById('selMonth').value,10);
     render();
   });
+
+  // === 設備情報アコーディオン ===
+  const accToggle = document.getElementById('accToggle');
+  const accPanel = document.getElementById('accPanel');
+  accToggle.addEventListener('click', ()=>{
+    const open = accPanel.classList.toggle('open');
+    accToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    if(open) buildSlider();
+  });
+
+  // === 設備スライダー ===
+  let slideIndex = 0;
+  let sliderBuilt = false;
+
+  // === 設備イラスト（SVG・薄いグリーン基調）===
+  function deviceSVG(){
+    // パワーサイクル試験装置：チャンバー付きの試験装置イメージ
+    return '<svg viewBox="0 0 320 200" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="試験装置のイラスト">' +
+      '<rect width="320" height="200" fill="#eef4f0"/>' +
+      // 床
+      '<rect y="168" width="320" height="32" fill="#dfe9e2"/>' +
+      // 本体キャビネット
+      '<rect x="70" y="40" width="120" height="128" rx="6" fill="#fff" stroke="#7ba889" stroke-width="2.5"/>' +
+      // 上部パネル（表示部）
+      '<rect x="82" y="52" width="96" height="34" rx="4" fill="#4f7a62"/>' +
+      '<rect x="90" y="60" width="34" height="6" rx="3" fill="#a9cbb6"/>' +
+      '<rect x="90" y="72" width="52" height="6" rx="3" fill="#7ba889"/>' +
+      // ダイヤル
+      '<circle cx="100" cy="112" r="12" fill="#e7efe9" stroke="#7ba889" stroke-width="2"/>' +
+      '<line x1="100" y1="112" x2="100" y2="103" stroke="#4f7a62" stroke-width="2.5"/>' +
+      '<circle cx="134" cy="112" r="12" fill="#e7efe9" stroke="#7ba889" stroke-width="2"/>' +
+      '<line x1="134" y1="112" x2="141" y2="107" stroke="#4f7a62" stroke-width="2.5"/>' +
+      // ボタン列
+      '<rect x="154" y="104" width="24" height="8" rx="4" fill="#c9dcd0"/>' +
+      '<rect x="154" y="118" width="24" height="8" rx="4" fill="#c9dcd0"/>' +
+      // 下部（開閉扉）
+      '<rect x="82" y="134" width="96" height="26" rx="4" fill="#f2f7f4" stroke="#c9dcd0" stroke-width="1.5"/>' +
+      '<circle cx="168" cy="147" r="3" fill="#7ba889"/>' +
+      // 右のチャンバー（配管でつながる）
+      '<rect x="206" y="70" width="70" height="98" rx="6" fill="#fff" stroke="#7ba889" stroke-width="2.5"/>' +
+      '<rect x="218" y="84" width="46" height="40" rx="4" fill="#dbe9e0"/>' +
+      '<circle cx="241" cy="104" r="12" fill="#eef4f0" stroke="#7ba889" stroke-width="2"/>' +
+      // 配管
+      '<path d="M190 96 h16 M190 120 h16" stroke="#7ba889" stroke-width="4" fill="none" stroke-linecap="round"/>' +
+      '</svg>';
+  }
+
+  function roomSVG(){
+    // 休憩室：テーブル・椅子・窓のある部屋
+    return '<svg viewBox="0 0 320 200" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="休憩室のイラスト">' +
+      '<rect width="320" height="200" fill="#eef4f0"/>' +
+      // 壁と床
+      '<rect y="150" width="320" height="50" fill="#dfe9e2"/>' +
+      // 窓
+      '<rect x="196" y="34" width="90" height="60" rx="4" fill="#fff" stroke="#7ba889" stroke-width="2.5"/>' +
+      '<line x1="241" y1="34" x2="241" y2="94" stroke="#7ba889" stroke-width="2"/>' +
+      '<line x1="196" y1="64" x2="286" y2="64" stroke="#7ba889" stroke-width="2"/>' +
+      // 観葉植物
+      '<rect x="150" y="120" width="18" height="30" rx="3" fill="#c9dcd0"/>' +
+      '<path d="M159 120 C150 100 150 96 159 88 C168 96 168 100 159 120 Z" fill="#7ba889"/>' +
+      '<path d="M159 118 C170 104 176 104 180 96" stroke="#4f7a62" stroke-width="3" fill="none" stroke-linecap="round"/>' +
+      // テーブル
+      '<rect x="40" y="126" width="96" height="10" rx="3" fill="#4f7a62"/>' +
+      '<rect x="48" y="136" width="8" height="30" fill="#7ba889"/>' +
+      '<rect x="120" y="136" width="8" height="30" fill="#7ba889"/>' +
+      // 椅子（左）
+      '<rect x="20" y="118" width="10" height="48" rx="3" fill="#7ba889"/>' +
+      '<rect x="20" y="132" width="26" height="8" rx="3" fill="#a9cbb6"/>' +
+      // 椅子（右）
+      '<rect x="146" y="118" width="10" height="48" rx="3" fill="#7ba889"/>' +
+      '<rect x="130" y="132" width="26" height="8" rx="3" fill="#a9cbb6"/>' +
+      // マグカップ
+      '<rect x="74" y="114" width="16" height="12" rx="2" fill="#fff" stroke="#7ba889" stroke-width="2"/>' +
+      '<path d="M90 117 h4 a3 3 0 0 1 0 6 h-4" fill="none" stroke="#7ba889" stroke-width="2"/>' +
+      '</svg>';
+  }
+
+  function buildSlider(){
+    if(sliderBuilt) return;
+    sliderBuilt = true;
+    const slides = document.getElementById('slides');
+    const dots = document.getElementById('slideDots');
+
+    slides.innerHTML = DEVICES.map((dev, i)=>{
+      const isRoom = dev.kind === '個室';
+      // 実画像があれば img を使用、なければ SVG イラストを表示
+      const img = dev.img
+        ? '<img src="'+dev.img+'" alt="'+dev.name+'">'
+        : (isRoom ? roomSVG() : deviceSVG());
+      const kindTag = isRoom
+        ? '<span class="kind room">休憩室</span>'
+        : '<span class="kind dev">装置</span>';
+      const spec = isRoom
+        ? '<span>定員：<b>'+dev.capacity+'</b></span><span>広さ：<b>'+dev.area+'</b></span>'
+        : '<span>型式：<b>'+dev.model+'</b></span><span>ch：<b>'+dev.ch+'</b></span><span>電流：<b>'+dev.current+'</b></span>';
+      return '<div class="slide'+(i===0?' active':'')+'" data-i="'+i+'">' +
+               '<div class="slide-img">'+img+'</div>' +
+               '<div class="slide-body">' +
+                 '<p class="slide-title">'+dev.name+kindTag+'</p>' +
+                 '<div class="slide-spec">'+spec+'</div>' +
+                 '<p class="slide-note">'+dev.note+'</p>' +
+               '</div>' +
+             '</div>';
+    }).join('');
+
+    dots.innerHTML = DEVICES.map((_,i)=>
+      '<button class="'+(i===0?'active':'')+'" data-i="'+i+'" aria-label="'+(i+1)+'番目"></button>'
+    ).join('');
+    dots.querySelectorAll('button').forEach(b=>{
+      b.addEventListener('click', ()=> goSlide(parseInt(b.dataset.i,10)));
+    });
+  }
+
+  function goSlide(i){
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.slider-dots button');
+    if(slides.length === 0) return;
+    slideIndex = (i + slides.length) % slides.length;
+    slides.forEach((s,k)=> s.classList.toggle('active', k===slideIndex));
+    dots.forEach((d,k)=> d.classList.toggle('active', k===slideIndex));
+  }
+
+  document.getElementById('slidePrev').addEventListener('click', ()=> goSlide(slideIndex-1));
+  document.getElementById('slideNext').addEventListener('click', ()=> goSlide(slideIndex+1));
+
+  // === この画面について（初回表示モーダル）===
+  const guideModal = document.getElementById('guideModal');
+  function closeGuide(){
+    guideModal.classList.remove('open');
+    // 閉じたら設備情報アコーディオンを一瞬光らせて誘導
+    const acc = document.getElementById('accordion');
+    acc.classList.remove('hint-pulse');
+    void acc.offsetWidth; // リフローでアニメ再start
+    acc.classList.add('hint-pulse');
+  }
+  document.getElementById('guideClose').addEventListener('click', closeGuide);
+  document.getElementById('guideOk').addEventListener('click', closeGuide);
+  guideModal.addEventListener('click', (e)=>{ if(e.target.id === 'guideModal') closeGuide(); });
+  document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeGuide(); });
+  // ページを開いたら表示
+  guideModal.classList.add('open');
 
   render();
 </script>
