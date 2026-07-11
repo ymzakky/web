@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PWT装置 空き状況ダッシュボード（サンプルデータ・1日単位）</title>
+<style>
+  :root{
+    --ink:#2b332e; --muted:#6b756e; --line:#dfe5e0;
+    --panel:#fff; --bg:#f2f5f2;
+    --green:#7ba889; --green-deep:#4f7a62; --green-soft:#e7efe9;
+    --busy:#7ba889; --free:#ffffff;
+    --adjust:#d8c48a;
+    --blocked:#b7bdb9;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:"BIZ UDPGothic","Noto Sans CJK JP","IPAゴシック",sans-serif;
+    line-height:1.5;
+  }
+  header{ padding:20px 24px 16px; background:var(--panel); border-bottom:1px solid var(--line); }
+
+  .poc-guide{ background:#eef4f0; border-bottom:1px solid var(--line); }
+  .poc-guide-inner{ padding:18px 24px 20px; }
+  .poc-tag{
+    display:inline-block; background:var(--green-deep); color:#fff;
+    font-size:.74rem; font-weight:700; padding:3px 12px; border-radius:999px; margin-bottom:10px;
+  }
+  .poc-lead{ margin:0 0 12px; font-size:.86rem; color:var(--ink); }
+  .poc-list{ margin:0 0 10px; padding-left:1.2em; font-size:.82rem; color:var(--ink); }
+  .poc-list li{ margin-bottom:5px; }
+  .poc-list strong{ color:var(--green-deep); }
+  .poc-privacy{ margin:0; font-size:.78rem; color:var(--muted); }
+  header h1{margin:0; font-size:1.2rem; font-weight:700;}
+  header p{margin:5px 0 0; font-size:.82rem; color:var(--muted);}
+  .demo-badge{ display:inline-block; margin-left:8px; padding:1px 9px; border-radius:999px;
+    background:#f4e9c9; color:#8a6d1f; font-size:.7rem; font-weight:700; vertical-align:middle; }
+
+  .navbar{
+    display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+    padding:12px 24px; background:var(--panel); border-bottom:1px solid var(--line);
+  }
+  .nav-title{ font-size:1.05rem; font-weight:700; min-width:150px; text-align:center; color:var(--green-deep); }
+  .nav-btn{
+    border:1px solid var(--green); background:#fff; color:var(--green-deep);
+    padding:6px 14px; border-radius:8px; font-size:.85rem; font-family:inherit; cursor:pointer;
+    display:inline-flex; align-items:center; gap:4px;
+  }
+  .nav-btn:hover{background:var(--green-soft);}
+  .nav-btn:focus-visible{outline:2px solid var(--green-deep); outline-offset:2px;}
+  .jump{ display:flex; align-items:center; gap:6px; margin-left:auto; }
+  .jump select{
+    font-family:inherit; font-size:.85rem; padding:6px 8px;
+    border:1px solid var(--line); border-radius:8px; background:#fff; color:var(--ink);
+  }
+  .jump .nav-btn{padding:6px 12px;}
+  .today-btn{ border-color:var(--green-deep); }
+
+  .bar{
+    display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+    padding:10px 24px; background:var(--green-soft); border-bottom:1px solid var(--line); font-size:.8rem;
+  }
+  .bar .stamp{color:var(--green-deep);}
+  .legend{display:flex; gap:14px; margin-left:auto; flex-wrap:wrap;}
+  .legend span{display:inline-flex; align-items:center; gap:6px; color:var(--muted);}
+  .sw{width:14px; height:14px; border-radius:3px; border:1px solid var(--line);}
+  .sw.busy{background:var(--busy);}
+  .sw.free{background:var(--free);}
+  .sw.adjust{background:var(--adjust);}
+  .sw.blocked{background:var(--blocked);}
+
+  main{padding:20px 16px 40px;}
+  .table-wrap{ background:var(--panel); border:1px solid var(--line); border-radius:10px; overflow:auto; }
+  table{border-collapse:collapse; width:100%; table-layout:fixed; font-size:.8rem;}
+  col.datecol{ width:58px; }
+  col.devcol{ width:auto; }
+  th,td{border:1px solid var(--line); text-align:center; padding:0; overflow:hidden;}
+  thead th{ background:linear-gradient(0deg,var(--green-soft),#fff); position:sticky; top:0; z-index:2;
+    font-weight:700; padding:0; white-space:nowrap; }
+  thead th.datecol{ padding:8px 2px; font-size:.74rem; }
+  .devbtn{
+    width:100%; border:0; background:transparent; cursor:pointer;
+    font-family:inherit; font-weight:700; font-size:.8rem; color:var(--green-deep);
+    padding:9px 2px; display:flex; flex-direction:column; align-items:center; gap:2px;
+  }
+  .devbtn:hover{ background:var(--green-soft); }
+  .devbtn:focus-visible{outline:2px solid var(--green-deep); outline-offset:-2px;}
+  .devbtn .sub{ font-size:.64rem; color:var(--muted); font-weight:400; }
+  .devbtn.room{ color:#9a6b8a; }
+  .devbtn.room:hover{ background:#f3e9ef; }
+  tbody th{ background:#fff; font-weight:700; padding:8px 2px; text-align:center; white-space:nowrap;
+    position:sticky; left:0; z-index:1; border-right:2px solid var(--line); font-size:.72rem; }
+  .cell{ height:34px; display:flex; align-items:center; justify-content:center; font-size:.64rem; }
+  .cell.busy{background:var(--busy); color:rgba(255,255,255,.95);}
+  .cell.free{background:var(--free); color:transparent;}
+  .cell.adjust{background:var(--adjust); color:#6b551f;}
+  .cell.blocked{ background:var(--blocked); color:#4a4f4c;
+    background-image:repeating-linear-gradient(45deg,transparent,transparent 5px,rgba(255,255,255,.35) 5px,rgba(255,255,255,.35) 10px); }
+  tr.weekend th{color:var(--muted);}
+  tr.weekend .cell.free{background:#fbfcfb;}
+  tr.today th{ box-shadow:inset 3px 0 0 var(--green-deep); }
+  tr.today .cell.free{background:#eef5f0;}
+
+  .note{ margin-top:16px; font-size:.76rem; color:var(--muted); background:#fff;
+    border:1px solid var(--line); border-left:3px solid var(--green); padding:11px 15px; border-radius:0 8px 8px 0; }
+
+  .contact-wrap{ margin-top:28px; text-align:center; }
+  .contact-btn{
+    display:inline-flex; align-items:center; gap:8px;
+    background:var(--green-deep); color:#fff; text-decoration:none;
+    padding:13px 32px; border-radius:999px; font-weight:700; font-size:.95rem;
+    border:1px solid var(--green-deep); transition:background .15s ease;
+  }
+  .contact-btn:hover{ background:#3d6350; }
+  .contact-note{ margin-top:8px; font-size:.74rem; color:var(--muted); }
+
+  /* モーダル */
+  .modal-overlay{
+    position:fixed; inset:0; background:rgba(30,40,34,.5);
+    display:none; align-items:center; justify-content:center; padding:20px; z-index:50;
+  }
+  .modal-overlay.open{ display:flex; }
+  .modal{
+    background:#fff; border-radius:12px; max-width:440px; width:100%;
+    box-shadow:0 12px 40px rgba(0,0,0,.25); overflow:hidden;
+  }
+  .modal-head{
+    padding:16px 20px; background:linear-gradient(0deg,var(--green-soft),#fff);
+    border-bottom:1px solid var(--line); display:flex; align-items:center; justify-content:space-between;
+  }
+  .modal-head h2{ margin:0; font-size:1.1rem; color:var(--green-deep); }
+  .modal-close{
+    border:0; background:transparent; font-size:1.3rem; cursor:pointer; color:var(--muted);
+    line-height:1; padding:4px 8px; border-radius:6px;
+  }
+  .modal-close:hover{ background:var(--green-soft); color:var(--ink); }
+  .modal-body{ padding:18px 20px 22px; font-size:.85rem; }
+  .modal-body dl{ margin:0; display:grid; grid-template-columns:auto 1fr; gap:8px 14px; }
+  .modal-body dt{ color:var(--muted); font-size:.78rem; white-space:nowrap; }
+  .modal-body dd{ margin:0; font-weight:600; }
+  .modal-body .desc{ margin-top:14px; padding-top:14px; border-top:1px dashed var(--line); color:var(--ink); font-weight:400; }
+</style>
+</head>
+<body>
+<div class="poc-guide">
+  <div class="poc-guide-inner">
+    <div class="poc-tag">この画面について（PoC・動作確認用）</div>
+    <p class="poc-lead">
+      本画面は、Googleカレンダーを使って「PWT装置8台＋個室（桜・梅）の空き状況を、顧客が自ら確認できるか」を検証するためのPoC（試作）です。
+      表示中のデータはすべてサンプルであり、実際の予約状況ではありません。
+    </p>
+    <ul class="poc-list">
+      <li><strong>空き状況の見方</strong>：日付×設備のマスに、予約あり／調整日／使用不可／空きを色で表示します（凡例は表の上）。</li>
+      <li><strong>調整日</strong>：装置の予約最終日の翌日を、段取り替えのため自動的に使用不可としています（個室にはありません）。</li>
+      <li><strong>使用不可</strong>：メンテナンス等でカレンダーに印を付けた日を反映します。</li>
+      <li><strong>設備の詳細</strong>：見出しの「#1〜#8」「桜・梅」を押すと、設備概要が表示されます。</li>
+      <li><strong>月の切り替え</strong>：前月／翌月ボタン、または年月を選んで「表示」で移動できます。</li>
+      <li><strong>問い合わせ</strong>：予約・相談は画面下部のボタンから受託サービスの問い合わせフォームへ進みます。</li>
+    </ul>
+    <p class="poc-privacy">
+      なお、他社の試験内容（顧客名・品番など）は表示されません。マスには「予約あり」等の状態のみが出ます。
+    </p>
+  </div>
+</div>
+
+<header>
+  <h1>PWT装置 空き状況ダッシュボード<span class="demo-badge">サンプルデータ</span></h1>
+  <p>パワーサイクル試験受託サービス ／ 1日単位・表示イメージ確認用｜キーナスデザイン株式会社</p>
+</header>
+
+<div class="navbar">
+  <button class="nav-btn" id="prev">◀ 前月</button>
+  <div class="nav-title" id="navTitle"></div>
+  <button class="nav-btn" id="next">翌月 ▶</button>
+  <div class="jump">
+    <button class="nav-btn today-btn" id="today">今月</button>
+    <select id="selYear"></select>
+    <select id="selMonth"></select>
+    <button class="nav-btn" id="go">表示</button>
+  </div>
+</div>
+
+<div class="bar">
+  <span class="stamp" id="stamp"></span>
+  <div class="legend">
+    <span><i class="sw busy"></i>予約あり</span>
+    <span><i class="sw adjust"></i>調整日</span>
+    <span><i class="sw blocked"></i>使用不可</span>
+    <span><i class="sw free"></i>空き</span>
+  </div>
+</div>
+
+<main>
+  <div class="table-wrap">
+    <table id="table">
+      <colgroup id="colgroup"></colgroup>
+      <thead><tr id="head"></tr></thead>
+      <tbody id="body"></tbody>
+    </table>
+  </div>
+
+  <div class="contact-wrap">
+    <a class="contact-btn" href="https://keenus.jp/contact-form/jutaku-form/" target="_blank" rel="noopener">
+      受託サービスに問い合わせる ↗
+    </a>
+    <div class="contact-note">空き状況の確認・予約のご相談はこちらから（別タブで開きます）</div>
+  </div>
+</main>
+
+<!-- 設備概要モーダル -->
+<div class="modal-overlay" id="modal">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-head">
+      <h2 id="modalTitle">設備概要</h2>
+      <button class="modal-close" id="modalClose" aria-label="閉じる">×</button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<script>
+  // 装置マスタ（#1〜#8）＋個室（桜・梅）。spec はサンプル（実データは差し替え）
+  const DEVICES = [
+    { name:'#1', kind:'装置', model:'PWT-A', ch:'6ch', current:'最大 600A', note:'標準機。汎用パワーサイクル試験に対応。' },
+    { name:'#2', kind:'装置', model:'PWT-A', ch:'6ch', current:'最大 600A', note:'標準機。#1と同構成のため互換運用可。' },
+    { name:'#3', kind:'装置', model:'PWT-A', ch:'6ch', current:'最大 600A', note:'標準機。' },
+    { name:'#4', kind:'装置', model:'PWT-B', ch:'6ch', current:'最大 800A', note:'大電流対応機。高負荷条件の試験向け。' },
+    { name:'#5', kind:'装置', model:'PWT-B', ch:'6ch', current:'最大 800A', note:'大電流対応機。' },
+    { name:'#6', kind:'装置', model:'PWT-B', ch:'6ch', current:'最大 800A', note:'大電流対応機。' },
+    { name:'#7', kind:'装置', model:'PWT-C', ch:'6ch', current:'最大 1000A', note:'高電流仕様。チラー連携による温度制御に対応。' },
+    { name:'#8', kind:'装置', model:'PWT-C', ch:'6ch', current:'最大 1000A', note:'高電流仕様。' },
+    { name:'桜', kind:'個室', capacity:'6名', area:'約20㎡', note:'打合せ・立会い用の個室。Web会議設備あり。' },
+    { name:'梅', kind:'個室', capacity:'4名', area:'約14㎡', note:'打合せ・立会い用の個室。' },
+  ];
+  const WD = ['日','月','火','水','木','金','土'];
+
+  const now = new Date();
+  let viewYear = now.getFullYear();
+  let viewMonth = now.getMonth();
+
+  function seeded(seed){
+    let s = seed % 2147483647; if(s <= 0) s += 2147483646;
+    return function(){ s = (s * 16807) % 2147483647; return (s - 1) / 2147483646; };
+  }
+
+  function makeMonthData(year, month){
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    const days = [];
+    for(let d=1; d<=daysInMonth; d++){
+      const dt = new Date(year, month, d);
+      const wd = dt.getDay();
+      const isToday = (year===now.getFullYear() && month===now.getMonth() && d===now.getDate());
+      days.push({ day:d, label:(month+1)+'/'+d+'('+WD[wd]+')', weekend:(wd===0||wd===6), today:isToday });
+    }
+    const devices = DEVICES.map((dev, di)=>{
+      const rand = seeded((year*100 + month)*10 + di + 1);
+      const slots = new Array(daysInMonth).fill('free');
+
+      if(dev.kind === '個室'){
+        // 個室：単発の予約が散発的に入る。連続稼働・調整日はなし
+        for(let k=0;k<daysInMonth;k++){ if(rand()<0.25) slots[k]='busy'; }
+      } else {
+        // 装置：数日〜の連続稼働ブロック
+        const blocks = 1 + Math.floor(rand()*3);
+        for(let b=0;b<blocks;b++){
+          const start = Math.floor(rand()*daysInMonth);
+          const len = 2 + Math.floor(rand()*8);
+          for(let k=start;k<Math.min(start+len,daysInMonth);k++) slots[k]='busy';
+        }
+        if(rand()<0.5){ const s = Math.floor(rand()*daysInMonth); if(slots[s]==='free') slots[s]='blocked'; }
+        // 調整日：予約ブロック最終日の翌日（装置のみ）
+        for(let k=0;k<daysInMonth-1;k++){ if(slots[k]==='busy' && slots[k+1]==='free') slots[k+1]='adjust'; }
+      }
+      return { name:dev.name, slots };
+    });
+    return { days, devices };
+  }
+
+  function labelOf(s){
+    if(s==='busy') return '予約';
+    if(s==='adjust') return '調整';
+    if(s==='blocked') return '不可';
+    return '';
+  }
+
+  function render(){
+    const data = makeMonthData(viewYear, viewMonth);
+    document.getElementById('navTitle').textContent = viewYear + '年 ' + (viewMonth+1) + '月';
+    document.getElementById('stamp').textContent = '表示：' + viewYear + '年' + (viewMonth+1) + '月（サンプル）';
+
+    document.getElementById('colgroup').innerHTML =
+      '<col class="datecol">' +
+      DEVICES.map(()=>'<col class="devcol">').join('');
+
+    document.getElementById('head').innerHTML = '<th class="datecol">日付</th>' +
+      DEVICES.map((dev,idx) =>
+        '<th><button class="devbtn'+(dev.kind==='個室'?' room':'')+'" data-idx="'+idx+'">'+dev.name+'</button></th>'
+      ).join('');
+
+    document.getElementById('body').innerHTML = data.days.map((day,i)=>{
+      const cells = data.devices.map(dev=>{
+        const s = dev.slots[i];
+        return '<td><div class="cell '+s+'">'+labelOf(s)+'</div></td>';
+      }).join('');
+      const cls = [day.weekend?'weekend':'', day.today?'today':''].filter(Boolean).join(' ');
+      return '<tr class="'+cls+'"><th>'+day.label+'</th>'+cells+'</tr>';
+    }).join('');
+
+    document.getElementById('selYear').value = viewYear;
+    document.getElementById('selMonth').value = viewMonth;
+
+    // 装置名クリック→モーダル
+    document.querySelectorAll('.devbtn').forEach(btn=>{
+      btn.addEventListener('click', ()=> openModal(parseInt(btn.dataset.idx,10)));
+    });
+  }
+
+  function openModal(idx){
+    const dev = DEVICES[idx];
+    document.getElementById('modalTitle').textContent = '設備概要 ' + dev.name;
+    let rows;
+    if(dev.kind === '個室'){
+      rows =
+        '<dt>名称</dt><dd>'+dev.name+'（個室）</dd>' +
+        '<dt>定員</dt><dd>'+dev.capacity+'</dd>' +
+        '<dt>広さ</dt><dd>'+dev.area+'</dd>';
+    } else {
+      rows =
+        '<dt>装置番号</dt><dd>'+dev.name+'</dd>' +
+        '<dt>型式</dt><dd>'+dev.model+'</dd>' +
+        '<dt>チャンネル</dt><dd>'+dev.ch+'</dd>' +
+        '<dt>電流条件</dt><dd>'+dev.current+'</dd>';
+    }
+    document.getElementById('modalBody').innerHTML =
+      '<dl>' + rows + '</dl>' +
+      '<div class="desc">'+dev.note+'</div>';
+    document.getElementById('modal').classList.add('open');
+  }
+  function closeModal(){ document.getElementById('modal').classList.remove('open'); }
+
+  document.getElementById('modalClose').addEventListener('click', closeModal);
+  document.getElementById('modal').addEventListener('click', (e)=>{
+    if(e.target.id === 'modal') closeModal();
+  });
+  document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeModal(); });
+
+  function shiftMonth(delta){
+    viewMonth += delta;
+    if(viewMonth < 0){ viewMonth = 11; viewYear--; }
+    else if(viewMonth > 11){ viewMonth = 0; viewYear++; }
+    render();
+  }
+
+  (function initSelectors(){
+    const selY = document.getElementById('selYear');
+    const selM = document.getElementById('selMonth');
+    const baseY = now.getFullYear();
+    for(let y=baseY-1; y<=baseY+2; y++){
+      const o = document.createElement('option'); o.value=y; o.textContent=y+'年'; selY.appendChild(o);
+    }
+    for(let m=0; m<12; m++){
+      const o = document.createElement('option'); o.value=m; o.textContent=(m+1)+'月'; selM.appendChild(o);
+    }
+  })();
+
+  document.getElementById('prev').addEventListener('click', ()=>shiftMonth(-1));
+  document.getElementById('next').addEventListener('click', ()=>shiftMonth(1));
+  document.getElementById('today').addEventListener('click', ()=>{
+    viewYear = now.getFullYear(); viewMonth = now.getMonth(); render();
+  });
+  document.getElementById('go').addEventListener('click', ()=>{
+    viewYear = parseInt(document.getElementById('selYear').value,10);
+    viewMonth = parseInt(document.getElementById('selMonth').value,10);
+    render();
+  });
+
+  render();
+</script>
+</body>
+</html>
