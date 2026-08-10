@@ -1,0 +1,591 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="大量写真の自動分類・評価パイプライン"
+  description="記念誌や報告書のために数千枚の写真から掲載候補を選ぶ——その膨大な手作業を、技術品質フィルタとAI分類・採点で自動化する仕組みです。"
+>
+  <div class="tools-article">
+    <div class="article-area">
+
+      <!-- パンくず -->
+      <nav class="breadcrumb">
+        <a href="/">ホーム</a> / <a href="/tools">ツール紹介</a> / 大量写真の自動分類
+      </nav>
+
+      <!-- 日付・タグ -->
+      <p class="article-date">2026.08</p>
+      <div class="article-tags">
+        <span>#構築実績</span>
+        <span>#文書管理</span>
+        <span>#業務自動化</span>
+        <span>#AI活用</span>
+        <span>#見える化</span>
+      </div>
+
+      <!-- アイキャッチ -->
+      <figure class="eyecatch">
+        <img src="/assets/images/case-study-photo-classifier-eyecatch.svg" alt="数千枚の写真素材を品質フィルタとAI分類にかけ、カテゴリー別フォルダと評価CSVに仕分けるシステムの概念図"/>
+        <figcaption>数千枚の写真を、品質チェックとAIの分類・採点で自動的に仕分けます。</figcaption>
+      </figure>
+
+      <!-- タイトル -->
+      <h1>数千枚の写真から、載せる一枚を自動で選び出す。<br>AIが品質チェックとカテゴリー分けをお手伝いします</h1>
+
+      <!-- メタカード -->
+      <div class="meta-card">
+        <div class="meta-card-title">CASE STUDY OVERVIEW</div>
+        <div class="meta-grid">
+          <div class="meta-item">
+            <div class="meta-item-label">タイトル</div>
+            <div class="meta-item-value">大量写真の自動分類・評価パイプライン</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-item-label">想定読者</div>
+            <div class="meta-item-value">記念誌・報告書などのために、数千枚規模の写真から掲載候補を選び出す必要がある制作担当者・事務局の方</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-item-label">対象課題</div>
+            <div class="meta-item-value">たくさんの写真を一枚ずつ確認して仕分け、載せる写真を選ぶまでの膨大な手間</div>
+          </div>
+          <div class="meta-item">
+            <div class="meta-item-label">得られる効果</div>
+            <div class="meta-item-value">数千枚を自動で仕分け・採点し、人は「最終的にどれを載せるか」の判断だけに集中できる</div>
+          </div>
+          <div class="meta-item full">
+            <div class="meta-item-label">技術タグ</div>
+            <div class="tech-tags">
+              <span>Claude Vision API</span>
+              <span>Claude API</span>
+              <span>文書・契約管理</span>
+              <span>データ分析・可視化</span>
+              <span>開発費：10〜30万円規模</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 共感パート -->
+      <h2>「この写真の山、どこから手をつければ…」<br>そのお悩み、解決できます</h2>
+
+      <p>イベントや活動の記録写真は、気づけば数百枚、数千枚。記念誌や報告書に載せる一枚を選ぼうとして、フォルダを開いた瞬間に手が止まってしまった——そんな経験はありませんか。</p>
+
+      <p>スタッフそれぞれのスマホ、参加者から共有されたチャットの写真、行事ごとのカメラロール。あちこちに散らばった写真を一枚ずつ開いて、「これはブレている」「これは同じ場面の重複」「この笑顔はいい」と確かめていく作業は、数が増えるほど気の遠くなる手間になります。しかも判断の基準は人によってばらつきがちで、後から見返すと「なぜこれを選んだんだっけ」と分からなくなることも少なくありません。</p>
+
+      <p>この仕組みは、そんな「膨大な写真を捌く」作業をまるごと肩代わりします。写真をフォルダごと渡すだけで、機械が品質の悪いものをふるい落とし、AI（画像の中身を理解できる人工知能）が内容ごとにカテゴリー分けし、一枚ずつ点数を付けて「載せる候補」を並べてくれます。人がやるのは、その候補の中から最終的に選ぶことだけです。</p>
+
+      <!-- Before / After -->
+      <h2>Before / After</h2>
+      <div class="ba-grid">
+        <div class="ba-card before">
+          <h4>Before：すべて目視で選定</h4>
+          <ul class="ba-list">
+            <li>数千枚を一枚ずつ開いて確認する</li>
+            <li>ブレ・ピンボケ・暗すぎる写真も目で判別</li>
+            <li>どのカテゴリーの写真か都度考える</li>
+            <li>良し悪しの基準が人によってばらつく</li>
+            <li>似た写真の重複や見落としが起きやすい</li>
+          </ul>
+        </div>
+        <div class="ba-card after">
+          <h4>After：フォルダごと渡すだけ</h4>
+          <ul class="ba-list">
+            <li>ピンボケや暗い写真を自動でより分ける</li>
+            <li>AIが写真の内容からカテゴリーを判定</li>
+            <li>4つの観点で点数をつけ、おすすめ順に並べる</li>
+            <li>「なぜ選んだか」の理由もひと言残る</li>
+            <li>似た重複写真も自動で見つけてくれる</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 仕組みの流れ -->
+      <h2>仕組みの流れ</h2>
+
+      <figure class="dataflow-figure">
+        <img src="/assets/images/case-study-photo-classifier.svg" alt="データの流れ：写真素材を技術品質フィルタにかけ、AI分類・4軸採点、整合性チェックを経て、分類フォルダと評価レポートCSVを出力するフロー図"/>
+        <figcaption>▲ 写真を渡してから、品質チェック・AIの分類・仕分けを経て、フォルダと一覧表ができあがるまでの流れ</figcaption>
+      </figure>
+
+      <div class="flow-diagram">
+        <div class="flow-step">
+          <div class="flow-num">1</div>
+          <div class="flow-body">
+            <div class="flow-title">写真をフォルダごとにまとめて渡す</div>
+            <div class="flow-desc">日付別・行事別など、いつものフォルダのまま渡すだけです。スマホの写真とチャットで共有された写真など、出どころが違うものは分けて扱います。ファイル名は元のまま残すので、あとから「どの一枚か」をたどれます。</div>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-num">2</div>
+          <div class="flow-body">
+            <div class="flow-title">ピンボケ・暗い写真を先により分ける</div>
+            <div class="flow-desc">まず自動のチェックで、手ブレ・ピンボケ・暗すぎる・小さすぎるといった「そもそも使えない写真」をより分けます。この下ごしらえで数を絞ってからAIにかけるので、早く、そして無駄な費用をかけずに進みます。</div>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-num">3</div>
+          <div class="flow-body">
+            <div class="flow-title">AIが写真を分類し、点数をつける</div>
+            <div class="flow-desc">残った写真をAIが一枚ずつ見て、「どんな場面か」のカテゴリー分け、4つの観点での点数、おすすめ度、その理由のひと言をつけていきます。たくさんの写真をまとめて処理できるので、枚数が多くても待たされません。</div>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-num">4</div>
+          <div class="flow-body">
+            <div class="flow-title">判定のあやしいものを見直す</div>
+            <div class="flow-desc">AIの判定にも、まれに「載せないのに理由が空っぽ」といったちぐはぐな結果が混じります。処理のあとにもう一度見直して、あやしいものは「未分類」によけておき、判断のズレをそのまま進めないようにしています。</div>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-num">5</div>
+          <div class="flow-body">
+            <div class="flow-title">カテゴリー別にコピー（原本はそのまま）</div>
+            <div class="flow-desc">写真は移動ではなく<strong>コピー</strong>で仕分けるので、元のフォルダはまったく手つかずのまま残ります。一枚は最も合う一つのカテゴリーだけに入れ、あちこちに重複させることはしません。同じ場面でダブった写真も、写真に記録された撮影情報から見分けます。</div>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="flow-num">6</div>
+          <div class="flow-body">
+            <div class="flow-title">仕分け済みフォルダと一覧表ができあがる</div>
+            <div class="flow-desc">カテゴリー別のフォルダ（＋見送り・未分類のフォルダ）と、すべての写真の点数・おすすめ度・理由を並べた一覧表（Excelなどで開ける表ファイル）ができあがります。この一覧を見ながら、人が最後の一枚を選びます。</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 使い回しの補足 -->
+      <h2>案件が変わっても、この仕組みはそのまま使えます</h2>
+
+      <p>この仕組みの要である「どんなカテゴリーに分けるか」「どの観点を何点で見るか」は、案件ごとの設定としてまとめてあります。新しい案件では、この設定だけを作り直せば、あとの流れはそのまま使い回せます。</p>
+
+      <p>カテゴリーは「こういう雰囲気の写真」といった曖昧な言い方よりも、「何が写っていれば当てはまるか」を具体的に挙げるほど、AIの判定がよく当たります。ここは実際の写真を見ながら一緒に決めていく部分です。</p>
+
+      <!-- 得られる効果 -->
+      <h2>得られる効果</h2>
+      <div class="effect-grid">
+        <div class="effect-item">
+          <div class="effect-num">約4,500枚</div>
+          <div class="effect-label">一度の案件で処理した写真（実績）</div>
+        </div>
+        <div class="effect-item">
+          <div class="effect-num">1,961枚</div>
+          <div class="effect-label">掲載候補として自動抽出</div>
+        </div>
+        <div class="effect-item">
+          <div class="effect-num">335枚</div>
+          <div class="effect-label">「ぜひ載せたい」とAIが判定</div>
+        </div>
+        <div class="effect-item">
+          <div class="effect-num">元写真そのまま</div>
+          <div class="effect-label">コピーするだけで元データはそのまま</div>
+        </div>
+      </div>
+      <p class="effect-note">※ 実績値は、あるNPOの記念写真集づくりでの一例です。2026年7月28日〜8月4日の7日間で撮影された約4,500枚超を処理し、そのうち1,961枚を評価しました。おすすめ度の内訳は「ぜひ載せたい335／良い972／候補に残す495／見送り159」です。処理する枚数や候補数は、案件の写真によって変わります。</p>
+
+      <!-- 利用に必要な環境 -->
+      <div class="note-box">
+        <div class="note-box-title">AI利用料について</div>
+        <p>写真の分類・採点にはClaude（Anthropic社のAI）を利用します。写真の枚数に応じた利用料がかかりますが、事前の品質フィルタで不要な写真を絞り込んでからAIにかけるため、無駄なコストを抑えられます。処理する枚数の目安から、あらかじめおおよその費用感をお伝えできます。</p>
+      </div>
+
+      <!-- この仕組みのこだわり -->
+      <h2>この仕組みのこだわり</h2>
+
+      <h3>先に「下ごしらえ」で数を絞る</h3>
+      <p>いきなり全部の写真をAIに送るのではなく、先に自動チェックでピンボケや暗い写真をより分けます。AIにかける枚数が減るぶん、処理も早く、費用も抑えられる——手間をかける前に無駄を減らす、二段構えにしています。</p>
+
+      <h3>「いい写真」を点数で見えるようにする</h3>
+      <p>写真の良し悪しを、品質・表情・内容（テーマとの関わり）・構図の4つの観点に分けて点数にします。感覚になりがちな「いい写真」の判断を、点数と理由のひと言で残すので、「なぜこれを選んだのか」を後からきちんと説明できます。</p>
+
+      <h3>大切な写真だから、やり直しがきく形に</h3>
+      <p>あやしい判定は後からもう一度見直し、疑わしいものはよけておきます。仕分けは元の写真を動かさずコピーで行い、消す必要があるときもゴミ箱を経由。迷う場面はその都度ご相談しながら進めます。大切な思い出の写真を預かるからこそ、いつでも元に戻せるやり方にしています。</p>
+
+      <!-- こんな方に向いています -->
+      <h2>こんな方に向いています</h2>
+
+      <p>周年記念誌や活動報告書、広報物の制作にあたって、数百枚から数千枚の写真の中から掲載する一枚を選ばなければならない事務局・制作担当の方に向いています。複数のスタッフや参加者から写真が集まってきて収拾がつかない、選定の基準を揃えたい、選んだ理由を後で説明できるようにしたい——そんな場面で力を発揮します。</p>
+
+      <p>一方で、写真が数十枚程度で目視でも十分に捌ける場合や、掲載可否を人の感性だけで一枚ずつじっくり決めたい場合には、無理に自動化する必要はありません。「量が多くて困っている」ときの下ごしらえの道具、という位置づけです。まずは手元の写真の状況をお聞かせください。</p>
+
+      <!-- CTA -->
+      <div class="cta-section">
+        <h2>「うちの写真でもできる？」と思ったら</h2>
+        <p>抱えている写真の量や、何のために選定したいのかをお聞かせください。<br>御社の状況に合わせて、分類の切り口や進め方をご提案します。</p>
+        <a href="/#contact" class="cta-btn">お問い合わせはこちら</a>
+      </div>
+
+      <!-- 戻るリンク -->
+      <div class="back-link">
+        <a href="/tools">← ツール紹介一覧へ戻る</a>
+      </div>
+
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  /* ===== ローカル変数（サイト変数にマッピング） ===== */
+  .tools-article {
+    --color-primary:       var(--color-brand-primary);
+    --color-primary-light: rgba(26,107,104,0.1);
+    --color-primary-dark:  var(--color-brand-primary-dark);
+    --color-accent:        var(--color-brand-warm);
+    --color-accent-light:  rgba(200,125,90,0.12);
+    --color-text:          var(--color-text-main);
+    --color-text-light:    var(--color-text-sub);
+    --color-bg:            var(--color-bg-body);
+    --color-white:         #ffffff;
+    --color-border:        rgba(0,0,0,0.11);
+    --color-tag-bg:        var(--color-bg-muted);
+    --max-width:           780px;
+    --radius:              8px;
+  }
+
+  /* ===== 記事エリア ===== */
+  .article-area {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 24px 20px 80px;
+  }
+
+  /* ===== パンくず ===== */
+  .breadcrumb {
+    font-size: 12.5px;
+    color: var(--color-text-light);
+    margin-bottom: 20px;
+  }
+  .breadcrumb a {
+    color: var(--color-text-light);
+    transition: color 0.2s;
+  }
+  .breadcrumb a:hover {
+    color: var(--color-primary);
+  }
+
+  /* ===== 日付・タグ ===== */
+  .article-date {
+    font-size: 13px;
+    color: var(--color-text-light);
+    margin-bottom: 8px;
+  }
+  .article-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 20px;
+  }
+  .article-tags span {
+    font-size: 12px;
+    background: var(--color-tag-bg);
+    padding: 3px 10px;
+    border-radius: 4px;
+    color: var(--color-text-light);
+  }
+
+  /* ===== アイキャッチ ===== */
+  .eyecatch {
+    margin: 0 0 36px;
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    background: var(--color-white);
+  }
+  .eyecatch img { width: 100%; height: auto; display: block; }
+  .eyecatch figcaption {
+    font-size: 12px;
+    color: var(--color-text-light);
+    padding: 8px 14px;
+    border-top: 1px solid var(--color-border);
+    background: var(--color-bg);
+  }
+
+  /* ===== 見出し ===== */
+  .tools-article h1 {
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1.5;
+    margin-bottom: 32px;
+    color: var(--color-text);
+  }
+  .tools-article h2 {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.5;
+    margin: 48px 0 20px;
+    padding-bottom: 8px;
+    border-bottom: 3px solid var(--color-primary);
+  }
+  .tools-article h3 {
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.5;
+    margin: 32px 0 12px;
+    padding-left: 14px;
+    border-left: 4px solid var(--color-accent);
+  }
+  .tools-article p { margin-bottom: 16px; }
+
+  /* ===== メタカード ===== */
+  .meta-card {
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 28px;
+    margin-bottom: 40px;
+  }
+  .meta-card-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--color-primary);
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    margin-bottom: 16px;
+  }
+  .meta-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .meta-item-label {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 4px;
+  }
+  .meta-item-value {
+    font-size: 14px;
+    color: var(--color-text-light);
+    line-height: 1.7;
+  }
+  .meta-item.full { grid-column: 1 / -1; }
+  .tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 8px;
+  }
+  .tech-tags span {
+    font-size: 11.5px;
+    font-weight: 500;
+    border: 1px solid var(--color-border);
+    padding: 2px 10px;
+    border-radius: 4px;
+    color: var(--color-text-light);
+  }
+
+  /* ===== Before/After ===== */
+  .ba-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .ba-card {
+    background: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 20px;
+  }
+  .ba-card.before { border-top: 4px solid #b0b0b0; }
+  .ba-card.after  { border-top: 4px solid var(--color-primary); }
+  .ba-card h4 {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .ba-card.before h4 { color: #888; }
+  .ba-card.after h4  { color: var(--color-primary); }
+  .ba-list { list-style: none; padding: 0; }
+  .ba-list li {
+    font-size: 14px;
+    padding: 4px 0 4px 24px;
+    position: relative;
+    line-height: 1.7;
+  }
+  .ba-card.before .ba-list li::before {
+    content: '\00D7';
+    position: absolute;
+    left: 4px;
+    color: #aaa;
+    font-weight: 700;
+  }
+  .ba-card.after .ba-list li::before {
+    content: '\2713';
+    position: absolute;
+    left: 2px;
+    color: var(--color-primary);
+    font-weight: 700;
+  }
+
+  /* ===== データフロー図 ===== */
+  .dataflow-figure {
+    margin: 20px 0 32px;
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    background: var(--color-white);
+  }
+  .dataflow-figure img { width: 100%; height: auto; display: block; }
+  .dataflow-figure figcaption {
+    font-size: 12.5px;
+    color: var(--color-text-light);
+    padding: 8px 14px;
+    border-top: 1px solid var(--color-border);
+    background: var(--color-bg);
+  }
+
+  /* ===== フロー図 ===== */
+  .flow-diagram { margin-bottom: 32px; }
+  .flow-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 4px;
+    position: relative;
+  }
+  .flow-step::after {
+    content: '';
+    position: absolute;
+    left: 17px;
+    top: 38px;
+    width: 2px;
+    height: calc(100% + 4px);
+    background: var(--color-primary-light);
+  }
+  .flow-step:last-child::after { display: none; }
+  .flow-num {
+    flex-shrink: 0;
+    width: 34px;
+    height: 34px;
+    background: var(--color-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 14px;
+    font-weight: 700;
+    position: relative;
+    z-index: 1;
+  }
+  .flow-body { padding-bottom: 20px; }
+  .flow-title {
+    font-size: 14.5px;
+    font-weight: 700;
+    margin-bottom: 2px;
+  }
+  .flow-desc {
+    font-size: 13.5px;
+    color: var(--color-text-light);
+  }
+
+  /* ===== 効果カード ===== */
+  .effect-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+  .effect-item {
+    background: var(--color-primary-light);
+    border-radius: var(--radius);
+    padding: 20px 16px;
+    text-align: center;
+  }
+  .effect-num {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 4px;
+  }
+  .effect-label {
+    font-size: 13.5px;
+    color: var(--color-text);
+  }
+  .effect-note {
+    font-size: 13.5px;
+    color: var(--color-text-light);
+    margin-bottom: 24px;
+  }
+
+  /* ===== ノートボックス ===== */
+  .note-box {
+    background: var(--color-accent-light);
+    border-left: 4px solid var(--color-accent);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 18px 20px;
+    margin: 24px 0;
+  }
+  .note-box-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--color-accent);
+    margin-bottom: 6px;
+  }
+  .note-box p {
+    font-size: 14px;
+    margin-bottom: 8px;
+  }
+  .note-box p:last-child { margin-bottom: 0; }
+
+  /* ===== CTAセクション ===== */
+  .cta-section {
+    background: var(--color-primary-light);
+    border-radius: var(--radius);
+    padding: 40px 24px;
+    text-align: center;
+    margin: 48px 0;
+  }
+  .cta-section h2 {
+    border: none;
+    margin: 0 0 12px;
+    padding: 0;
+    font-size: 20px;
+  }
+  .cta-section p {
+    font-size: 15px;
+    color: var(--color-text-light);
+    margin-bottom: 20px;
+  }
+  .cta-btn {
+    display: inline-block;
+    background: var(--color-primary);
+    color: white;
+    padding: 12px 36px;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .cta-btn:hover {
+    background: var(--color-primary-dark);
+    text-decoration: none;
+  }
+
+  /* ===== 戻るリンク ===== */
+  .back-link {
+    text-align: center;
+    margin: 32px 0;
+  }
+  .back-link a {
+    font-size: 14px;
+    color: var(--color-primary);
+  }
+
+  /* ===== モバイル ===== */
+  @media (max-width: 640px) {
+    .tools-article h1 { font-size: 21px; }
+    .ba-grid { grid-template-columns: 1fr; }
+    .effect-grid { grid-template-columns: 1fr; }
+    .meta-grid { grid-template-columns: 1fr; }
+    .eyecatch,
+    .dataflow-figure {
+      margin-left: -20px;
+      margin-right: -20px;
+      border-radius: 0;
+      border-left: none;
+      border-right: none;
+    }
+  }
+</style>
