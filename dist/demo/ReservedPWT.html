@@ -1,0 +1,1397 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PWT装置 空き状況ダッシュボード（サンプルデータ）</title>
+<!-- DADS タイポグラフィ: Noto Sans JP（SIL OFL 1.1）。読めない環境では system の日本語ゴシックに落ちる -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* ===== キーカラー（DADS Blue） ===== */
+    --primary:#0017C1;          /* プライマリー。白に対し 4.5:1 以上 */
+    --primary-hover:#000C8F;    /* UI ステート Hover */
+    --primary-active:#000060;   /* UI ステート Active */
+    --secondary:#3460FB;        /* セカンダリー。非テキスト 3:1 以上 */
+    --tertiary:#7096F8;         /* ターシャリー */
+    --key-bg:#E8F1FE;           /* バックグラウンド（キーカラー系） */
+    --key-bg-strong:#C5D7FB;
+
+    /* ===== 共通カラー（Solid Gray 階調） ===== */
+    --ink:#1A1A1C;              /* 本文テキスト。白に対し 4.5:1 以上 */
+    --muted:#626264;            /* 補足テキスト。白に対し 4.5:1 以上（Gray-536 相当） */
+    --line:#D8D8DB;             /* 罫線・ディバイダー */
+    --line-strong:#949494;      /* 非テキスト 3:1 を要する境界（Gray-420 相当） */
+    --panel:#FFFFFF;
+    --bg:#F1F1F4;               /* ページ背景 */
+    --bg-subtle:#F8F8FB;        /* 面の内側で一段沈める背景 */
+
+    /* ===== 機能カラー ===== */
+    --focus:#FFD43C;            /* フォーカスカラー（Yellow-300 相当）。黒との 2 重構造で使う */
+    --link:#0017C1;
+    --link-visited:#8B00A8;
+
+    /* ===== セマンティックカラー ===== */
+    --success:#197A4B;          /* サクセス（緑） */
+    --success-bg:#E6F5ED;
+    --error:#CE0000;            /* エラー（赤） */
+    --error-bg:#FDECEC;
+    --warning:#9A6300;          /* 警告（黄・橙） */
+    --warning-bg:#FDF4E4;
+
+    /* ===== 状態色（空き状況の 4 状態。色以外の手掛かりも必ず併記する） ===== */
+    --busy:#0017C1;             /* 予約あり。キーカラーで最も濃く */
+    --free:#FFFFFF;             /* 空き */
+    --adjust:#9A6300;           /* 調整日。警告の色相 */
+    --blocked:#626264;          /* 使用不可。無彩色＋斜線 */
+
+    /* ===== 余白スケール（8px 基準） ===== */
+    --sp-1:4px; --sp-2:8px; --sp-3:16px; --sp-4:24px; --sp-5:32px; --sp-6:40px;
+
+    /* ===== 角の形状（5 段階） ===== */
+    --r-1:4px; --r-2:8px; --r-3:12px; --r-4:16px; --r-full:999px;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:"Noto Sans JP","BIZ UDPGothic","Hiragino Sans","Yu Gothic",sans-serif;
+    font-size:16px; line-height:1.6;
+  }
+  /* フォーカスは Yellow-300 と黒の 2 重構造。DADS ではこの表現を変更しない */
+  :where(button,a,select,[tabindex]):focus-visible{
+    outline:3px solid var(--focus); outline-offset:0;
+    box-shadow:0 0 0 5px #000000;
+  }
+
+  header{
+    padding:var(--sp-4) var(--sp-4) var(--sp-3); background:var(--panel);
+    border-bottom:2px solid var(--primary);
+    display:flex; align-items:flex-end; justify-content:space-between; gap:var(--sp-3); flex-wrap:wrap;
+  }
+  header h1{ margin:0; font-size:1.5rem; font-weight:700; line-height:1.4; }
+  header p{ margin:var(--sp-1) 0 0; font-size:1rem; color:var(--muted); line-height:1.6; }
+  /* データの更新日時（ガイド 5.4 チェックリスト） */
+  .updated{ font-size:.875rem; color:var(--muted); white-space:nowrap; }
+
+  /* ===== 概況（全体を表す指標。ガイド 3.4: 左上に全体、右下へ詳細） ===== */
+  .kpis{
+    display:grid; grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:var(--sp-3); padding:var(--sp-4) var(--sp-4) 0;
+  }
+  .kpi{
+    background:var(--panel); border:1px solid var(--line); border-top:4px solid var(--primary);
+    border-radius:var(--r-2); padding:var(--sp-3);
+  }
+  .kpi-label{ margin:0; font-size:1rem; font-weight:700; color:var(--ink); line-height:1.4; }
+  .kpi-value{ margin:var(--sp-2) 0 0; font-size:2.25rem; font-weight:700; color:var(--primary); line-height:1.2; }
+  .kpi-value small{ font-size:1rem; font-weight:400; color:var(--muted); margin-left:var(--sp-1); }
+  .kpi-sub{ margin:var(--sp-1) 0 0; font-size:.875rem; color:var(--muted); min-height:1.4em; line-height:1.4; }
+  /* サンプルデータであることを示すバッジ（moc.html 専用）。DADS 警告色相を使う */
+  .demo-badge{
+    display:inline-block; margin-left:var(--sp-2); padding:var(--sp-1) var(--sp-2);
+    border-radius:var(--r-1); background:var(--warning-bg); color:var(--warning);
+    border:1px solid var(--warning); font-size:.875rem; font-weight:700; vertical-align:middle;
+  }
+
+  /* ===== 2カラムレイアウト（PC: カレンダー2/3 + 設備情報1/3） ===== */
+  .layout{
+    display:grid; grid-template-columns:minmax(0,2fr) minmax(0,1fr);
+    gap:var(--sp-3); padding:var(--sp-4) var(--sp-4) var(--sp-2); align-items:start;
+  }
+  .foot{ padding:0 var(--sp-4) var(--sp-6); }
+  .cal-col{ min-width:0; }
+  .info-col{ min-width:0; }
+
+  /* ガイドモーダル */
+  .guide-modal{ max-width:720px; }
+  .poc-lead{ margin:0 0 var(--sp-3); font-size:1rem; color:var(--ink); line-height:1.7; }
+  .poc-list{ margin:0 0 var(--sp-3); padding-left:1.4em; font-size:1rem; color:var(--ink); line-height:1.7; }
+  .poc-list li{ margin-bottom:var(--sp-2); }
+  .poc-list strong{ color:var(--primary); }
+  .poc-privacy{ margin:0 0 var(--sp-3); font-size:.875rem; color:var(--muted); line-height:1.6; }
+  .guide-actions{ text-align:center; padding-top:var(--sp-2); border-top:1px solid var(--line); margin-top:var(--sp-1); }
+  .guide-ok{
+    margin-top:var(--sp-3); border:1px solid var(--primary); background:var(--primary); color:#fff;
+    font-family:inherit; font-size:1rem; font-weight:700; line-height:1;
+    padding:var(--sp-3) var(--sp-4); border-radius:var(--r-2); cursor:pointer;
+    min-height:44px;
+  }
+  .guide-ok:hover{ background:var(--primary-hover); }
+  .guide-ok:active{ background:var(--primary-active); }
+
+  /* カレンダーパネル。右の設備情報カードと上端・見出し高さを揃える */
+  .cal-panel{ background:var(--panel); border:1px solid var(--line); border-radius:var(--r-2); overflow:hidden; }
+  .navbar{
+    display:flex; align-items:center; gap:var(--sp-2); flex-wrap:wrap;
+    min-height:64px; padding:var(--sp-2) var(--sp-3); border-bottom:1px solid var(--line);
+  }
+  /* 月／週の切替（ガイド 3.4: フィルタは影響範囲の上・左に置く） */
+  .seg{ display:inline-flex; border:1px solid var(--primary); border-radius:var(--r-2); overflow:hidden; }
+  .seg button{
+    border:0; background:#fff; color:var(--primary); padding:var(--sp-2) var(--sp-3);
+    font-family:inherit; font-size:1rem; font-weight:700; line-height:1; cursor:pointer; min-height:44px;
+  }
+  .seg button + button{ border-left:1px solid var(--primary); }
+  .seg button.active{ background:var(--primary); color:#fff; }
+  .nav-btn{
+    border:1px solid var(--primary); background:#fff; color:var(--primary);
+    padding:var(--sp-2) var(--sp-3); border-radius:var(--r-2);
+    font-size:1rem; font-family:inherit; font-weight:700; line-height:1; cursor:pointer;
+    display:inline-flex; align-items:center; justify-content:center; gap:var(--sp-1); min-height:44px;
+  }
+  .nav-btn:hover{ background:var(--key-bg); }
+  .nav-btn:active{ background:var(--key-bg-strong); }
+  .nav-btn:disabled{ color:var(--muted); border-color:var(--line-strong); background:#fff; cursor:default; }
+  /* 右端に離すと大画面で視線が左右に往復するので、操作はすべて左に寄せる */
+  .jump{ display:flex; align-items:center; gap:var(--sp-1); margin-left:var(--sp-2); }
+  .jump select{
+    font-family:inherit; font-size:1rem; padding:var(--sp-2); min-height:44px;
+    border:1px solid var(--line-strong); border-radius:var(--r-2); background:#fff; color:var(--ink);
+  }
+  .today-btn{ border-width:2px; }
+
+  /* 表示期間（ナビ操作行とは別行で、大きく表示する） */
+  .period{ padding:var(--sp-3) var(--sp-3) var(--sp-1); background:var(--panel); }
+  .stamp{ font-size:1.375rem; font-weight:700; color:var(--ink); line-height:1.4; }
+  .stamp b{ font-size:1.3em; font-weight:700; }
+  .stamp i{ font-size:.6em; font-weight:400; font-style:normal; margin-right:.05em; color:var(--muted); }
+  .stamp-sep{ margin:0 .4em; font-size:.7em; font-weight:400; color:var(--muted); vertical-align:.1em; }
+
+  /* 凡例バー（ガイド 4.5: 凡例は表に隣接させ、順序も表と対応させる） */
+  .bar{
+    display:flex; align-items:center; gap:var(--sp-3); flex-wrap:wrap;
+    padding:var(--sp-2) var(--sp-3); background:var(--bg-subtle);
+    border-top:1px solid var(--line); border-bottom:1px solid var(--line); font-size:.875rem;
+  }
+  .legend{ display:flex; gap:var(--sp-3); flex-wrap:wrap; }
+  .legend span{ display:inline-flex; align-items:center; gap:var(--sp-1); color:var(--ink); }
+  .sw{
+    width:16px; height:16px; border-radius:var(--r-1); border:1px solid var(--line-strong);
+    display:inline-block; flex-shrink:0;
+  }
+  .sw.busy{ background:var(--busy); }
+  .sw.free{ background:var(--free); }
+  .sw.adjust{ background:var(--adjust); }
+  .sw.blocked{
+    background:var(--blocked);
+    background-image:repeating-linear-gradient(45deg,transparent,transparent 3px,rgba(255,255,255,.5) 3px,rgba(255,255,255,.5) 6px);
+  }
+
+  .cal-body{ padding:var(--sp-3); }
+  /* メタ情報（ガイド 4.4: データの定義と更新の説明を添える） */
+  .meta{ margin-top:var(--sp-2); font-size:.875rem; color:var(--muted); line-height:1.6; }
+
+  /* ===== 設備情報パネル（右カラム） ===== */
+  .info-card{ background:var(--panel); border:1px solid var(--line); border-radius:var(--r-2); position:sticky; top:var(--sp-3); }
+  .info-head{
+    display:flex; align-items:center; min-height:64px;
+    padding:var(--sp-2) var(--sp-3); border-bottom:1px solid var(--line);
+    font-size:1.125rem; font-weight:700; color:var(--ink);
+  }
+  .acc-toggle{
+    display:none; width:100%; border:1px solid var(--primary); background:var(--primary);
+    font-family:inherit; font-size:1rem; font-weight:700; color:#fff; border-radius:var(--r-2);
+    padding:var(--sp-3); cursor:pointer; align-items:center; justify-content:space-between; gap:var(--sp-2);
+    min-height:44px;
+  }
+  .acc-toggle:hover{ background:var(--primary-hover); }
+  .acc-icon{ transition:transform .2s ease; font-size:.875rem; }
+  .acc-toggle[aria-expanded="true"] .acc-icon{ transform:rotate(180deg); }
+  .acc-toggle[aria-expanded="true"]{ border-radius:var(--r-2) var(--r-2) 0 0; }
+  .acc-panel{ display:block; }
+
+  /* スライダー: 大きい写真 → 概要 → サムネイル列 */
+  .slider{ padding:var(--sp-3); }
+  .stage{ position:relative; }
+  .slides{ overflow:hidden; border-radius:var(--r-2); border:1px solid var(--line); background:var(--bg-subtle); }
+  .slide{ display:none; }
+  .slide.active{ display:block; }
+  .slide-img{
+    width:100%; aspect-ratio:16/10; background:var(--bg-subtle);
+    display:flex; align-items:center; justify-content:center; overflow:hidden;
+  }
+  .slide-img svg{ width:100%; height:100%; display:block; }
+  .slide-img img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .slider-arrow{
+    position:absolute; top:50%; transform:translateY(-50%);
+    border:1px solid var(--line-strong); background:#fff; color:var(--primary);
+    width:44px; height:44px; border-radius:var(--r-full); font-size:1.25rem; cursor:pointer;
+    display:flex; align-items:center; justify-content:center; padding:0;
+  }
+  .slider-arrow:hover{ background:var(--key-bg); border-color:var(--primary); }
+  .slider-arrow.prev{ left:var(--sp-2); }
+  .slider-arrow.next{ right:var(--sp-2); }
+  .slide-body{ padding:var(--sp-3) 0 0; }
+  .slide-title{ font-size:1.125rem; font-weight:700; color:var(--ink); margin:0 0 var(--sp-1); line-height:1.4; }
+  .slide-title .kind{
+    font-size:.875rem; font-weight:700; padding:var(--sp-1) var(--sp-2); border-radius:var(--r-1);
+    margin-left:var(--sp-2); vertical-align:middle; border:1px solid;
+  }
+  .slide-title .kind.dev{ background:var(--key-bg); color:var(--primary); border-color:var(--primary); }
+  .slide-title .kind.room{ background:var(--bg-subtle); color:var(--muted); border-color:var(--line-strong); }
+  .slide-spec{ display:flex; flex-wrap:wrap; gap:var(--sp-1) var(--sp-3); margin:var(--sp-2) 0; font-size:1rem; }
+  .slide-spec span{ color:var(--muted); }
+  .slide-spec b{ color:var(--ink); font-weight:700; }
+  .slide-note{ font-size:1rem; color:var(--ink); margin:0; line-height:1.7; }
+
+  .thumbs{ display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:var(--sp-1); margin-top:var(--sp-3); }
+  .thumb{
+    padding:0; border:1px solid var(--line-strong); border-radius:var(--r-1); background:#fff; cursor:pointer;
+    overflow:hidden; font-family:inherit; text-align:center;
+  }
+  .thumb:hover{ border-color:var(--primary); }
+  .thumb-img{ aspect-ratio:16/10; overflow:hidden; background:var(--bg-subtle); }
+  .thumb-img img, .thumb-img svg{ width:100%; height:100%; object-fit:cover; display:block; }
+  .thumb-name{ display:block; font-size:.875rem; font-weight:700; padding:var(--sp-1) 0; color:var(--muted); }
+  .thumb.active{ border-color:var(--primary); border-width:2px; }
+  .thumb.active .thumb-name{ color:var(--primary); background:var(--key-bg); }
+
+  /* 表（ガイド 4.5: 下地の罫線は最小限、装飾は使わない） */
+  .table-wrap{
+    background:var(--panel); border:1px solid var(--line); border-radius:var(--r-2); overflow:auto;
+    position:relative; min-height:120px;
+  }
+  table{ border-collapse:collapse; width:100%; table-layout:fixed; font-size:1rem; }
+  col.datecol{ width:76px; }
+  col.devcol{ width:auto; }
+  th,td{ border:1px solid var(--line); text-align:center; padding:0; overflow:hidden; }
+  thead th{
+    background:var(--bg-subtle); position:sticky; top:0; z-index:2;
+    font-weight:700; padding:0; white-space:nowrap; border-bottom:2px solid var(--line-strong);
+  }
+  thead th.datecol{ padding:var(--sp-2) var(--sp-1); font-size:.875rem; color:var(--ink); }
+  .devbtn{
+    width:100%; border:0; background:transparent; cursor:pointer;
+    font-family:inherit; font-weight:700; font-size:1rem; color:var(--primary);
+    padding:var(--sp-2) var(--sp-1); display:flex; flex-direction:column; align-items:center; gap:2px;
+    min-height:44px; text-decoration:underline;
+  }
+  .devbtn:hover{ background:var(--key-bg); }
+  .devbtn .sub{ font-size:.875rem; color:var(--muted); font-weight:400; text-decoration:none; }
+  .devbtn.room{ color:var(--muted); }
+  .devbtn.room:hover{ background:var(--bg-subtle); }
+  .devbtn .warn{ color:var(--error); font-size:.875rem; }
+  tbody th{
+    background:#fff; font-weight:700; padding:var(--sp-2) var(--sp-1); text-align:center; white-space:nowrap;
+    position:sticky; left:0; z-index:1; border-right:2px solid var(--line-strong); font-size:.875rem;
+  }
+  /* 状態は色だけで識別させず、必ずテキストを併記する（ガイド 4.5 / DADS アクセシビリティ） */
+  .cell{ height:40px; display:flex; align-items:center; justify-content:center; font-size:.875rem; font-weight:700; }
+  .cell.busy{ background:var(--busy); color:#fff; }
+  .cell.free{ background:var(--free); color:var(--muted); font-weight:400; }
+  .cell.adjust{ background:var(--adjust); color:#fff; }
+  .cell.blocked{
+    background:var(--blocked); color:#fff;
+    background-image:repeating-linear-gradient(45deg,transparent,transparent 5px,rgba(255,255,255,.28) 5px,rgba(255,255,255,.28) 10px);
+  }
+  tr.weekend th{ color:var(--muted); background:var(--bg-subtle); }
+  tr.weekend .cell.free{ background:var(--bg-subtle); }
+  tr.today th{ box-shadow:inset 4px 0 0 var(--primary); color:var(--primary); }
+  tr.today .cell.free{ background:var(--key-bg); }
+
+  /* ローディング／エラー */
+  .table-wrap.loading::after{
+    content:"読み込み中…"; position:absolute; inset:0;
+    background:rgba(255,255,255,.85); display:flex; align-items:center; justify-content:center;
+    color:var(--ink); font-weight:700; font-size:1rem; z-index:3;
+  }
+  .errbar{
+    display:none; margin:0 0 var(--sp-3); padding:var(--sp-3); border-radius:var(--r-1);
+    background:var(--error-bg); border:1px solid var(--error); border-left:4px solid var(--error);
+    color:var(--ink); font-size:1rem; line-height:1.7;
+  }
+  .errbar.show{ display:block; }
+  .errbar strong{ display:block; margin-bottom:var(--sp-1); color:var(--error); }
+  .warnbar{
+    display:none; margin:0 0 var(--sp-3); padding:var(--sp-3); border-radius:var(--r-1);
+    background:var(--warning-bg); border:1px solid var(--warning); border-left:4px solid var(--warning);
+    color:var(--ink); font-size:1rem; line-height:1.7;
+  }
+  .warnbar.show{ display:block; }
+  .warnbar strong{ display:block; margin-bottom:var(--sp-1); color:var(--warning); }
+  .warnbar ul{ margin:0; padding-left:1.4em; }
+  .fatal{
+    display:none; background:#fff; border:1px solid var(--line); border-radius:var(--r-2);
+    padding:var(--sp-6) var(--sp-4); text-align:center; color:var(--muted); font-size:1rem;
+  }
+  .fatal.show{ display:block; }
+  .fatal .fatal-msg{ color:var(--ink); font-weight:700; margin:0 0 var(--sp-2); font-size:1.125rem; }
+  .fatal .fatal-sub{ margin:0 0 var(--sp-3); font-size:1rem; }
+
+  .note{
+    margin-top:var(--sp-3); font-size:1rem; color:var(--ink); background:#fff; line-height:1.7;
+    border:1px solid var(--line); border-left:4px solid var(--secondary);
+    padding:var(--sp-3); border-radius:var(--r-1);
+  }
+
+  .contact-wrap{ margin-top:var(--sp-4); text-align:center; }
+  .contact-btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:var(--sp-2);
+    background:var(--primary); color:#fff; text-decoration:none;
+    padding:var(--sp-3) var(--sp-5); border-radius:var(--r-2); font-weight:700; font-size:1.125rem;
+    border:1px solid var(--primary); min-height:44px;
+  }
+  .contact-btn:hover{ background:var(--primary-hover); }
+  .contact-btn:active{ background:var(--primary-active); }
+  .contact-note{ margin-top:var(--sp-2); font-size:.875rem; color:var(--muted); }
+
+  /* モーダル（DADS エレベーション: オーバーレイシェード＋必ずボーダーを持たせる） */
+  .modal-overlay{
+    position:fixed; inset:0; background:rgba(0,0,0,.6);
+    display:none; align-items:center; justify-content:center; padding:var(--sp-3); z-index:50;
+  }
+  .modal-overlay.open{ display:flex; }
+  .modal{
+    background:#fff; border-radius:var(--r-3); max-width:480px; width:100%;
+    border:1px solid var(--line-strong); overflow:hidden;
+    max-height:90vh; display:flex; flex-direction:column;
+  }
+  .modal-head{
+    padding:var(--sp-3); background:var(--bg-subtle);
+    border-bottom:1px solid var(--line); display:flex; align-items:center; justify-content:space-between;
+    flex-shrink:0; gap:var(--sp-2);
+  }
+  .modal-head h2{ margin:0; font-size:1.25rem; color:var(--ink); line-height:1.4; }
+  .modal-close{
+    border:1px solid transparent; background:transparent; font-size:1.25rem; cursor:pointer; color:var(--ink);
+    line-height:1; padding:0; border-radius:var(--r-1);
+    width:44px; height:44px; flex-shrink:0;
+    display:inline-flex; align-items:center; justify-content:center;
+  }
+  .modal-close:hover{ background:var(--key-bg); border-color:var(--line-strong); }
+  .modal-body{ padding:var(--sp-3); font-size:1rem; overflow-y:auto; }
+  .modal-body dl{ margin:0; display:grid; grid-template-columns:auto 1fr; gap:var(--sp-2) var(--sp-3); }
+  .modal-body dt{ color:var(--muted); font-size:1rem; white-space:nowrap; }
+  .modal-body dd{ margin:0; font-weight:700; }
+  .modal-body .desc{
+    margin-top:var(--sp-3); padding-top:var(--sp-3); border-top:1px solid var(--line);
+    color:var(--ink); font-weight:400; line-height:1.7;
+  }
+
+  /* ===== モバイル・タブレット（DADS ブレークポイント: 768px 未満） ===== */
+  @media (max-width:767px){
+    header{ padding:var(--sp-3); }
+    header h1{ font-size:1.25rem; }
+    .kpis{ grid-template-columns:1fr; gap:var(--sp-2); padding:var(--sp-3) var(--sp-3) 0; }
+    .kpi{ padding:var(--sp-3); }
+    .kpi-value{ font-size:1.75rem; }
+    .layout{ grid-template-columns:1fr; gap:var(--sp-3); padding:var(--sp-3) var(--sp-3) var(--sp-1); }
+    .foot{ padding:0 var(--sp-3) var(--sp-5); }
+    .info-col{ order:2; }
+    .info-card{ position:static; border:0; }
+    .info-head{ display:none; }
+    .acc-toggle{ display:flex; }
+    .acc-panel{ display:none; border:1px solid var(--line); border-top:0; border-radius:0 0 var(--r-2) var(--r-2); }
+    .acc-panel.open{ display:block; }
+    /* ナビは2段: 月/週切替（全幅） → 前月・翌月・今月・年月ジャンプ */
+    .navbar{ padding:var(--sp-2); }
+    .seg{ flex-basis:100%; }
+    .seg button{ flex:1; }
+    .jump{ flex-basis:100%; margin-left:0; justify-content:center; }
+    .period{ padding:var(--sp-3) var(--sp-2) var(--sp-1); }
+    .stamp{ font-size:1.125rem; }
+    .bar{ padding:var(--sp-2); }
+    .cal-body{ padding:var(--sp-2); }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <h1 id="pageTitle">PWT装置 空き状況ダッシュボード<span class="demo-badge">サンプルデータ</span></h1>
+    <p id="pageSubtitle" style="display:none"></p>
+  </div>
+  <div class="updated" id="updated"></div>
+</header>
+
+<!--
+===== 概況: 全体を表す指標（表示期間・今日） =====
+<div class="kpis" aria-label="概況">
+  <div class="kpi">
+    <p class="kpi-label">今日の空き設備</p>
+    <p class="kpi-value" id="kpiToday">—</p>
+    <p class="kpi-sub" id="kpiTodaySub"></p>
+  </div>
+  <div class="kpi">
+    <p class="kpi-label">装置の空き日率（表示期間）</p>
+    <p class="kpi-value" id="kpiDev">—</p>
+    <p class="kpi-sub" id="kpiDevSub"></p>
+  </div>
+  <div class="kpi">
+    <p class="kpi-label">個室の空き日率（表示期間）</p>
+    <p class="kpi-value" id="kpiRoom">—</p>
+    <p class="kpi-sub" id="kpiRoomSub"></p>
+  </div>
+</div>
+-->
+
+<div class="layout">
+  <!-- ===== 左: カレンダー ===== -->
+  <section class="cal-col" aria-label="空き状況カレンダー">
+    <div class="cal-panel">
+      <div class="navbar">
+        <div class="seg" id="viewTabs" role="tablist">
+          <button class="active" id="tabMonth" role="tab" data-view="month" aria-selected="true">月表示</button>
+          <button id="tabWeek" role="tab" data-view="week" aria-selected="false">週表示</button>
+        </div>
+        <button class="nav-btn" id="prev">◀ 前月</button>
+        <button class="nav-btn" id="next">翌月 ▶</button>
+        <div class="jump">
+          <button class="nav-btn today-btn" id="today">今月</button>
+          <span id="jumpBox">
+            <select id="selYear"></select>
+            <select id="selMonth"></select>
+            <button class="nav-btn" id="go">表示</button>
+          </span>
+        </div>
+      </div>
+
+      <div class="period" id="period">
+        <span class="stamp" id="stamp"></span>
+      </div>
+
+      <div class="bar">
+        <div class="legend">
+          <span><span class="sw busy" aria-hidden="true"></span>予約あり</span>
+          <span><span class="sw adjust" aria-hidden="true"></span>調整日</span>
+          <span><span class="sw blocked" aria-hidden="true"></span>使用不可</span>
+          <span><span class="sw free" aria-hidden="true"></span>空き</span>
+        </div>
+      </div>
+
+      <div class="cal-body">
+        <!-- 設定シートの不備（種別の綴り違い、カレンダーID 未設定など）。月をまたいで出し続ける -->
+        <div class="warnbar" id="warnbar"></div>
+        <div class="errbar" id="errbar"></div>
+
+        <div class="fatal" id="fatal">
+          <p class="fatal-msg" id="fatalMsg">空き状況を取得できませんでした。</p>
+          <p class="fatal-sub">時間をおいて再度お試しください。</p>
+          <button class="nav-btn" id="reloadBtn">再読み込み</button>
+        </div>
+
+        <div class="table-wrap" id="tableWrap" tabindex="0" role="region" aria-label="日付ごとの設備の空き状況">
+          <table id="table">
+            <colgroup id="colgroup"></colgroup>
+            <thead><tr id="head"></tr></thead>
+            <tbody id="body"></tbody>
+          </table>
+        </div>
+
+        <div class="meta">Googleカレンダーの登録内容を反映しています（反映まで最大5分程度）。装置の予約最終日の翌日は調整日として表示します。</div>
+      </div>
+    </div>
+
+    <div class="note" id="pageNote" style="display:none"></div>
+  </section>
+
+  <!-- ===== 右: 設備情報（スマホでは折りたたみ） ===== -->
+  <aside class="info-col" aria-label="設備情報">
+    <div class="info-card">
+      <div class="info-head">設備情報</div>
+      <button class="acc-toggle" id="accToggle" aria-expanded="false" aria-controls="accPanel">
+        <span>設備情報を見る</span>
+        <span class="acc-icon" id="accIcon">▼</span>
+      </button>
+      <div class="acc-panel" id="accPanel">
+        <div class="slider" id="slider">
+          <div class="stage">
+            <div class="slides" id="slides"></div>
+            <button class="slider-arrow prev" id="slidePrev" aria-label="前の設備">‹</button>
+            <button class="slider-arrow next" id="slideNext" aria-label="次の設備">›</button>
+          </div>
+          <div class="slide-body" id="slideBody"></div>
+          <div class="thumbs" id="slideThumbs"></div>
+        </div>
+      </div>
+    </div>
+  </aside>
+</div>
+
+<!-- 問い合わせ導線。PC・スマホとも最下部 -->
+<div class="foot">
+  <div class="contact-wrap" id="contactWrap" style="display:none">
+    <a class="contact-btn" id="contactBtn" href="#" target="_blank" rel="noopener">問い合わせる ↗</a>
+    <div class="contact-note">空き状況の確認・予約のご相談はこちらから（別タブで開きます）</div>
+  </div>
+</div>
+
+<!-- 設備概要モーダル -->
+<div class="modal-overlay" id="modal">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-head">
+      <h2 id="modalTitle">設備概要</h2>
+      <button class="modal-close" id="modalClose" aria-label="閉じる">×</button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<!-- この画面について（初回表示）モーダル -->
+<div class="modal-overlay" id="guideModal">
+  <div class="modal guide-modal" role="dialog" aria-modal="true" aria-labelledby="guideTitle">
+    <div class="modal-head">
+      <h2 id="guideTitle">この画面について</h2>
+      <button class="modal-close" id="guideClose" aria-label="閉じる">×</button>
+    </div>
+    <div class="modal-body">
+      <p class="poc-lead">
+        PWT装置8台と個室（桜・梅）の空き状況を、1日単位でご覧いただけます。
+        表示内容はGoogleカレンダーの登録を反映しています（反映まで最大5分程度かかる場合があります）。
+      </p>
+      <ul class="poc-list">
+        <li><strong>概況</strong>：画面上部の3つの数値で、今日の空き設備数と、表示している期間の空き日率（装置・個室）がわかります。</li>
+        <li><strong>設備情報</strong>：PCでは画面右側に、スマホではカレンダー下の「設備情報を見る」を開くと表示されます。写真の下に並ぶ小さい写真を押すと、その設備の写真と概要に切り替わります。</li>
+        <li><strong>空き状況の見方</strong>：日付×設備のマスに、予約／調整／不可／空のいずれかを、色と文字の両方で表示します（凡例は表の上）。</li>
+        <li><strong>調整日</strong>：装置の予約最終日の翌日を、段取り替えのため自動的に調整日として表示します（個室にはありません）。</li>
+        <li><strong>使用不可</strong>：メンテナンス等でカレンダーに登録された日を反映します。</li>
+        <li><strong>設備の詳細</strong>：見出しの「#1〜#8」「桜・梅」を押すと設備概要が表示されます。</li>
+        <li><strong>月の切り替え</strong>：前月／翌月ボタン、または年月を選んで「表示」で移動できます。週表示タブで1週間単位でも確認できます。</li>
+        <li><strong>問い合わせ</strong>：予約・相談は画面下部のボタンから受託サービスの問い合わせフォームへ進みます。</li>
+      </ul>
+      <p class="poc-privacy">
+        なお、他社の試験内容（顧客名・品番など）は表示されません。マスには「予約あり」等の状態のみが出ます。
+      </p>
+      <div class="guide-actions">
+        <button class="guide-ok" id="guideOk">閉じて画面を見る</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ===== MOCK ここから: サーバから注入される初期ペイロードの代わり =====
+  // index.html では  var BOOT = <?!= BOOT_JSON ?>;  の1行になる
+  var MOCK_DEVICES = [
+    { name:'#1', kind:'装置', model:'PWT-A', ch:'6ch', current:'最大 600A', note:'標準機。汎用パワーサイクル試験に対応。' },
+    { name:'#2', kind:'装置', model:'PWT-A', ch:'6ch', current:'最大 600A', note:'標準機。#1と同構成のため互換運用可。' },
+    { name:'#3', kind:'装置', model:'PWT-A', ch:'6ch', current:'最大 600A', note:'標準機。' },
+    { name:'#4', kind:'装置', model:'PWT-B', ch:'6ch', current:'最大 800A', note:'大電流対応機。高負荷条件の試験向け。' },
+    { name:'#5', kind:'装置', model:'PWT-B', ch:'6ch', current:'最大 800A', note:'大電流対応機。' },
+    { name:'#6', kind:'装置', model:'PWT-B', ch:'6ch', current:'最大 800A', note:'大電流対応機。' },
+    { name:'#7', kind:'装置', model:'PWT-C', ch:'6ch', current:'最大 1000A', note:'高電流仕様。チラー連携による温度制御に対応。' },
+    { name:'#8', kind:'装置', model:'PWT-C', ch:'6ch', current:'最大 1000A', note:'高電流仕様。' },
+    { name:'桜', kind:'個室', capacity:'6名', area:'約20㎡', note:'打合せ・立会い用の個室。Web会議設備あり。' },
+    { name:'梅', kind:'個室', capacity:'4名', area:'約14㎡', note:'打合せ・立会い用の個室。' }
+  ];
+  var MOCK_NOW = new Date();
+  var BOOT = {
+    ok: true,
+    devices: MOCK_DEVICES,
+    // #noguide を付けて開くと初回ガイドを出さない（スクリーンショット確認用）
+    ui: { contactUrl:'https://keenus.jp/contact-form/jutaku-form/', showGuide: location.hash !== '#noguide' },
+    range: { from:-1, to:12 },
+    today: { y:MOCK_NOW.getFullYear(), m:MOCK_NOW.getMonth(), d:MOCK_NOW.getDate() },
+    cacheEnabled: false,
+    warnings: []
+  };
+
+  function seeded(seed){
+    var s = seed % 2147483647; if(s <= 0) s += 2147483646;
+    return function(){ s = (s * 16807) % 2147483647; return (s - 1) / 2147483646; };
+  }
+  // サーバの getMonthData(y, m) と同じ形 { days, devices, errors } を返す
+  function makeMonthData(year, month){
+    var daysInMonth = new Date(year, month + 1, 0).getDate();
+    var days = [];
+    for(var d=1; d<=daysInMonth; d++){
+      var dt = new Date(year, month, d);
+      var wd = dt.getDay();
+      var isToday = (year===BOOT.today.y && month===BOOT.today.m && d===BOOT.today.d);
+      days.push({ day:d, label:(month+1)+'/'+d+'('+WD[wd]+')', weekend:(wd===0||wd===6), today:isToday });
+    }
+    var devices = MOCK_DEVICES.map(function(dev, di){
+      var rand = seeded((year*100 + month)*10 + di + 1);
+      var slots = []; for(var k=0;k<daysInMonth;k++) slots.push('free');
+      if(dev.kind === '個室'){
+        for(var k2=0;k2<daysInMonth;k2++){ if(rand()<0.25) slots[k2]='busy'; }
+      } else {
+        var blocks = 1 + Math.floor(rand()*3);
+        for(var b=0;b<blocks;b++){
+          var start = Math.floor(rand()*daysInMonth);
+          var len = 2 + Math.floor(rand()*8);
+          for(var k3=start;k3<Math.min(start+len,daysInMonth);k3++) slots[k3]='busy';
+        }
+        if(rand()<0.5){ var s = Math.floor(rand()*daysInMonth); if(slots[s]==='free') slots[s]='blocked'; }
+        for(var k4=0;k4<daysInMonth-1;k4++){ if(slots[k4]==='busy' && slots[k4+1]==='free') slots[k4+1]='adjust'; }
+      }
+      return { name:dev.name, slots:slots };
+    });
+    return { days:days, devices:devices, errors:[] };
+  }
+  // ===== MOCK ここまで =====
+
+  var DEVICES = BOOT.devices || [];
+  var UI = BOOT.ui || {};
+  var WD = ['日','月','火','水','木','金','土'];
+
+  // 表示名 → 設備情報。表の列はサーバの応答を正とし、見出しの型式などをここから引く。
+  var deviceMetaByName = {};
+  var deviceIndexByName = {};
+  DEVICES.forEach(function(d, i){ deviceMetaByName[d.name] = d; deviceIndexByName[d.name] = i; });
+
+  // 「今日」はサーバTZ基準。閲覧者のPCの時計・TZに依存させない。
+  var TODAY = BOOT.today || { y:new Date().getFullYear(), m:new Date().getMonth(), d:1 };
+  var viewYear = TODAY.y;
+  var viewMonth = TODAY.m;
+
+  // 表示可能な月の範囲（今月を0としたオフセット）
+  var RANGE = BOOT.range || { from:-1, to:12 };
+
+  function esc(s){
+    return String(s == null ? '' : s)
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+      .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+  }
+
+  // 状態は色だけで区別させない（DADS アクセシビリティ / ガイド 4.5「色のみで分類を識別しない」）。
+  // 空きも含め、すべてのマスにテキストを入れる。
+  function labelOf(s){
+    if(s==='busy') return '予約';
+    if(s==='adjust') return '調整';
+    if(s==='blocked') return '不可';
+    return '空';
+  }
+
+  // 「yyyy年 m月 d日」を、数字だけ大きく・年月日の文字は小さく表示する HTML にする。
+  // 月表示・週表示のどちらの見出しも、これで見た目を統一する。
+  function dateHtml(y, m, d){
+    var out = '<b>'+y+'</b><i>年</i> <b>'+(m+1)+'</b><i>月</i>';
+    if(d != null) out += ' <b>'+d+'</b><i>日</i>';
+    return out;
+  }
+
+  // ===== 画面の初期設定（設定シート由来） =====
+  (function applyUi(){
+    if(UI.title){ document.getElementById('pageTitle').textContent = UI.title; }
+    if(UI.subtitle){
+      var p = document.getElementById('pageSubtitle');
+      p.textContent = UI.subtitle; p.style.display = '';
+    }
+    if(UI.note){
+      var n = document.getElementById('pageNote');
+      n.textContent = UI.note; n.style.display = '';
+    }
+    if(UI.contactUrl){
+      var w = document.getElementById('contactWrap');
+      var b = document.getElementById('contactBtn');
+      b.href = UI.contactUrl;
+      b.textContent = UI.contactLabel || '問い合わせる ↗';
+      w.style.display = '';
+    }
+  })();
+
+  // ===== 表示モード（月／週） =====
+  var viewMode = 'month';         // 'month' | 'week'
+  var viewWeekStart = null;       // 週表示中の週の開始日（日曜） { y, m, d }
+
+  // ===== 月データの取得と描画 =====
+  var reqSeq = 0;                 // 世代カウンタ。遅れて届いた古い応答を捨てる
+  var warnedDevices = {};         // 取得に失敗した設備名 → 列見出しに ⚠ を付ける
+  var monthCache = {};            // 'y-m' → サーバ応答。週表示が月をまたぐ際の再取得を避ける
+
+  function setLoading(on){
+    document.getElementById('tableWrap').classList.toggle('loading', !!on);
+  }
+
+  // 設定シートの不備を表示する。サーバは warnings を返していたのに
+  // 画面に出ていなかったため、設定ミスが誰にも気づかれないままになっていた。
+  function showWarnings(warnings){
+    var bar = document.getElementById('warnbar');
+    if(!warnings || !warnings.length){
+      bar.classList.remove('show');
+      bar.innerHTML = '';
+      return;
+    }
+    bar.innerHTML =
+      '<strong>設定に問題があります（管理者向け）</strong>' +
+      '<ul>' + warnings.map(function(w){ return '<li>' + esc(w) + '</li>'; }).join('') + '</ul>';
+    bar.classList.add('show');
+  }
+
+  function showFatal(msg){
+    document.getElementById('fatalMsg').textContent = msg;
+    document.getElementById('fatal').classList.add('show');
+    document.getElementById('tableWrap').style.display = 'none';
+  }
+
+  // 一度 showFatal すると表を display:none のまま戻さないため、
+  // その後の描画が成功しても画面は空のままだった。描画のたびに解除する。
+  function clearFatal(){
+    document.getElementById('fatal').classList.remove('show');
+    document.getElementById('tableWrap').style.display = '';
+  }
+
+  function showErrors(errors){
+    var bar = document.getElementById('errbar');
+    warnedDevices = {};
+
+    if(!errors || !errors.length){
+      bar.classList.remove('show');
+      bar.innerHTML = '';
+      return;
+    }
+    var names = errors.map(function(e){
+      warnedDevices[e.name] = true;
+      return e.name;
+    });
+    // 「取得失敗＝空き」に見えてしまうのが最大の実害なので、そう読ませない文言にする
+    bar.innerHTML =
+      '<strong>一部の設備の空き状況を取得できませんでした（' + esc(names.join('、')) + '）</strong>' +
+      'これらの設備は空きとして表示されていますが、実際には予約が入っている可能性があります。' +
+      'お手数ですが、お問い合わせにてご確認ください。';
+    bar.classList.add('show');
+  }
+
+  // 月データ取得の共通口。サーバキャッシュとは別に、クライアント側でも
+  // 直近取得ぶんを monthCache に持つ。週表示が月をまたぐと同じ月を
+  // 続けて要求しがちなので、二重リクエストを避ける。
+  function fetchMonthData(y, m, onSuccess, onFailure){
+    var key = y + '-' + m;
+    var hit = monthCache[key];
+    if(hit){ onSuccess(hit); return; }
+    // ===== MOCK: google.script.run の代わりにサンプルを非同期で返す =====
+    setTimeout(function(){
+      var data = makeMonthData(y, m);
+      monthCache[key] = data;
+      noteFetched();
+      onSuccess(data);
+    }, 150);
+    // ===== MOCK ここまで =====
+  }
+
+  function render(){
+    clearFatal();
+    var y = viewYear, m = viewMonth;
+    var seq = ++reqSeq;
+
+    // 応答を待たずに見出しを先に更新して「反応している」感を出す
+    document.getElementById('stamp').innerHTML = dateHtml(y, m, null);
+    document.getElementById('selYear').value = y;
+    document.getElementById('selMonth').value = m;
+    updateNavButtons();
+    setLoading(true);
+
+    fetchMonthData(y, m, function(data){
+      if(seq !== reqSeq) return;       // より新しいリクエストが出ている
+      setLoading(false);
+      showErrors(data.errors);
+      paintMonth(data);
+      prefetchNeighbors(y, m);
+    }, function(err){
+      if(seq !== reqSeq) return;
+      setLoading(false);
+      showFatal('空き状況を取得できませんでした。');
+    });
+  }
+
+  // 表の組み立て。
+  //
+  // 列は「サーバの応答」を正とし、見出しの設備情報は名前で突き合わせる。
+  // BOOT.devices はページを開いた時点のスナップショットなので、
+  // 開いたまま設備マスタが編集されると（有効フラグ・行追加・表示順の変更など）
+  // 位置だけで対応づけると見出しと中身がずれ、
+  // 「予約済みの装置が空きに見える」という最悪の誤表示になる。
+  // 見出し行・データ行の組み立て。月表示・週表示で共通利用する。
+  // rows は { label, weekend, today, slotsByName:{ 装置名: slot } } の配列。
+  function paintRows(cols, rows){
+    document.getElementById('colgroup').innerHTML =
+      '<col class="datecol">' +
+      cols.map(function(){ return '<col class="devcol">'; }).join('');
+
+    document.getElementById('head').innerHTML = '<th class="datecol" scope="col">日付</th>' +
+      cols.map(function(c){
+        var warn = warnedDevices[c.name] ? '<span class="warn" title="空き状況を取得できませんでした">⚠</span>' : '';
+        return '<th scope="col"><button class="devbtn'+(c.meta.kind==='個室'?' room':'')+'" data-name="'+esc(c.name)+'">'+esc(c.name)+warn+'</button></th>';
+      }).join('');
+
+    document.getElementById('body').innerHTML = rows.map(function(row){
+      var cells = cols.map(function(c){
+        var s = row.slotsByName[c.name] || 'free';
+        return '<td><div class="cell '+esc(s)+'">'+labelOf(s)+'</div></td>';
+      }).join('');
+      var cls = [row.weekend?'weekend':'', row.today?'today':''].filter(Boolean).join(' ');
+      return '<tr class="'+cls+'"><th scope="row">'+esc(row.label)+'</th>'+cells+'</tr>';
+    }).join('');
+
+    // 装置名クリック→モーダル。右の設備情報パネルも同じ設備に合わせる
+    document.querySelectorAll('.devbtn').forEach(function(btn){
+      btn.addEventListener('click', function(){
+        openModal(btn.dataset.name);
+        syncSlideTo(btn.dataset.name);
+      });
+    });
+
+    // updateKpis(cols, rows); // 概況KPIブロックをコメントアウトしたため無効化
+  }
+
+  // ===== 概況（指標） =====
+  // 表の内容から「表示期間の空き日率（装置／個室）」と「今日の空き設備数」を出す。
+  // 表と同じ cols/rows から計算するので、表と数値が食い違わない。
+  function countFree(cols, slotsByName){
+    var dev = { free:0, total:0 }, room = { free:0, total:0 };
+    cols.forEach(function(c){
+      var b = (c.meta.kind === '個室') ? room : dev;
+      b.total++;
+      if((slotsByName[c.name] || 'free') === 'free') b.free++;
+    });
+    return { dev:dev, room:room };
+  }
+  function setKpiRate(valId, subId, b){
+    var v = document.getElementById(valId), s = document.getElementById(subId);
+    if(!b.total){ v.textContent = '—'; s.textContent = '対象の設備がありません'; return; }
+    v.innerHTML = Math.round(b.free / b.total * 100) + '<small>%</small>';
+    s.textContent = '空き 延べ' + b.free + '日 ／ ' + b.total + '日';
+  }
+  function updateKpis(cols, rows){
+    var dev = { free:0, total:0 }, room = { free:0, total:0 };
+    var todayRow = null;
+    rows.forEach(function(row){
+      if(row.missing) return;            // 範囲外で取得しなかった日は数えない
+      if(row.today) todayRow = row;
+      var c = countFree(cols, row.slotsByName);
+      dev.free += c.dev.free;   dev.total += c.dev.total;
+      room.free += c.room.free; room.total += c.room.total;
+    });
+    setKpiRate('kpiDev', 'kpiDevSub', dev);
+    setKpiRate('kpiRoom', 'kpiRoomSub', room);
+
+    // 今日が表示期間に無くても、今月のデータを取得済みならそこから出す
+    var todayCols = cols, todaySlots = null;
+    if(todayRow){
+      todaySlots = todayRow.slotsByName;
+    } else {
+      var cached = monthCache[TODAY.y + '-' + TODAY.m];
+      if(cached && cached.days[TODAY.d - 1]){
+        todayCols = colsFromDevices(cached.devices);
+        todaySlots = {};
+        cached.devices.forEach(function(sd){ todaySlots[sd.name] = sd.slots[TODAY.d - 1]; });
+      }
+    }
+    var tv = document.getElementById('kpiToday'), ts = document.getElementById('kpiTodaySub');
+    if(!todaySlots){
+      tv.textContent = '—';
+      ts.textContent = '今日を含む月を表示すると出ます';
+      return;
+    }
+    var t = countFree(todayCols, todaySlots);
+    tv.innerHTML = (t.dev.free + t.room.free) + '<small>／ ' + (t.dev.total + t.room.total) + '</small>';
+    ts.textContent = TODAY.y + '/' + (TODAY.m+1) + '/' + TODAY.d + '　装置 ' + t.dev.free + '／個室 ' + t.room.free;
+  }
+
+  // データを取りに行った時刻（ガイド: データの更新日時を記載する）
+  function noteFetched(){
+    var d = new Date();
+    var hh = ('0' + d.getHours()).slice(-2), mm = ('0' + d.getMinutes()).slice(-2);
+    document.getElementById('updated').textContent =
+      'データ取得：' + (d.getMonth()+1) + '/' + d.getDate() + ' ' + hh + ':' + mm;
+  }
+
+  function colsFromDevices(devices){
+    return devices.map(function(sd){
+      return {
+        name: sd.name,
+        meta: deviceMetaByName[sd.name] || { name: sd.name, kind: '装置' }
+      };
+    });
+  }
+
+  function paintMonth(data){
+    var cols = colsFromDevices(data.devices);
+    var rows = data.days.map(function(day, i){
+      var slotsByName = {};
+      data.devices.forEach(function(sd){ slotsByName[sd.name] = sd.slots[i]; });
+      return { label: day.label, weekend: day.weekend, today: day.today, slotsByName: slotsByName };
+    });
+    paintRows(cols, rows);
+  }
+
+  // 隣接月をサーバキャッシュに温めておく（結果は捨てる）。月送りが体感で速くなる。
+  //
+  // 1回の先読みで最大10カレンダーを読むため、連打中に投げるとカレンダーAPIの
+  // 呼び出し回数が跳ね上がり、表示中の月の取得まで遅くなる。
+  // 少し待って「その月に落ち着いた」ときだけ投げる。
+  // サーバ側キャッシュが無効なら温める先が無いので何もしない。
+  var prefetchTimer = null;
+  var prefetched = {};
+
+  function prefetchNeighbors(y, m){
+    if(!BOOT.cacheEnabled) return;
+    if(prefetchTimer) clearTimeout(prefetchTimer);
+    prefetchTimer = setTimeout(function(){
+      [-1, 1].forEach(function(d){
+        var t = new Date(y, m + d, 1);
+        var ty = t.getFullYear(), tm = t.getMonth();
+        if(!inRange(ty, tm)) return;
+        var key = ty + '-' + tm;
+        if(prefetched[key]) return;      // 同じ月を何度も温めない
+        prefetched[key] = true;
+        fetchMonthData(ty, tm, function(){}, function(){ delete prefetched[key]; });
+      });
+    }, 800);
+  }
+
+  // ===== 週表示 =====
+  // 週の開始日（日曜）を { y, m, d } で返す。ヘッダの「日月火水木金土」に合わせ日曜始まり。
+  function weekStartOf(y, m, d){
+    var t = new Date(y, m, d);
+    t.setDate(t.getDate() - t.getDay());
+    return { y: t.getFullYear(), m: t.getMonth(), d: t.getDate() };
+  }
+  function addDaysToWeekStart(ws, days){
+    var t = new Date(ws.y, ws.m, ws.d + days);
+    return { y: t.getFullYear(), m: t.getMonth(), d: t.getDate() };
+  }
+  // 週内の7日すべてが範囲内とは限らない（月境界）ので、開始日・終了日双方の月で判定する
+  function weekInRange(ws){
+    var we = addDaysToWeekStart(ws, 6);
+    return inRange(ws.y, ws.m) && inRange(we.y, we.m);
+  }
+  // 週開始日（日曜）は月の1日より前に来ることがあり、表示範囲の下端を
+  // 1週ぶん飛び出す。範囲に収まるまで週単位で前へ送る。
+  // 範囲が1週間に満たない設定なら諦めて null を返す（呼び出し側で判断する）。
+  function clampWeekToRange(ws){
+    var t = ws;
+    for(var i=0; i<8; i++){
+      if(weekInRange(t)) return t;
+      t = addDaysToWeekStart(t, 7);
+    }
+    return null;
+  }
+
+  function renderWeek(){
+    clearFatal();
+    var ws = viewWeekStart;
+    var seq = ++reqSeq;
+
+    var we = addDaysToWeekStart(ws, 6);
+    // 開始・終了とも常に「yyyy年 m月 d日」の完全な形で出す（月をまたいでも省略しない）
+    document.getElementById('stamp').innerHTML =
+      dateHtml(ws.y, ws.m, ws.d) + '<span class="stamp-sep">〜</span>' + dateHtml(we.y, we.m, we.d);
+    updateNavButtons();
+    setLoading(true);
+
+    // 週が月をまたぐ場合、必要な月（最大2つ）を取得してから該当7日ぶんを組み立てる。
+    // 範囲外の月はサーバが例外を投げるので、そもそも要求しない。
+    // 要求すると失敗扱いになり、表示できるはずの日まで巻き添えで消える。
+    var months = {};
+    for(var i=0;i<7;i++){
+      var t = addDaysToWeekStart(ws, i);
+      if(!inRange(t.y, t.m)) continue;
+      months[t.y+'-'+t.m] = { y:t.y, m:t.m };
+    }
+    var keys = Object.keys(months);
+    var results = {};
+    var pending = keys.length;
+    var failed = false;
+
+    // 7日すべてが範囲外なら要求する月が無く、pending が 0 のまま
+    // finish() が呼ばれない（読み込み中のまま固まる）ので、ここで打ち切る。
+    if(pending === 0){
+      setLoading(false);
+      showFatal('この週は表示範囲外です。');
+      return;
+    }
+
+    keys.forEach(function(key){
+      var mm = months[key];
+      fetchMonthData(mm.y, mm.m, function(data){
+        if(seq !== reqSeq) return;
+        results[key] = data;
+        pending--;
+        if(pending === 0 && !failed) finish();
+      }, function(err){
+        if(seq !== reqSeq) return;
+        if(failed) return;
+        failed = true;
+        setLoading(false);
+        showFatal('空き状況を取得できませんでした。');
+      });
+    });
+
+    function finish(){
+      setLoading(false);
+      // 週内に含まれる全設備のエラーをまとめて表示
+      var allErrors = [];
+      keys.forEach(function(key){ (results[key].errors||[]).forEach(function(e){ allErrors.push(e); }); });
+      showErrors(allErrors);
+
+      // 列は基準月（週開始日の月）のデバイス一覧を使う。
+      // 週開始日の月が範囲外で飛ばされていることがあるので、取得できた月で代替する。
+      var baseData = results[ws.y+'-'+ws.m] || results[keys[0]];
+      var cols = colsFromDevices(baseData.devices);
+
+      var rows = [];
+      for(var i=0;i<7;i++){
+        var t = addDaysToWeekStart(ws, i);
+        var data = results[t.y+'-'+t.m];
+        var dayIdx = t.d - 1;
+        // 範囲外で取得しなかった日。状態を入れずに空行として出す。
+        if(!data){
+          rows.push({
+            label: (t.m+1)+'/'+t.d+'('+WD[new Date(t.y, t.m, t.d).getDay()]+')',
+            weekend: false, today: false, slotsByName: {}, missing: true
+          });
+          continue;
+        }
+        var day = data.days[dayIdx];
+        var slotsByName = {};
+        data.devices.forEach(function(sd){ slotsByName[sd.name] = sd.slots[dayIdx]; });
+        rows.push({ label: day.label, weekend: day.weekend, today: day.today, slotsByName: slotsByName });
+      }
+      paintRows(cols, rows);
+    }
+  }
+
+  function shiftWeek(delta){
+    var t = addDaysToWeekStart(viewWeekStart, delta * 7);
+    if(!weekInRange(t)) return;
+    viewWeekStart = t;
+    renderWeek();
+  }
+
+  function setViewMode(mode){
+    if(viewMode === mode) return;
+    viewMode = mode;
+    document.getElementById('tabMonth').classList.toggle('active', mode==='month');
+    document.getElementById('tabMonth').setAttribute('aria-selected', mode==='month');
+    document.getElementById('tabWeek').classList.toggle('active', mode==='week');
+    document.getElementById('tabWeek').setAttribute('aria-selected', mode==='week');
+    document.getElementById('jumpBox').style.display = (mode==='month') ? '' : 'none';
+    document.getElementById('prev').textContent = (mode==='month') ? '◀ 前月' : '◀ 前週';
+    document.getElementById('next').textContent = (mode==='month') ? '翌月 ▶' : '翌週 ▶';
+    document.getElementById('today').textContent = (mode==='month') ? '今月' : '今週';
+
+    if(mode === 'week'){
+      var basis = clampToRange(viewYear, viewMonth);
+      var d = (basis.y===TODAY.y && basis.m===TODAY.m) ? TODAY.d : 1;
+      var ws = clampWeekToRange(weekStartOf(basis.y, basis.m, d));
+      if(!ws){ showFatal('表示できる週がありません。'); return; }
+      viewWeekStart = ws;
+      renderWeek();
+    } else {
+      // 以前はここで viewYear/viewMonth を週開始日で上書きしていた。
+      // 週開始日は日曜なので前月に属することがあり、月表示に戻すたびに
+      // 月が1つずつ後ろへずれて、やがて表示範囲から外れて取得に失敗していた。
+      // 月表示は自前の状態を保ったまま戻す。
+      render();
+    }
+  }
+
+  // ===== 表示可能範囲 =====
+  function monthOffset(y, m){
+    return (y - TODAY.y) * 12 + (m - TODAY.m);
+  }
+  function inRange(y, m){
+    var off = monthOffset(y, m);
+    return off >= RANGE.from && off <= RANGE.to;
+  }
+  // 表示範囲が今月を含まない設定（例: 翌月〜3か月先のみ）でも
+  // 行き先を失わないよう、範囲内に引き戻す。
+  function clampToRange(y, m){
+    var off = Math.min(Math.max(monthOffset(y, m), RANGE.from), RANGE.to);
+    var t = new Date(TODAY.y, TODAY.m + off, 1);
+    return { y: t.getFullYear(), m: t.getMonth() };
+  }
+  function updateNavButtons(){
+    if(viewMode === 'week'){
+      var prevW = addDaysToWeekStart(viewWeekStart, -7);
+      var nextW = addDaysToWeekStart(viewWeekStart, 7);
+      document.getElementById('prev').disabled = !weekInRange(prevW);
+      document.getElementById('next').disabled = !weekInRange(nextW);
+      return;
+    }
+    var prevT = new Date(viewYear, viewMonth - 1, 1);
+    var nextT = new Date(viewYear, viewMonth + 1, 1);
+    document.getElementById('prev').disabled = !inRange(prevT.getFullYear(), prevT.getMonth());
+    document.getElementById('next').disabled = !inRange(nextT.getFullYear(), nextT.getMonth());
+  }
+
+  function openModal(name){
+    var dev = deviceMetaByName[name];
+    // 表示中に設備マスタが編集され、詳細を持たない設備が出てきた場合
+    if(!dev){
+      document.getElementById('modalTitle').textContent = '設備概要 ' + name;
+      document.getElementById('modalBody').innerHTML =
+        '<div class="desc">設備情報を読み込めませんでした。ページを再読み込みしてください。</div>';
+      document.getElementById('modal').classList.add('open');
+      return;
+    }
+    document.getElementById('modalTitle').textContent = '設備概要 ' + dev.name;
+    var rows;
+    if(dev.kind === '個室'){
+      rows =
+        '<dt>名称</dt><dd>'+esc(dev.name)+'（個室）</dd>' +
+        '<dt>定員</dt><dd>'+esc(dev.capacity)+'</dd>' +
+        '<dt>広さ</dt><dd>'+esc(dev.area)+'</dd>';
+    } else {
+      rows =
+        '<dt>装置番号</dt><dd>'+esc(dev.name)+'</dd>' +
+        '<dt>型式</dt><dd>'+esc(dev.model)+'</dd>' +
+        '<dt>チャンネル</dt><dd>'+esc(dev.ch)+'</dd>' +
+        '<dt>電流条件</dt><dd>'+esc(dev.current)+'</dd>';
+    }
+    document.getElementById('modalBody').innerHTML =
+      '<dl>' + rows + '</dl>' +
+      '<div class="desc">'+esc(dev.note)+'</div>';
+    document.getElementById('modal').classList.add('open');
+  }
+  function closeModal(){ document.getElementById('modal').classList.remove('open'); }
+
+  document.getElementById('modalClose').addEventListener('click', closeModal);
+  document.getElementById('modal').addEventListener('click', function(e){
+    if(e.target.id === 'modal') closeModal();
+  });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeModal(); });
+
+  // このページは HtmlService の IFRAME サンドボックス内にあり、location は
+  // 使い捨ての内部URL（userCodeAppPanel）を指す。reload すると白紙になる。
+  // 利用者が求めているのは「もう一度取りに行く」ことなので、まず再描画を試す。
+  // BOOT 自体が壊れている場合は再描画しても直らないので、外側のURLを開き直す。
+  document.getElementById('reloadBtn').addEventListener('click', function(){
+    if(BOOT.ok){
+      if(viewMode === 'week') renderWeek(); else render();
+      return;
+    }
+    hardReload();
+  });
+
+  // 外側フレームのURLは google.script.url でしか分からない（追加スコープ不要）。
+  function hardReload(){
+    try{
+      google.script.url.getLocation(function(loc){
+        if(loc && loc.url){ window.top.location.href = loc.url; }
+        else { window.top.location.reload(); }
+      });
+    }catch(e){
+      window.top.location.reload();
+    }
+  }
+
+  function shiftMonth(delta){
+    var t = new Date(viewYear, viewMonth + delta, 1);
+    if(!inRange(t.getFullYear(), t.getMonth())) return;
+    viewYear = t.getFullYear();
+    viewMonth = t.getMonth();
+    render();
+  }
+
+  (function initSelectors(){
+    var selY = document.getElementById('selYear');
+    var selM = document.getElementById('selMonth');
+    // 表示範囲（設定シート）から年の選択肢を作る
+    var first = new Date(TODAY.y, TODAY.m + RANGE.from, 1);
+    var last  = new Date(TODAY.y, TODAY.m + RANGE.to, 1);
+    for(var y=first.getFullYear(); y<=last.getFullYear(); y++){
+      var o = document.createElement('option'); o.value=y; o.textContent=y+'年'; selY.appendChild(o);
+    }
+    for(var m=0; m<12; m++){
+      var om = document.createElement('option'); om.value=m; om.textContent=(m+1)+'月'; selM.appendChild(om);
+    }
+  })();
+
+  document.getElementById('prev').addEventListener('click', function(){
+    if(viewMode==='week') shiftWeek(-1); else shiftMonth(-1);
+  });
+  document.getElementById('next').addEventListener('click', function(){
+    if(viewMode==='week') shiftWeek(1); else shiftMonth(1);
+  });
+  document.getElementById('today').addEventListener('click', function(){
+    if(viewMode==='week'){
+      var basis = clampToRange(TODAY.y, TODAY.m);
+      var d = (basis.y===TODAY.y && basis.m===TODAY.m) ? TODAY.d : 1;
+      // 行き先が無いときは黙って何もしない。有効な表が出ている画面を
+      // fatal で潰すほうが害が大きい。
+      var ws = clampWeekToRange(weekStartOf(basis.y, basis.m, d));
+      if(!ws) return;
+      viewWeekStart = ws;
+      renderWeek();
+    } else {
+      var t = clampToRange(TODAY.y, TODAY.m);
+      viewYear = t.y; viewMonth = t.m; render();
+    }
+  });
+  document.getElementById('go').addEventListener('click', function(){
+    var y = parseInt(document.getElementById('selYear').value,10);
+    var m = parseInt(document.getElementById('selMonth').value,10);
+    if(!inRange(y, m)){
+      alert('選択された年月は表示範囲外です。');
+      document.getElementById('selYear').value = viewYear;
+      document.getElementById('selMonth').value = viewMonth;
+      return;
+    }
+    viewYear = y; viewMonth = m; render();
+  });
+
+  document.getElementById('tabMonth').addEventListener('click', function(){ setViewMode('month'); });
+  document.getElementById('tabWeek').addEventListener('click', function(){ setViewMode('week'); });
+
+  // === 設備情報の折りたたみ（スマホ幅のみ。PCでは常時表示） ===
+  var accToggle = document.getElementById('accToggle');
+  var accPanel = document.getElementById('accPanel');
+  accToggle.addEventListener('click', function(){
+    var open = accPanel.classList.toggle('open');
+    accToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+
+  // === 設備スライダー ===
+  var slideIndex = 0;
+  var sliderBuilt = false;
+
+  // === 設備イラスト（SVG・薄いグリーン基調）===
+  function deviceSVG(){
+    // パワーサイクル試験装置：チャンバー付きの試験装置イメージ
+    return '<svg viewBox="0 0 320 200" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="試験装置のイラスト">' +
+      '<rect width="320" height="200" fill="#eef4f0"/>' +
+      '<rect y="168" width="320" height="32" fill="#dfe9e2"/>' +
+      '<rect x="70" y="40" width="120" height="128" rx="6" fill="#fff" stroke="#7ba889" stroke-width="2.5"/>' +
+      '<rect x="82" y="52" width="96" height="34" rx="4" fill="#4f7a62"/>' +
+      '<rect x="90" y="60" width="34" height="6" rx="3" fill="#a9cbb6"/>' +
+      '<rect x="90" y="72" width="52" height="6" rx="3" fill="#7ba889"/>' +
+      '<circle cx="100" cy="112" r="12" fill="#e7efe9" stroke="#7ba889" stroke-width="2"/>' +
+      '<line x1="100" y1="112" x2="100" y2="103" stroke="#4f7a62" stroke-width="2.5"/>' +
+      '<circle cx="134" cy="112" r="12" fill="#e7efe9" stroke="#7ba889" stroke-width="2"/>' +
+      '<line x1="134" y1="112" x2="141" y2="107" stroke="#4f7a62" stroke-width="2.5"/>' +
+      '<rect x="154" y="104" width="24" height="8" rx="4" fill="#c9dcd0"/>' +
+      '<rect x="154" y="118" width="24" height="8" rx="4" fill="#c9dcd0"/>' +
+      '<rect x="82" y="134" width="96" height="26" rx="4" fill="#f2f7f4" stroke="#c9dcd0" stroke-width="1.5"/>' +
+      '<circle cx="168" cy="147" r="3" fill="#7ba889"/>' +
+      '<rect x="206" y="70" width="70" height="98" rx="6" fill="#fff" stroke="#7ba889" stroke-width="2.5"/>' +
+      '<rect x="218" y="84" width="46" height="40" rx="4" fill="#dbe9e0"/>' +
+      '<circle cx="241" cy="104" r="12" fill="#eef4f0" stroke="#7ba889" stroke-width="2"/>' +
+      '<path d="M190 96 h16 M190 120 h16" stroke="#7ba889" stroke-width="4" fill="none" stroke-linecap="round"/>' +
+      '</svg>';
+  }
+
+  function roomSVG(){
+    // 個室：テーブル・椅子・窓のある部屋
+    return '<svg viewBox="0 0 320 200" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="個室のイラスト">' +
+      '<rect width="320" height="200" fill="#eef4f0"/>' +
+      '<rect y="150" width="320" height="50" fill="#dfe9e2"/>' +
+      '<rect x="196" y="34" width="90" height="60" rx="4" fill="#fff" stroke="#7ba889" stroke-width="2.5"/>' +
+      '<line x1="241" y1="34" x2="241" y2="94" stroke="#7ba889" stroke-width="2"/>' +
+      '<line x1="196" y1="64" x2="286" y2="64" stroke="#7ba889" stroke-width="2"/>' +
+      '<rect x="150" y="120" width="18" height="30" rx="3" fill="#c9dcd0"/>' +
+      '<path d="M159 120 C150 100 150 96 159 88 C168 96 168 100 159 120 Z" fill="#7ba889"/>' +
+      '<path d="M159 118 C170 104 176 104 180 96" stroke="#4f7a62" stroke-width="3" fill="none" stroke-linecap="round"/>' +
+      '<rect x="40" y="126" width="96" height="10" rx="3" fill="#4f7a62"/>' +
+      '<rect x="48" y="136" width="8" height="30" fill="#7ba889"/>' +
+      '<rect x="120" y="136" width="8" height="30" fill="#7ba889"/>' +
+      '<rect x="20" y="118" width="10" height="48" rx="3" fill="#7ba889"/>' +
+      '<rect x="20" y="132" width="26" height="8" rx="3" fill="#a9cbb6"/>' +
+      '<rect x="146" y="118" width="10" height="48" rx="3" fill="#7ba889"/>' +
+      '<rect x="130" y="132" width="26" height="8" rx="3" fill="#a9cbb6"/>' +
+      '<rect x="74" y="114" width="16" height="12" rx="2" fill="#fff" stroke="#7ba889" stroke-width="2"/>' +
+      '<path d="M90 117 h4 a3 3 0 0 1 0 6 h-4" fill="none" stroke="#7ba889" stroke-width="2"/>' +
+      '</svg>';
+  }
+
+  // 実画像があれば img、なければ SVG イラスト。大きい写真とサムネイルで共用。
+  function deviceImage(dev){
+    if(dev.img) return '<img src="'+esc(dev.img)+'" alt="'+esc(dev.name)+'" loading="lazy">';
+    return dev.kind === '個室' ? roomSVG() : deviceSVG();
+  }
+
+  function buildSlider(){
+    if(sliderBuilt) return;
+    sliderBuilt = true;
+    var slides = document.getElementById('slides');
+    var thumbs = document.getElementById('slideThumbs');
+
+    // 大きい写真（設備ごとに1枚）
+    slides.innerHTML = DEVICES.map(function(dev, i){
+      return '<div class="slide'+(i===0?' active':'')+'" data-i="'+i+'">' +
+               '<div class="slide-img">'+deviceImage(dev)+'</div>' +
+             '</div>';
+    }).join('');
+
+    // サムネイル列。押すとその設備の写真と概要に切り替わる
+    thumbs.innerHTML = DEVICES.map(function(dev, i){
+      return '<button type="button" class="thumb'+(i===0?' active':'')+'" data-i="'+i+'"' +
+               ' aria-pressed="'+(i===0?'true':'false')+'" aria-label="'+esc(dev.name)+'の写真を表示">' +
+               '<span class="thumb-img">'+deviceImage(dev)+'</span>' +
+               '<span class="thumb-name">'+esc(dev.name)+'</span>' +
+             '</button>';
+    }).join('');
+    thumbs.querySelectorAll('.thumb').forEach(function(b){
+      b.addEventListener('click', function(){ goSlide(parseInt(b.dataset.i,10)); });
+    });
+
+    paintSlideBody(0);
+  }
+
+  // 大きい写真の下の概要（名称・種別・スペック・説明）
+  function paintSlideBody(i){
+    var dev = DEVICES[i];
+    var body = document.getElementById('slideBody');
+    if(!dev){ body.innerHTML = ''; return; }
+    var isRoom = dev.kind === '個室';
+    var kindTag = isRoom
+      ? '<span class="kind room">個室</span>'
+      : '<span class="kind dev">装置</span>';
+    var spec = isRoom
+      ? '<span>定員：<b>'+esc(dev.capacity)+'</b></span><span>広さ：<b>'+esc(dev.area)+'</b></span>'
+      : '<span>型式：<b>'+esc(dev.model)+'</b></span><span>ch：<b>'+esc(dev.ch)+'</b></span><span>電流：<b>'+esc(dev.current)+'</b></span>';
+    body.innerHTML =
+      '<p class="slide-title">'+esc(dev.name)+kindTag+'</p>' +
+      '<div class="slide-spec">'+spec+'</div>' +
+      '<p class="slide-note">'+esc(dev.note)+'</p>';
+  }
+
+  function goSlide(i){
+    var slides = document.querySelectorAll('.slide');
+    var thumbs = document.querySelectorAll('.thumb');
+    if(slides.length === 0) return;
+    slideIndex = (i + slides.length) % slides.length;
+    slides.forEach(function(s,k){ s.classList.toggle('active', k===slideIndex); });
+    thumbs.forEach(function(t,k){
+      var on = (k===slideIndex);
+      t.classList.toggle('active', on);
+      t.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+    paintSlideBody(slideIndex);
+  }
+
+  // 表の列見出しを押したとき、設備情報パネルも同じ設備に合わせる
+  function syncSlideTo(name){
+    var idx = deviceIndexByName[name];
+    if(idx == null || !sliderBuilt) return;
+    goSlide(idx);
+  }
+
+  document.getElementById('slidePrev').addEventListener('click', function(){ goSlide(slideIndex-1); });
+  document.getElementById('slideNext').addEventListener('click', function(){ goSlide(slideIndex+1); });
+
+  // === この画面について（初回表示モーダル）===
+  var guideModal = document.getElementById('guideModal');
+  function closeGuide(){ guideModal.classList.remove('open'); }
+  document.getElementById('guideClose').addEventListener('click', closeGuide);
+  document.getElementById('guideOk').addEventListener('click', closeGuide);
+  guideModal.addEventListener('click', function(e){ if(e.target.id === 'guideModal') closeGuide(); });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeGuide(); });
+
+  // ===== 起動 =====
+  (function start(){
+    // 設定が壊れている（doGet が buildBootstrap_ に失敗した）
+    if(!BOOT.ok){
+      showFatal(BOOT.message || '設定を読み込めませんでした。');
+      return;
+    }
+    // ===== MOCK: index.html ではここで google.script.run の存在を確認する =====
+    showWarnings(BOOT.warnings);
+
+    // 設備情報はPCで常時表示なので起動時に組み立てる
+    buildSlider();
+
+    if(UI.showGuide !== false) guideModal.classList.add('open');
+
+    // 表示範囲が今月を含まない設定でも、開いた直後に見られる月へ寄せる
+    var start = clampToRange(viewYear, viewMonth);
+    viewYear = start.y; viewMonth = start.m;
+    render();
+  })();
+</script>
+</body>
+</html>
