@@ -547,7 +547,7 @@
         <li><strong>空き状況の見方</strong>：日付×設備のマスに、予約／調整／不可／空のいずれかを、色と文字の両方で表示します（凡例は表の上）。</li>
         <li><strong>調整日</strong>：装置の予約最終日の翌日を、段取り替えのため自動的に調整日として表示します（個室にはありません）。</li>
         <li><strong>使用不可</strong>：メンテナンス等でカレンダーに登録された日を反映します。</li>
-        <li><strong>設備の詳細</strong>：見出しの「#1〜#8」「桜・梅」を押すと設備概要が表示されます。</li>
+        <li><strong>設備の詳細</strong>：見出しの「#1〜#8」「桜・梅」を押すと、設備情報の表示がその設備に切り替わります。</li>
         <li><strong>月の切り替え</strong>：前月／翌月ボタン、または年月を選んで「表示」で移動できます。週表示タブで1週間単位でも確認できます。</li>
         <li><strong>問い合わせ</strong>：予約・相談は画面下部のボタンから受託サービスの問い合わせフォームへ進みます。</li>
       </ul>
@@ -685,7 +685,7 @@
 
   // ===== 表示モード（月／週） =====
   var viewMode = 'month';         // 'month' | 'week'
-  var viewWeekStart = null;       // 週表示中の週の開始日（日曜） { y, m, d }
+  var viewWeekStart = null;       // 週表示中の週の開始日（月曜） { y, m, d }
 
   // ===== 月データの取得と描画 =====
   var reqSeq = 0;                 // 世代カウンタ。遅れて届いた古い応答を捨てる
@@ -816,12 +816,9 @@
       return '<tr class="'+cls+'"><th scope="row">'+esc(row.label)+'</th>'+cells+'</tr>';
     }).join('');
 
-    // 装置名クリック→モーダル。右の設備情報パネルも同じ設備に合わせる
+    // 装置名クリック→設備情報パネルをその設備に切り替える（モーダルは出さない）
     document.querySelectorAll('.devbtn').forEach(function(btn){
-      btn.addEventListener('click', function(){
-        openModal(btn.dataset.name);
-        syncSlideTo(btn.dataset.name);
-      });
+      btn.addEventListener('click', function(){ revealDevice(btn.dataset.name); });
     });
 
     // updateKpis(cols, rows); // 概況KPIブロックをコメントアウトしたため無効化
@@ -934,10 +931,10 @@
   }
 
   // ===== 週表示 =====
-  // 週の開始日（日曜）を { y, m, d } で返す。ヘッダの「日月火水木金土」に合わせ日曜始まり。
+  // 週の開始日（月曜）を { y, m, d } で返す。業務カレンダーに合わせ月曜始まり。
   function weekStartOf(y, m, d){
     var t = new Date(y, m, d);
-    t.setDate(t.getDate() - t.getDay());
+    t.setDate(t.getDate() - ((t.getDay() + 6) % 7));  // 日曜(0)は6日戻す
     return { y: t.getFullYear(), m: t.getMonth(), d: t.getDate() };
   }
   function addDaysToWeekStart(ws, days){
@@ -949,7 +946,7 @@
     var we = addDaysToWeekStart(ws, 6);
     return inRange(ws.y, ws.m) && inRange(we.y, we.m);
   }
-  // 週開始日（日曜）は月の1日より前に来ることがあり、表示範囲の下端を
+  // 週開始日（月曜）は月の1日より前に来ることがあり、表示範囲の下端を
   // 1週ぶん飛び出す。範囲に収まるまで週単位で前へ送る。
   // 範囲が1週間に満たない設定なら諦めて null を返す（呼び出し側で判断する）。
   function clampWeekToRange(ws){
@@ -1073,7 +1070,7 @@
       renderWeek();
     } else {
       // 以前はここで viewYear/viewMonth を週開始日で上書きしていた。
-      // 週開始日は日曜なので前月に属することがあり、月表示に戻すたびに
+      // 週開始日は月曜なので前月に属することがあり、月表示に戻すたびに
       // 月が1つずつ後ろへずれて、やがて表示範囲から外れて取得に失敗していた。
       // 月表示は自前の状態を保ったまま戻す。
       render();
@@ -1109,6 +1106,8 @@
     document.getElementById('next').disabled = !inRange(nextT.getFullYear(), nextT.getMonth());
   }
 
+  // 設備概要モーダル。列見出しクリックは設備情報スライダーの切り替えに変えたため
+  // 現在この関数を呼ぶ箇所は無いが、戻せるようマークアップごと残してある。
   function openModal(name){
     var dev = deviceMetaByName[name];
     // 表示中に設備マスタが編集され、詳細を持たない設備が出てきた場合
@@ -1240,51 +1239,51 @@
   var slideIndex = 0;
   var sliderBuilt = false;
 
-  // === 設備イラスト（SVG・薄いグリーン基調）===
+  // === 設備イラスト（SVG・DADS Blue 基調。色は styles の CSS 変数を参照）===
   function deviceSVG(){
     // パワーサイクル試験装置：チャンバー付きの試験装置イメージ
     return '<svg viewBox="0 0 320 200" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="試験装置のイラスト">' +
-      '<rect width="320" height="200" fill="#eef4f0"/>' +
-      '<rect y="168" width="320" height="32" fill="#dfe9e2"/>' +
-      '<rect x="70" y="40" width="120" height="128" rx="6" fill="#fff" stroke="#7ba889" stroke-width="2.5"/>' +
-      '<rect x="82" y="52" width="96" height="34" rx="4" fill="#4f7a62"/>' +
-      '<rect x="90" y="60" width="34" height="6" rx="3" fill="#a9cbb6"/>' +
-      '<rect x="90" y="72" width="52" height="6" rx="3" fill="#7ba889"/>' +
-      '<circle cx="100" cy="112" r="12" fill="#e7efe9" stroke="#7ba889" stroke-width="2"/>' +
-      '<line x1="100" y1="112" x2="100" y2="103" stroke="#4f7a62" stroke-width="2.5"/>' +
-      '<circle cx="134" cy="112" r="12" fill="#e7efe9" stroke="#7ba889" stroke-width="2"/>' +
-      '<line x1="134" y1="112" x2="141" y2="107" stroke="#4f7a62" stroke-width="2.5"/>' +
-      '<rect x="154" y="104" width="24" height="8" rx="4" fill="#c9dcd0"/>' +
-      '<rect x="154" y="118" width="24" height="8" rx="4" fill="#c9dcd0"/>' +
-      '<rect x="82" y="134" width="96" height="26" rx="4" fill="#f2f7f4" stroke="#c9dcd0" stroke-width="1.5"/>' +
-      '<circle cx="168" cy="147" r="3" fill="#7ba889"/>' +
-      '<rect x="206" y="70" width="70" height="98" rx="6" fill="#fff" stroke="#7ba889" stroke-width="2.5"/>' +
-      '<rect x="218" y="84" width="46" height="40" rx="4" fill="#dbe9e0"/>' +
-      '<circle cx="241" cy="104" r="12" fill="#eef4f0" stroke="#7ba889" stroke-width="2"/>' +
-      '<path d="M190 96 h16 M190 120 h16" stroke="#7ba889" stroke-width="4" fill="none" stroke-linecap="round"/>' +
+      '<rect width="320" height="200" fill="var(--key-bg)"/>' +
+      '<rect y="168" width="320" height="32" fill="var(--key-bg-strong)"/>' +
+      '<rect x="70" y="40" width="120" height="128" rx="6" fill="#fff" stroke="var(--secondary)" stroke-width="2.5"/>' +
+      '<rect x="82" y="52" width="96" height="34" rx="4" fill="var(--primary)"/>' +
+      '<rect x="90" y="60" width="34" height="6" rx="3" fill="var(--tertiary)"/>' +
+      '<rect x="90" y="72" width="52" height="6" rx="3" fill="var(--secondary)"/>' +
+      '<circle cx="100" cy="112" r="12" fill="var(--key-bg)" stroke="var(--secondary)" stroke-width="2"/>' +
+      '<line x1="100" y1="112" x2="100" y2="103" stroke="var(--primary)" stroke-width="2.5"/>' +
+      '<circle cx="134" cy="112" r="12" fill="var(--key-bg)" stroke="var(--secondary)" stroke-width="2"/>' +
+      '<line x1="134" y1="112" x2="141" y2="107" stroke="var(--primary)" stroke-width="2.5"/>' +
+      '<rect x="154" y="104" width="24" height="8" rx="4" fill="var(--key-bg-strong)"/>' +
+      '<rect x="154" y="118" width="24" height="8" rx="4" fill="var(--key-bg-strong)"/>' +
+      '<rect x="82" y="134" width="96" height="26" rx="4" fill="var(--bg-subtle)" stroke="var(--key-bg-strong)" stroke-width="1.5"/>' +
+      '<circle cx="168" cy="147" r="3" fill="var(--secondary)"/>' +
+      '<rect x="206" y="70" width="70" height="98" rx="6" fill="#fff" stroke="var(--secondary)" stroke-width="2.5"/>' +
+      '<rect x="218" y="84" width="46" height="40" rx="4" fill="var(--key-bg-strong)"/>' +
+      '<circle cx="241" cy="104" r="12" fill="var(--key-bg)" stroke="var(--secondary)" stroke-width="2"/>' +
+      '<path d="M190 96 h16 M190 120 h16" stroke="var(--secondary)" stroke-width="4" fill="none" stroke-linecap="round"/>' +
       '</svg>';
   }
 
   function roomSVG(){
     // 個室：テーブル・椅子・窓のある部屋
     return '<svg viewBox="0 0 320 200" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="個室のイラスト">' +
-      '<rect width="320" height="200" fill="#eef4f0"/>' +
-      '<rect y="150" width="320" height="50" fill="#dfe9e2"/>' +
-      '<rect x="196" y="34" width="90" height="60" rx="4" fill="#fff" stroke="#7ba889" stroke-width="2.5"/>' +
-      '<line x1="241" y1="34" x2="241" y2="94" stroke="#7ba889" stroke-width="2"/>' +
-      '<line x1="196" y1="64" x2="286" y2="64" stroke="#7ba889" stroke-width="2"/>' +
-      '<rect x="150" y="120" width="18" height="30" rx="3" fill="#c9dcd0"/>' +
-      '<path d="M159 120 C150 100 150 96 159 88 C168 96 168 100 159 120 Z" fill="#7ba889"/>' +
-      '<path d="M159 118 C170 104 176 104 180 96" stroke="#4f7a62" stroke-width="3" fill="none" stroke-linecap="round"/>' +
-      '<rect x="40" y="126" width="96" height="10" rx="3" fill="#4f7a62"/>' +
-      '<rect x="48" y="136" width="8" height="30" fill="#7ba889"/>' +
-      '<rect x="120" y="136" width="8" height="30" fill="#7ba889"/>' +
-      '<rect x="20" y="118" width="10" height="48" rx="3" fill="#7ba889"/>' +
-      '<rect x="20" y="132" width="26" height="8" rx="3" fill="#a9cbb6"/>' +
-      '<rect x="146" y="118" width="10" height="48" rx="3" fill="#7ba889"/>' +
-      '<rect x="130" y="132" width="26" height="8" rx="3" fill="#a9cbb6"/>' +
-      '<rect x="74" y="114" width="16" height="12" rx="2" fill="#fff" stroke="#7ba889" stroke-width="2"/>' +
-      '<path d="M90 117 h4 a3 3 0 0 1 0 6 h-4" fill="none" stroke="#7ba889" stroke-width="2"/>' +
+      '<rect width="320" height="200" fill="var(--key-bg)"/>' +
+      '<rect y="150" width="320" height="50" fill="var(--key-bg-strong)"/>' +
+      '<rect x="196" y="34" width="90" height="60" rx="4" fill="#fff" stroke="var(--secondary)" stroke-width="2.5"/>' +
+      '<line x1="241" y1="34" x2="241" y2="94" stroke="var(--secondary)" stroke-width="2"/>' +
+      '<line x1="196" y1="64" x2="286" y2="64" stroke="var(--secondary)" stroke-width="2"/>' +
+      '<rect x="150" y="120" width="18" height="30" rx="3" fill="var(--key-bg-strong)"/>' +
+      '<path d="M159 120 C150 100 150 96 159 88 C168 96 168 100 159 120 Z" fill="var(--secondary)"/>' +
+      '<path d="M159 118 C170 104 176 104 180 96" stroke="var(--primary)" stroke-width="3" fill="none" stroke-linecap="round"/>' +
+      '<rect x="40" y="126" width="96" height="10" rx="3" fill="var(--primary)"/>' +
+      '<rect x="48" y="136" width="8" height="30" fill="var(--secondary)"/>' +
+      '<rect x="120" y="136" width="8" height="30" fill="var(--secondary)"/>' +
+      '<rect x="20" y="118" width="10" height="48" rx="3" fill="var(--secondary)"/>' +
+      '<rect x="20" y="132" width="26" height="8" rx="3" fill="var(--tertiary)"/>' +
+      '<rect x="146" y="118" width="10" height="48" rx="3" fill="var(--secondary)"/>' +
+      '<rect x="130" y="132" width="26" height="8" rx="3" fill="var(--tertiary)"/>' +
+      '<rect x="74" y="114" width="16" height="12" rx="2" fill="#fff" stroke="var(--secondary)" stroke-width="2"/>' +
+      '<path d="M90 117 h4 a3 3 0 0 1 0 6 h-4" fill="none" stroke="var(--secondary)" stroke-width="2"/>' +
       '</svg>';
   }
 
@@ -1359,6 +1358,20 @@
     var idx = deviceIndexByName[name];
     if(idx == null || !sliderBuilt) return;
     goSlide(idx);
+  }
+
+  // 表の列見出し（設備名）クリックの受け口。
+  // スマホ幅では設備情報が折りたたまれているので、開いてスライダーまで送る。
+  // 押しても何も起きていないように見えるのを防ぐ。
+  function revealDevice(name){
+    syncSlideTo(name);
+    // PC では設備情報は常時表示（.acc-toggle は display:none）なので開閉もスクロールも不要
+    if(!window.matchMedia('(max-width:767px)').matches) return;
+    if(!accPanel.classList.contains('open')){
+      accPanel.classList.add('open');
+      accToggle.setAttribute('aria-expanded', 'true');
+    }
+    document.getElementById('slider').scrollIntoView({ behavior:'smooth', block:'start' });
   }
 
   document.getElementById('slidePrev').addEventListener('click', function(){ goSlide(slideIndex-1); });
