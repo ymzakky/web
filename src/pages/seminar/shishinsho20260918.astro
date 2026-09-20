@@ -1,9 +1,16 @@
 ---
 const title = '第１回指針書ワーク振り返り会';
 const organizer = '一般社団法人 東京中小企業家同友会';
+const copyrightHolders = [
+  '一般社団法人 東京中小企業家同友会',
+  '合同会社アクララール',
+  '株式会社ユーアンドエム',
+  '株式会社ユニオンクラフト',
+];
 const deadline = '2026年9月30日';
 const deadlineISO = '2026-10-01T01:59:00+09:00';
 const videoUrl = 'https://customer-muxtdmy486fmsk10.cloudflarestream.com/225f90d50272c3d68cfdfd149ffba6bf/watch';
+const surveyUrl = 'https://forms.gle/xoZD8bbUr6mfH1rU6';
 ---
 
 <!DOCTYPE html>
@@ -38,15 +45,23 @@ const videoUrl = 'https://customer-muxtdmy486fmsk10.cloudflarestream.com/225f90d
           <p class="expired-message" hidden>この動画の視聴期限は{deadline}をもって終了しました。</p>
         </div>
 
+        <div class="survey-box">
+          <p>動画をご視聴いただいた後、下記のアンケートへのご回答にご協力ください。</p>
+          <a href={surveyUrl} class="survey-btn" target="_blank" rel="noopener">アンケートに回答する</a>
+        </div>
+
         <p class="note">
           本ページはお申込みいただいた方限定でご案内しております。URLの共有はご遠慮くださいますようお願いいたします。
         </p>
-      </main>
 
-      <footer class="page-footer">
-        <p>&copy; {new Date().getFullYear()} {organizer}</p>
-        <p class="distribution-credit">配信協力：むすびかなでる</p>
-      </footer>
+        <div class="copyright-block">
+          <p class="copyright-text">
+            <span class="c-item">&copy; {new Date().getFullYear()}</span>
+            {copyrightHolders.map((holder) => <span class="c-item">{holder}</span>)}
+          </p>
+          <p class="distribution-credit">配信協力：むすびかなでる</p>
+        </div>
+      </main>
     </div>
 
     <script define:vars={{ deadlineISO }}>
@@ -133,23 +148,68 @@ const videoUrl = 'https://customer-muxtdmy486fmsk10.cloudflarestream.com/225f90d
         color: var(--color-text-sub);
         font-size: 0.95rem;
       }
+      .survey-box {
+        margin-top: 1.75rem;
+        background: var(--color-bg-body);
+        border: 1px solid rgba(0,0,0,0.08);
+        border-radius: 8px;
+        padding: 1.5rem;
+        text-align: center;
+      }
+      .survey-box p {
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+      }
+      .survey-btn {
+        display: inline-block;
+        background: var(--color-brand-primary);
+        color: #fff;
+        font-size: 0.9rem;
+        font-weight: 700;
+        text-decoration: none;
+        padding: 0.65rem 1.8rem;
+        border-radius: 6px;
+        transition: background 0.2s;
+      }
+      .survey-btn:hover {
+        background: var(--color-brand-primary-dark);
+      }
       .note {
         margin-top: 1.75rem;
         font-size: 0.82rem;
         color: var(--color-text-sub);
         line-height: 1.8;
       }
-      .page-footer {
-        margin-top: 2.5rem;
+      .copyright-block {
+        margin-top: 2rem;
+        padding-top: 1.25rem;
+        border-top: 1px solid rgba(0,0,0,0.08);
         text-align: center;
-        font-size: 0.78rem;
+      }
+      .copyright-text {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        column-gap: 0.6rem;
+        row-gap: 0.2rem;
+        font-size: 0.72rem;
         color: var(--color-text-sub);
-        opacity: 0.7;
+        opacity: 0.75;
+        line-height: 1.6;
+      }
+      .c-item {
+        white-space: nowrap;
+      }
+      .c-item:not(:last-child)::after {
+        content: '/';
+        margin-left: 0.6rem;
+        opacity: 0.5;
       }
       .distribution-credit {
         margin-top: 0.3rem;
-        font-size: 0.72rem;
-        opacity: 0.8;
+        font-size: 0.7rem;
+        color: var(--color-text-sub);
+        opacity: 0.55;
       }
       @media (max-width: 560px) {
         .card { padding: 1.75rem 1.25rem; }
